@@ -2,7 +2,10 @@ import { Component } from 'react';
 import styles from './Header.module.css';
 import SearchInput from './SearchInput';
 
-export default class Header extends Component {
+type HeaderPropsType = {
+  handleOnSubmit: (input: string) => void;
+};
+export default class Header extends Component<HeaderPropsType> {
   render() {
     return (
       <header className={styles.header_bordered}>
@@ -12,9 +15,7 @@ export default class Header extends Component {
         <div className={styles.search_container}>
           <SearchInput />
         </div>
-        <button
-        //  onClickSignIn={() => setOpenAuthModal(true)}
-        >
+        <button onClick={() => this.props.handleOnSubmit('hello')}>
           Search Button
         </button>
         {/* правая часть */}
