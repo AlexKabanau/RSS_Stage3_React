@@ -1,0 +1,15 @@
+.header_bordered {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+  border-bottom-width: 1px;
+  display: flex;
+}
+
+.search_container {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  /* display: flex; */
+  flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+}
