@@ -1,36 +1,74 @@
 import { Component } from 'react';
 import styles from './Header.module.css';
-import SearchInput from './SearchInput';
+import { getItems, ResponseType } from '../api/getItems';
 
 type HeaderPropsType = {
-  handleOnSubmit: (input: string) => void;
+  handleResponse: (data: ResponseType[]) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  setIsError: (isError: boolean) => void;
 };
-export default class Header extends Component<HeaderPropsType> {
+
+type HeaderStateType = {
+  inputValue: string;
+  // isLoading: boolean;
+};
+export default class Header extends Component<
+  HeaderPropsType,
+  HeaderStateType
+> {
+  constructor(props: HeaderPropsType) {
+    super(props);
+    this.state = {
+      inputValue: localStorage.getItem('searchValue') || '',
+      // isLoading: false,
+    };
+    // this.handleOnSubmit(this.state.inputValue);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    // this.handleOnClick = this.handleOnClick.bind(this);
+  }
+  async handleOnSubmit() {
+    localStorage.setItem('searchValue', this.state.inputValue);
+    try {
+      this.props.setIsLoading(true);
+      const response = await getItems(this.state.inputValue);
+      console.log(response);
+
+      if (response) {
+        this.props.setIsLoading(false);
+        this.props.setIsError(false);
+        this.props.handleResponse(response);
+      }
+    } catch (error) {
+      console.error(error);
+      this.props.setIsLoading(false);
+      this.props.setIsError(true);
+    }
+    // this.setState({ isLoading: true });
+    // console.log('Submit', this.state.inputValue);
+    // console.log(response);
+    // this.setState({ isLoading: false });
+  }
+  handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ inputValue: event.target.value });
+    localStorage.setItem('searchValue', this.state.inputValue);
+  }
+  componentDidMount(): void {
+    this.handleOnSubmit();
+  }
   render() {
     return (
       <header className={styles.header_bordered}>
-        {/* Header */}
-        {/* <Container className="flex items-center justify-between py-8"> */}
-        {/* левая часть */}
+        <h2>StarWars Starships</h2>
         <div className={styles.search_container}>
-          <SearchInput />
+          <input
+            className={styles.searchInput}
+            type="text"
+            placeholder="Search"
+            value={this.state.inputValue}
+            onChange={this.handleOnChange}
+          />
         </div>
-        <button onClick={() => this.props.handleOnSubmit('hello')}>
-          Search Button
-        </button>
-        {/* правая часть */}
-        {/* <div className="flex items-center gap-3">
-            <AuthModal
-              open={openAuthModal}
-              onClose={() => {
-                setOpenAuthModal(false);
-              }}
-            />
-
-            <ProfileButton onClickSignIn={() => setOpenAuthModal(true)} />
-            {hasCart && <CartButton />}
-          </div> */}
-        {/* </Container> */}
+        <button onClick={() => this.handleOnSubmit()}>Search</button>
       </header>
     );
   }

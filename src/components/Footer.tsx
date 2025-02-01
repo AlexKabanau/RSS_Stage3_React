@@ -6,7 +6,7 @@ import RSSLogo from '../assets/rs_logo_black.svg';
 export default class Footer extends Component {
   render() {
     return (
-      <footer>
+      <footer className="footer">
         <div className="creator">
           <a
             // className="tooltips"

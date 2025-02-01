@@ -7,10 +7,77 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  padding: 0 30px !important;
+
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  height: 100vh;
+  /* padding-bottom: 0; */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.logo {
+  height: 6rem;
+  right: 1.5rem;
+  will-change: filter;
+  animation: filter 1000ms;
+  animation-name: logo-rotate;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+@keyframes logo-rotate {  
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+  
+}
+
+.list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.item {
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.error-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.rsschool__link {
+  height: 30px;
 }
 
 a {
@@ -24,10 +91,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
