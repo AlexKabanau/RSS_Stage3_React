@@ -7,7 +7,6 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,7 +14,6 @@
 }
 #root {
   padding: 0 30px !important;
-
 }
 
 .error-content {
@@ -39,14 +37,13 @@
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
-@keyframes logo-rotate {  
+@keyframes logo-rotate {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-  
 }
 
 .list-items {

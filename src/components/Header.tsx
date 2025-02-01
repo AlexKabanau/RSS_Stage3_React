@@ -50,7 +50,7 @@ export default class Header extends Component<
   }
   handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ inputValue: event.target.value });
-    localStorage.setItem('searchValue', this.state.inputValue);
+    localStorage.setItem('searchValue', this.state.inputValue.trim());
   }
   componentDidMount(): void {
     this.handleOnSubmit();
