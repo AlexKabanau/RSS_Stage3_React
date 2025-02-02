@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import './App.css';
 import React from 'react';
 import Header from './components/Header';
@@ -22,9 +21,7 @@ class App extends React.Component {
   };
 
   setIsLoading = (isLoading: boolean) => {
-    // console.log(this.state.isLoading);
     this.setState({ isLoading });
-    // console.log(this.state.isLoading);
   };
 
   setIsError = (isError: boolean) => {
@@ -32,19 +29,8 @@ class App extends React.Component {
   };
 
   setData = (data: ResponseType[]) => {
-    // console.log(data);
     this.setState({ data: data });
-    // console.log(this.state);
   };
-
-  // window.store = this.state;
-
-  // document.store = this.state;
-
-  // handleOnSubmit = (search: string) => {
-  //   this.setState({ searchParams: search });
-  //   // console.log(this.state.searchParams);
-  // };
 
   render() {
     return (

@@ -23,7 +23,6 @@
 
 .app {
   height: 100vh;
-  /* padding-bottom: 0; */
   display: grid;
   grid-template-rows: auto 1fr auto;
 }

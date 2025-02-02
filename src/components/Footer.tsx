@@ -1,5 +1,4 @@
 import { Component } from 'react';
-// import { ReactComponent as GithubSvg } from '../assets/github_logo_black.svg';
 import gitHubLogo from '../assets/github_logo_black.svg';
 import RSSLogo from '../assets/rs_logo_black.svg';
 
@@ -9,7 +8,6 @@ export default class Footer extends Component {
       <footer className="footer">
         <div className="creator">
           <a
-            // className="tooltips"
             href="https://github.com/AlexKabanau"
             target="_blank"
             rel="noreferrer"
@@ -24,7 +22,6 @@ export default class Footer extends Component {
             target="_blank"
             rel="noreferrer"
           >
-            {/* <GithubSvg /> */}
             <img className="rsschool__link" src={RSSLogo} alt="RSSchool logo" />
           </a>
         </div>
