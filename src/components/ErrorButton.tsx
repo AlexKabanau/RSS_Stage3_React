@@ -1,6 +1,5 @@
 import { Component } from 'react';
 
-// type ErrorButtonPropsType = { disabled: boolean };
 type ErrorButtonStateType = { error: boolean };
 
 export default class ErrorButton extends Component {
