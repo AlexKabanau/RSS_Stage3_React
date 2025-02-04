@@ -59,7 +59,7 @@ export default class Header extends Component<
             onChange={this.handleOnChange}
           />
         </div>
-        <button onClick={() => this.handleOnSubmit()}>Search</button>
+        <button onClick={() => this.handleOnSubmit()}>Searchq</button>
       </header>
     );
   }
