@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL } from '../constants/url';
+import { URL } from '../constants/constants';
 
 export type ResponseType = {
   name: string;
@@ -21,9 +21,34 @@ export type ResponseType = {
   created: string;
 };
 
-export const getItems = async (params: string): Promise<ResponseType[]> => {
-  const response = await axios(
-    `${URL.baseUrl}${URL.props}${URL.search}${params}`
-  );
-  return response.data.results;
+export type ResponseInfoType = {
+  count: number;
+  next: string;
+  previous: string | null;
+  results: ResponseType[];
 };
+
+export const getTotalInfo = async (
+  params: string,
+  page: number = 1
+): Promise<ResponseInfoType> => {
+  let response;
+  if (page > 1) {
+    response = await axios(
+      `${URL.baseUrl}${URL.props}${URL.search}${params}${URL.page}${page}`
+    );
+  } else {
+    response = await axios(`${URL.baseUrl}${URL.props}${URL.search}${params}`);
+  }
+  return response.data;
+};
+
+export const getItems = async (params: string): Promise<ResponseType[]> => {
+  return (await getTotalInfo(params)).results;
+};
+// export const getItems = async (params: string): Promise<ResponseType[]> => {
+//   const response = await axios(
+//     `${URL.baseUrl}${URL.props}${URL.search}${params}`
+//   );
+//   return response.data.results;
+// };

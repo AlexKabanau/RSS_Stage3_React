@@ -1,45 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from './Header.module.css';
-import { getItems, ResponseType } from '../api/getItems';
+// import { getItems, getTotalInfo, ResponseType } from '../api/getItems';
 
 type HeaderPropsType = {
-  handleResponse: (data: ResponseType[]) => void;
-  setIsLoading: (isLoading: boolean) => void;
-  setIsError: (isError: boolean) => void;
+  // handleResponse: (data: ResponseType[]) => void;
+  // setIsLoading: (isLoading: boolean) => void;
+  // setIsError: (isError: boolean) => void;
+  // setItemsCount: (itemsCount: number) => void;
+  // setNextPageLink: (nextPageLink: string) => void;
+  // setPrevPageLink: (prevPageLink: string) => void;
+  handleOnSubmit: () => void;
+  inputValue: string;
+  setInputValue: (value: string) => void;
 };
 
 import React from 'react';
 
 const Header: React.FC<HeaderPropsType> = ({
-  handleResponse,
-  setIsError,
-  setIsLoading,
+  // handleResponse,
+  // setIsError,
+  // setIsLoading,
+  // setItemsCount,
+  // setNextPageLink,
+  // setPrevPageLink,
+  handleOnSubmit,
+  inputValue,
+  setInputValue,
 }) => {
-  const [inputValue, setInputValue] = useState(
-    localStorage.getItem('searchValue') || ''
-  );
-
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     localStorage.setItem('searchValue', inputValue.trim());
-  };
-
-  const handleOnSubmit = async () => {
-    localStorage.setItem('searchValue', inputValue);
-    try {
-      setIsLoading(true);
-      const response = await getItems(inputValue);
-
-      if (response) {
-        setIsLoading(false);
-        setIsError(false);
-        handleResponse(response);
-      }
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setIsError(true);
-    }
   };
 
   useEffect(() => {
