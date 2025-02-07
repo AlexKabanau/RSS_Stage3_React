@@ -38,11 +38,12 @@ export default function HomePage() {
         </div>
       )}
       {isError && <div>Some error occurred. Please try again.</div>}
+      {data?.length === 0 && <div>Items not found</div>}
+      {/* TODO Pagination */}
       {data && <Main items={data} />}
       <div className="error-container">
         <ErrorButton />
       </div>
-
       <Footer />
     </div>
   );
