@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Header.module.css';
 import { getItems, ResponseType } from '../api/getItems';
 
@@ -8,59 +8,59 @@ type HeaderPropsType = {
   setIsError: (isError: boolean) => void;
 };
 
-type HeaderStateType = {
-  inputValue: string;
-};
-export default class Header extends Component<
-  HeaderPropsType,
-  HeaderStateType
-> {
-  constructor(props: HeaderPropsType) {
-    super(props);
-    this.state = {
-      inputValue: localStorage.getItem('searchValue') || '',
-    };
-    this.handleOnChange = this.handleOnChange.bind(this);
-  }
-  async handleOnSubmit() {
-    localStorage.setItem('searchValue', this.state.inputValue);
+import React from 'react';
+
+const Header: React.FC<HeaderPropsType> = ({
+  handleResponse,
+  setIsError,
+  setIsLoading,
+}) => {
+  const [inputValue, setInputValue] = useState(
+    localStorage.getItem('searchValue') || ''
+  );
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+    localStorage.setItem('searchValue', inputValue.trim());
+  };
+
+  const handleOnSubmit = async () => {
+    localStorage.setItem('searchValue', inputValue);
     try {
-      this.props.setIsLoading(true);
-      const response = await getItems(this.state.inputValue);
+      setIsLoading(true);
+      const response = await getItems(inputValue);
 
       if (response) {
-        this.props.setIsLoading(false);
-        this.props.setIsError(false);
-        this.props.handleResponse(response);
+        setIsLoading(false);
+        setIsError(false);
+        handleResponse(response);
       }
     } catch (error) {
       console.error(error);
-      this.props.setIsLoading(false);
-      this.props.setIsError(true);
+      setIsLoading(false);
+      setIsError(true);
     }
-  }
-  handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ inputValue: event.target.value });
-    localStorage.setItem('searchValue', this.state.inputValue.trim());
-  }
-  componentDidMount(): void {
-    this.handleOnSubmit();
-  }
-  render() {
-    return (
-      <header className={styles.header_bordered}>
-        <h2>StarWars Starships</h2>
-        <div className={styles.search_container}>
-          <input
-            className={styles.searchInput}
-            type="text"
-            placeholder="Search"
-            value={this.state.inputValue}
-            onChange={this.handleOnChange}
-          />
-        </div>
-        <button onClick={() => this.handleOnSubmit()}>Search</button>
-      </header>
-    );
-  }
-}
+  };
+
+  useEffect(() => {
+    handleOnSubmit();
+  }, []);
+
+  return (
+    <header className={styles.header_bordered}>
+      <h2>StarWars Starships</h2>
+      <div className={styles.search_container}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Search"
+          value={inputValue}
+          onChange={handleOnChange}
+        />
+      </div>
+      <button onClick={() => handleOnSubmit()}>Search</button>
+    </header>
+  );
+};
+
+export default Header;
