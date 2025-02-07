@@ -1,63 +1,79 @@
 import './App.css';
-import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import { ResponseType } from './api/getItems';
-import ErrorButton from './components/ErrorButton';
-import reactLogo from './assets/react.svg';
+// import React from 'react';
+// import Header from './components/Header';
+// import Main from './components/Main';
+// import Footer from './components/Footer';
+// import { ResponseType } from './api/getItems';
+// import ErrorButton from './components/ErrorButton';
+// import reactLogo from './assets/react.svg';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import HomePage from './pages/HomePage';
+import CartPage from './pages/CartPage';
+import NotFoundPager from './pages/NotFoundPager';
 
-type StateType = {
-  data: ResponseType[] | null;
-  isLoading: boolean;
-  isError: boolean;
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="starship/:id" element={<CartPage />} />
+        <Route path="*" element={<NotFoundPager />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
-class App extends React.Component {
-  state: StateType = {
-    data: [],
-    isLoading: false,
-    isError: false,
-  };
+// type StateType = {
+//   data: ResponseType[] | null;
+//   isLoading: boolean;
+//   isError: boolean;
+// };
 
-  setIsLoading = (isLoading: boolean) => {
-    this.setState({ isLoading });
-  };
+// class App extends React.Component {
+//   state: StateType = {
+//     data: [],
+//     isLoading: false,
+//     isError: false,
+//   };
 
-  setIsError = (isError: boolean) => {
-    this.setState({ isError });
-  };
+//   setIsLoading = (isLoading: boolean) => {
+//     this.setState({ isLoading });
+//   };
 
-  setData = (data: ResponseType[]) => {
-    this.setState({ data: data });
-  };
+//   setIsError = (isError: boolean) => {
+//     this.setState({ isError });
+//   };
 
-  render() {
-    return (
-      <div className="app">
-        <Header
-          handleResponse={this.setData}
-          setIsLoading={this.setIsLoading}
-          setIsError={this.setIsError}
-        />
-        {this.state.isLoading && (
-          <div>
-            <p>Loading...</p>
-            <img src={reactLogo} className="logo" alt="loading" />
-          </div>
-        )}
-        {this.state.isError && (
-          <div>Some error occurred. Please try again.</div>
-        )}
-        {this.state.data && <Main items={this.state.data} />}
-        <div className="error-container">
-          <ErrorButton />
-        </div>
+//   setData = (data: ResponseType[]) => {
+//     this.setState({ data: data });
+//   };
 
-        <Footer />
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div className="app">
+//         <Header
+//           handleResponse={this.setData}
+//           setIsLoading={this.setIsLoading}
+//           setIsError={this.setIsError}
+//         />
+//         {this.state.isLoading && (
+//           <div>
+//             <p>Loading...</p>
+//             <img src={reactLogo} className="logo" alt="loading" />
+//           </div>
+//         )}
+//         {this.state.isError && (
+//           <div>Some error occurred. Please try again.</div>
+//         )}
+//         {this.state.data && <Main items={this.state.data} />}
+//         <div className="error-container">
+//           <ErrorButton />
+//         </div>
+
+//         <Footer />
+//       </div>
+//     );
+//   }
+// }
 
 export default App;
