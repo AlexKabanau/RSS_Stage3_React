@@ -32,14 +32,14 @@ export const getTotalInfo = async (
   params: string,
   page: number = 1
 ): Promise<ResponseInfoType> => {
-  let response;
-  if (page > 1) {
-    response = await axios(
-      `${URL.baseUrl}${URL.props}${URL.search}${params}${URL.page}${page}`
-    );
-  } else {
-    response = await axios(`${URL.baseUrl}${URL.props}${URL.search}${params}`);
-  }
+  // let response;
+  // if (page > 1) {
+  const response = await axios(
+    `${URL.baseUrl}${URL.props}${URL.search}${params}${URL.page}${page}`
+  );
+  // } else {
+  //   response = await axios(`${URL.baseUrl}${URL.props}${URL.search}${params}`);
+  // }
   return response.data;
 };
 

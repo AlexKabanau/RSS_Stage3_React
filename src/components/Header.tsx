@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import styles from './Header.module.css';
 // import { getItems, getTotalInfo, ResponseType } from '../api/getItems';
@@ -13,8 +14,6 @@ type HeaderPropsType = {
   inputValue: string;
   setInputValue: (value: string) => void;
 };
-
-import React from 'react';
 
 const Header: React.FC<HeaderPropsType> = ({
   // handleResponse,

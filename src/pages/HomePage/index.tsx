@@ -5,6 +5,8 @@ import Main from '../../components/Main';
 import ErrorButton from '../../components/ErrorButton';
 import { getTotalInfo, ResponseType } from '../../api/getItems';
 import Footer from '../../components/Footer';
+import { useSearchParams } from 'react-router';
+import { DEFAULT_PAGE } from '../../constants/constants';
 // import Footer from '../../components/Footer';import { ResponseType } from './api/getItems';
 
 export default function HomePage() {
@@ -19,10 +21,20 @@ export default function HomePage() {
   // const [prevPageLink, setPrevPageLink] = useState<string>('');
   // const [page, setPage] = useState<number>(1);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleSearchParams = (inputValue: string, page?: string) => {
+    searchParams.set('search', inputValue);
+    searchParams.set('page', page || DEFAULT_PAGE.toString());
+    setSearchParams(searchParams);
+  };
+
   const handleOnSubmit = async () => {
     localStorage.setItem('searchValue', inputValue);
     try {
+      setData([]);
       setIsLoading(true);
+      handleSearchParams(inputValue);
       // const response = await getItems(inputValue);
       // console.log(response);
       const info = await getTotalInfo(inputValue);
@@ -32,8 +44,8 @@ export default function HomePage() {
         setIsLoading(false);
         setIsError(false);
         setItemsCount(info.count);
-        setNextPageLink(info.next || '');
-        setPrevPageLink(info.previous || '');
+        // setNextPageLink(info.next || '');
+        // setPrevPageLink(info.previous || '');
         setData(info.results);
       }
     } catch (error) {
@@ -41,18 +53,23 @@ export default function HomePage() {
       setIsLoading(false);
       setIsError(true);
     }
+
+    // FIXME: refactor!!!!
   };
   const onPageChanged = async (page: number) => {
     try {
+      setData([]);
       setIsLoading(true);
+      handleSearchParams(inputValue, page.toString());
+
       const info = await getTotalInfo(inputValue, page);
       console.log(info);
       if (info.results) {
         setIsLoading(false);
         setIsError(false);
         setItemsCount(info.count);
-        setNextPageLink(info.next || '');
-        setPrevPageLink(info.previous || '');
+        // setNextPageLink(info.next || '');
+        // setPrevPageLink(info.previous || '');
         setData(info.results);
       }
     } catch (error) {
@@ -105,6 +122,7 @@ export default function HomePage() {
         <Main
           items={data}
           count={itemsCount}
+          // currentPage={DEFAULT_PAGE}
           onPageChanged={onPageChanged}
           // nextPageLink={nextPageLink}
           // prevPageLink={prevPageLink}

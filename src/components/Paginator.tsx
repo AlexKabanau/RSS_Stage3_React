@@ -6,6 +6,7 @@ type PropsType = {
   totalItemsCount: number;
   pageSize: number;
   currentPage: number;
+  setCurrentPage: (page: number) => void;
   onPageChanged: (pageNumber: number) => void;
   portionsSize?: number;
 };
@@ -15,6 +16,7 @@ const Paginator: FC<PropsType> = ({
   currentPage,
   onPageChanged,
   portionsSize = 10,
+  setCurrentPage,
 }) => {
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   console.log(totalItemsCount);
@@ -59,6 +61,7 @@ const Paginator: FC<PropsType> = ({
               )}
               // currentPage === page ? style.selectedPage : style.pageNumber}
               onClick={() => {
+                setCurrentPage(page);
                 onPageChanged(page);
               }}
             >
