@@ -3,9 +3,9 @@ import Header from '../../components/Header';
 import reactLogo from '../../assets/react.svg';
 import Main from '../../components/Main';
 import ErrorButton from '../../components/ErrorButton';
-import { getTotalInfo, ResponseType } from '../../api/getItems';
+import { getItems, ResponseType } from '../../api/getItems';
 import Footer from '../../components/Footer';
-import { useSearchParams } from 'react-router';
+import { Outlet, useSearchParams } from 'react-router';
 import { DEFAULT_PAGE } from '../../constants/constants';
 // import Footer from '../../components/Footer';import { ResponseType } from './api/getItems';
 
@@ -37,16 +37,16 @@ export default function HomePage() {
       handleSearchParams(inputValue);
       // const response = await getItems(inputValue);
       // console.log(response);
-      const info = await getTotalInfo(inputValue);
+      const info = await getItems(inputValue);
       console.log(info);
 
-      if (info.results) {
+      if (info.data) {
         setIsLoading(false);
         setIsError(false);
-        setItemsCount(info.count);
+        setItemsCount(info.meta.pagination.records);
         // setNextPageLink(info.next || '');
         // setPrevPageLink(info.previous || '');
-        setData(info.results);
+        setData(info.data);
       }
     } catch (error) {
       console.error(error);
@@ -62,15 +62,15 @@ export default function HomePage() {
       setIsLoading(true);
       handleSearchParams(inputValue, page.toString());
 
-      const info = await getTotalInfo(inputValue, page);
+      const info = await getItems(inputValue, page);
       console.log(info);
-      if (info.results) {
+      if (info.data) {
         setIsLoading(false);
         setIsError(false);
-        setItemsCount(info.count);
+        setItemsCount(info.meta.pagination.records);
         // setNextPageLink(info.next || '');
         // setPrevPageLink(info.previous || '');
-        setData(info.results);
+        setData(info.data);
       }
     } catch (error) {
       console.error(error);
@@ -116,17 +116,19 @@ export default function HomePage() {
       )}
       {/* count: {itemsCount} */}
       {isError && <div>Some error occurred. Please try again.</div>}
-      {data?.length === 0 && <div>Items not found</div>}
-      {/* TODO Pagination */}
+      {!isLoading && data?.length === 0 && <div>Items not found</div>}
       {data && (
-        <Main
-          items={data}
-          count={itemsCount}
-          // currentPage={DEFAULT_PAGE}
-          onPageChanged={onPageChanged}
-          // nextPageLink={nextPageLink}
-          // prevPageLink={prevPageLink}
-        />
+        <div className="main-container">
+          <Main
+            items={data}
+            count={itemsCount}
+            // currentPage={DEFAULT_PAGE}
+            onPageChanged={onPageChanged}
+            // nextPageLink={nextPageLink}
+            // prevPageLink={prevPageLink}
+          />
+          <Outlet />
+        </div>
       )}
       <div className="error-container">
         <ErrorButton />

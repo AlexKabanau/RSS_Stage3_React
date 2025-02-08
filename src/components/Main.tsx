@@ -3,7 +3,10 @@ import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
 // import { useLocation, useNavigate } from 'react-router';
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from '../constants/constants';
+import {
+  RESOURCES_PER_PAGE,
+  DEFAULT_CURRENT_PAGE,
+} from '../constants/constants';
 // import { useSearchParams } from 'react-router';
 
 type MainPropsType = {
@@ -21,7 +24,7 @@ const Main: React.FC<MainPropsType> = ({
   // nextPageLink,
   // prevPageLink,
 }) => {
-  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE);
+  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
   // const currentPage = DEFAULT_PAGE;
 
   // const [searchParams, setSearchParams] = useSearchParams();
@@ -42,7 +45,7 @@ const Main: React.FC<MainPropsType> = ({
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalItemsCount={count}
-        pageSize={DEFAULT_PAGE_SIZE}
+        pageSize={RESOURCES_PER_PAGE}
         onPageChanged={onPageChanged}
       />
       <ListItems items={items} />

@@ -1,5 +1,5 @@
-import React from 'react';
 import { useEffect } from 'react';
+import React from 'react';
 import styles from './Header.module.css';
 // import { getItems, getTotalInfo, ResponseType } from '../api/getItems';
 
@@ -37,7 +37,7 @@ const Header: React.FC<HeaderPropsType> = ({
 
   return (
     <header className={styles.header_bordered}>
-      <h2>StarWars Starships</h2>
+      <h2>Harry Potter Characters</h2>
       <div className={styles.search_container}>
         <input
           className={styles.searchInput}

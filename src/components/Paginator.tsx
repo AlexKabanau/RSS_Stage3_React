@@ -13,7 +13,6 @@ type PropsType = {
 const Paginator: FC<PropsType> = ({
   totalItemsCount,
   pageSize,
-  currentPage,
   onPageChanged,
   portionsSize = 10,
   setCurrentPage,
@@ -53,12 +52,7 @@ const Paginator: FC<PropsType> = ({
           return (
             <span
               key={page}
-              className={cn(
-                {
-                  [style.selectedPage]: currentPage === page,
-                },
-                style.pageNumber
-              )}
+              className={cn(style.pageNumber)}
               // currentPage === page ? style.selectedPage : style.pageNumber}
               onClick={() => {
                 setCurrentPage(page);

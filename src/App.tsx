@@ -15,8 +15,9 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="starship/:id" element={<CartPage />} />
+        <Route path="/" element={<HomePage />}>
+          <Route path="character/:id" element={<CartPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPager />} />
       </Routes>
     </BrowserRouter>
