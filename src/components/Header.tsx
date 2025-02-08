@@ -33,7 +33,7 @@ const Header: React.FC<HeaderPropsType> = ({
 
   useEffect(() => {
     handleOnSubmit();
-  }, []);
+  }, [handleOnSubmit]);
 
   return (
     <header className={styles.header_bordered}>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Header from '../../components/Header';
 import reactLogo from '../../assets/react.svg';
 import Main from '../../components/Main';
@@ -23,13 +23,16 @@ export default function HomePage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearchParams = (inputValue: string, page?: string) => {
-    searchParams.set('search', inputValue);
-    searchParams.set('page', page || DEFAULT_PAGE.toString());
-    setSearchParams(searchParams);
-  };
+  const handleSearchParams = useCallback(
+    (inputValue: string, page?: string) => {
+      searchParams.set('search', inputValue);
+      searchParams.set('page', page || DEFAULT_PAGE.toString());
+      setSearchParams(searchParams);
+    },
+    []
+  );
 
-  const handleOnSubmit = async () => {
+  const handleOnSubmit = useCallback(async () => {
     localStorage.setItem('searchValue', inputValue);
     try {
       setData([]);
@@ -55,7 +58,7 @@ export default function HomePage() {
     }
 
     // FIXME: refactor!!!!
-  };
+  }, [handleSearchParams, inputValue]);
   const onPageChanged = async (page: number) => {
     try {
       setData([]);
