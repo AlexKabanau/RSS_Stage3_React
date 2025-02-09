@@ -46,22 +46,26 @@ export type ResponseType = {
 
 type PaginationType = {
   current: number;
-  next: number;
-  last: number;
+  next?: number;
+  last?: number;
   records: number;
+  first?: number;
+  prev?: number;
 };
 
 type MetaType = {
-  pagination: PaginationType;
+  pagination?: PaginationType;
   copyright: string;
   generated_at: string;
 };
 
 type LinksType = {
   self: string;
-  current: string;
-  next: string;
-  last: string;
+  current?: string;
+  next?: string;
+  last?: string;
+  first?: string;
+  prev?: string;
 };
 
 export type ResponseInfoType = {

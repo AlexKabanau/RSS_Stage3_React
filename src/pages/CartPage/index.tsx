@@ -29,12 +29,12 @@ export default function CartPage() {
   }, [id]);
   return (
     <div className="cart">
-      <button onClick={() => setVisible(!visible)}>
+      <button role="button" onClick={() => setVisible(!visible)}>
         {!visible ? 'Show' : 'Hide'}
       </button>
-      <div className={visible ? 'visible' : 'hidden'}>
+      <div role="container" className={visible ? 'visible' : 'hidden'}>
         {isLoading && (
-          <div>
+          <div role="loading">
             <p>Loading...</p>
             <img src={reactLogo} className="logo" alt="loading" />
           </div>

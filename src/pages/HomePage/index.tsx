@@ -33,8 +33,8 @@ export default function HomePage() {
       setIsError(false);
       try {
         const info = await getItems(search, page);
-        console.log(info);
-        if (info.data) {
+        // console.log(info);
+        if (info.data && info.meta.pagination?.records) {
           setData(info.data);
           setItemsCount(info.meta.pagination.records);
         } else {
@@ -141,7 +141,7 @@ export default function HomePage() {
   // };
 
   return (
-    <div className="app">
+    <div className="app" role="mainPage">
       <Header
         inputValue={inputValue}
         setInputValue={setInputValue}
@@ -163,7 +163,7 @@ export default function HomePage() {
       {isError && <div>Some error occurred. Please try again.</div>}
       {!isLoading && data?.length === 0 && <div>Items not found</div>}
       {data && (
-        <div className="main-container">
+        <div role="homePage" className="main-container">
           <Main
             items={data}
             count={itemsCount}

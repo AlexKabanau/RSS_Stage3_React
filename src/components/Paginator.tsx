@@ -18,14 +18,14 @@ const Paginator: FC<PropsType> = ({
   setCurrentPage,
 }) => {
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
-  console.log(totalItemsCount);
+  // console.log(totalItemsCount);
   const pages: Array<number> = [];
 
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
-  console.log(pages);
+  // console.log(pages);
 
   const portionCount = Math.ceil(pagesCount / portionsSize);
   const [portionNumber, setPortionNumber] = useState(1);

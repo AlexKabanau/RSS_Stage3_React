@@ -6,7 +6,7 @@ type ItemsType = {
   items: ResponseType[];
 };
 const ListItems: React.FC<ItemsType> = ({ items }) => {
-  console.log(items);
+  // console.log(items);
   return (
     <ul className="list-items">
       {items.map((item, key) => (
