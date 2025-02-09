@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import reactLogo from '../../assets/react.svg';
 import Main from '../../components/Main';
@@ -23,64 +23,107 @@ export default function HomePage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearchParams = useCallback(
-    (inputValue: string, page?: string) => {
-      searchParams.set('search', inputValue);
-      searchParams.set('page', page || DEFAULT_PAGE.toString());
-      setSearchParams(searchParams);
-    },
-    []
-  );
+  useEffect(() => {
+    const search = searchParams.get('search') || '';
+    const pageStr = searchParams.get('page');
+    const page = pageStr ? Number(pageStr) : DEFAULT_PAGE;
 
-  const handleOnSubmit = useCallback(async () => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      setIsError(false);
+      try {
+        const info = await getItems(search, page);
+        console.log(info);
+        if (info.data) {
+          setData(info.data);
+          setItemsCount(info.meta.pagination.records);
+        } else {
+          setData([]);
+        }
+      } catch (error) {
+        console.error(error);
+        setIsError(true);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, [searchParams]);
+
+  // Обработчик для кнопки Search (обновляем URL-параметры, сбрасывая страницу на DEFAULT_PAGE)
+  const handleOnSubmit = () => {
     localStorage.setItem('searchValue', inputValue);
-    try {
-      setData([]);
-      setIsLoading(true);
-      handleSearchParams(inputValue);
-      // const response = await getItems(inputValue);
-      // console.log(response);
-      const info = await getItems(inputValue);
-      console.log(info);
-
-      if (info.data) {
-        setIsLoading(false);
-        setIsError(false);
-        setItemsCount(info.meta.pagination.records);
-        // setNextPageLink(info.next || '');
-        // setPrevPageLink(info.previous || '');
-        setData(info.data);
-      }
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setIsError(true);
-    }
-
-    // FIXME: refactor!!!!
-  }, [handleSearchParams, inputValue]);
-  const onPageChanged = async (page: number) => {
-    try {
-      setData([]);
-      setIsLoading(true);
-      handleSearchParams(inputValue, page.toString());
-
-      const info = await getItems(inputValue, page);
-      console.log(info);
-      if (info.data) {
-        setIsLoading(false);
-        setIsError(false);
-        setItemsCount(info.meta.pagination.records);
-        // setNextPageLink(info.next || '');
-        // setPrevPageLink(info.previous || '');
-        setData(info.data);
-      }
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setIsError(true);
-    }
+    setSearchParams({ search: inputValue, page: DEFAULT_PAGE.toString() });
   };
+
+  // Обработчик для смены страницы
+  // Берёт значение поиска из searchParams (если оно там уже есть) или из inputValue
+  const onPageChanged = (page: number) => {
+    const currentSearch = searchParams.get('search') || inputValue;
+    setSearchParams({ search: currentSearch, page: page.toString() });
+  };
+  // const handleSearchParams = useCallback(
+  //   (inputValue: string, page?: string) => {
+  //     // Создаём новый объект, чтобы избежать мутирования searchParams
+  //     const params = new URLSearchParams(searchParams);
+  //     params.set('search', inputValue);
+  //     params.set('page', page || DEFAULT_PAGE.toString());
+  //     setSearchParams(params);
+  //   },
+  //   [searchParams, setSearchParams]
+  // );
+
+  // const handleOnSubmit = useCallback(async () => {
+  //   localStorage.setItem('searchValue', inputValue);
+  //   debugger;
+  //   try {
+  //     setData([]);
+  //     setIsLoading(true);
+  //     handleSearchParams(inputValue);
+
+  //     const info = await getItems(inputValue);
+  //     console.log(info);
+
+  //     if (info.data) {
+  //       setIsLoading(false);
+  //       setIsError(false);
+  //       setItemsCount(info.meta.pagination.records);
+  //       setData(info.data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setIsLoading(false);
+  //     setIsError(true);
+  //   }
+  // }, [inputValue, handleSearchParams]);
+  // FIXME
+  // Если требуется первоначальная загрузка данных при монтировании:
+  // useEffect(() => {
+  //   handleOnSubmit();
+  // }, [handleOnSubmit]);
+  // const onPageChanged = useCallback(
+  //   async (page: number) => {
+  //     try {
+  //       setData([]);
+  //       setIsLoading(true);
+  //       handleSearchParams(inputValue, page.toString());
+
+  //       const info = await getItems(inputValue, page);
+  //       console.log(info);
+  //       if (info.data) {
+  //         setIsLoading(false);
+  //         setIsError(false);
+  //         setItemsCount(info.meta.pagination.records);
+  //         setData(info.data);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       setIsLoading(false);
+  //       setIsError(true);
+  //     }
+  //   },
+  //   [inputValue, handleSearchParams]
+  // );
 
   // const handleResponse = (data: ResponseType[]) => {
   //   setData(data);

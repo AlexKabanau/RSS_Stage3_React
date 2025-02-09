@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import React from 'react';
 import styles from './Header.module.css';
 // import { getItems, getTotalInfo, ResponseType } from '../api/getItems';
@@ -30,10 +30,6 @@ const Header: React.FC<HeaderPropsType> = ({
     setInputValue(event.target.value);
     localStorage.setItem('searchValue', inputValue.trim());
   };
-
-  useEffect(() => {
-    handleOnSubmit();
-  }, [handleOnSubmit]);
 
   return (
     <header className={styles.header_bordered}>

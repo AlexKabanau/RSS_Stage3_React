@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { getCharacter, GetCharacterType } from '../../api/getItems';
 import reactLogo from '../../assets/react.svg';
 
@@ -60,7 +60,7 @@ export default function CartPage() {
                 <p>Hair color: {character.data.attributes.hair_color}</p>
                 <p>Eye color: {character.data.attributes.eye_color}</p>
                 <p>Skin color: {character.data.attributes.skin_color}</p>
-                <Link to={`${character.data.attributes.wiki}`}>Wiki</Link>
+                <a href={`${character.data.attributes.wiki}`}>Wiki</a>
               </div>
             </>
           )
