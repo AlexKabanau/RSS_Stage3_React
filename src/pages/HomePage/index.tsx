@@ -96,7 +96,6 @@ export default function HomePage() {
   //     setIsError(true);
   //   }
   // }, [inputValue, handleSearchParams]);
-  // FIXME
   // Если требуется первоначальная загрузка данных при монтировании:
   // useEffect(() => {
   //   handleOnSubmit();
