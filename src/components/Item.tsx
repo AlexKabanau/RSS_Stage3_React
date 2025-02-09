@@ -7,7 +7,6 @@ type ItemPropsType = {
 };
 const Item: React.FC<ItemPropsType> = ({ item }) => {
   const location = useLocation();
-  // console.log(item);
   return (
     <li className="item">
       <Link role="link" to={`character/${item.id}${location.search}`}>

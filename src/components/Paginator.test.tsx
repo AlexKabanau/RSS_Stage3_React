@@ -1,11 +1,9 @@
-// import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Paginator from './Paginator';
 
 describe('Paginator Component', () => {
   let currentPage = 1;
 
-  // Обычные функции вместо `jest.fn()`
   const setCurrentPage = (page: number) => {
     currentPage = page;
     console.log(`setCurrentPage called with: ${page}`);
@@ -18,12 +16,12 @@ describe('Paginator Component', () => {
   beforeEach(() => {
     render(
       <Paginator
-        totalItemsCount={50} // 50 элементов
-        pageSize={5} // 5 элементов на страницу
+        totalItemsCount={50}
+        pageSize={5}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         onPageChanged={onPageChanged}
-        portionsSize={5} // 5 страниц в одной порции
+        portionsSize={5}
       />
     );
   });
@@ -48,13 +46,6 @@ describe('Paginator Component', () => {
   test('shows NEXT button when more pages exist', () => {
     expect(screen.getByText(/NEXT/)).toBeInTheDocument();
   });
-
-  // test('clicking NEXT button updates portion', () => {
-  //   const nextButton = screen.getByText(/NEXT/);
-  //   fireEvent.click(nextButton);
-
-  //   expect(nextButton).toBeInTheDocument();
-  // });
 
   test('does not show PREV on first portion', () => {
     expect(screen.queryByText(/PREV/)).not.toBeInTheDocument();

@@ -18,14 +18,11 @@ const Paginator: FC<PropsType> = ({
   setCurrentPage,
 }) => {
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
-  // console.log(totalItemsCount);
   const pages: Array<number> = [];
 
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-
-  // console.log(pages);
 
   const portionCount = Math.ceil(pagesCount / portionsSize);
   const [portionNumber, setPortionNumber] = useState(1);
@@ -53,7 +50,6 @@ const Paginator: FC<PropsType> = ({
             <span
               key={page}
               className={cn(style.pageNumber)}
-              // currentPage === page ? style.selectedPage : style.pageNumber}
               onClick={() => {
                 setCurrentPage(page);
                 onPageChanged(page);

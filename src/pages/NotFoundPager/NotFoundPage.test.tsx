@@ -5,7 +5,7 @@ import NotFoundPager from '.';
 
 describe('NotFoundPage test', () => {
   it('NotFoundPage should be defined', () => {
-    expect(NotFoundPager).toBeDefined(); // Убираем JSX
+    expect(NotFoundPager).toBeDefined();
   });
 
   it('NotFoundPage should render', () => {

@@ -80,27 +80,11 @@ export type GetCharacterType = {
   links: LinksType;
 };
 
-export const getTotalInfo = async () // params: string,
-// page: number = 1
-: Promise<ResponseInfoType> => {
-  // let response;
-  // if (page > 1) {
+export const getTotalInfo = async (): Promise<ResponseInfoType> => {
   const response = await axios(`${URL.baseUrl}${URL.props}`);
-  // } else {
-  //   response = await axios(`${URL.baseUrl}${URL.props}${URL.search}${params}`);
-  // }
   return response.data;
 };
 
-// export const getItems = async (
-//   params: string,
-//   page: number = DEFAULT_CURRENT_PAGE
-// ): Promise<ResponseInfoType> => {
-//   const response = await axios(
-//     `${URL.baseUrl}${URL.props}${URL.search}${params}`
-//   );
-//   return response.data;
-// };
 export const getItems = async (
   params: string,
   page: number = DEFAULT_CURRENT_PAGE
@@ -117,9 +101,3 @@ export const getCharacter = async (
   const response = await axios(`${URL.baseUrl}${URL.props}/${id}`);
   return response.data;
 };
-// export const getItems = async (params: string): Promise<ResponseType[]> => {
-//   const response = await axios(
-//     `${URL.baseUrl}${URL.props}${URL.search}${params}`
-//   );
-//   return response.data.results;
-// };

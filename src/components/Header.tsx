@@ -1,27 +1,13 @@
-// import { useEffect } from 'react';
 import React from 'react';
 import styles from './Header.module.css';
-// import { getItems, getTotalInfo, ResponseType } from '../api/getItems';
 
 type HeaderPropsType = {
-  // handleResponse: (data: ResponseType[]) => void;
-  // setIsLoading: (isLoading: boolean) => void;
-  // setIsError: (isError: boolean) => void;
-  // setItemsCount: (itemsCount: number) => void;
-  // setNextPageLink: (nextPageLink: string) => void;
-  // setPrevPageLink: (prevPageLink: string) => void;
   handleOnSubmit: () => void;
   inputValue: string;
   setInputValue: (value: string) => void;
 };
 
 const Header: React.FC<HeaderPropsType> = ({
-  // handleResponse,
-  // setIsError,
-  // setIsLoading,
-  // setItemsCount,
-  // setNextPageLink,
-  // setPrevPageLink,
   handleOnSubmit,
   inputValue,
   setInputValue,

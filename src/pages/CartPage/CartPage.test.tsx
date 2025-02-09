@@ -68,20 +68,4 @@ describe('CartPage test', () => {
     const container = screen.getByRole('container');
     expect(container).toHaveClass('hidden');
   });
-
-  // it('Check the loading indicator', () => {
-  //   render(
-  //     <MemoryRouter
-  //       initialEntries={[
-  //         '/character/b832f9ed-fe71-46f5-a9e1-b947a49161e2?search=potter&page=3',
-  //       ]}
-  //     >
-  //       <CartPage />
-  //     </MemoryRouter>
-  //   );
-
-  //   const loading = screen.getByRole('loading');
-
-  //   expect(loading).toBeInTheDocument();
-  // });
 });

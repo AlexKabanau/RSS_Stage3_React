@@ -39,10 +39,8 @@ describe('ErrorButton Component', () => {
   test('throws error when button is clicked', () => {
     const { getByRole } = renderWithErrorBoundary(<ErrorButton />);
 
-    // Нажимаем на кнопку
     fireEvent.click(getByRole('button', { name: /ErrorButton/i }));
 
-    // Проверяем, что компонент обрабатывает ошибку
     expect(screen.getByText(/Something went wrong/i)).toBeInTheDocument();
   });
 });

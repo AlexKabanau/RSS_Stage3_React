@@ -11,12 +11,10 @@ describe('Item Component', () => {
       </MemoryRouter>
     );
 
-    // Check if the character name is displayed
     expect(
       screen.getByText(`George Weasley's dance partner`)
     ).toBeInTheDocument();
 
-    // Check if species and gender are displayed
     expect(screen.getByText('Species: Human')).toBeInTheDocument();
     expect(screen.getByText('Gender: Female')).toBeInTheDocument();
   });
