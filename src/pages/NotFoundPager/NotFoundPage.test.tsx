@@ -4,8 +4,8 @@ import { MemoryRouter } from 'react-router';
 import NotFoundPager from '.';
 
 describe('NotFoundPage test', () => {
-  it('NotFoundPage should defined', () => {
-    expect(<NotFoundPager />).toBeDefined();
+  it('NotFoundPage should be defined', () => {
+    expect(NotFoundPager).toBeDefined(); // Убираем JSX
   });
 
   it('NotFoundPage should render', () => {
@@ -14,7 +14,11 @@ describe('NotFoundPage test', () => {
         <NotFoundPager />
       </MemoryRouter>
     );
+
     const text = screen.getByText('😢 OOPS! Page not found.');
+    const homeButton = screen.getByText('Home Page');
+
     expect(text).toBeInTheDocument();
+    expect(homeButton).toBeInTheDocument();
   });
 });
