@@ -14,7 +14,6 @@ const Header: React.FC<HeaderPropsType> = ({
 }) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    localStorage.setItem('searchValue', inputValue.trim());
   };
 
   return (

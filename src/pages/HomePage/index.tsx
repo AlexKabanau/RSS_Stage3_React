@@ -7,11 +7,10 @@ import { getItems, ResponseType } from '../../api/getItems';
 import Footer from '../../components/Footer';
 import { Outlet, useSearchParams } from 'react-router';
 import { DEFAULT_PAGE } from '../../constants/constants';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 export default function HomePage() {
-  const [inputValue, setInputValue] = useState(
-    localStorage.getItem('searchValue') || ''
-  );
+  const [inputValue, setInputValue] = useLocalStorage();
   const [data, setData] = useState<ResponseType[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -46,7 +45,7 @@ export default function HomePage() {
   }, [searchParams]);
 
   const handleOnSubmit = () => {
-    localStorage.setItem('searchValue', inputValue);
+    setInputValue(inputValue);
     setSearchParams({ search: inputValue, page: DEFAULT_PAGE.toString() });
   };
 
