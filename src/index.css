@@ -15,6 +15,17 @@
 #root {
   padding: 0 30px !important;
 }
+/* body {
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+body.dark {
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+} */
 
 .error-content {
   display: flex;
@@ -22,9 +33,18 @@
 }
 
 .app {
-  height: 100vh;
+  /* height: 100vh; */
   display: grid;
   grid-template-rows: auto 1fr auto;
+
+  color-scheme: light;
+  color: #242424;
+  background-color: #e5e7eb;
+}
+.app.dark {
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 }
 .logo {
   height: 6rem;

@@ -3,6 +3,7 @@
   border: 0 solid #e5e7eb;
   border-bottom-width: 1px;
   display: flex;
+  align-items: center;
 }
 
 .search_container {
@@ -25,3 +26,5 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
+

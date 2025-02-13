@@ -8,6 +8,8 @@ import Footer from '../../components/Footer';
 import { Outlet, useSearchParams } from 'react-router';
 import { DEFAULT_PAGE } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { useTheme } from '../../hooks/useTheme';
+// import cn from 'classnames';
 
 export default function HomePage() {
   const [inputValue, setInputValue] = useLocalStorage();
@@ -17,6 +19,7 @@ export default function HomePage() {
   const [itemsCount, setItemsCount] = useState<number>(0);
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const search = searchParams.get('search') || '';
@@ -55,7 +58,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="app" role="mainPage">
+    <div className={theme === 'dark' ? 'app dark' : 'app'} role="mainPage">
       <Header
         inputValue={inputValue}
         setInputValue={setInputValue}

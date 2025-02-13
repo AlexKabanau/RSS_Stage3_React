@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
+import ThemeSelect from './ThemeSelect';
 
 type HeaderPropsType = {
   handleOnSubmit: () => void;
@@ -29,6 +30,7 @@ const Header: React.FC<HeaderPropsType> = ({
         />
       </div>
       <button onClick={() => handleOnSubmit()}>Search</button>
+      <ThemeSelect />
     </header>
   );
 };
