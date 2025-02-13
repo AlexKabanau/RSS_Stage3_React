@@ -34,7 +34,7 @@ export type AttributesType = {
   wiki: string | null;
 };
 
-type LinkType = {
+export type LinkType = {
   self: string;
 };
 export type ResponseType = {

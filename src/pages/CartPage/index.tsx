@@ -41,7 +41,7 @@ export default function CartPage() {
         )}
         {character && (
           <>
-            <h3>{JSON.stringify(character.data.attributes.name)}</h3>
+            <h3>{character.data.attributes.name}</h3>
             <div>
               {character.data.attributes.image && (
                 <img
