@@ -15,6 +15,7 @@ type MainPropsType = {
 
 const Main: React.FC<MainPropsType> = ({ items, count, onPageChanged }) => {
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
+  console.log('count main', count);
   return (
     <main>
       <Paginator

@@ -36,6 +36,7 @@ export default function HomePage() {
           setItemsCount(info.meta.pagination.records);
         } else {
           setData([]);
+          setItemsCount(0);
         }
       } catch (error) {
         console.error(error);
@@ -45,7 +46,47 @@ export default function HomePage() {
     };
 
     fetchData();
-  }, [searchParams]);
+  }, [searchParams, itemsCount]);
+
+  // const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // useEffect(() => {
+  //   console.log(darkModePreference);
+  //   if (theme === 'system') {
+  //     if (darkModePreference.matches) {
+  //       changeTheme('dark');
+  //       console.log(theme);
+  //     } else {
+  //       changeTheme('light');
+  //     }
+
+  //     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+  //       console.log('change');
+  //       if (e.matches) {
+  //         changeTheme('dark');
+  //       } else {
+  //         changeTheme('light');
+  //       }
+  //     };
+
+  //     darkModePreference.addEventListener('change', handleSystemThemeChange);
+
+  //     return () => {
+  //       darkModePreference.removeEventListener(
+  //         'change',
+  //         handleSystemThemeChange
+  //       );
+  //     };
+  //   }
+
+  //   if (theme === 'dark') {
+  //     changeTheme('dark');
+  //   }
+
+  //   if (theme === 'light') {
+  //     changeTheme('light');
+  //   }
+  // }, [changeTheme, theme]);
 
   const handleOnSubmit = () => {
     setInputValue(inputValue);

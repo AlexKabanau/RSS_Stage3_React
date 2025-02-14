@@ -27,6 +27,10 @@ const Header: React.FC<HeaderPropsType> = ({
           placeholder="Search"
           value={inputValue}
           onChange={handleOnChange}
+          onKeyDown={(e) => {
+            console.log(e.key);
+            if (e.key === 'Enter') handleOnSubmit();
+          }}
         />
       </div>
       <button onClick={() => handleOnSubmit()}>Search</button>

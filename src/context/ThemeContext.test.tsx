@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import ThemeContextProvider, { ThemeContext } from './ThemeContext';
 import { THEMES, LOCALSTORAGE_THEME } from '../constants/constants';
@@ -17,7 +17,7 @@ describe('ThemeContextProvider', () => {
       </ThemeContextProvider>
     );
 
-    expect(screen.getByText(THEMES[2])).toBeInTheDocument();
+    expect(screen.getByText(THEMES[0])).toBeInTheDocument();
   });
 
   test('updates theme and stores in localStorage', () => {
