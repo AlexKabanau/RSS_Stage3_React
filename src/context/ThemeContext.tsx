@@ -1,23 +1,12 @@
-import { createContext, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import {
   DEFAULT_THEME,
   LOCALSTORAGE_THEME,
   THEMES,
 } from '../constants/constants';
+import { ThemeContext } from './themeContextCreation';
 
 export type ThemesType = (typeof THEMES)[number];
-
-type InitialStateType = {
-  theme: ThemesType;
-  changeTheme: (selectedTheme: ThemesType) => void;
-};
-
-const initialState: InitialStateType = {
-  theme: DEFAULT_THEME,
-  changeTheme: () => {},
-};
-
-export const ThemeContext = createContext(initialState);
 
 const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemesType>(() => {
