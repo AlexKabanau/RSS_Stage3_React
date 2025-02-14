@@ -1,7 +1,8 @@
 // import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import ThemeContextProvider, { ThemeContext } from './ThemeContext';
 import { THEMES, LOCALSTORAGE_THEME } from '../constants/constants';
+import ThemeContextProvider from './ThemeContext';
+import { ThemeContext } from './themeContextCreation';
 
 describe('ThemeContextProvider', () => {
   beforeEach(() => {
