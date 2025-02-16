@@ -5,6 +5,25 @@ import {
   URL,
 } from '../constants/constants';
 
+export type ResponseInfoType = {
+  data: ResponseType[];
+  meta: MetaType;
+  links: LinksType;
+};
+
+export type GetCharacterType = {
+  data: ResponseType;
+  meta: MetaType;
+  links: LinksType;
+};
+
+export type ResponseType = {
+  id: string;
+  type: string;
+  attributes: AttributesType;
+  links: LinkType;
+};
+
 export type AttributesType = {
   slug: string;
   alias_names: string[];
@@ -37,11 +56,11 @@ export type AttributesType = {
 export type LinkType = {
   self: string;
 };
-export type ResponseType = {
-  id: string;
-  type: string;
-  attributes: AttributesType;
-  links: LinkType;
+
+type MetaType = {
+  pagination?: PaginationType;
+  copyright: string;
+  generated_at: string;
 };
 
 type PaginationType = {
@@ -53,12 +72,6 @@ type PaginationType = {
   prev?: number;
 };
 
-type MetaType = {
-  pagination?: PaginationType;
-  copyright: string;
-  generated_at: string;
-};
-
 type LinksType = {
   self: string;
   current?: string;
@@ -66,18 +79,6 @@ type LinksType = {
   last?: string;
   first?: string;
   prev?: string;
-};
-
-export type ResponseInfoType = {
-  data: ResponseType[];
-  meta: MetaType;
-  links: LinksType;
-};
-
-export type GetCharacterType = {
-  data: ResponseType;
-  meta: MetaType;
-  links: LinksType;
 };
 
 export const getTotalInfo = async (): Promise<ResponseInfoType> => {

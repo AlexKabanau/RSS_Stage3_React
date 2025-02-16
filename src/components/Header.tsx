@@ -28,7 +28,7 @@ const Header: React.FC<HeaderPropsType> = ({
           value={inputValue}
           onChange={handleOnChange}
           onKeyDown={(e) => {
-            console.log(e.key);
+            // console.log(e.key);
             if (e.key === 'Enter') handleOnSubmit();
           }}
         />

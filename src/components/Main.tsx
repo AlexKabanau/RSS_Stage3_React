@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
 import {
   RESOURCES_PER_PAGE,
-  DEFAULT_CURRENT_PAGE,
+  // DEFAULT_CURRENT_PAGE,
 } from '../constants/constants';
+// import { useAppSelector } from '../hooks/redux';
+import { queryParamsSelectors } from '../store/slice/queryParamsSelectors';
+import { useSelector } from 'react-redux';
 
 type MainPropsType = {
   items: ResponseType[];
@@ -14,13 +17,14 @@ type MainPropsType = {
 };
 
 const Main: React.FC<MainPropsType> = ({ items, count, onPageChanged }) => {
-  const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
-  console.log('count main', count);
+  // const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
+  // console.log('count main', count);
+  const { page } = useSelector(queryParamsSelectors);
   return (
     <main>
       <Paginator
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        currentPage={Number(page)}
+        // setCurrentPage={setCurrentPage}
         totalItemsCount={count}
         pageSize={RESOURCES_PER_PAGE}
         onPageChanged={onPageChanged}

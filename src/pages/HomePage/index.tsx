@@ -9,9 +9,23 @@ import { Outlet, useSearchParams } from 'react-router';
 import { DEFAULT_PAGE } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useTheme } from '../../hooks/useTheme';
+// import { useAppDispatch } from '../../hooks/redux';
+import { setSearchParamsToState } from '../../store/slice/serchParamsSlice';
+import {
+  setPage,
+  setQueryParamsToState,
+} from '../../store/slice/queryParamsSlice';
+import { useAppDispatch } from '../../store/store';
+// import { useGetItemsQuery } from '../../api/redux.api';
+import { fetchItems } from '../../store/slice/chractersSlice';
+import { useSelector } from 'react-redux';
+import { charactersSelectors } from '../../store/slice/chractersSelectors';
 // import cn from 'classnames';
 
 export default function HomePage() {
+  const dispatch = useAppDispatch();
+
+  const { response } = useSelector(charactersSelectors);
   const [inputValue, setInputValue] = useLocalStorage();
   const [data, setData] = useState<ResponseType[] | null>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +33,10 @@ export default function HomePage() {
   const [itemsCount, setItemsCount] = useState<number>(0);
 
   const [searchParams, setSearchParams] = useSearchParams();
+  // debugger;
+  // const [searchURL, setSearchURL] = useLocalStorage('inputValue');
   const { theme } = useTheme();
+  // const {data, meta, links} = useGetItemsQuery(search = 'potter', page = 1);
 
   useEffect(() => {
     const search = searchParams.get('search') || '';
@@ -30,10 +47,15 @@ export default function HomePage() {
       setIsLoading(true);
       setIsError(false);
       try {
+        dispatch(fetchItems({ searchParams: search, page }));
+        // console.log(characters);
+        // const info = await getItems(search, page);
         const info = await getItems(search, page);
+
         if (info.data && info.meta.pagination?.records) {
           setData(info.data);
           setItemsCount(info.meta.pagination.records);
+          console.log(response);
         } else {
           setData([]);
           setItemsCount(0);
@@ -90,10 +112,22 @@ export default function HomePage() {
 
   const handleOnSubmit = () => {
     setInputValue(inputValue);
+    dispatch(setSearchParamsToState(inputValue));
+    dispatch(
+      setQueryParamsToState({
+        search: inputValue,
+        page: DEFAULT_PAGE.toString(),
+      })
+    );
+
     setSearchParams({ search: inputValue, page: DEFAULT_PAGE.toString() });
+    console.log(inputValue);
   };
 
   const onPageChanged = (page: number) => {
+    dispatch(setPage(page.toString()));
+    dispatch(setSearchParamsToState(inputValue));
+
     const currentSearch = searchParams.get('search') || inputValue;
     setSearchParams({ search: currentSearch, page: page.toString() });
   };
