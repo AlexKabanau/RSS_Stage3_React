@@ -20,6 +20,7 @@ import { charactersSelectors } from '../../store/slice/chractersSelectors';
 import { queryParamsSelectors } from '../../store/slice/queryParamsSelectors';
 import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
+import { ArrowDownToLine, Trash2 } from 'lucide-react';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
@@ -57,6 +58,61 @@ export default function HomePage() {
     const currentSearch = searchParams.get('search') || inputValue;
     setSearchParams({ search: currentSearch, page: page.toString() });
   };
+  const onDeleteIconClick = () => {
+    console.log('delete click');
+  };
+  const onDownloadIconClick = () => {
+    console.log('download click');
+    if (favorits.length === 0) {
+      alert('Нет выбранных элементов для скачивания!');
+      return;
+    }
+
+    // Преобразуем данные в CSV-формат
+    const csvRows = [];
+    const headers = ['Name', 'Species', 'Gender', 'Wiki URL']; // Заголовки CSV
+    csvRows.push(headers.join(',')); // Добавляем заголовки
+    //TODO найти итемсы по ID
+    const filteredObjects = response.data.filter((obj) =>
+      favorits.includes(obj.id)
+    );
+    filteredObjects.forEach((item) => {
+      const row = [
+        `"${item.attributes.name}"`, // Оборачиваем в кавычки на случай, если есть запятые
+        `"${item.attributes.species || 'N/A'}"`,
+        `"${item.attributes.gender}"`,
+        `"${item.attributes.wiki}"`,
+      ];
+      csvRows.push(row.join(','));
+    });
+
+    // Создаем CSV-файл
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const fileName = `${favorits.length}_characters.csv`;
+    const file = new File([csvString], `${favorits.length}_items.csv`, {
+      type: 'text/csv',
+    });
+
+    const url = URL.createObjectURL(file);
+
+    // Формируем имя файла, например "15_episodes.csv"
+
+    // Создаем ссылку для скачивания
+
+    window.open(url);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = fileName;
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
+
+    // const b = <a href={url} download={fileName}></a>
+
+    // Освобождаем URL
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className={theme === 'dark' ? 'app dark' : 'app'} role="mainPage">
@@ -75,7 +131,19 @@ export default function HomePage() {
       {status === 'success' && response.data?.length === 0 && (
         <div>Items not found</div>
       )}
-      {favorits.length > 0 && <p>Favorits: {favorits.length}</p>}
+      {favorits.length > 0 && (
+        <>
+          <p>
+            Favorits: {favorits.length}
+            <Trash2 size={15} cursor={'pointer'} onClick={onDeleteIconClick} />
+            <ArrowDownToLine
+              size={15}
+              cursor={'pointer'}
+              onClick={onDownloadIconClick}
+            />
+          </p>
+        </>
+      )}
       {response.data && (
         <div role="homePage" className="main-container">
           <Main
