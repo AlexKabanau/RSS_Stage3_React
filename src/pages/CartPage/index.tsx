@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
 // import { getCharacter, GetCharacterType } from '../../api/getItems';
 import reactLogo from '../../assets/react.svg';
 import { useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { characterSelectors } from '../../store/slice/chracterSelectors';
-import { fetchItem } from '../../store/slice/characterSlice';
+import { fetchItem, setChracter } from '../../store/slice/characterSlice';
+// import { DEFAULT_PAGE } from '../../constants/constants';
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
@@ -16,7 +17,10 @@ export default function CartPage() {
   //   undefined
   // );
   // const [isLoading, setIsLoading] = useState(false);
-  const [visible, setVisible] = useState(true);
+  // const [visible, setVisible] = useState(true);
+  // const navigate = useNavigate();
+
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (id) dispatch(fetchItem({ id: id }));
@@ -38,12 +42,16 @@ export default function CartPage() {
   //   };
   //   getData();
   // }, [id]);
+  const onCloseClick = () => {
+    dispatch(setChracter(''));
+
+    // const currentSearch = searchParams.get('search') || '';
+    // setSearchParams({ search: currentSearch, page: DEFAULT_PAGE.toString() });
+    // navigate('/');
+  };
   return (
     <div className="cart">
-      <button role="button" onClick={() => setVisible(!visible)}>
-        {!visible ? 'Show' : 'Hide'}
-      </button>
-      <div role="container" className={visible ? 'visible' : 'hidden'}>
+      <div role="container">
         {status === 'loading' && (
           <div role="loading">
             <p>Loading...</p>
@@ -52,6 +60,9 @@ export default function CartPage() {
         )}
         {response.data && (
           <>
+            <button role="button" onClick={onCloseClick}>
+              Close
+            </button>
             <h3>{response.data.attributes.name}</h3>
             <div>
               {response.data.attributes.image && (

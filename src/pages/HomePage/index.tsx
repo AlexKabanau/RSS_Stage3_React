@@ -18,15 +18,19 @@ import { fetchItems } from '../../store/slice/chractersSlice';
 import { useSelector } from 'react-redux';
 import { charactersSelectors } from '../../store/slice/chractersSelectors';
 import { queryParamsSelectors } from '../../store/slice/queryParamsSelectors';
+import { characterSelectors } from '../../store/slice/chracterSelectors';
+import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
 
   const { response, status } = useSelector(charactersSelectors);
+  const { response: characterResponse } = useSelector(characterSelectors);
   const { page, search } = useSelector(queryParamsSelectors);
   const [inputValue, setInputValue] = useLocalStorage();
   const [searchParams, setSearchParams] = useSearchParams();
   const { theme } = useTheme();
+  const favorits = useSelector(favoritsSelectors);
 
   useEffect(() => {
     dispatch(fetchItems({ searchParams: search, page: Number(page) }));
@@ -71,13 +75,17 @@ export default function HomePage() {
       {status === 'success' && response.data?.length === 0 && (
         <div>Items not found</div>
       )}
+      {favorits.length > 0 && <p>Favorits: {favorits.length}</p>}
       {response.data && (
         <div role="homePage" className="main-container">
           <Main
+            // style={{ width: characterResponse ? 'calc(2/3 * 100%)' : '100%' }}
+            className={characterResponse ? 'fullWidth' : 'width2_3'}
             items={response.data}
             count={response.meta.pagination?.records || 0}
             onPageChanged={onPageChanged}
           />
+          {/* {characterResponse ? 'есть' : 'нет'} */}
           <Outlet />
         </div>
       )}

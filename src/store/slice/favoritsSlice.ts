@@ -1,20 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
-  favorist: {
-    characters: [],
-  },
+type InintialStateType = {
+  favorits: string[];
+};
+const initialState: InintialStateType = {
+  favorits: [],
 };
 export const favoritsSlice = createSlice({
   name: 'favorits',
   initialState,
   reducers: {
-    setFavorits: (state, action) => {
-      state.favorist = action.payload;
+    setFavorites: (state, action: PayloadAction<string[]>) => {
+      state.favorits = action.payload;
     },
   },
 });
 
-export const { setFavorits } = favoritsSlice.actions;
+export const { setFavorites } = favoritsSlice.actions;
 
 export default favoritsSlice.reducer;

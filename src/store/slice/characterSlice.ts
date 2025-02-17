@@ -78,6 +78,9 @@ export const chracterSlice = createSlice({
     setChracter: (state, action) => {
       state.response = action.payload;
     },
+    delChracter: (state) => {
+      state.response = initialState.response;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchItem.pending, (state) => {
@@ -95,4 +98,4 @@ export const chracterSlice = createSlice({
 
 export default chracterSlice.reducer;
 
-export const { setChracter } = chracterSlice.actions;
+export const { setChracter, delChracter } = chracterSlice.actions;

@@ -14,14 +14,21 @@ type MainPropsType = {
   items: ResponseType[];
   count: number;
   onPageChanged: (page: number) => void;
+  // style?: React.CSSProperties;
+  className?: string;
 };
 
-const Main: React.FC<MainPropsType> = ({ items, count, onPageChanged }) => {
+const Main: React.FC<MainPropsType> = ({
+  items,
+  count,
+  onPageChanged,
+  className,
+}) => {
   // const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
   // console.log('count main', count);
   const { page } = useSelector(queryParamsSelectors);
   return (
-    <main>
+    <main className={className}>
       <Paginator
         currentPage={Number(page)}
         // setCurrentPage={setCurrentPage}
