@@ -4,8 +4,11 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import NotFoundPager from './pages/NotFoundPager';
+import { Toaster } from 'sonner';
+import { useTheme } from './hooks/useTheme';
 
 const App = () => {
+  const { theme } = useTheme();
   return (
     <BrowserRouter>
       <Routes>
@@ -14,6 +17,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<NotFoundPager />} />
       </Routes>
+      <Toaster theme={theme} position="bottom-right" duration={5000} />
     </BrowserRouter>
   );
 };

@@ -73,6 +73,9 @@ body.dark {
   /* flex-direction: column;
   gap: 1rem; */
 }
+.favorits > * {
+  margin: 0 1rem;
+}
 .fullWidth {
   width: 100%;
 }

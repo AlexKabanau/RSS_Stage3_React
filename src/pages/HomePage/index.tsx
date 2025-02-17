@@ -21,6 +21,9 @@ import { queryParamsSelectors } from '../../store/slice/queryParamsSelectors';
 import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
+import { clearFavorits } from '../../store/slice/favoritsSlice';
+import { toast } from 'sonner';
+import { DownloadItemsCSV, useDownloadCSV } from '../../hooks/downloadItemsCSV';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
@@ -32,6 +35,7 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { theme } = useTheme();
   const favorits = useSelector(favoritsSelectors);
+  const downloadCSV = useDownloadCSV();
 
   useEffect(() => {
     dispatch(fetchItems({ searchParams: search, page: Number(page) }));
@@ -60,58 +64,53 @@ export default function HomePage() {
   };
   const onDeleteIconClick = () => {
     console.log('delete click');
+    dispatch(clearFavorits());
+    toast.success('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
     console.log('download click');
-    if (favorits.length === 0) {
-      alert('Нет выбранных элементов для скачивания!');
-      return;
-    }
+    downloadCSV();
 
-    // Преобразуем данные в CSV-формат
-    const csvRows = [];
-    const headers = ['Name', 'Species', 'Gender', 'Wiki URL']; // Заголовки CSV
-    csvRows.push(headers.join(',')); // Добавляем заголовки
-    //TODO найти итемсы по ID
-    const filteredObjects = response.data.filter((obj) =>
-      favorits.includes(obj.id)
-    );
-    filteredObjects.forEach((item) => {
-      const row = [
-        `"${item.attributes.name}"`, // Оборачиваем в кавычки на случай, если есть запятые
-        `"${item.attributes.species || 'N/A'}"`,
-        `"${item.attributes.gender}"`,
-        `"${item.attributes.wiki}"`,
-      ];
-      csvRows.push(row.join(','));
-    });
+    // if (favorits.length === 0) {
+    //   alert('Нет выбранных элементов для скачивания!');
+    //   return;
+    // }
 
-    // Создаем CSV-файл
-    const csvString = csvRows.join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv' });
-    const fileName = `${favorits.length}_characters.csv`;
-    const file = new File([csvString], `${favorits.length}_items.csv`, {
-      type: 'text/csv',
-    });
+    // // Преобразуем данные в CSV-формат
+    // const csvRows = [];
+    // const headers = ['Name', 'Species', 'Gender', 'Wiki URL']; // Заголовки CSV
+    // csvRows.push(headers.join(',')); // Добавляем заголовки
+    // //TODO найти итемсы по ID
+    // const filteredObjects = response.data.filter((obj) =>
+    //   favorits.includes(obj.id)
+    // );
+    // filteredObjects.forEach((item) => {
+    //   const row = [
+    //     `"${item.attributes.name}"`, // Оборачиваем в кавычки на случай, если есть запятые
+    //     `"${item.attributes.species || 'N/A'}"`,
+    //     `"${item.attributes.gender}"`,
+    //     `"${item.attributes.wiki}"`,
+    //   ];
+    //   csvRows.push(row.join(','));
+    // });
 
-    const url = URL.createObjectURL(file);
+    // // Создаем CSV-файл
+    // const csvString = csvRows.join('\n');
+    // const blob = new Blob([csvString], { type: 'text/csv' });
 
-    // Формируем имя файла, например "15_episodes.csv"
+    // // Создаем объект URL для Blob
+    // const url = URL.createObjectURL(blob);
 
-    // Создаем ссылку для скачивания
-
-    window.open(url);
+    // // Создаем элемент <a> для скачивания
     // const a = document.createElement('a');
     // a.href = url;
-    // a.download = fileName;
-    // document.body.appendChild(a);
+    // a.download = `${favorits.length}_items.csv`; // Задаем имя файла
+
+    // // Программно кликаем по ссылке
+    // // document.body.appendChild(a);
     // a.click();
-    // document.body.removeChild(a);
-
-    // const b = <a href={url} download={fileName}></a>
-
-    // Освобождаем URL
-    URL.revokeObjectURL(url);
+    // URL.revokeObjectURL(url);
+    // toast.success('Successfully downloaded!');
   };
 
   return (
@@ -133,7 +132,7 @@ export default function HomePage() {
       )}
       {favorits.length > 0 && (
         <>
-          <p>
+          <p className="favorits">
             Favorits: {favorits.length}
             <Trash2 size={15} cursor={'pointer'} onClick={onDeleteIconClick} />
             <ArrowDownToLine

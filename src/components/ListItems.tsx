@@ -3,8 +3,11 @@ import { ResponseType } from '../api/getItems';
 import Item from './Item';
 import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
-import { setFavorites } from '../store/slice/favoritsSlice';
+import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
+import { toast } from 'sonner';
+import { ArrowDownToLine, Trash, Trash2 } from 'lucide-react';
+import { DownloadItemsCSV, useDownloadCSV } from '../hooks/downloadItemsCSV';
 
 type ItemsType = {
   items: ResponseType[];
@@ -12,6 +15,7 @@ type ItemsType = {
 
 const ListItems: React.FC<ItemsType> = ({ items }) => {
   const dispatch = useAppDispatch();
+  const downloadCSV = useDownloadCSV();
 
   const favorits = useSelector(favoritsSelectors);
   // let x = favorits.includes
@@ -30,7 +34,53 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
       : [...favorits, id]; // Добавляем в избранное
 
     dispatch(setFavorites(updatedFavorites)); // Теперь передаем массив
-    console.log(favorits, 'favorits after');
+    // console.log(favorits, 'favorits after');
+    // debugger;
+    if (!favorits.includes(id)) {
+      toast(
+        `One character successfully added to favorites! \
+        Favorits: ${favorits.length + 1}`,
+        //   {
+        //   cancel: {
+        //     label: 'Close',
+        //     onClick: () => toast.dismiss(),
+        //   },
+
+        // },
+        {
+          action: (
+            <>
+              <Trash
+                size={15}
+                cursor={'pointer'}
+                onClick={() => {
+                  dispatch(clearFavorits());
+                  toast.success('Successfully deleted all characters!');
+                }}
+              />
+              <ArrowDownToLine
+                size={15}
+                cursor={'pointer'}
+                onClick={downloadCSV}
+              />
+            </>
+          ),
+        }
+      );
+    } else {
+      toast(
+        'One character successfully removed from favorites!',
+        {
+          cancel: {
+            label: 'Close',
+            onClick: () => toast.dismiss(),
+          },
+        }
+        // {
+        //   cancel: <button onClick={() => toast.dismiss()}>Close</button>,
+        // },
+      );
+    }
   };
 
   return (
