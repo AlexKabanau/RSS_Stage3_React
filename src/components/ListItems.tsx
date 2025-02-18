@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
-// import { toast } from 'sonner';
 import { ArrowDownToLine, Trash } from 'lucide-react';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
 import { useToast } from './ToastContext';
@@ -17,83 +16,51 @@ type ItemsType = {
 const ListItems: React.FC<ItemsType> = ({ items }) => {
   const dispatch = useAppDispatch();
   const downloadCSV = useDownloadCSV();
-
   const { addToast } = useToast();
-
   const favorits = useSelector(favoritsSelectors);
-  // let x = favorits.includes
+
+  const showAddedToast = () => {
+    addToast(
+      <p>
+        One character successfully added to favorites!
+        <br /> Favorits: {favorits.length + 1}
+        <Trash
+          size={15}
+          cursor={'pointer'}
+          onClick={() => {
+            dispatch(clearFavorits());
+            addToast('Successfully deleted all characters!');
+          }}
+        />
+        <ArrowDownToLine size={15} cursor={'pointer'} onClick={downloadCSV} />
+      </p>
+    );
+  };
+
+  const showRemovedToast = () => {
+    addToast(
+      <p data-testid="toast">
+        One character successfully removed from favorites!
+      </p>
+    );
+  };
 
   const toggleFavorite = (id: string) => {
-    console.log(favorits); // Вывод текущего состояния favorits
-
     if (!Array.isArray(favorits)) {
-      console.error('favorits is not an array!'); // Если это не массив, выведем ошибку
-      return; // Прекращаем выполнение, чтобы избежать ошибки
+      console.error('favorits is not an array!');
+      return;
     }
 
-    // Создаем новый массив в зависимости от текущего состояния
     const updatedFavorites = favorits.includes(id)
-      ? favorits.filter((favId) => favId !== id) // Удаляем из избранного
-      : [...favorits, id]; // Добавляем в избранное
+      ? favorits.filter((favId) => favId !== id)
+      : [...favorits, id];
 
-    dispatch(setFavorites(updatedFavorites)); // Теперь передаем массив
-    // console.log(favorits, 'favorits after');
-    // debugger;
+    dispatch(setFavorites(updatedFavorites));
+
     if (!favorits.includes(id)) {
-      addToast(
-        <p>
-          One character successfully added to favorites!
-          <br /> Favorits: {favorits.length + 1}
-          <Trash
-            size={15}
-            cursor={'pointer'}
-            onClick={() => {
-              dispatch(clearFavorits());
-              addToast('Successfully deleted all characters!');
-            }}
-          />
-          <ArrowDownToLine size={15} cursor={'pointer'} onClick={downloadCSV} />
-        </p>
-        //   {
-        //   cancel: {
-        //     label: 'Close',
-        //     onClick: () => toast.dismiss(),
-        //   },
-
-        // },
-        // {
-        //   action: (
-        //     <>
-        //       <Trash
-        //         size={15}
-        //         cursor={'pointer'}
-        //         onClick={() => {
-        //           dispatch(clearFavorits());
-        //           toast.success('Successfully deleted all characters!');
-        //         }}
-        //       />
-        //       <ArrowDownToLine
-        //         size={15}
-        //         cursor={'pointer'}
-        //         onClick={downloadCSV}
-        //       />
-        //     </>
-        //   ),
-        // }
-      );
+      showAddedToast();
     } else {
-      addToast(
-        'One character successfully removed from favorites!'
-        // {
-        //   cancel: {
-        //     label: 'Close',
-        //     onClick: () => toast.dismiss(),
-        //   },
-        // }
-        // {
-        //   cancel: <button onClick={() => toast.dismiss()}>Close</button>,
-        // },
-      );
+      showRemovedToast();
     }
   };
 

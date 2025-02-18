@@ -21,6 +21,7 @@ const Item: React.FC<ItemPropsType> = ({
       <label>
         <input
           type="checkbox"
+          data-testid={`favorite-checkbox-${item.id}`}
           checked={isFavorite}
           onChange={() => onToggleFavorite(item.id)}
         />
