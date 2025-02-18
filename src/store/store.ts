@@ -20,7 +20,7 @@ export const store = configureStore({
   reducer: {
     searchParams: searchParams,
     queryParams: queryParams,
-    isLoading: isLoading,
+    // isLoading: isLoading,
     favorits: favorits,
     character: character,
     characters: characters,

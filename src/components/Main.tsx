@@ -2,10 +2,7 @@ import React from 'react';
 import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
-import {
-  RESOURCES_PER_PAGE,
-  // DEFAULT_CURRENT_PAGE,
-} from '../constants/constants';
+import { RESOURCES_PER_PAGE } from '../constants/constants';
 // import { useAppSelector } from '../hooks/redux';
 import { queryParamsSelectors } from '../store/slice/queryParamsSelectors';
 import { useSelector } from 'react-redux';
@@ -14,7 +11,6 @@ type MainPropsType = {
   items: ResponseType[];
   count: number;
   onPageChanged: (page: number) => void;
-  // style?: React.CSSProperties;
   className?: string;
 };
 
@@ -24,8 +20,6 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
-  // const [currentPage, setCurrentPage] = useState<number>(DEFAULT_CURRENT_PAGE);
-  // console.log('count main', count);
   const { page } = useSelector(queryParamsSelectors);
   return (
     <main className={className}>

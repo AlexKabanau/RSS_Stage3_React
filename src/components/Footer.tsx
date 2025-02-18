@@ -20,6 +20,7 @@ export default function Footer() {
           to="https://rs.school/courses/reactjs"
           target="_blank"
           rel="noreferrer"
+          data-testid="rsschool-link"
         >
           <img className="rsschool__link" src={RSSLogo} alt="RSSchool logo" />
         </Link>
