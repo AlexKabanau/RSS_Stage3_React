@@ -18,6 +18,7 @@ const ToastContainer: React.FC = () => {
   };
 
   const removeToast = (id: number) => {
+    console.log(`Removing toast with id: ${id}`);
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
