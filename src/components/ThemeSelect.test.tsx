@@ -1,50 +1,41 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// ThemeSelect.test.tsx
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import ThemeSelect from './ThemeSelect';
 import { useTheme } from '../hooks/useTheme';
 import { THEMES } from '../constants/constants';
 
-// Мокаем useTheme
-jest.mock('../hooks/useTheme');
+vi.mock('../hooks/useTheme', () => ({
+  useTheme: vi.fn(),
+}));
+
+const mockChangeTheme = vi.fn();
 
 describe('ThemeSelect', () => {
-  const changeThemeMock = jest.fn(); // Мокаем функцию changeTheme
-
   beforeEach(() => {
-    // Настраиваем useTheme, чтобы возвращать нужные значения
     (useTheme as jest.Mock).mockReturnValue({
-      theme: 'light', // Устанавливаем начальную тему
-      changeTheme: changeThemeMock, // Используем наш мок
+      theme: 'light', // текущая тема для теста
+      changeTheme: mockChangeTheme, // мок функции смены темы
     });
   });
 
-  it('renders correctly', () => {
+  it('should render the current theme', () => {
     render(<ThemeSelect />);
-
-    // Проверяем, что селект рендерится
     const selectElement = screen.getByRole('combobox');
-    expect(selectElement).toBeInTheDocument();
+    expect(selectElement).toHaveValue('light'); // проверяем, что выбранная тема соответствует текущей
   });
 
-  it('displays the correct options', () => {
+  it('should render the correct number of theme options', () => {
     render(<ThemeSelect />);
-
-    // Проверяем, что все опции из THEMES отображаются
-    THEMES.forEach((theme) => {
-      expect(screen.getByText(theme)).toBeInTheDocument();
-    });
+    const options = screen.getAllByRole('option');
+    expect(options).toHaveLength(THEMES.length); // проверяем, что количество опций соответствует количеству тем
   });
 
-  it('calls changeTheme with the selected theme', () => {
+  it('should call changeTheme when a new theme is selected', () => {
     render(<ThemeSelect />);
-
-    // Получаем селект
     const selectElement = screen.getByRole('combobox');
 
-    // Выбираем другую тему
-    userEvent.selectOptions(selectElement, THEMES[1]); // Например, выбираем вторую тему
-
-    // Проверяем, что changeTheme был вызван с правильным значением
-    expect(changeThemeMock).toHaveBeenCalledWith(THEMES[1]);
+    fireEvent.change(selectElement, { target: { value: 'dark' } }); // выбираем новую тему
+    expect(mockChangeTheme).toHaveBeenCalledWith('dark'); // проверяем, что функция была вызвана с правильным аргументом
   });
 });
