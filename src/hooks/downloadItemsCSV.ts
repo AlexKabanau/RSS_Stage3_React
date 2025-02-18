@@ -14,7 +14,7 @@ export const useDownloadCSV = () => {
     console.log('download click');
 
     if (favorits.length === 0) {
-      addToast('No filefor download!');
+      addToast('No file for download!');
       return;
     }
 

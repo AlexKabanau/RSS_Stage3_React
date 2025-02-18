@@ -1,48 +1,50 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import ThemeSelect from './ThemeSelect';
 import { useTheme } from '../hooks/useTheme';
 import { THEMES } from '../constants/constants';
-import { ThemesType } from '../context/ThemeContext';
 
-vi.mock('../hooks/useTheme');
+// Мокаем useTheme
+jest.mock('../hooks/useTheme');
 
-describe('ThemeSelect Component', () => {
-  test('renders without crashing', () => {
+describe('ThemeSelect', () => {
+  const changeThemeMock = jest.fn(); // Мокаем функцию changeTheme
+
+  beforeEach(() => {
+    // Настраиваем useTheme, чтобы возвращать нужные значения
     (useTheme as jest.Mock).mockReturnValue({
-      theme: THEMES[0],
-      changeTheme: vi.fn(),
+      theme: 'light', // Устанавливаем начальную тему
+      changeTheme: changeThemeMock, // Используем наш мок
     });
-
-    render(<ThemeSelect />);
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
-  test('renders all theme options', () => {
-    (useTheme as jest.Mock).mockReturnValue({
-      theme: THEMES[0],
-      changeTheme: vi.fn(),
-    });
-
+  it('renders correctly', () => {
     render(<ThemeSelect />);
+
+    // Проверяем, что селект рендерится
+    const selectElement = screen.getByRole('combobox');
+    expect(selectElement).toBeInTheDocument();
+  });
+
+  it('displays the correct options', () => {
+    render(<ThemeSelect />);
+
+    // Проверяем, что все опции из THEMES отображаются
     THEMES.forEach((theme) => {
-      expect(screen.getByRole('option', { name: theme })).toBeInTheDocument();
+      expect(screen.getByText(theme)).toBeInTheDocument();
     });
   });
 
-  test('calls changeTheme on theme change', () => {
-    const mockChangeTheme = vi.fn();
-
-    (useTheme as jest.Mock).mockReturnValue({
-      theme: THEMES[0],
-      changeTheme: mockChangeTheme,
-    });
-
+  it('calls changeTheme with the selected theme', () => {
     render(<ThemeSelect />);
 
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: THEMES[1] as ThemesType } });
+    // Получаем селект
+    const selectElement = screen.getByRole('combobox');
 
-    expect(mockChangeTheme).toHaveBeenCalledWith(THEMES[1]);
+    // Выбираем другую тему
+    userEvent.selectOptions(selectElement, THEMES[1]); // Например, выбираем вторую тему
+
+    // Проверяем, что changeTheme был вызван с правильным значением
+    expect(changeThemeMock).toHaveBeenCalledWith(THEMES[1]);
   });
 });

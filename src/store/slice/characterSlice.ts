@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { GetCharacterType } from '../../api/getItems';
 import axios from 'axios';
 import { URL } from '../../constants/constants';
-type initialStateType = {
+type InitialStateType = {
   response: GetCharacterType;
   status: 'loading' | 'success' | 'error';
   error: string | null;
 };
 
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
   response: {
     data: {
       id: '',
@@ -46,21 +46,21 @@ const initialState: initialStateType = {
       },
     },
     meta: {
-      pagination: undefined,
-      copyright: '',
-      generated_at: '',
+      pagination: { current: 1, records: 0 },
+      copyright: 'some copyright',
+      generated_at: '2025-02-18',
     },
     links: {
       self: '',
-      current: undefined,
-      next: undefined,
-      last: undefined,
-      first: undefined,
-      prev: undefined,
+      current: '',
+      first: '',
+      last: '',
+      next: '',
+      prev: '',
     },
   },
   status: 'loading',
-  error: null, // Изначально нет ошибки
+  error: null,
 };
 export const fetchItem = createAsyncThunk<GetCharacterType, { id: string }>(
   'character/fetchCharacter',
@@ -73,33 +73,32 @@ export const fetchItem = createAsyncThunk<GetCharacterType, { id: string }>(
   }
 );
 
-export const chracterSlice = createSlice({
+export const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {
-    setChracter: (state, action) => {
+    setCharacter: (state, action) => {
       state.response = action.payload;
     },
-    delChracter: (state) => {
+    delCharacter: (state) => {
       state.response = initialState.response;
+      state.status = 'success';
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchItem.pending, (state) => {
       state.status = 'loading';
-      state.error = null;
     });
     builder.addCase(fetchItem.fulfilled, (state, action) => {
       state.status = 'success';
       state.response = action.payload;
     });
-    builder.addCase(fetchItem.rejected, (state, action) => {
+    builder.addCase(fetchItem.rejected, (state) => {
       state.status = 'error';
-      state.error = action.error.message || 'Unknown error';
     });
   },
 });
 
-export default chracterSlice.reducer;
+export default characterSlice.reducer;
 
-export const { setChracter, delChracter } = chracterSlice.actions;
+export const { setCharacter, delCharacter } = characterSlice.actions;

@@ -5,7 +5,7 @@ import reactLogo from '../../assets/react.svg';
 import { useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { characterSelectors } from '../../store/slice/chracterSelectors';
-import { fetchItem, setChracter } from '../../store/slice/characterSlice';
+import { fetchItem, setCharacter } from '../../store/slice/characterSlice';
 // import { DEFAULT_PAGE } from '../../constants/constants';
 
 export default function CartPage() {

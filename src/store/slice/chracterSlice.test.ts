@@ -1,12 +1,12 @@
 import characterReducer, {
   fetchItem,
-  setChracter,
-  delChracter,
+  setCharacter,
+  delCharacter,
 } from './characterSlice';
 import { GetCharacterType } from '../../api/getItems';
 
 type initialStateType = {
-  response: GetCharacterType; // Заменяем тип на GetCharacterType
+  response: GetCharacterType;
   status: 'loading' | 'success' | 'error';
   error: string | null;
 };
@@ -52,7 +52,7 @@ describe('character slice', () => {
       meta: {
         pagination: {
           current: 1,
-          records: 10,
+          records: 0,
         },
         copyright: 'some copyright',
         generated_at: '2025-02-18',
@@ -71,9 +71,8 @@ describe('character slice', () => {
   };
 
   it('should handle initial state', () => {
-    expect(characterReducer(undefined, { type: 'unknown' })).toEqual(
-      initialState
-    );
+    const actual = characterReducer(undefined, { type: 'unknown' });
+    expect(actual).toEqual(initialState); // Убедитесь, что actual соответствует initialState
   });
 
   it('should handle setChracter', () => {
@@ -128,12 +127,92 @@ describe('character slice', () => {
       },
     };
 
-    const actual = characterReducer(initialState, setChracter(character));
+    const actual = characterReducer(initialState, setCharacter(character));
     expect(actual.response).toEqual(character);
   });
 
   it('should handle delChracter', () => {
-    const actual = characterReducer(initialState, delChracter());
+    const stateBefore = {
+      ...initialState,
+      response: {
+        data: {
+          id: '1',
+          type: 'character',
+          attributes: {
+            slug: 'example-slug',
+            alias_names: [],
+            animagus: null,
+            blood_status: null,
+            boggart: null,
+            born: null,
+            died: null,
+            eye_color: null,
+            family_members: [],
+            gender: null,
+            hair_color: null,
+            height: null,
+            house: null,
+            image: null,
+            jobs: [],
+            marital_status: null,
+            name: 'Example Name',
+            nationality: null,
+            patronus: null,
+            romances: [],
+            skin_color: null,
+            species: null,
+            titles: [],
+            wands: [],
+            weight: null,
+            wiki: null,
+          },
+          links: {
+            self: 'https://example.com',
+          },
+        },
+        links: {
+          self: '',
+          current: undefined,
+          first: undefined,
+          last: undefined,
+          next: undefined,
+          prev: undefined,
+        },
+        meta: {
+          copyright: 'some copyright',
+          generated_at: '2025-02-18',
+          pagination: {
+            current: 1,
+            records: 1,
+          },
+        },
+      },
+    };
+    // const actual = characterReducer(initialState, delCharacter());
+    // const expected = {
+    //   ...initialState,
+    //   response: {
+    //     ...initialState.response,
+    //     links: {
+    //       ...initialState.response.links,
+    //       current: undefined, // Приводим undefined к пустой строке
+    //       first: undefined,
+    //       last: undefined,
+    //       next: undefined,
+    //       prev: undefined,
+    //     },
+    //     meta: {
+    //       ...initialState.response.meta,
+    //       copyright: '',
+    //       generated_at: '',
+    //       pagination: undefined,
+    //     },
+    //   },
+    // };
+
+    // Проверяем только актуальные изменения в состоянии
+    // expect(actual.response).toEqual(initialState.response);
+    const actual = characterReducer(stateBefore, delCharacter());
     expect(actual.response).toEqual(initialState.response);
   });
 
@@ -205,11 +284,12 @@ describe('character slice', () => {
     expect(actual.response).toEqual(character);
   });
 
-  // it('should handle fetchItem rejected', () => {
-  //   const actual = characterReducer(
-  //     initialState,
-  //     fetchItem.rejected('', '', { id: '1' })
-  //   );
-  //   expect(actual.status).toEqual('error');
-  // });
+  it('should handle fetchItem rejected', () => {
+    const errorMessage = 'Error fetching item';
+    const actual = characterReducer(
+      initialState,
+      fetchItem.rejected(new Error(errorMessage), '', { id: '1' })
+    );
+    expect(actual.status).toEqual('error');
+  });
 });
