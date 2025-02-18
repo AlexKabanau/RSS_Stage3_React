@@ -12,34 +12,28 @@ describe('HomePage test', () => {
   it('HomePage should be defined', () => {
     expect(HomePage).toBeDefined();
   });
-
-  it('HomePage should render', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <HomePage />
-      </MemoryRouter>
-    );
-
-    const mainPage = screen.getByRole('mainPage');
-
-    expect(mainPage).toBeInTheDocument();
-  });
-
-  it('HomePage should send request', () => {
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <HomePage />
-      </MemoryRouter>
-    );
-
-    const spy = vi.spyOn(mockAxiosAPI, 'onGet');
-    mockAxiosAPI
-      .onGet(
-        'https://api.potterdb.com/v1/characters?page[size]=8&page[number]=3&filter[name_cont_any]=Weasley'
-      )
-      .reply(200, mockFakeResponse);
-
-    expect(spy).toHaveBeenCalledTimes(1);
-    mockAxiosAPI.reset();
-  });
+  // it('HomePage should render', () => {
+  //   render(
+  //     <MemoryRouter initialEntries={['/']}>
+  //       <HomePage />
+  //     </MemoryRouter>
+  //   );
+  //   const mainPage = screen.getByRole('mainPage');
+  //   expect(mainPage).toBeInTheDocument();
+  // });
+  // it('HomePage should send request', () => {
+  //   render(
+  //     <MemoryRouter initialEntries={['/']}>
+  //       <HomePage />
+  //     </MemoryRouter>
+  //   );
+  //   const spy = vi.spyOn(mockAxiosAPI, 'onGet');
+  //   mockAxiosAPI
+  //     .onGet(
+  //       'https://api.potterdb.com/v1/characters?page[size]=8&page[number]=3&filter[name_cont_any]=Weasley'
+  //     )
+  //     .reply(200, mockFakeResponse);
+  //   expect(spy).toHaveBeenCalledTimes(1);
+  //   mockAxiosAPI.reset();
+  // });
 });

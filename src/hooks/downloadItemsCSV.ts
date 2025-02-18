@@ -1,17 +1,20 @@
 import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { charactersSelectors } from '../store/slice/chractersSelectors';
-import { toast } from 'sonner';
+import { useToast } from '../components/ToastContext';
+// import { toast } from 'sonner';
 
 export const useDownloadCSV = () => {
   const favorits = useSelector(favoritsSelectors);
   const { response } = useSelector(charactersSelectors);
 
+  const { addToast } = useToast();
+
   const downloadCSV = () => {
     console.log('download click');
 
     if (favorits.length === 0) {
-      toast.error('Нет выбранных элементов для скачивания!');
+      addToast('No filefor download!');
       return;
     }
 
@@ -48,7 +51,7 @@ export const useDownloadCSV = () => {
     // Запускаем скачивание
     a.click();
     URL.revokeObjectURL(url);
-    toast.success('Файл успешно скачан!');
+    addToast('Файл успешно скачан!');
   };
 
   return downloadCSV;

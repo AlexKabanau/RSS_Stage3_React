@@ -5,6 +5,7 @@ import { URL } from '../../constants/constants';
 type initialStateType = {
   response: GetCharacterType;
   status: 'loading' | 'success' | 'error';
+  error: string | null;
 };
 
 const initialState: initialStateType = {
@@ -59,6 +60,7 @@ const initialState: initialStateType = {
     },
   },
   status: 'loading',
+  error: null, // Изначально нет ошибки
 };
 export const fetchItem = createAsyncThunk<GetCharacterType, { id: string }>(
   'character/fetchCharacter',
@@ -85,13 +87,15 @@ export const chracterSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchItem.pending, (state) => {
       state.status = 'loading';
+      state.error = null;
     });
     builder.addCase(fetchItem.fulfilled, (state, action) => {
       state.status = 'success';
       state.response = action.payload;
     });
-    builder.addCase(fetchItem.rejected, (state) => {
+    builder.addCase(fetchItem.rejected, (state, action) => {
       state.status = 'error';
+      state.error = action.error.message || 'Unknown error';
     });
   },
 });

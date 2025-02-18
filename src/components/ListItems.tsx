@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
-import { toast } from 'sonner';
-import { ArrowDownToLine, Trash, Trash2 } from 'lucide-react';
-import { DownloadItemsCSV, useDownloadCSV } from '../hooks/downloadItemsCSV';
+// import { toast } from 'sonner';
+import { ArrowDownToLine, Trash } from 'lucide-react';
+import { useDownloadCSV } from '../hooks/downloadItemsCSV';
+import { useToast } from './ToastContext';
 
 type ItemsType = {
   items: ResponseType[];
@@ -16,6 +17,8 @@ type ItemsType = {
 const ListItems: React.FC<ItemsType> = ({ items }) => {
   const dispatch = useAppDispatch();
   const downloadCSV = useDownloadCSV();
+
+  const { addToast } = useToast();
 
   const favorits = useSelector(favoritsSelectors);
   // let x = favorits.includes
@@ -37,9 +40,20 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
     // console.log(favorits, 'favorits after');
     // debugger;
     if (!favorits.includes(id)) {
-      toast(
-        `One character successfully added to favorites! \
-        Favorits: ${favorits.length + 1}`,
+      addToast(
+        <p>
+          One character successfully added to favorites!
+          <br /> Favorits: {favorits.length + 1}
+          <Trash
+            size={15}
+            cursor={'pointer'}
+            onClick={() => {
+              dispatch(clearFavorits());
+              addToast('Successfully deleted all characters!');
+            }}
+          />
+          <ArrowDownToLine size={15} cursor={'pointer'} onClick={downloadCSV} />
+        </p>
         //   {
         //   cancel: {
         //     label: 'Close',
@@ -47,35 +61,35 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
         //   },
 
         // },
-        {
-          action: (
-            <>
-              <Trash
-                size={15}
-                cursor={'pointer'}
-                onClick={() => {
-                  dispatch(clearFavorits());
-                  toast.success('Successfully deleted all characters!');
-                }}
-              />
-              <ArrowDownToLine
-                size={15}
-                cursor={'pointer'}
-                onClick={downloadCSV}
-              />
-            </>
-          ),
-        }
+        // {
+        //   action: (
+        //     <>
+        //       <Trash
+        //         size={15}
+        //         cursor={'pointer'}
+        //         onClick={() => {
+        //           dispatch(clearFavorits());
+        //           toast.success('Successfully deleted all characters!');
+        //         }}
+        //       />
+        //       <ArrowDownToLine
+        //         size={15}
+        //         cursor={'pointer'}
+        //         onClick={downloadCSV}
+        //       />
+        //     </>
+        //   ),
+        // }
       );
     } else {
-      toast(
-        'One character successfully removed from favorites!',
-        {
-          cancel: {
-            label: 'Close',
-            onClick: () => toast.dismiss(),
-          },
-        }
+      addToast(
+        'One character successfully removed from favorites!'
+        // {
+        //   cancel: {
+        //     label: 'Close',
+        //     onClick: () => toast.dismiss(),
+        //   },
+        // }
         // {
         //   cancel: <button onClick={() => toast.dismiss()}>Close</button>,
         // },

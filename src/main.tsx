@@ -11,6 +11,7 @@ import React, { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
 import { store } from './store/store.ts';
+import { ToastProvider } from './components/ToastContext.tsx';
 
 const rootElement = document.getElementById('root');
 
@@ -20,7 +21,9 @@ if (rootElement) {
       <StrictMode>
         <ErrorBoundary>
           <ThemeContextProvider>
-            <App />
+            <ToastProvider>
+              <App />
+            </ToastProvider>
           </ThemeContextProvider>
         </ErrorBoundary>
       </StrictMode>

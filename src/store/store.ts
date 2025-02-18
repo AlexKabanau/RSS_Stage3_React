@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import searchParams from './slice/serchParamsSlice';
-import { reduxApi } from '../api/redux.api';
+// import { reduxApi } from '../api/redux.api';
 import queryParams from './slice/queryParamsSlice';
 import isLoading from './slice/isLoadingSlice';
 import favorits from './slice/favoritsSlice';
@@ -25,6 +25,7 @@ export const store = configureStore({
     character: character,
     characters: characters,
   },
+
   // middleware: (getDefaultMiddleware) =>
   //   getDefaultMiddleware().concat(reduxApi.middleware),
 });
@@ -42,6 +43,3 @@ export type RootStateType = ReturnType<typeof store.getState>;
 export type AppStoreType = typeof store;
 export type AppDispatchType = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatchType>();
-
-//@ts-ignore
-window.__store__ = store;

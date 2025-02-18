@@ -22,11 +22,14 @@ import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '../../store/slice/favoritsSlice';
-import { toast } from 'sonner';
-import { DownloadItemsCSV, useDownloadCSV } from '../../hooks/downloadItemsCSV';
+// import { toast } from 'sonner';
+import { useDownloadCSV } from '../../hooks/downloadItemsCSV';
+// import ToastContainer from '../../components/ToastContainer';
+import { useToast } from '../../components/ToastContext';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
+  const { addToast } = useToast();
 
   const { response, status } = useSelector(charactersSelectors);
   const { response: characterResponse } = useSelector(characterSelectors);
@@ -65,7 +68,7 @@ export default function HomePage() {
   const onDeleteIconClick = () => {
     console.log('delete click');
     dispatch(clearFavorits());
-    toast.success('Successfully deleted all characters!');
+    addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
     console.log('download click');
