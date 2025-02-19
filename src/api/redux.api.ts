@@ -1,75 +1,23 @@
-// import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-
-import {
-  DEFAULT_CURRENT_PAGE,
-  // DEFAULT_CURRENT_PAGE,
-  RESOURCES_PER_PAGE,
-  URL,
-} from '../constants/constants';
-import {
-  // BaseQueryFn,
-  createApi,
-  // EndpointBuilder,
-  // EndpointDefinitions,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { GetCharacterType, ResponseInfoType } from './getItems';
+import { RESOURCES_PER_PAGE, URL } from '../constants/constants';
+// import { URL } from '';
 
-// const axiosBaseQuery =
-//   (
-//     { baseUrl }: { baseUrl: string } = { baseUrl: '' }
-//   ): BaseQueryFn<
-//     {
-//       url: string;
-//       method?: AxiosRequestConfig['method'];
-//       data?: AxiosRequestConfig['data'];
-//       params?: AxiosRequestConfig['params'];
-//       headers?: AxiosRequestConfig['headers'];
-//     },
-//     unknown,
-//     unknown
-//   > =>
-//   async ({ url, method, data, params, headers }) => {
-//     try {
-//       const result = await axios({
-//         url: baseUrl + url,
-//         method,
-//         data,
-//         params,
-//         headers,
-//       });
-//       return { data: result.data };
-//     } catch (axiosError) {
-//       const err = axiosError as AxiosError;
-//       return {
-//         error: {
-//           status: err.response?.status,
-//           data: err.response?.data || err.message,
-//         },
-//       };
-//     }
-//   };
-
-export const reduxApi = createApi({
-  reducerPath: 'api/characters',
-  baseQuery: fetchBaseQuery({
-    baseUrl: URL.baseUrl,
-  }),
-  endpoints: (build) => ({
-    getItems: build.query<ResponseInfoType, { params: string; page: number }>({
-      query: ({ params, page = DEFAULT_CURRENT_PAGE }) => {
-        return `${URL.baseUrl}${URL.props}${URL.ammount}${RESOURCES_PER_PAGE}${URL.currentPage}${page}${URL.search}${params}`;
-      },
-      transformResponse: (response: ResponseInfoType) => ({
-        data: response.data,
-        meta: response.meta,
-        links: response.links,
-      }),
+export const api = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: URL.baseUrl }),
+  endpoints: (builder) => ({
+    getCharacter: builder.query<GetCharacterType, string>({
+      query: (id) => `${URL.props}/${id}`,
     }),
-    getCharacter: build.query<{ response: GetCharacterType }, { id: string }>({
-      query: ({ id }) => `${URL.props}/${id}`,
+    getCharacters: builder.query<
+      ResponseInfoType,
+      { searchParams: string; page: number }
+    >({
+      query: ({ searchParams, page }) =>
+        `${URL.props}${URL.ammount}${RESOURCES_PER_PAGE}${URL.currentPage}${page}${URL.search}${searchParams}`,
     }),
   }),
 });
 
-export const { useGetItemsQuery, useGetCharacterQuery } = reduxApi;
+export const { useGetCharacterQuery, useGetCharactersQuery } = api;

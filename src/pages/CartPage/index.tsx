@@ -1,65 +1,78 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
-
+import { useParams, useSearchParams } from 'react-router-dom';
 import reactLogo from '../../assets/react.svg';
+import { useGetCharacterQuery } from '../../api/redux.api';
 import { useAppDispatch } from '../../store/store';
-import { useSelector } from 'react-redux';
-import { characterSelectors } from '../../store/slice/chracterSelectors';
-import { fetchItem, setCharacter } from '../../store/slice/characterSlice';
+import { setCharacter } from '../../store/slice/characterSlice';
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
+  const { id } = useParams(); // Извлекаем id из параметров маршрута
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const { response, status } = useSelector(characterSelectors);
-  const { id } = useParams();
+  console.log('ID персонажа:', id);
+
+  const { data, error, isFetching } = useGetCharacterQuery(id || '', {
+    skip: !id,
+  });
 
   useEffect(() => {
-    if (id) dispatch(fetchItem({ id: id }));
+    if (!id) {
+      dispatch(setCharacter(null));
+    }
   }, [id, dispatch]);
 
   const onCloseClick = () => {
-    dispatch(setCharacter(''));
+    dispatch(setCharacter(null)); // Сбрасываем состояние персонажа
+    setSearchParams({}); // Сбрасываем параметры URL
   };
+
+  if (!id) {
+    return <p>Пожалуйста, выберите персонажа.</p>;
+  }
+
   return (
     <div className="cart" data-testid="cart-page">
       <div role="container">
-        {status === 'loading' && (
+        {isFetching && ( // Используйте isFetching для отображения состояния загрузки
           <div role="loading">
-            <p>Loading...</p>
+            <p>Загрузка...</p>
             <img src={reactLogo} className="logo" alt="loading" />
           </div>
         )}
-        {status === 'error' && (
+        {error && (
           <div role="error">
-            <p>Some error occurred. Please try again.</p>
+            <p>Произошла ошибка. Пожалуйста, попробуйте снова.</p>
           </div>
         )}
-        {response.data && (
+        {data?.data ? (
           <>
             <button role="button" onClick={onCloseClick}>
-              Close
+              Закрыть
             </button>
-            <h3>{response.data.attributes.name}</h3>
+            <h3>{data.data.attributes.name}</h3>
             <div>
-              {response.data.attributes.image && (
+              {data.data.attributes.image && (
                 <img
-                  src={`${response.data.attributes.image}`}
-                  alt="Character image"
+                  src={data.data.attributes.image}
+                  alt="Изображение персонажа"
                 />
               )}
-              <p>Species: {response.data.attributes.species}</p>
-              {response.data.attributes.gender && (
-                <p>Gender: {response.data.attributes.gender}</p>
+              <p>Вид: {data.data.attributes.species}</p>
+              {data.data.attributes.gender && (
+                <p>Пол: {data.data.attributes.gender}</p>
               )}
-              {response.data.attributes.nationality && (
-                <p>Nationality: {response.data.attributes.nationality}</p>
+              {data.data.attributes.nationality && (
+                <p>Национальность: {data.data.attributes.nationality}</p>
               )}
-              <p>Hair color: {response.data.attributes.hair_color}</p>
-              <p>Eye color: {response.data.attributes.eye_color}</p>
-              <p>Skin color: {response.data.attributes.skin_color}</p>
-              <a href={`${response.data.attributes.wiki}`}>Wiki</a>
+              <p>Цвет волос: {data.data.attributes.hair_color}</p>
+              <p>Цвет глаз: {data.data.attributes.eye_color}</p>
+              <p>Цвет кожи: {data.data.attributes.skin_color}</p>
+              {/* <a href={data.data.attributes.wiki}>Wiki</a> */}
             </div>
           </>
+        ) : (
+          <p>Нет доступных данных о персонаже.</p>
         )}
       </div>
     </div>

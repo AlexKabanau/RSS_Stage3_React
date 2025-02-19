@@ -2,12 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchParams from './slice/serchParamsSlice';
 // import { reduxApi } from '../api/redux.api';
 import queryParams from './slice/queryParamsSlice';
-import isLoading from './slice/isLoadingSlice';
+// import isLoading from './slice/isLoadingSlice';
 import favorits from './slice/favoritsSlice';
 
 import { useDispatch } from 'react-redux';
 import character from './slice/characterSlice';
 import characters from './slice/chractersSlice';
+import { api } from '../api/redux.api';
 
 // const rootReducer = combineReducers({
 //   searchParamsReducer,
@@ -24,11 +25,16 @@ export const store = configureStore({
     favorits: favorits,
     character: character,
     characters: characters,
+    [api.reducerPath]: api.reducer,
   },
-
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(reduxApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
 });
+// },
+
+// middleware: (getDefaultMiddleware) =>
+//   getDefaultMiddleware().concat(reduxApi.middleware),
+// });
 
 // export const store = configureStore({
 //   reducer: rootReducer,
@@ -43,6 +49,3 @@ export type RootStateType = ReturnType<typeof store.getState>;
 export type AppStoreType = typeof store;
 export type AppDispatchType = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatchType>();
-
-//@ts-ignore
-window.__store__ = store;

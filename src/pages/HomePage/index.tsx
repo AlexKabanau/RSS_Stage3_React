@@ -14,11 +14,11 @@ import {
   setQueryParamsToState,
 } from '../../store/slice/queryParamsSlice';
 import { useAppDispatch } from '../../store/store';
-import { fetchItems } from '../../store/slice/chractersSlice';
+// import { fetchItems } from '../../store/slice/chractersSlice';
 import { useSelector } from 'react-redux';
-import { charactersSelectors } from '../../store/slice/chractersSelectors';
+// import { charactersSelectors } from '../../store/slice/chractersSelectors';
 import { queryParamsSelectors } from '../../store/slice/queryParamsSelectors';
-import { characterSelectors } from '../../store/slice/chracterSelectors';
+// import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '../../store/slice/favoritsSlice';
@@ -26,13 +26,14 @@ import { clearFavorits } from '../../store/slice/favoritsSlice';
 import { useDownloadCSV } from '../../hooks/downloadItemsCSV';
 
 import { useToast } from '../../components/ToastContext';
+import { useGetCharactersQuery } from '../../api/redux.api';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
 
-  const { response, status } = useSelector(charactersSelectors);
-  const { response: characterResponse } = useSelector(characterSelectors);
+  // const { response, status } = useSelector(charactersSelectors);
+  // const { response: characterResponse } = useSelector(characterSelectors);
   const { page, search } = useSelector(queryParamsSelectors);
   const [inputValue, setInputValue] = useLocalStorage();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,9 +41,23 @@ export default function HomePage() {
   const favorits = useSelector(favoritsSelectors);
   const downloadCSV = useDownloadCSV();
 
+  const {
+    data: response,
+    error,
+    isFetching,
+    refetch,
+  } = useGetCharactersQuery(
+    { searchParams: search, page: Number(page) },
+    { refetchOnMountOrArgChange: true } // Отключаем кеширование
+  );
+
   useEffect(() => {
-    dispatch(fetchItems({ searchParams: search, page: Number(page) }));
-  }, [search, page, dispatch]);
+    refetch(); // Принудительно запрашиваем новые данные при изменении параметров
+  }, [search, page, refetch]);
+
+  // useEffect(() => {
+  //   dispatch(fetchItems({ searchParams: search, page: Number(page) }));
+  // }, [search, page, dispatch]);
 
   const handleOnSubmit = () => {
     setInputValue(inputValue);
@@ -55,7 +70,7 @@ export default function HomePage() {
     );
 
     setSearchParams({ search: inputValue, page: DEFAULT_PAGE.toString() });
-    console.log(inputValue);
+    // console.log(inputValue);
   };
 
   const onPageChanged = (page: number) => {
@@ -66,12 +81,12 @@ export default function HomePage() {
     setSearchParams({ search: currentSearch, page: page.toString() });
   };
   const onDeleteIconClick = () => {
-    console.log('delete click');
+    // console.log('delete click');
     dispatch(clearFavorits());
     addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    console.log('download click');
+    // console.log('download click');
     downloadCSV();
   };
 
@@ -82,42 +97,37 @@ export default function HomePage() {
         setInputValue={setInputValue}
         handleOnSubmit={handleOnSubmit}
       />
-      {status === 'loading' && (
+      {isFetching && (
         <div>
           <p>Loading...</p>
           <img src={reactLogo} className="logo" alt="loading" />
         </div>
       )}
-      {status === 'error' && <div>Some error occurred. Please try again.</div>}
-      {status === 'success' && response.data?.length <= 0 && (
-        <div>Items not found</div>
-      )}
-
+      {error && <div>Some error occurred. Please try again.</div>}
+      {response?.data?.length === 0 && <div>Items not found</div>}
       {favorits.length > 0 && (
-        <>
-          <p className="favorits">
-            Favorits: {favorits.length}
-            <button
-              className={'favoritButton'}
-              aria-label="Trash"
-              onClick={onDeleteIconClick}
-            >
-              <Trash2 size={15} />
-            </button>
-            <button
-              className={'favoritButton'}
-              onClick={onDownloadIconClick}
-              aria-label="Download"
-            >
-              <ArrowDownToLine size={15} cursor={'pointer'} />
-            </button>
-          </p>
-        </>
+        <p className="favorits">
+          Favorits: {favorits.length}
+          <button
+            className={'favoritButton'}
+            aria-label="Trash"
+            onClick={onDeleteIconClick}
+          >
+            <Trash2 size={15} />
+          </button>
+          <button
+            className={'favoritButton'}
+            onClick={onDownloadIconClick}
+            aria-label="Download"
+          >
+            <ArrowDownToLine size={15} cursor={'pointer'} />
+          </button>
+        </p>
       )}
-      {response.data && (
+      {response?.data && (
         <div role="homePage" className="main-container">
           <Main
-            className={characterResponse ? 'fullWidth' : 'width2_3'}
+            className={response.data.length ? 'fullWidth' : 'width2_3'}
             items={response.data}
             count={response.meta.pagination?.records || 0}
             onPageChanged={onPageChanged}
