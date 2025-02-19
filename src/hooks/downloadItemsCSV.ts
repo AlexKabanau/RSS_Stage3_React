@@ -11,22 +11,30 @@ export const useDownloadCSV = () => {
   const { addToast } = useToast();
 
   const downloadCSV = () => {
-    console.log('download click');
+    console.log('Клик для загрузки');
 
     if (favorits.length === 0) {
-      addToast('No file for download!');
+      addToast('Нет файла для загрузки!');
       return;
     }
 
+    // Логируем favorits и response data
+    console.log('Избранное:', favorits);
+    console.log('Ответные данные:', response.data);
+
     // Преобразуем данные в CSV-формат
     const csvRows = [];
-    const headers = ['Name', 'Species', 'Gender', 'Wiki URL']; // Заголовки CSV
-    csvRows.push(headers.join(',')); // Добавляем заголовки
+    const headers = ['Name', 'Species', 'Gender', 'Wiki URL'];
+    csvRows.push(headers.join(','));
 
     // Фильтруем данные по избранным ID
     const filteredObjects = response.data.filter((obj) =>
       favorits.includes(obj.id)
     );
+
+    // Логируем отфильтрованные объекты
+    console.log('Количество отфильтрованных объектов:', filteredObjects.length);
+    console.log('Отфильтрованные объекты:', filteredObjects);
 
     filteredObjects.forEach((item) => {
       const row = [
@@ -43,12 +51,10 @@ export const useDownloadCSV = () => {
     const blob = new Blob([csvString], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
 
-    // Создаем ссылку для скачивания
     const a = document.createElement('a');
     a.href = url;
     a.download = `${favorits.length}_items.csv`;
-
-    // Запускаем скачивание
+    debugger;
     a.click();
     URL.revokeObjectURL(url);
     addToast('Файл успешно скачан!');

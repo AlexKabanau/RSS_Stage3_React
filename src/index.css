@@ -76,6 +76,11 @@ body.dark {
 .favorits > * {
   margin: 0 1rem;
 }
+.favoritButton {
+  font-size: 0.5rem;
+  padding: 3px;
+    margin: 0;
+}
 .fullWidth {
   width: 100%;
 }

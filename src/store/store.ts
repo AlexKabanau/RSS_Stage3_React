@@ -43,3 +43,6 @@ export type RootStateType = ReturnType<typeof store.getState>;
 export type AppStoreType = typeof store;
 export type AppDispatchType = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatchType>();
+
+//@ts-ignore
+window.__store__ = store;

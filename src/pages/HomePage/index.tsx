@@ -92,22 +92,25 @@ export default function HomePage() {
       {status === 'success' && response.data?.length <= 0 && (
         <div>Items not found</div>
       )}
+
       {favorits.length > 0 && (
         <>
           <p className="favorits">
             Favorits: {favorits.length}
-            <Trash2
+            <button
+              className={'favoritButton'}
               aria-label="Trash"
-              size={15}
-              cursor={'pointer'}
               onClick={onDeleteIconClick}
-            />
-            <ArrowDownToLine
-              aria-label="Download"
-              size={15}
-              cursor={'pointer'}
+            >
+              <Trash2 size={15} />
+            </button>
+            <button
+              className={'favoritButton'}
               onClick={onDownloadIconClick}
-            />
+              aria-label="Download"
+            >
+              <ArrowDownToLine size={15} cursor={'pointer'} />
+            </button>
           </p>
         </>
       )}

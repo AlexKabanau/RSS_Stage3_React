@@ -24,15 +24,23 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
       <p>
         One character successfully added to favorites!
         <br /> Favorits: {favorits.length + 1}
-        <Trash
-          size={15}
-          cursor={'pointer'}
+        <button
+          className={'favoritButton'}
+          aria-label="Trash"
           onClick={() => {
             dispatch(clearFavorits());
             addToast('Successfully deleted all characters!');
           }}
-        />
-        <ArrowDownToLine size={15} cursor={'pointer'} onClick={downloadCSV} />
+        >
+          Unselect all
+        </button>
+        <button
+          className={'favoritButton'}
+          onClick={downloadCSV}
+          aria-label="Download"
+        >
+          Download
+        </button>
       </p>
     );
   };
