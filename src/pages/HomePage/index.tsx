@@ -22,9 +22,9 @@ import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '../../store/slice/favoritsSlice';
-// import { toast } from 'sonner';
+
 import { useDownloadCSV } from '../../hooks/downloadItemsCSV';
-// import ToastContainer from '../../components/ToastContainer';
+
 import { useToast } from '../../components/ToastContext';
 
 export default function HomePage() {
@@ -73,47 +73,6 @@ export default function HomePage() {
   const onDownloadIconClick = () => {
     console.log('download click');
     downloadCSV();
-
-    // if (favorits.length === 0) {
-    //   alert('Нет выбранных элементов для скачивания!');
-    //   return;
-    // }
-
-    // // Преобразуем данные в CSV-формат
-    // const csvRows = [];
-    // const headers = ['Name', 'Species', 'Gender', 'Wiki URL']; // Заголовки CSV
-    // csvRows.push(headers.join(',')); // Добавляем заголовки
-    // //TODO найти итемсы по ID
-    // const filteredObjects = response.data.filter((obj) =>
-    //   favorits.includes(obj.id)
-    // );
-    // filteredObjects.forEach((item) => {
-    //   const row = [
-    //     `"${item.attributes.name}"`, // Оборачиваем в кавычки на случай, если есть запятые
-    //     `"${item.attributes.species || 'N/A'}"`,
-    //     `"${item.attributes.gender}"`,
-    //     `"${item.attributes.wiki}"`,
-    //   ];
-    //   csvRows.push(row.join(','));
-    // });
-
-    // // Создаем CSV-файл
-    // const csvString = csvRows.join('\n');
-    // const blob = new Blob([csvString], { type: 'text/csv' });
-
-    // // Создаем объект URL для Blob
-    // const url = URL.createObjectURL(blob);
-
-    // // Создаем элемент <a> для скачивания
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = `${favorits.length}_items.csv`; // Задаем имя файла
-
-    // // Программно кликаем по ссылке
-    // // document.body.appendChild(a);
-    // a.click();
-    // URL.revokeObjectURL(url);
-    // toast.success('Successfully downloaded!');
   };
 
   return (
@@ -130,15 +89,21 @@ export default function HomePage() {
         </div>
       )}
       {status === 'error' && <div>Some error occurred. Please try again.</div>}
-      {status === 'success' && response.data?.length === 0 && (
+      {status === 'success' && response.data?.length <= 0 && (
         <div>Items not found</div>
       )}
       {favorits.length > 0 && (
         <>
           <p className="favorits">
             Favorits: {favorits.length}
-            <Trash2 size={15} cursor={'pointer'} onClick={onDeleteIconClick} />
+            <Trash2
+              aria-label="Trash"
+              size={15}
+              cursor={'pointer'}
+              onClick={onDeleteIconClick}
+            />
             <ArrowDownToLine
+              aria-label="Download"
               size={15}
               cursor={'pointer'}
               onClick={onDownloadIconClick}
@@ -149,13 +114,12 @@ export default function HomePage() {
       {response.data && (
         <div role="homePage" className="main-container">
           <Main
-            // style={{ width: characterResponse ? 'calc(2/3 * 100%)' : '100%' }}
             className={characterResponse ? 'fullWidth' : 'width2_3'}
             items={response.data}
             count={response.meta.pagination?.records || 0}
             onPageChanged={onPageChanged}
           />
-          {/* {characterResponse ? 'есть' : 'нет'} */}
+
           <Outlet />
         </div>
       )}

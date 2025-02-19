@@ -21,12 +21,17 @@ export default function CartPage() {
     dispatch(setCharacter(''));
   };
   return (
-    <div className="cart">
+    <div className="cart" data-testid="cart-page">
       <div role="container">
         {status === 'loading' && (
           <div role="loading">
             <p>Loading...</p>
             <img src={reactLogo} className="logo" alt="loading" />
+          </div>
+        )}
+        {status === 'error' && (
+          <div role="error">
+            <p>Some error occurred. Please try again.</p>
           </div>
         )}
         {response.data && (

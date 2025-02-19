@@ -500,6 +500,22 @@ export const mockFakeResponse: ResponseInfoType = {
     last: 'https://api.potterdb.com/v1/characters?filter[name_cont_any]=Weasley&page[number]=7&page[size]=8',
   },
 };
+export const mockFakeResponseNoItems: ResponseInfoType = {
+  meta: {
+    pagination: {
+      current: 1,
+      records: 0,
+    },
+    copyright: 'Copyright © Potter DB 2025',
+    generated_at: '',
+  },
+  links: {
+    self: 'https://api.potterdb.com/v1/characters?page[size]=10\u0026page[number]=1\u0026filter[name_cont_any]=zxcsdfasdfasdf',
+    current:
+      'https://api.potterdb.com/v1/characters?filter[name_cont_any]=zxcsdfasdfasdf\u0026page[number]=1\u0026page[size]=10',
+  },
+  data: [],
+};
 
 export const mockFakeCharacterResponse: GetCharacterType = {
   data: {

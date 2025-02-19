@@ -15,7 +15,11 @@ const Item: React.FC<ItemPropsType> = ({
   const location = useLocation();
   return (
     <li className="item">
-      <Link role="link" to={`character/${item.id}${location.search}`}>
+      <Link
+        role="link"
+        to={`character/${item.id}${location.search}`}
+        data-testid={`link-${item.id}`}
+      >
         <h3>{item.attributes.name}</h3>
       </Link>
       <label>
