@@ -62,22 +62,23 @@ const initialState: InitialStateType = {
   status: 'loading',
   error: null,
 };
-export const fetchItem = createAsyncThunk<GetCharacterType, { id: string }>(
-  'character/fetchCharacter',
-  async (params: { id: string }) => {
-    const { id } = params;
-    const response = await axios.get<GetCharacterType>(
-      `${URL.baseUrl}${URL.props}/${id}`
-    );
-    return response.data;
-  }
-);
+// export const fetchItem = createAsyncThunk<GetCharacterType, { id: string }>(
+//   'character/fetchCharacter',
+//   async (params: { id: string }) => {
+//     const { id } = params;
+//     const response = await axios.get<GetCharacterType>(
+//       `${URL.baseUrl}${URL.props}/${id}`
+//     );
+//     return response.data;
+//   }
+// );
 
 export const characterSlice = createSlice({
   name: 'character',
   initialState,
   reducers: {
     setCharacter: (state, action) => {
+      console.log('Обновление состояния персонажа:', action.payload);
       state.response = action.payload;
     },
     delCharacter: (state) => {
@@ -85,18 +86,18 @@ export const characterSlice = createSlice({
       state.status = 'success';
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchItem.pending, (state) => {
-      state.status = 'loading';
-    });
-    builder.addCase(fetchItem.fulfilled, (state, action) => {
-      state.status = 'success';
-      state.response = action.payload;
-    });
-    builder.addCase(fetchItem.rejected, (state) => {
-      state.status = 'error';
-    });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(fetchItem.pending, (state) => {
+  //     state.status = 'loading';
+  //   });
+  //   builder.addCase(fetchItem.fulfilled, (state, action) => {
+  //     state.status = 'success';
+  //     state.response = action.payload;
+  //   });
+  //   builder.addCase(fetchItem.rejected, (state) => {
+  //     state.status = 'error';
+  //   });
+  // },
 });
 
 export default characterSlice.reducer;

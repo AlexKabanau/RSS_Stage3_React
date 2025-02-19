@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import reactLogo from '../../assets/react.svg';
 import { useGetCharacterQuery } from '../../api/redux.api';
 import { useAppDispatch } from '../../store/store';
@@ -7,8 +7,9 @@ import { setCharacter } from '../../store/slice/characterSlice';
 
 export default function CartPage() {
   const dispatch = useAppDispatch();
-  const { id } = useParams(); // Извлекаем id из параметров маршрута
+  const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate(); // Добавляем navigate
 
   console.log('ID персонажа:', id);
 
@@ -18,23 +19,31 @@ export default function CartPage() {
 
   useEffect(() => {
     if (!id) {
+      console.log('ID отсутствует, сбрасываем персонажа');
       dispatch(setCharacter(null));
     }
   }, [id, dispatch]);
 
+  useEffect(() => {
+    const newId = searchParams.get('id');
+    console.log('Новый ID из параметров:', newId);
+    if (!newId) {
+      dispatch(setCharacter(null)); // Сбрасываем состояние персонажа
+    }
+  }, [searchParams, dispatch]);
+
   const onCloseClick = () => {
+    console.log('Кнопка закрыть нажата'); // Для проверки
     dispatch(setCharacter(null)); // Сбрасываем состояние персонажа
     setSearchParams({}); // Сбрасываем параметры URL
+    navigate('/'); // Перенаправляем на главную страницу или другую нужную страницу
+    console.log('Параметры URL очищены'); // Проверка очистки параметров
   };
-
-  if (!id) {
-    return <p>Пожалуйста, выберите персонажа.</p>;
-  }
 
   return (
     <div className="cart" data-testid="cart-page">
       <div role="container">
-        {isFetching && ( // Используйте isFetching для отображения состояния загрузки
+        {isFetching && (
           <div role="loading">
             <p>Загрузка...</p>
             <img src={reactLogo} className="logo" alt="loading" />
@@ -68,7 +77,7 @@ export default function CartPage() {
               <p>Цвет волос: {data.data.attributes.hair_color}</p>
               <p>Цвет глаз: {data.data.attributes.eye_color}</p>
               <p>Цвет кожи: {data.data.attributes.skin_color}</p>
-              {/* <a href={data.data.attributes.wiki}>Wiki</a> */}
+              <a href={data.data.attributes.wiki}>Wiki</a>
             </div>
           </>
         ) : (
