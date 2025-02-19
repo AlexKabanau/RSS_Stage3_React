@@ -23,8 +23,8 @@ export const store = configureStore({
     queryParams: queryParams,
     // isLoading: isLoading,
     favorits: favorits,
-    character: character,
-    characters: characters,
+    // character: character,
+    // characters: characters,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>

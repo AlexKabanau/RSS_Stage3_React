@@ -39,7 +39,6 @@ export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { theme } = useTheme();
   const favorits = useSelector(favoritsSelectors);
-  const downloadCSV = useDownloadCSV();
 
   const {
     data: response,
@@ -50,8 +49,10 @@ export default function HomePage() {
     { searchParams: search, page: Number(page) },
     { refetchOnMountOrArgChange: true } // Отключаем кеширование
   );
+  const downloadCSV = useDownloadCSV();
 
   useEffect(() => {
+    console.log('refetch');
     refetch(); // Принудительно запрашиваем новые данные при изменении параметров
   }, [search, page, refetch]);
 
@@ -86,7 +87,11 @@ export default function HomePage() {
     addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    // console.log('download click');
+    if (!response || !response.data || response.data.length === 0) {
+      addToast('Нет данных для загрузки!');
+      return;
+    }
+    console.log('response в HomePage:', response);
     downloadCSV();
   };
 

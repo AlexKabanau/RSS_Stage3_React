@@ -8,16 +8,28 @@ import { useAppDispatch } from '../store/store';
 import { ArrowDownToLine, Trash } from 'lucide-react';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
 import { useToast } from './ToastContext';
+import { useGetCharactersQuery } from '../api/redux.api';
 
 type ItemsType = {
   items: ResponseType[];
 };
 
 const ListItems: React.FC<ItemsType> = ({ items }) => {
+  // const {
+  //     data: response,
+  //     // error,
+  //     // isFetching,
+  //     // refetch,
+  //   } = useGetCharactersQuery(
+  //     { searchParams: search, page: Number(page) },
+  //     { refetchOnMountOrArgChange: true } // Отключаем кеширование
+  //   );
   const dispatch = useAppDispatch();
-  const downloadCSV = useDownloadCSV();
   const { addToast } = useToast();
   const favorits = useSelector(favoritsSelectors);
+  const downloadCSV = useDownloadCSV();
+
+  const isFavorite = (id: string) => favorits.some((fav) => fav.id === id);
 
   const showAddedToast = () => {
     addToast(
@@ -53,19 +65,19 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
     );
   };
 
-  const toggleFavorite = (id: string) => {
+  const toggleFavorite = (item: ResponseType) => {
     if (!Array.isArray(favorits)) {
       console.error('favorits is not an array!');
       return;
     }
 
-    const updatedFavorites = favorits.includes(id)
-      ? favorits.filter((favId) => favId !== id)
-      : [...favorits, id];
+    const updatedFavorites = isFavorite(item.id)
+      ? favorits.filter((fav) => fav.id !== item.id)
+      : [...favorits, item];
 
     dispatch(setFavorites(updatedFavorites));
 
-    if (!favorits.includes(id)) {
+    if (!isFavorite(item.id)) {
       showAddedToast();
     } else {
       showRemovedToast();
@@ -78,8 +90,8 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
         <Item
           key={item.id}
           item={item}
-          isFavorite={favorits.includes(item.id.toString())}
-          onToggleFavorite={toggleFavorite}
+          isFavorite={isFavorite(item.id)}
+          onToggleFavorite={() => toggleFavorite(item)}
         />
       ))}
     </ul>

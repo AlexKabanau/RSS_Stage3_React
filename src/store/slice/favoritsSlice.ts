@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ResponseType } from '../../api/getItems';
 
 type InintialStateType = {
-  favorits: string[];
+  favorits: ResponseType[];
 };
 const initialState: InintialStateType = {
   favorits: [],
@@ -10,7 +11,7 @@ export const favoritsSlice = createSlice({
   name: 'favorits',
   initialState,
   reducers: {
-    setFavorites: (state, action: PayloadAction<string[]>) => {
+    setFavorites: (state, action: PayloadAction<ResponseType[]>) => {
       state.favorits = action.payload;
     },
     clearFavorits: (state) => {

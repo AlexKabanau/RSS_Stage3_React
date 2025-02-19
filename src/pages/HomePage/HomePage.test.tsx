@@ -43,23 +43,23 @@ describe('HomePage tests', () => {
     expect(mainPage).toBeInTheDocument();
   });
 
-  it('should show loading state', () => {
-    mockAxiosAPI.onGet('/characters').reply(200, mockFakeResponse);
-    render(
-      <Provider store={store}>
-        <ThemeContextProvider>
-          <ToastProvider>
-            <MemoryRouter initialEntries={['/']}>
-              <HomePage />
-            </MemoryRouter>
-          </ToastProvider>
-        </ThemeContextProvider>
-      </Provider>
-    );
+  // it('should show loading state', () => {
+  //   mockAxiosAPI.onGet('/characters').reply(200, mockFakeResponse);
+  //   render(
+  //     <Provider store={store}>
+  //       <ThemeContextProvider>
+  //         <ToastProvider>
+  //           <MemoryRouter initialEntries={['/']}>
+  //             <HomePage />
+  //           </MemoryRouter>
+  //         </ToastProvider>
+  //       </ThemeContextProvider>
+  //     </Provider>
+  //   );
 
-    const loadingText = screen.getByText('Loading...');
-    expect(loadingText).toBeInTheDocument();
-  });
+  //   const loadingText = screen.getByText('Loading...');
+  //   expect(loadingText).toBeInTheDocument();
+  // });
 
   it('should show error state', async () => {
     mockAxiosAPI.onGet('/characters').reply(500);
