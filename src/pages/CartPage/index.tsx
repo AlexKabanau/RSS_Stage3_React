@@ -13,9 +13,10 @@ export default function CartPage() {
 
   console.log('ID персонажа:', id);
 
-  const { data, error, isFetching } = useGetCharacterQuery(id || '', {
+  const { data, error, isFetching, status } = useGetCharacterQuery(id || '', {
     skip: !id,
   });
+  // if (status === 'pending')
 
   useEffect(() => {
     if (!id) {
@@ -39,13 +40,16 @@ export default function CartPage() {
     navigate('/'); // Перенаправляем на главную страницу или другую нужную страницу
     console.log('Параметры URL очищены'); // Проверка очистки параметров
   };
+  console.log('Status:', status); // Вставьте это в компонент CartPage
+  console.log('Error:', error); // Вставьте это в компонент CartPage
+  console.log('Is Fetching:', isFetching);
 
   return (
     <div className="cart" data-testid="cart-page">
       <div role="container">
         {isFetching && (
-          <div role="loading">
-            <p>Загрузка...</p>
+          <div role="status">
+            <p>Loading...</p>
             <img src={reactLogo} className="logo" alt="loading" />
           </div>
         )}
@@ -54,7 +58,7 @@ export default function CartPage() {
             <p>Произошла ошибка. Пожалуйста, попробуйте снова.</p>
           </div>
         )}
-        {data?.data ? (
+        {status === 'fulfilled' && data?.data && (
           <>
             <button role="button" onClick={onCloseClick}>
               Закрыть
@@ -80,8 +84,6 @@ export default function CartPage() {
               <a href={data.data.attributes.wiki}>Wiki</a>
             </div>
           </>
-        ) : (
-          <p>Нет доступных данных о персонаже.</p>
         )}
       </div>
     </div>

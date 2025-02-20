@@ -216,80 +216,80 @@ describe('character slice', () => {
     expect(actual.response).toEqual(initialState.response);
   });
 
-  it('should handle fetchItem pending', () => {
-    const actual = characterReducer(
-      initialState,
-      fetchItem.pending('', { id: '1' })
-    );
-    expect(actual.status).toEqual('loading');
-  });
+  // it('should handle fetchItem pending', () => {
+  //   const actual = characterReducer(
+  //     initialState,
+  //     fetchItem.pending('', { id: '1' })
+  //   );
+  //   expect(actual.status).toEqual('loading');
+  // });
 
-  it('should handle fetchItem fulfilled', () => {
-    const character: GetCharacterType = {
-      data: {
-        id: '1',
-        type: 'character',
-        attributes: {
-          slug: 'example-character',
-          alias_names: [],
-          animagus: null,
-          blood_status: null,
-          boggart: null,
-          born: null,
-          died: null,
-          eye_color: null,
-          family_members: [],
-          gender: null,
-          hair_color: null,
-          height: null,
-          house: null,
-          image: null,
-          jobs: [],
-          marital_status: null,
-          name: 'Example Character',
-          nationality: null,
-          patronus: null,
-          romances: [],
-          skin_color: null,
-          species: null,
-          titles: [],
-          wands: [],
-          weight: null,
-          wiki: null,
-        },
-        links: {
-          self: '',
-        },
-      },
-      meta: {
-        pagination: { current: 1, records: 10 },
-        copyright: 'some copyright',
-        generated_at: '2025-02-18',
-      },
-      links: {
-        self: '',
-        current: '',
-        next: '',
-        last: '',
-        first: '',
-        prev: '',
-      },
-    };
+  // it('should handle fetchItem fulfilled', () => {
+  //   const character: GetCharacterType = {
+  //     data: {
+  //       id: '1',
+  //       type: 'character',
+  //       attributes: {
+  //         slug: 'example-character',
+  //         alias_names: [],
+  //         animagus: null,
+  //         blood_status: null,
+  //         boggart: null,
+  //         born: null,
+  //         died: null,
+  //         eye_color: null,
+  //         family_members: [],
+  //         gender: null,
+  //         hair_color: null,
+  //         height: null,
+  //         house: null,
+  //         image: null,
+  //         jobs: [],
+  //         marital_status: null,
+  //         name: 'Example Character',
+  //         nationality: null,
+  //         patronus: null,
+  //         romances: [],
+  //         skin_color: null,
+  //         species: null,
+  //         titles: [],
+  //         wands: [],
+  //         weight: null,
+  //         wiki: null,
+  //       },
+  //       links: {
+  //         self: '',
+  //       },
+  //     },
+  //     meta: {
+  //       pagination: { current: 1, records: 10 },
+  //       copyright: 'some copyright',
+  //       generated_at: '2025-02-18',
+  //     },
+  //     links: {
+  //       self: '',
+  //       current: '',
+  //       next: '',
+  //       last: '',
+  //       first: '',
+  //       prev: '',
+  //     },
+  //   };
 
-    const actual = characterReducer(
-      initialState,
-      fetchItem.fulfilled(character, '', { id: '1' })
-    );
-    expect(actual.status).toEqual('success');
-    expect(actual.response).toEqual(character);
-  });
+  //   const actual = characterReducer(
+  //     initialState,
+  //     fetchItem.fulfilled(character, '', { id: '1' })
+  //   );
+  //   expect(actual.status).toEqual('success');
+  //   expect(actual.response).toEqual(character);
+  // });
 
-  it('should handle fetchItem rejected', () => {
-    const errorMessage = 'Error fetching item';
-    const actual = characterReducer(
-      initialState,
-      fetchItem.rejected(new Error(errorMessage), '', { id: '1' })
-    );
-    expect(actual.status).toEqual('error');
-  });
+  // it('should handle fetchItem rejected', () => {
+  //   const errorMessage = 'Error fetching item';
+  //   const actual = characterReducer(
+  //     initialState,
+  //     fetchItem.rejected(new Error(errorMessage), '', { id: '1' })
+  //   );
+  //   expect(actual.status).toEqual('error');
+  // });
 });

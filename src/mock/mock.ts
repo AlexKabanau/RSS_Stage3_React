@@ -748,3 +748,38 @@ export const mockFakeItemList: ResponseType[] = [
     },
   },
 ];
+
+export const mockInitialState = {
+  searchParams: {
+    searchParams: '',
+    isLoading: false,
+    error: '',
+  },
+  queryParams: {
+    limit: '10',
+    page: '1',
+    isLoading: false,
+    error: '',
+    search: '',
+  },
+  favorits: {
+    favorits: [],
+  },
+  api: {
+    queries: {},
+    mutations: {},
+    provided: {},
+    subscriptions: {},
+    config: {
+      online: true,
+      focused: true,
+      middlewareRegistered: false,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMountOrArgChange: false,
+      keepUnusedDataFor: 60,
+      reducerPath: 'api',
+      invalidationBehavior: 'delayed',
+    },
+  },
+};

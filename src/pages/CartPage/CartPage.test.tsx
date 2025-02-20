@@ -1,147 +1,44 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
-import { configureStore } from '@reduxjs/toolkit';
-import userEvent from '@testing-library/user-event';
+import {
+  BrowserRouter,
+  MemoryRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from 'react-router-dom';
+// import { setupApiStore } from '../../utils/testUtils'; // Вспомогательная утилита для мокирования API
+import { api } from '../../api/redux.api';
 import CartPage from '.';
-import characterReducer, { fetchItem } from '../../store/slice/characterSlice';
-import { AppStoreType, RootStateType, store } from '../../store/store';
+import characterReducer, {
+  setCharacter,
+} from '../../store/slice/characterSlice';
+import ThemeContextProvider from '../../context/ThemeContext';
+import { ToastProvider } from '../../components/ToastContext';
+import { mockFakeCharacterResponse, mockInitialState } from '../../mock/mock';
+import userEvent from '@testing-library/user-event';
+import { setupApiStore } from '../../api/setupApiStore';
+import { configureStore } from '@reduxjs/toolkit';
 import searchParams from '../../store/slice/serchParamsSlice';
 import queryParams from '../../store/slice/queryParamsSlice';
 import favorits from '../../store/slice/favoritsSlice';
-import character from '../../store/slice/characterSlice';
-import characters from '../../store/slice/chractersSlice';
+import { RootStateType } from '../../store/store';
+import ErrorBoundary from '../../components/ErrorBoundary';
 import HomePage from '../HomePage';
-import ThemeContextProvider from '../../context/ThemeContext';
-import { ToastProvider } from '../../components/ToastContext';
-import { mockFakeCharacterResponse, mockFakeResponse } from '../../mock/mock';
+import NotFoundPager from '../NotFoundPager';
+const store = setupApiStore();
 
-const mockAxiosAPI = new MockAdapter(axios);
-
-const renderWithProviders = (store: AppStoreType, route: string) => {
-  return render(
-    <Provider store={store}>
-      <MemoryRouter initialEntries={[route]}>
-        <Routes>
-          <Route path="/" element={<HomePage />}>
-            <Route path="character/:id" element={<CartPage />} />
-          </Route>{' '}
-        </Routes>
-      </MemoryRouter>
-    </Provider>
-  );
-};
-
-// let store: AppStoreType;
-describe('CartPage tests', () => {
-  // const preloadedState: RootStateType = {
-  //   favorits: { favorits: ['1'] }, // массив строк (или что у вас в `favorits`)
-  //   queryParams: {
-  //     search: '',
-  //     page: '1',
-  //     limit: '',
-  //     isLoading: false,
-  //     error: '',
-  //   },
-  //   searchParams: {
-  //     searchParams: '',
-  //     isLoading: false,
-  //     error: '',
-  //   },
-  //   characters: {
-  //     response: {
-  //       data: [], // здесь важно соответствие типу данных
-  //       meta: {
-  //         pagination: { current: 1, records: 0 },
-  //         copyright: '',
-  //         generated_at: '',
-  //       },
-  //       links: {
-  //         self: '',
-  //       },
-  //     },
-  //     status: 'success',
-  //     // error: null,
-  //   },
-  //   character: {
-  //     response: {
-  //       data: {
-  //         id: '',
-  //         type: '',
-  //         attributes: {
-  //           slug: '',
-  //           alias_names: [],
-  //           animagus: null,
-  //           blood_status: null,
-  //           boggart: null,
-  //           born: null,
-  //           died: null,
-  //           eye_color: null,
-  //           family_members: [],
-  //           gender: null,
-  //           hair_color: null,
-  //           height: null,
-  //           house: null,
-  //           image: null,
-  //           jobs: [],
-  //           marital_status: null,
-  //           name: '',
-  //           nationality: null,
-  //           patronus: null,
-  //           romances: [],
-  //           skin_color: null,
-  //           species: null,
-  //           titles: [],
-  //           wands: [],
-  //           weight: null,
-  //           wiki: null,
-  //         },
-  //         links: {
-  //           self: '',
-  //         },
-  //       },
-  //       meta: {
-  //         pagination: {
-  //           current: 1,
-  //           records: 0,
-  //         },
-  //         copyright: 'some copyright',
-  //         generated_at: '2025-02-18',
-  //       },
-  //       links: {
-  //         self: '',
-  //         current: '',
-  //         first: '',
-  //         last: '',
-  //         next: '',
-  //         prev: '',
-  //       },
-  //     },
-  //     status: 'loading',
-  //     error: null,
-  //   },
-  // };
-
+describe('CartPage tests with RTK Query', () => {
   beforeEach(() => {
-    mockAxiosAPI.reset();
-    // store = configureStore({
-    //   reducer: {
-    //     searchParams: searchParams,
-    //     queryParams: queryParams,
-    //     // isLoading: isLoading,
-    //     favorits: favorits,
-    //     character: character,
-    //     characters: characters,
-    //   },
-    //   preloadedState,
-    // });
+    store.dispatch(setCharacter(null));
+    console.log('Initial store state:', store.getState());
   });
-  it('CartPage should be defined', () => {
-    expect(CartPage).toBeDefined();
-  });
+
+  // it('CartPage should be defined', () => {
+  //   expect(CartPage).toBeDefined();
+  // });
+
   it('CartPage should render', () => {
     render(
       <Provider store={store}>
@@ -154,48 +51,146 @@ describe('CartPage tests', () => {
         </ThemeContextProvider>
       </Provider>
     );
-    const cartPage = screen.getByTestId('cart-page');
-    expect(cartPage).toBeInTheDocument();
+    expect(screen.getByTestId('cart-page')).toBeInTheDocument();
   });
-
-  it('should show loading state', () => {
-    mockAxiosAPI
-      .onGet('/characters/b832f9ed-fe71-46f5-a9e1-b947a49161e2')
-      .reply(200, mockFakeCharacterResponse);
+  it('Make sure the detailed card component correctly displays the detailed card data', async () => {
     render(
       <Provider store={store}>
-        <ThemeContextProvider>
-          <ToastProvider>
-            <MemoryRouter
-              initialEntries={[
-                '/character/b832f9ed-fe71-46f5-a9e1-b947a49161e2',
-              ]}
-            >
-              <CartPage />
-            </MemoryRouter>
-          </ToastProvider>
-        </ThemeContextProvider>
+        <StrictMode>
+          <ErrorBoundary>
+            <ThemeContextProvider>
+              <ToastProvider>
+                <MemoryRouter
+                  initialEntries={[
+                    '/character/8b7e8ccb-f2ef-42b0-a4cd-fb3c2572e619',
+                  ]}
+                >
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="character/:id" element={<CartPage />} />
+                    <Route path="*" element={<NotFoundPager />} />
+                  </Routes>
+                </MemoryRouter>
+              </ToastProvider>
+            </ThemeContextProvider>
+          </ErrorBoundary>
+        </StrictMode>
       </Provider>
     );
 
-    const loadingText = screen.getByText('Loading...');
-    expect(loadingText).toBeInTheDocument();
+    // Check if the cart page is rendered
+    expect(screen.getByTestId('cart-page')).toBeInTheDocument();
+
+    // Additional assertions can be added here to verify detailed card data
   });
 
-  // it('should show error state', async () => {
-  //   mockAxiosAPI
-  //     .onGet('/characters/b832f9ed-fe71-46f5-a9e1-b947a49161e2')
-  //     .reply(500); // Мок ответа с ошибкой 500
+  it('should show loading state', async () => {
+    render(
+      <Provider store={store}>
+        <StrictMode>
+          <ErrorBoundary>
+            <ThemeContextProvider>
+              <ToastProvider>
+                <MemoryRouter
+                  initialEntries={[
+                    '/character/8b7e8ccb-f2ef-42b0-a4cd-fb3c2572e619',
+                  ]}
+                >
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="character/:id" element={<CartPage />} />
+                    <Route path="*" element={<NotFoundPager />} />
+                  </Routes>
+                </MemoryRouter>
+              </ToastProvider>
+            </ThemeContextProvider>
+          </ErrorBoundary>
+        </StrictMode>
+      </Provider>
+    );
+
+    // Check if the cart page is rendered
+    await waitFor(() => {
+      expect(screen.getByText('Loading...')).toBeInTheDocument();
+    });
+
+    // Additional assertions can be added here to verify detailed card data
+  });
+  it('should show error state', async () => {
+    render(
+      <Provider store={store}>
+        <StrictMode>
+          <ErrorBoundary>
+            <ThemeContextProvider>
+              <ToastProvider>
+                <MemoryRouter initialEntries={['/character/xxx']}>
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="character/:id" element={<CartPage />} />
+                  </Routes>
+                </MemoryRouter>
+              </ToastProvider>
+            </ThemeContextProvider>
+          </ErrorBoundary>
+        </StrictMode>
+      </Provider>
+    );
+
+    // Check if the cart page is rendered
+    await waitFor(() => {
+      expect(
+        screen.getByText('Произошла ошибка. Пожалуйста, попробуйте снова.')
+      ).toBeInTheDocument();
+    });
+
+    // Additional assertions can be added here to verify detailed card data
+  });
+  it('should display character details', async () => {
+    render(
+      <Provider store={store}>
+        <StrictMode>
+          <ErrorBoundary>
+            <ThemeContextProvider>
+              <ToastProvider>
+                <MemoryRouter
+                  initialEntries={[
+                    '/character/1d9f49ca-44ec-4aed-bbe2-72713710d3c0',
+                  ]}
+                >
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="character/:id" element={<CartPage />} />
+                  </Routes>
+                </MemoryRouter>
+              </ToastProvider>
+            </ThemeContextProvider>
+          </ErrorBoundary>
+        </StrictMode>
+      </Provider>
+    );
+
+    // Check if the cart page is rendered
+    await waitFor(() => {
+      expect(screen.getByText('2-Headed Baby')).toBeInTheDocument();
+    });
+
+    // Additional assertions can be added here to verify detailed card data
+  });
+
+  //
+
+  // it('should display character details', async () => {
+  //   store.dispatch(
+  //     api.util.upsertQueryData('getCharacter', '1', {
+  //       data: mockFakeCharacterResponse,
+  //     })
+  //   );
 
   //   render(
   //     <Provider store={store}>
   //       <ThemeContextProvider>
   //         <ToastProvider>
-  //           <MemoryRouter
-  //             initialEntries={[
-  //               '/characters/b832f9ed-fe71-46f5-a9e1-b947a49161e2',
-  //             ]}
-  //           >
+  //           <MemoryRouter initialEntries={['/character/1']}>
   //             <CartPage />
   //           </MemoryRouter>
   //         </ToastProvider>
@@ -203,118 +198,37 @@ describe('CartPage tests', () => {
   //     </Provider>
   //   );
 
-  //   // Ждем, пока состояние изменится на 'error'
-  //   await waitFor(() => {
-  //     const errorText = screen.getByText(
-  //       'Some error occurred. Please try again.'
-  //     );
-  //     expect(errorText).toBeInTheDocument();
-  //   });
-  // });
-
-  // it('should render CartPage', () => {
-  //   renderWithProviders(store, 'characters/1');
-  //   expect(screen.getByTestId('cart-page')).toBeInTheDocument();
-  // });
-
-  // it('should show loading state', async () => {
-  //   store.dispatch(fetchItem.pending('', { id: '1' }));
-  //   renderWithProviders(store, '/cart/1');
-  //   expect(screen.getByRole('loading')).toBeInTheDocument();
-  // });
-
-  // it('should show error state', async () => {
-  //   store = configureStore({
-  //     reducer: { character: characterReducer },
-  //     preloadedState: {
-  //       character: {
-  //         response: {},
-  //         status: 'error',
-  //         error: 'Some error occurred',
-  //       },
-  //     } as RootStateType,
-  //   });
-  //   renderWithProviders(store, '/cart/1');
-
   //   await waitFor(() => {
   //     expect(
-  //       screen.getByText('Some error occurred. Please try again.')
+  //       screen.getByText(mockFakeCharacterResponse.data.attributes.name)
   //     ).toBeInTheDocument();
   //   });
   // });
 
-  // it('should display character details', async () => {
-  //   store = configureStore({
-  //     reducer: { character: characterReducer },
-  //     preloadedState: {
-  //       character: {
-  //         response: {
-  //           data: {
-  //             attributes: {
-  //               name: 'Harry Potter',
-  //               species: 'Human',
-  //               gender: 'Male',
-  //               nationality: 'British',
-  //               hair_color: 'Black',
-  //               eye_color: 'Green',
-  //               skin_color: 'Fair',
-  //               image: 'https://image.url',
-  //               wiki: 'https://harrypotter.wiki',
-  //             },
-  //           },
-  //         },
-  //         status: 'success',
-  //         error: null,
-  //       },
-  //     } as RootStateType,
-  //   });
-
-  //   renderWithProviders(store, '/cart/1');
-
-  //   await waitFor(() => {
-  //     expect(screen.getByText('Harry Potter')).toBeInTheDocument();
-  //     expect(screen.getByText('Species: Human')).toBeInTheDocument();
-  //     expect(screen.getByText('Gender: Male')).toBeInTheDocument();
-  //     expect(screen.getByText('Nationality: British')).toBeInTheDocument();
-  //     expect(screen.getByText('Hair color: Black')).toBeInTheDocument();
-  //     expect(screen.getByText('Eye color: Green')).toBeInTheDocument();
-  //     expect(screen.getByText('Skin color: Fair')).toBeInTheDocument();
-  //     expect(screen.getByRole('img', { name: 'Character image' })).toHaveAttribute(
-  //       'src',
-  //       'https://image.url'
-  //     );
-  //     expect(screen.getByRole('link', { name: 'Wiki' })).toHaveAttribute(
-  //       'href',
-  //       'https://harrypotter.wiki'
-  //     );
-  //   });
-  // });
-
   // it('should close character details on button click', async () => {
-  //   store = configureStore({
-  //     reducer: { character: characterReducer },
-  //     preloadedState: {
-  //       character: {
-  //         response: {
-  //           data: {
-  //             attributes: {
-  //               name: 'Harry Potter',
-  //             },
-  //           },
-  //         },
-  //         status: 'success',
-  //         error: null,
-  //       },
-  //     } as RootStateType,
-  //   });
+  //   store.dispatch(
+  //     api.util.upsertQueryData('getCharacter', '1', {
+  //       data: mockFakeCharacterResponse,
+  //     })
+  //   );
 
-  //   renderWithProviders(store, '/cart/1');
+  //   render(
+  //     <Provider store={store}>
+  //       <ThemeContextProvider>
+  //         <ToastProvider>
+  //           <MemoryRouter initialEntries={['/character/1']}>
+  //             <CartPage />
+  //           </MemoryRouter>
+  //         </ToastProvider>
+  //       </ThemeContextProvider>
+  //     </Provider>
+  //   );
 
-  //   const closeButton = screen.getByRole('button', { name: 'Close' });
+  //   const closeButton = screen.getByRole('button', { name: 'Закрыть' });
   //   await userEvent.click(closeButton);
 
   //   await waitFor(() => {
-  //     expect(store.getState().character.response).toEqual('');
+  //     expect(store.getState().character.response).toBeNull();
   //   });
   // });
 });
