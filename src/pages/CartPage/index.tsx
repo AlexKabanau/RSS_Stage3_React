@@ -51,27 +51,30 @@ export default function CartPage() {
         {status === 'fulfilled' && data?.data && (
           <>
             <button role="button" onClick={onCloseClick}>
-              Закрыть
+              Close
             </button>
-            <h3>{data.data.attributes.name}</h3>
+            <h3 data-testid="character-name">{data.data.attributes.name}</h3>
             <div>
               {data.data.attributes.image && (
-                <img
-                  src={data.data.attributes.image}
-                  alt="Изображение персонажа"
-                />
+                <img src={data.data.attributes.image} alt="Character image" />
               )}
-              <p>Вид: {data.data.attributes.species}</p>
+              <p data-testid="character-species">
+                Species: {data.data.attributes.species}
+              </p>
               {data.data.attributes.gender && (
-                <p>Пол: {data.data.attributes.gender}</p>
+                <p data-testid="character-gender">
+                  Пол: {data.data.attributes.gender}
+                </p>
               )}
               {data.data.attributes.nationality && (
-                <p>Национальность: {data.data.attributes.nationality}</p>
+                <p>Nationality: {data.data.attributes.nationality}</p>
               )}
-              <p>Цвет волос: {data.data.attributes.hair_color}</p>
-              <p>Цвет глаз: {data.data.attributes.eye_color}</p>
-              <p>Цвет кожи: {data.data.attributes.skin_color}</p>
-              <a href={data.data.attributes.wiki}>Wiki</a>
+              <p>Hair color: {data.data.attributes.hair_color}</p>
+              <p>Eyes color: {data.data.attributes.eye_color}</p>
+              <p>Skin color: {data.data.attributes.skin_color}</p>
+              {data.data.attributes.wiki && (
+                <a href={data.data.attributes.wiki}>Wiki</a>
+              )}
             </div>
           </>
         )}

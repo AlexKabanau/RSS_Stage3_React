@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CartPage from '.';
@@ -140,7 +140,16 @@ describe('CartPage tests with RTK Query', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('2-Headed Baby')).toBeInTheDocument();
+      const name = screen.getByTestId('character-name');
+      within(name).findByText(/2-Headed Baby/i);
+    });
+    await waitFor(() => {
+      const name = screen.getByTestId('character-species');
+      within(name).findByText(/Human/i);
+    });
+    await waitFor(() => {
+      const name = screen.getByTestId('character-gender');
+      within(name).findByText(/Male (most likely)/i);
     });
   });
 });

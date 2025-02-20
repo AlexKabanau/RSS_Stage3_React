@@ -43,7 +43,7 @@ export const useDownloadCSV = () => {
     a.click();
     URL.revokeObjectURL(url);
 
-    addToast('Файл успешно скачан!');
+    addToast('File successfully downloaded!');
   }, [addToast, favorits]);
 
   return downloadCSV;
