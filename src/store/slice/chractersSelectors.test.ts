@@ -4,9 +4,7 @@ import { RootStateType } from '../store';
 
 describe('charactersSelectors', () => {
   it('должен вернуть состояние characters из RootState', () => {
-    // Моковое состояние Redux-хранилища
     const mockState: RootStateType = {
-      // заполняем другие части состояния, если они нужны
       character: {
         response: {
           data: {
@@ -73,7 +71,6 @@ describe('charactersSelectors', () => {
         isLoading: false,
         error: '',
       },
-      // isLoading: false,
       favorits: {
         favorits: [],
       },

@@ -14,11 +14,8 @@ import {
   setQueryParamsToState,
 } from '../../store/slice/queryParamsSlice';
 import { useAppDispatch } from '../../store/store';
-// import { fetchItems } from '../../store/slice/chractersSlice';
 import { useSelector } from 'react-redux';
-// import { charactersSelectors } from '../../store/slice/chractersSelectors';
 import { queryParamsSelectors } from '../../store/slice/queryParamsSelectors';
-// import { characterSelectors } from '../../store/slice/chracterSelectors';
 import { favoritsSelectors } from '../../store/slice/favoritsSelectors';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '../../store/slice/favoritsSlice';
@@ -32,8 +29,6 @@ export default function HomePage() {
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
 
-  // const { response, status } = useSelector(charactersSelectors);
-  // const { response: characterResponse } = useSelector(characterSelectors);
   const { page, search } = useSelector(queryParamsSelectors);
   const [inputValue, setInputValue] = useLocalStorage();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,18 +42,13 @@ export default function HomePage() {
     refetch,
   } = useGetCharactersQuery(
     { searchParams: search, page: Number(page) },
-    { refetchOnMountOrArgChange: true } // Отключаем кеширование
+    { refetchOnMountOrArgChange: true }
   );
   const downloadCSV = useDownloadCSV();
 
   useEffect(() => {
-    console.log('refetch');
-    refetch(); // Принудительно запрашиваем новые данные при изменении параметров
+    refetch();
   }, [search, page, refetch]);
-
-  // useEffect(() => {
-  //   dispatch(fetchItems({ searchParams: search, page: Number(page) }));
-  // }, [search, page, dispatch]);
 
   const handleOnSubmit = () => {
     setInputValue(inputValue);
@@ -71,7 +61,6 @@ export default function HomePage() {
     );
 
     setSearchParams({ search: inputValue, page: DEFAULT_PAGE.toString() });
-    // console.log(inputValue);
   };
 
   const onPageChanged = (page: number) => {
@@ -82,7 +71,6 @@ export default function HomePage() {
     setSearchParams({ search: currentSearch, page: page.toString() });
   };
   const onDeleteIconClick = () => {
-    // console.log('delete click');
     dispatch(clearFavorits());
     addToast('Successfully deleted all characters!');
   };
@@ -91,7 +79,6 @@ export default function HomePage() {
       addToast('Нет данных для загрузки!');
       return;
     }
-    console.log('response в HomePage:', response);
     downloadCSV();
   };
 

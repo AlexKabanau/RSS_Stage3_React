@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { ToastProvider, useToast } from './ToastContext';
 import '@testing-library/jest-dom';
 
-// Мокаем компонент Toast, чтобы не зависеть от его реализации
 vi.mock('./Toast', () => {
   return {
     default: function DummyToast({ content }: { content: React.ReactNode }) {
@@ -42,47 +41,6 @@ describe('ToastProvider', () => {
     await userEvent.click(screen.getByTestId('button'));
     expect(await screen.findByText('Тестовый тост')).toBeInTheDocument();
   });
-
-  // test('удаляет тост через 3000 мс', async () => {
-  //   // Используем fake timers только для этого теста
-  //   vi.useFakeTimers();
-
-  //   const TestComponent = () => {
-  //     const { addToast } = useToast();
-  //     return (
-  //       <button
-  //         onClick={() => addToast('Тост с таймаутом')}
-  //         data-testid="button"
-  //       >
-  //         Добавить тост
-  //       </button>
-  //     );
-  //   };
-
-  //   render(
-  //     <ToastProvider>
-  //       <TestComponent />
-  //     </ToastProvider>
-  //   );
-
-  //   await userEvent.click(screen.getByTestId('button'));
-
-  //   // Ждем, пока тост появится в DOM
-  //   expect(await screen.findByText('Тост с таймаутом')).toBeInTheDocument();
-
-  //   // Оборачиваем изменение времени в act, чтобы обновления применились корректно
-  //   await act(async () => {
-  //     vi.advanceTimersByTime(3000);
-  //   });
-
-  //   // Ждем, что тост будет удален из DOM
-  //   await waitFor(() => {
-  //     expect(screen.queryByText('Тост с таймаутом')).not.toBeInTheDocument();
-  //   });
-
-  //   // Восстанавливаем реальные таймеры
-  //   vi.useRealTimers();
-  // });
 
   test('хук useToast выбрасывает ошибку при использовании вне ToastProvider', () => {
     const ProblemComponent = () => {

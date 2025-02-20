@@ -6,7 +6,6 @@ describe('favoritsSelectors', () => {
   it('должен вернуть список избранных элементов из состояния', () => {
     const mockState: RootStateType = {
       favorits: { favorits: ['Harry Potter', 'Hermione Granger'] },
-      // Добавляем заглушки для других частей состояния, если нужно
     } as RootStateType;
 
     const selectedFavorits = favoritsSelectors(mockState);
@@ -16,7 +15,6 @@ describe('favoritsSelectors', () => {
 
   it('должен вернуть пустой массив, если избранные элементы отсутствуют', () => {
     const mockState: RootStateType = {
-      // заполняем другие части состояния, если они нужны
       character: {
         response: {
           data: {
@@ -83,7 +81,6 @@ describe('favoritsSelectors', () => {
         isLoading: false,
         error: '',
       },
-      // isLoading: false,
       favorits: {
         favorits: [],
       },

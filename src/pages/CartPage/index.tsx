@@ -9,40 +9,30 @@ export default function CartPage() {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate(); // Добавляем navigate
-
-  console.log('ID персонажа:', id);
+  const navigate = useNavigate();
 
   const { data, error, isFetching, status } = useGetCharacterQuery(id || '', {
     skip: !id,
   });
-  // if (status === 'pending')
 
   useEffect(() => {
     if (!id) {
-      console.log('ID отсутствует, сбрасываем персонажа');
       dispatch(setCharacter(null));
     }
   }, [id, dispatch]);
 
   useEffect(() => {
     const newId = searchParams.get('id');
-    console.log('Новый ID из параметров:', newId);
     if (!newId) {
-      dispatch(setCharacter(null)); // Сбрасываем состояние персонажа
+      dispatch(setCharacter(null));
     }
   }, [searchParams, dispatch]);
 
   const onCloseClick = () => {
-    console.log('Кнопка закрыть нажата'); // Для проверки
-    dispatch(setCharacter(null)); // Сбрасываем состояние персонажа
-    setSearchParams({}); // Сбрасываем параметры URL
-    navigate('/'); // Перенаправляем на главную страницу или другую нужную страницу
-    console.log('Параметры URL очищены'); // Проверка очистки параметров
+    dispatch(setCharacter(null));
+    setSearchParams({});
+    navigate('/');
   };
-  console.log('Status:', status); // Вставьте это в компонент CartPage
-  console.log('Error:', error); // Вставьте это в компонент CartPage
-  console.log('Is Fetching:', isFetching);
 
   return (
     <div className="cart" data-testid="cart-page">

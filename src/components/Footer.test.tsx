@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
 import { MemoryRouter } from 'react-router-dom';
@@ -32,9 +31,8 @@ describe('Footer Component', () => {
   });
 
   it('должен отображать ссылку на RSSchool с правильным URL', () => {
-    // Используем getByRole с фильтром по href
     const rsschoolLink = screen.getByTestId('rsschool-link', {
-      name: '', // или просто уберите name, если он не нужен
+      name: '',
       hidden: true,
     });
 

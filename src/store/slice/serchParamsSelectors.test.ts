@@ -11,7 +11,6 @@ describe('queryParamsSelectors', () => {
         isLoading: false,
         error: '',
       },
-      // другие состояния, если есть
     } as RootStateType;
 
     const result = queryParamsSelectors(initialState);

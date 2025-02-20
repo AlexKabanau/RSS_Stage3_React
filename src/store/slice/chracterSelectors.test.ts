@@ -1,12 +1,9 @@
-// import { characterSelectors } from './path/to/your/selectors'; // обновите путь к селектору
-import { RootStateType } from '../store'; // обновите путь к типу состояния
+import { RootStateType } from '../store';
 import { characterSelectors } from './chracterSelectors';
 
 describe('characterSelectors', () => {
   it('should return character state', () => {
-    // Создаем пример состояния
     const mockState: RootStateType = {
-      // заполняем другие части состояния, если они нужны
       character: {
         response: {
           data: {
@@ -73,7 +70,6 @@ describe('characterSelectors', () => {
         isLoading: false,
         error: '',
       },
-      // isLoading: false,
       favorits: {
         favorits: [],
       },
@@ -98,10 +94,8 @@ describe('characterSelectors', () => {
       },
     };
 
-    // Вызываем селектор
     const result = characterSelectors(mockState);
 
-    // Проверяем, что результат соответствует ожидаемому
     expect(result).toEqual(mockState.character);
   });
 });

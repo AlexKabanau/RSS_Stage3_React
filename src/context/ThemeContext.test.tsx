@@ -1,4 +1,3 @@
-// import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import { THEMES, LOCALSTORAGE_THEME } from '../constants/constants';
 import ThemeContextProvider from './ThemeContext';

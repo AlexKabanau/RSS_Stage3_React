@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { api } from './redux.api'; // Импортируй свой API slice
+import { api } from './redux.api';
 import characterReducer from '../store/slice/characterSlice';
 
 export function setupApiStore() {

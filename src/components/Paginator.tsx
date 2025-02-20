@@ -6,7 +6,6 @@ type PropsType = {
   totalItemsCount: number;
   pageSize: number;
   currentPage: number;
-  // setCurrentPage: (page: number) => void;
   onPageChanged: (pageNumber: number) => void;
   portionsSize?: number;
 };
@@ -16,16 +15,13 @@ const Paginator: FC<PropsType> = ({
   currentPage,
   onPageChanged,
   portionsSize = 10,
-  // setCurrentPage,
 }) => {
-  // console.log(totalItemsCount);
   const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages: Array<number> = [];
 
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-  // console.log(pages);
 
   const portionCount = Math.ceil(pagesCount / portionsSize);
   const [portionNumber, setPortionNumber] = useState(1);
@@ -59,7 +55,6 @@ const Paginator: FC<PropsType> = ({
                 style.pageNumber
               )}
               onClick={() => {
-                // setCurrentPage(page);
                 onPageChanged(page);
               }}
             >

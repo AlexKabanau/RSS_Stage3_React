@@ -6,7 +6,6 @@ interface ToastProps {
 }
 
 const Toast: React.FC<ToastProps> = ({ content }) => {
-  // console.log('Rendering Toast with content:', content);
   return <div className="toast">{content}</div>;
 };
 

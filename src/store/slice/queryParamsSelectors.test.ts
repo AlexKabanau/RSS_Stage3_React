@@ -12,7 +12,6 @@ describe('queryParamsSelectors', () => {
         error: '',
         search: 'Harry Potter',
       },
-      // Добавляем другие части состояния, если необходимо
     } as RootStateType;
 
     const selectedQueryParams = queryParamsSelectors(mockState);

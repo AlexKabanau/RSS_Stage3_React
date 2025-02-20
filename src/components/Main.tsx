@@ -3,7 +3,6 @@ import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
 import { RESOURCES_PER_PAGE } from '../constants/constants';
-// import { useAppSelector } from '../hooks/redux';
 import { queryParamsSelectors } from '../store/slice/queryParamsSelectors';
 import { useSelector } from 'react-redux';
 
@@ -25,7 +24,6 @@ const Main: React.FC<MainPropsType> = ({
     <main className={className}>
       <Paginator
         currentPage={Number(page)}
-        // setCurrentPage={setCurrentPage}
         totalItemsCount={count}
         pageSize={RESOURCES_PER_PAGE}
         onPageChanged={onPageChanged}

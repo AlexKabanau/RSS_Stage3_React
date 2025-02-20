@@ -20,41 +20,6 @@ const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
     return DEFAULT_THEME;
   });
 
-  // useEffect(() => {
-  //   const darkModePreference = window.matchMedia(
-  //     '(prefers-color-scheme: dark)'
-  //   );
-
-  //   if (theme === 'system') {
-  //     darkModePreference.matches
-  //       ? document.body.classList.add('dark')
-  //       : document.body.classList.remove('dark');
-
-  //     // const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-  //     //   e.matches
-  //     //     ? document.body.classList.add('dark')
-  //     //     : document.body.classList.remove('dark');
-  //     // };
-
-  //     // darkModePreference.addEventListener('change', handleSystemThemeChange);
-
-  //     // return () => {
-  //     //   darkModePreference.removeEventListener(
-  //     //     'change',
-  //     //     handleSystemThemeChange
-  //     //   );
-  //     // };
-  //   }
-
-  //   if (theme === 'dark') {
-  //     document.body.classList.add('dark');
-  //   }
-
-  //   if (theme === 'light') {
-  //     document.body.classList.remove('dark');
-  //   }
-  // }, [theme]);
-
   const value = {
     theme,
     changeTheme: (selectedTheme: ThemesType) => {

@@ -2,8 +2,6 @@ import { THEMES } from '../constants/constants';
 import { ThemesType } from '../context/ThemeContext';
 import { useTheme } from '../hooks/useTheme';
 
-// import style from './ThemeSelect.module.css';
-
 const ThemeSelect = () => {
   const { theme, changeTheme } = useTheme();
 

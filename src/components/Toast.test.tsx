@@ -1,5 +1,3 @@
-// Toast.test.tsx
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Toast from './Toast';
 
@@ -9,7 +7,6 @@ describe('Toast component', () => {
 
     render(<Toast content={content} />);
 
-    // Проверяем, что контент отображается
     expect(screen.getByText('This is a toast message!')).toBeInTheDocument();
   });
 
@@ -18,13 +15,10 @@ describe('Toast component', () => {
 
     render(<Toast content={content} />);
 
-    // Проверяем, что компонент Toast отрисовывается и имеет класс 'toast'
     const toastElement = screen.getByText('Another toast message!');
 
-    // Проверяем, что элемент существует
     expect(toastElement).toBeInTheDocument();
 
-    // Проверяем, что класс toast присутствует
     expect(toastElement.parentElement).toHaveClass('toast');
   });
 });

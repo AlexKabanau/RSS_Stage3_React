@@ -26,7 +26,7 @@ describe('Header Component', () => {
   it('должен отображать поле ввода для поиска', () => {
     const input = screen.getByPlaceholderText('Search');
     expect(input).toBeInTheDocument();
-    expect(input).toHaveValue(''); // Проверяем, что изначально значение пустое
+    expect(input).toHaveValue('');
   });
 
   it('должен вызывать setInputValue при вводе текста', () => {

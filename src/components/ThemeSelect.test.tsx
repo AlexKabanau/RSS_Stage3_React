@@ -4,7 +4,6 @@ import ThemeSelect from './ThemeSelect';
 import { useTheme } from '../hooks/useTheme';
 import { THEMES } from '../constants/constants';
 
-// Мокаем хук useTheme
 vi.mock('../hooks/useTheme');
 
 describe('ThemeSelect Component', () => {
@@ -13,7 +12,7 @@ describe('ThemeSelect Component', () => {
 
   beforeEach(() => {
     mockUseTheme.mockReturnValue({
-      theme: THEMES[0], // Установим начальную тему
+      theme: THEMES[0],
       changeTheme: mockChangeTheme,
     });
 
@@ -30,24 +29,23 @@ describe('ThemeSelect Component', () => {
   });
 
   it('должен содержать все темы из THEMES', () => {
-    // const select = screen.getByRole('combobox');
     const options = screen.getAllByRole('option');
 
-    expect(options).toHaveLength(THEMES.length); // Проверяем, что количество опций соответствует количеству тем
+    expect(options).toHaveLength(THEMES.length);
     THEMES.forEach((theme) => {
-      expect(screen.getByRole('option', { name: theme })).toBeInTheDocument(); // Проверяем, что каждая тема отображается в селекторе
+      expect(screen.getByRole('option', { name: theme })).toBeInTheDocument();
     });
   });
 
   it('должен вызывать changeTheme при выборе темы', () => {
     const select = screen.getByRole('combobox');
 
-    fireEvent.change(select, { target: { value: THEMES[1] } }); // Выбираем другую тему
-    expect(mockChangeTheme).toHaveBeenCalledWith(THEMES[1]); // Проверяем, что функция changeTheme вызвана с правильным значением
+    fireEvent.change(select, { target: { value: THEMES[1] } });
+    expect(mockChangeTheme).toHaveBeenCalledWith(THEMES[1]);
   });
 
   it('должен устанавливать значение по умолчанию в соответствии с текущей темой', () => {
     const select = screen.getByRole('combobox');
-    expect(select).toHaveValue(THEMES[0]); // Проверяем, что значение по умолчанию соответствует текущей теме
+    expect(select).toHaveValue(THEMES[0]);
   });
 });

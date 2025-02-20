@@ -1,4 +1,3 @@
-// ToastContainer.tsx
 import React, { useState } from 'react';
 import Toast from './Toast';
 
@@ -11,14 +10,12 @@ const ToastContainer: React.FC = () => {
     const newToast = { id: Date.now(), content };
     setToasts((prev) => [...prev, newToast]);
 
-    // Удаление тоста через 3 секунды
     setTimeout(() => {
       removeToast(newToast.id);
     }, 3000);
   };
 
   const removeToast = (id: number) => {
-    console.log(`Removing toast with id: ${id}`);
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 

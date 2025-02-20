@@ -5,7 +5,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import HomePage from '../../pages/HomePage';
 import { store } from '../../store/store';
 import { vi } from 'vitest';
-import { useGetCharactersQuery } from '../../api/redux.api'; // Импортируем отдельно
+import { useGetCharactersQuery } from '../../api/redux.api';
 import { api } from '../../api/redux.api';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import ThemeContextProvider from '../../context/ThemeContext';
@@ -16,13 +16,12 @@ vi.mock('../../api/redux.api', async (importOriginal) => {
   const actual = (await importOriginal()) as typeof api;
   return {
     ...actual,
-    useGetCharactersQuery: vi.fn(), // Мокаем только нужный хук
+    useGetCharactersQuery: vi.fn(),
   };
 });
 
 describe('HomePage', () => {
   it('should show error state', async () => {
-    // Настраиваем мок, чтобы он возвращал ошибку
     (useGetCharactersQuery as jest.Mock).mockReturnValue({
       data: null,
       error: new Error('Some error occurred'),
@@ -48,7 +47,6 @@ describe('HomePage', () => {
       </Provider>
     );
 
-    // Ожидаем, что сообщение об ошибке появится в документе
     await waitFor(() => {
       expect(
         screen.getByText(/Some error occurred\. Please try again\./i)
@@ -57,7 +55,6 @@ describe('HomePage', () => {
   });
 
   it('should show data when query is successful', async () => {
-    // Настраиваем мок, чтобы он возвращал данные
     (useGetCharactersQuery as jest.Mock).mockReturnValue({
       data: mockFakeResponse,
       error: null,
@@ -83,7 +80,6 @@ describe('HomePage', () => {
       </Provider>
     );
 
-    // Ожидаем, что данные появятся в документе
     await waitFor(() => {
       expect(
         screen.getByText('Ginevra Molly Potter (née Weasley)')
@@ -91,7 +87,6 @@ describe('HomePage', () => {
     });
   });
   it('should show nodata when query is successful', async () => {
-    // Настраиваем мок, чтобы он возвращал данные
     (useGetCharactersQuery as jest.Mock).mockReturnValue({
       data: mockFakeResponseNoItems,
       error: null,
@@ -117,13 +112,11 @@ describe('HomePage', () => {
       </Provider>
     );
 
-    // Ожидаем, что данные появятся в документе
     await waitFor(() => {
       expect(screen.getByText('Items not found')).toBeInTheDocument();
     });
   });
   it('should show favorits count when there are favorits', async () => {
-    // Добавляем избранные элементы в стор
     store.dispatch({
       type: 'favorits/setFavorites',
       payload: [
@@ -165,7 +158,6 @@ describe('HomePage', () => {
       ],
     });
 
-    // Настраиваем мок, чтобы он возвращал успешные данные
     (useGetCharactersQuery as jest.Mock).mockReturnValue({
       data: mockFakeResponse,
       error: null,
@@ -191,7 +183,6 @@ describe('HomePage', () => {
       </Provider>
     );
 
-    // Ожидаем, что количество избранных элементов появится в документе
     await waitFor(() => {
       expect(screen.getByText(/Favorits: 1/i)).toBeInTheDocument();
     });

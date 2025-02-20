@@ -5,25 +5,14 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
-// import { ArrowDownToLine, Trash } from 'lucide-react';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
 import { useToast } from './ToastContext';
-// import { useGetCharactersQuery } from '../api/redux.api';
 
 type ItemsType = {
   items: ResponseType[];
 };
 
 const ListItems: React.FC<ItemsType> = ({ items }) => {
-  // const {
-  //     data: response,
-  //     // error,
-  //     // isFetching,
-  //     // refetch,
-  //   } = useGetCharactersQuery(
-  //     { searchParams: search, page: Number(page) },
-  //     { refetchOnMountOrArgChange: true } // Отключаем кеширование
-  //   );
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
   const favorits = useSelector(favoritsSelectors);

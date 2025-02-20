@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { GetCharacterType, ResponseInfoType } from './getItems';
 import { RESOURCES_PER_PAGE, URL } from '../constants/constants';
-// import { URL } from '';
 
 export const api = createApi({
   reducerPath: 'api',
