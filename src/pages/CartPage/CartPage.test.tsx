@@ -1,29 +1,27 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter,
+  // BrowserRouter,
   MemoryRouter,
   Route,
-  RouterProvider,
+  // RouterProvider,
   Routes,
 } from 'react-router-dom';
 // import { setupApiStore } from '../../utils/testUtils'; // Вспомогательная утилита для мокирования API
-import { api } from '../../api/redux.api';
+// import { api } from '../../api/redux.api';
 import CartPage from '.';
-import characterReducer, {
-  setCharacter,
-} from '../../store/slice/characterSlice';
+import { setCharacter } from '../../store/slice/characterSlice';
 import ThemeContextProvider from '../../context/ThemeContext';
 import { ToastProvider } from '../../components/ToastContext';
-import { mockFakeCharacterResponse, mockInitialState } from '../../mock/mock';
-import userEvent from '@testing-library/user-event';
+// import { mockFakeCharacterResponse, mockInitialState } from '../../mock/mock';
+// import userEvent from '@testing-library/user-event';
 import { setupApiStore } from '../../api/setupApiStore';
-import { configureStore } from '@reduxjs/toolkit';
-import searchParams from '../../store/slice/serchParamsSlice';
-import queryParams from '../../store/slice/queryParamsSlice';
-import favorits from '../../store/slice/favoritsSlice';
-import { RootStateType } from '../../store/store';
+// import { configureStore } from '@reduxjs/toolkit';
+// import searchParams from '../../store/slice/serchParamsSlice';
+// import queryParams from '../../store/slice/queryParamsSlice';
+// import favorits from '../../store/slice/favoritsSlice';
+// import { RootStateType } from '../../store/store';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import HomePage from '../HomePage';
 import NotFoundPager from '../NotFoundPager';

@@ -1,8 +1,4 @@
-import characterReducer, {
-  fetchItem,
-  setCharacter,
-  delCharacter,
-} from './characterSlice';
+import characterReducer, { setCharacter, delCharacter } from './characterSlice';
 import { GetCharacterType } from '../../api/getItems';
 
 type initialStateType = {

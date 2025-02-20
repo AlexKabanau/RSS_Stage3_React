@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
-import { ArrowDownToLine, Trash } from 'lucide-react';
+// import { ArrowDownToLine, Trash } from 'lucide-react';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
 import { useToast } from './ToastContext';
-import { useGetCharactersQuery } from '../api/redux.api';
+// import { useGetCharactersQuery } from '../api/redux.api';
 
 type ItemsType = {
   items: ResponseType[];

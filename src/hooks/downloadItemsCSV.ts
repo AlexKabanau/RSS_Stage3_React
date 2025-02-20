@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { useToast } from '../components/ToastContext';
 import { useCallback, useEffect, useRef } from 'react';
-import { ResponseInfoType } from '../api/getItems';
+// import { ResponseInfoType } from '../api/getItems';
 
 export const useDownloadCSV = () => {
   const favorits = useSelector(favoritsSelectors);
@@ -61,7 +61,7 @@ export const useDownloadCSV = () => {
     const a = document.createElement('a');
     a.href = url;
     a.download = `${favorits.length}_items.csv`;
-    debugger;
+    // debugger;
     a.click();
     URL.revokeObjectURL(url);
 

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import ListItems from './ListItems';
 // import { ToastProvider } from './ToastContext';
-import { setFavorites, clearFavorits } from '../store/slice/favoritsSlice';
+import { clearFavorits } from '../store/slice/favoritsSlice';
 import { ResponseType } from '../api/getItems'; // Импортируйте ResponseType
 import { mockFakeItemList } from '../mock/mock';
 import { MemoryRouter } from 'react-router-dom';

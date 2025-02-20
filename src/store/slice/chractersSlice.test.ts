@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import axios from 'axios';
 import characters, { fetchItems, setChracters } from './chractersSlice'; // обновите путь к слайсу
-import { ResponseInfoType } from '../../api/getItems';
+// import { ResponseInfoType } from '../../api/getItems';
 
 export const store = configureStore({
   reducer: {
@@ -9,9 +9,9 @@ export const store = configureStore({
   },
 });
 
-type RootState = ReturnType<typeof store.getState>;
+// type RootState = ReturnType<typeof store.getState>;
 type AppStore = typeof store;
-type AppDispatch = typeof store.dispatch;
+// type AppDispatch = typeof store.dispatch;
 
 vi.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -77,10 +77,10 @@ describe('charactersSlice', () => {
   });
 
   it('should handle fetchItems pending', async () => {
-    const params = { searchParams: 'Harry', page: 1 };
+    // const params = { searchParams: 'Harry', page: 1 };
 
     const action = fetchItems.pending.type;
-    const initialState = store.getState().characters;
+    // const initialState = store.getState().characters;
 
     store.dispatch({ type: action });
 

@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { GetCharacterType } from '../../api/getItems';
-import axios from 'axios';
-import { URL } from '../../constants/constants';
+// import axios from 'axios';
+// import { URL } from '../../constants/constants';
 type InitialStateType = {
   response: GetCharacterType;
   status: 'loading' | 'success' | 'error';

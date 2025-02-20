@@ -6,8 +6,8 @@ import queryParams from './slice/queryParamsSlice';
 import favorits from './slice/favoritsSlice';
 
 import { useDispatch } from 'react-redux';
-import character from './slice/characterSlice';
-import characters from './slice/chractersSlice';
+// import character from './slice/characterSlice';
+// import characters from './slice/chractersSlice';
 import { api } from '../api/redux.api';
 
 // const rootReducer = combineReducers({

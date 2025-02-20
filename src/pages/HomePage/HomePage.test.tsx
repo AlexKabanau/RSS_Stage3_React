@@ -1,23 +1,23 @@
-import React, { StrictMode } from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { StrictMode } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import ThemeContextProvider from '../../context/ThemeContext';
 import { ToastProvider } from '../../components/ToastContext';
-import { RootStateType, store } from '../../store/store';
+import { store } from '../../store/store';
 import HomePage from '.';
-import { mockFakeResponse, mockFakeResponseNoItems } from '../../mock/mock';
-import { configureStore } from '@reduxjs/toolkit';
-import searchParams from '../../store/slice/serchParamsSlice';
-import queryParams from '../../store/slice/queryParamsSlice';
-import favorits from '../../store/slice/favoritsSlice';
-import character from '../../store/slice/characterSlice';
-import characters from '../../store/slice/chractersSlice';
-import userEvent from '@testing-library/user-event';
+// import { mockFakeResponse, mockFakeResponseNoItems } from '../../mock/mock';
+// import { configureStore } from '@reduxjs/toolkit';
+// import searchParams from '../../store/slice/serchParamsSlice';
+// import queryParams from '../../store/slice/queryParamsSlice';
+// import favorits from '../../store/slice/favoritsSlice';
+// import character from '../../store/slice/characterSlice';
+// import characters from '../../store/slice/chractersSlice';
+// import userEvent from '@testing-library/user-event';
 import ErrorBoundary from '../../components/ErrorBoundary';
-import { api, useGetCharactersQuery } from '../../api/redux.api';
+// import { api, useGetCharactersQuery } from '../../api/redux.api';
 
 const mockAxiosAPI = new MockAdapter(axios);
 
