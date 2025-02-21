@@ -7,7 +7,11 @@ describe('Item Component', () => {
   test('renders item details correctly', () => {
     render(
       <MemoryRouter>
-        <Item item={mockFakeItem} />
+        <Item
+          item={mockFakeItem}
+          isFavorite={false}
+          onToggleFavorite={vi.fn()}
+        />
       </MemoryRouter>
     );
 
@@ -22,7 +26,11 @@ describe('Item Component', () => {
   test('renders a link with the correct URL', () => {
     render(
       <MemoryRouter>
-        <Item item={mockFakeItem} />
+        <Item
+          item={mockFakeItem}
+          isFavorite={false}
+          onToggleFavorite={vi.fn()}
+        />
       </MemoryRouter>
     );
 

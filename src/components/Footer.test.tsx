@@ -31,10 +31,7 @@ describe('Footer Component', () => {
   });
 
   it('должен отображать ссылку на RSSchool с правильным URL', () => {
-    const rsschoolLink = screen.getByTestId('rsschool-link', {
-      name: '',
-      hidden: true,
-    });
+    const rsschoolLink = screen.getByTestId('rsschool-link');
 
     expect(rsschoolLink).toBeInTheDocument();
     expect(rsschoolLink).toHaveAttribute(

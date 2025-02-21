@@ -1,36 +1,19 @@
-import { useEffect } from 'react';
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import reactLogo from '../../assets/react.svg';
 import { useGetCharacterQuery } from '../../api/redux.api';
-import { useAppDispatch } from '../../store/store';
-import { setCharacter } from '../../store/slice/characterSlice';
 
 export default function CartPage() {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const { data, error, isFetching, status } = useGetCharacterQuery(id || '', {
     skip: !id,
   });
 
-  useEffect(() => {
-    if (!id) {
-      dispatch(setCharacter(null));
-    }
-  }, [id, dispatch]);
-
-  useEffect(() => {
-    const newId = searchParams.get('id');
-    if (!newId) {
-      dispatch(setCharacter(null));
-    }
-  }, [searchParams, dispatch]);
-
   const onCloseClick = () => {
-    dispatch(setCharacter(null));
-    setSearchParams({});
+    // setSearchParams({});
     navigate('/');
   };
 

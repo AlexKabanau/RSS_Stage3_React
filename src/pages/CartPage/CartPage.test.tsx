@@ -3,7 +3,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CartPage from '.';
-import { setCharacter } from '../../store/slice/characterSlice';
+// import { setCharacter } from '../../store/slice/characterSlice';
 import ThemeContextProvider from '../../context/ThemeContext';
 import { ToastProvider } from '../../components/ToastContext';
 import { setupApiStore } from '../../api/setupApiStore';
@@ -14,9 +14,9 @@ import NotFoundPager from '../NotFoundPager';
 const store = setupApiStore();
 
 describe('CartPage tests with RTK Query', () => {
-  beforeEach(() => {
-    store.dispatch(setCharacter(null));
-  });
+  // beforeEach(() => {
+  //   store.dispatch(setCharacter(null));
+  // });
 
   it('CartPage should render', () => {
     render(

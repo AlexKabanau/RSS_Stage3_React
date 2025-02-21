@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import favoritsReducer, { setFavorites, clearFavorits } from './favoritsSlice';
+import { firstCharacter, secondCharacter } from '../../mock/mock';
 
 describe('favoritsSlice', () => {
   it('должен вернуть начальное состояние', () => {
@@ -9,7 +10,7 @@ describe('favoritsSlice', () => {
 
   it('должен устанавливать избранные элементы', () => {
     const previousState = { favorits: [] };
-    const newFavorites = ['Harry Potter', 'Hermione Granger'];
+    const newFavorites = [firstCharacter, secondCharacter];
 
     const newState = favoritsReducer(previousState, setFavorites(newFavorites));
 
@@ -17,7 +18,7 @@ describe('favoritsSlice', () => {
   });
 
   it('должен очищать список избранных элементов', () => {
-    const previousState = { favorits: ['Harry Potter', 'Hermione Granger'] };
+    const previousState = { favorits: [firstCharacter, secondCharacter] };
 
     const newState = favoritsReducer(previousState, clearFavorits());
 
