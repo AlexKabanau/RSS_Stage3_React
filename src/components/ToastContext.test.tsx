@@ -1,8 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ToastProvider, useToast } from './ToastContext';
+import { ToastProvider } from './ToastContext';
 import '@testing-library/jest-dom';
+import { useToast } from './useToast';
 
 vi.mock('./Toast', () => {
   return {
