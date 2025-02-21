@@ -6,7 +6,7 @@ import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/slice/favoritsSlice';
 import { useAppDispatch } from '../store/store';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
-import { useToast } from './ToastContext';
+import { useToast } from './useToast';
 
 type ItemsType = {
   items: ResponseType[];

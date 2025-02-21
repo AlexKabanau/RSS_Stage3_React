@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
-import { useToast } from '../components/ToastContext';
 import { useCallback, useEffect, useRef } from 'react';
+import { useToast } from '../components/useToast';
 
 export const useDownloadCSV = () => {
   const favorits = useSelector(favoritsSelectors);

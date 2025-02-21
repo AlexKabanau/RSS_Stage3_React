@@ -22,8 +22,8 @@ import { clearFavorits } from '../../store/slice/favoritsSlice';
 
 import { useDownloadCSV } from '../../hooks/downloadItemsCSV';
 
-import { useToast } from '../../components/ToastContext';
 import { useGetCharactersQuery } from '../../api/redux.api';
+import { useToast } from '../../components/useToast';
 
 export default function HomePage() {
   const dispatch = useAppDispatch();
