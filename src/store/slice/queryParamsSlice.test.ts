@@ -8,7 +8,7 @@ import { DEFAULT_PAGE, RESOURCES_PER_PAGE } from '../../constants/constants';
 
 describe('queryParamsSlice', () => {
   it('должен возвращать начальное состояние', () => {
-    const initialState = queryParamsReducer(undefined, { type: '@@INIT' }); // Указываем type как строку
+    const initialState = queryParamsReducer(undefined, { type: '@@INIT' });
     expect(initialState).toEqual({
       limit: RESOURCES_PER_PAGE.toString(),
       page: DEFAULT_PAGE.toString(),

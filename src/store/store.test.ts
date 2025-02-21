@@ -1,4 +1,4 @@
-import { store } from './store'; // Убедитесь, что путь правильный
+import { store } from './store';
 import { setSearchParamsToState } from './slice/serchParamsSlice';
 import { setLimit, setPage } from './slice/queryParamsSlice';
 import { setFavorites } from './slice/favoritsSlice';
