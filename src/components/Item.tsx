@@ -29,7 +29,7 @@ const Item: React.FC<ItemPropsType> = ({
           checked={isFavorite}
           onChange={() => onToggleFavorite(item.id)}
         />
-        Favorits
+        Favorites
       </label>
       <p>Name: {item.attributes.name}</p>
       <p>Species: {item.attributes.species}</p>

@@ -15,16 +15,16 @@ type ItemsType = {
 const ListItems: React.FC<ItemsType> = ({ items }) => {
   const dispatch = useAppDispatch();
   const { addToast } = useToast();
-  const favorits = useSelector(favoritsSelectors);
+  const favorites = useSelector(favoritsSelectors);
   const downloadCSV = useDownloadCSV();
 
-  const isFavorite = (id: string) => favorits.some((fav) => fav.id === id);
+  const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
 
   const showAddedToast = () => {
     addToast(
       <p>
         One character successfully added to favorites!
-        <br /> Favorits: {favorits.length + 1}
+        <br /> Favorites: {favorites.length + 1}
         <button
           className={'favoritButton'}
           aria-label="Trash"
@@ -55,14 +55,14 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
   };
 
   const toggleFavorite = (item: ResponseType) => {
-    if (!Array.isArray(favorits)) {
+    if (!Array.isArray(favorites)) {
       console.error('favorits is not an array!');
       return;
     }
 
     const updatedFavorites = isFavorite(item.id)
-      ? favorits.filter((fav) => fav.id !== item.id)
-      : [...favorits, item];
+      ? favorites.filter((fav) => fav.id !== item.id)
+      : [...favorites, item];
 
     dispatch(setFavorites(updatedFavorites));
 
