@@ -13,6 +13,9 @@ dist-ssr
 coverage
 *.local
 
+# next.js
+/.next/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

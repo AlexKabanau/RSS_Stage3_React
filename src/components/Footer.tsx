@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
-import gitHubLogo from '../assets/github_logo_black.svg';
-import RSSLogo from '../assets/rs_logo_black.svg';
+// import gitHubLogo from '/github_logo_black.svg';
+// import RSSLogo from '/rs_logo_black.svg';
 
 export default function Footer() {
   return (
@@ -11,7 +11,10 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          <img className="creator__link" src={gitHubLogo} alt="github logo" />
+          <img
+            className="creator__link"
+            // src={gitHubLogo} alt="github logo"
+          />
           <span>AlexKabanau</span>
         </Link>
       </div>
@@ -22,7 +25,10 @@ export default function Footer() {
           rel="noreferrer"
           data-testid="rsschool-link"
         >
-          <img className="rsschool__link" src={RSSLogo} alt="RSSchool logo" />
+          <img
+            className="rsschool__link"
+            // src={RSSLogo} alt="RSSchool logo"
+          />
         </Link>
       </div>
     </footer>

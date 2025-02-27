@@ -3,27 +3,27 @@ import style from './Paginator.module.css';
 import cn from 'classnames';
 
 type PropsType = {
-  totalItemsCount: number;
+  // totalItemsCount: number;
   pageSize: number;
   currentPage: number;
-  onPageChanged: (pageNumber: number) => void;
+  // onPageChanged: (pageNumber: number) => void;
   portionsSize?: number;
 };
 const Paginator: FC<PropsType> = ({
-  totalItemsCount,
+  // totalItemsCount,
   pageSize,
   currentPage,
-  onPageChanged,
+  // onPageChanged,
   portionsSize = 10,
 }) => {
-  const pagesCount = Math.ceil(totalItemsCount / pageSize);
+  // const pagesCount = Math.ceil(totalItemsCount / pageSize);
   const pages: Array<number> = [];
 
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+  // for (let i = 1; i <= pagesCount; i++) {
+  //   pages.push(i);
+  // }
 
-  const portionCount = Math.ceil(pagesCount / portionsSize);
+  // const portionCount = Math.ceil(pagesCount / portionsSize);
   const [portionNumber, setPortionNumber] = useState(1);
   const leftPortionPageNumber = (portionNumber - 1) * portionsSize + 1;
   const rightPortionPageNumber = portionNumber * portionsSize;
@@ -54,15 +54,15 @@ const Paginator: FC<PropsType> = ({
                 },
                 style.pageNumber
               )}
-              onClick={() => {
-                onPageChanged(page);
-              }}
+              // onClick={() => {
+              //   onPageChanged(page);
+              // }}
             >
               {page}
             </span>
           );
         })}
-      {portionCount > portionNumber && (
+      {/* {portionCount > portionNumber && (
         <button
           onClick={() => {
             setPortionNumber(portionNumber + 1);
@@ -70,7 +70,7 @@ const Paginator: FC<PropsType> = ({
         >
           NEXT
         </button>
-      )}
+      )} */}
     </div>
   );
 };

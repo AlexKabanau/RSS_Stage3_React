@@ -3,19 +3,21 @@ import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
 
 type HeaderPropsType = {
-  handleOnSubmit: () => void;
-  inputValue: string;
-  setInputValue: (value: string) => void;
+  // handleOnSubmit: () => void;
+  // inputValue: string;
+  // setInputValue: (value: string) => void;
 };
 
-const Header: React.FC<HeaderPropsType> = ({
-  handleOnSubmit,
-  inputValue,
-  setInputValue,
-}) => {
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
+const Header: React.FC<HeaderPropsType> = (
+  {
+    // handleOnSubmit,
+    // inputValue,
+    // setInputValue,
+  }
+) => {
+  // const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setInputValue(event.target.value);
+  // };
 
   return (
     <header className={styles.header_bordered}>
@@ -25,14 +27,14 @@ const Header: React.FC<HeaderPropsType> = ({
           className={styles.searchInput}
           type="text"
           placeholder="Search"
-          value={inputValue}
-          onChange={handleOnChange}
+          // value={inputValue}
+          // onChange={handleOnChange}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') handleOnSubmit();
+            // if (e.key === 'Enter') handleOnSubmit();
           }}
         />
       </div>
-      <button onClick={() => handleOnSubmit()}>Search</button>
+      {/* <button onClick={() => handleOnSubmit()}>Search</button> */}
       <ThemeSelect />
     </header>
   );

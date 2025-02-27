@@ -7,7 +7,12 @@ type SearchParamsType = {
 };
 
 const initialState: SearchParamsType = {
-  searchParams: localStorage.getItem('inputValue') || '',
+  searchParams:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('inputValue') || ''
+      : '',
+
+  // searchParams: localStorage.getItem('inputValue') || '',
   isLoading: false,
   error: '',
 };
