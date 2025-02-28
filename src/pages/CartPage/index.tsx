@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import reactLogo from '../../assets/react.svg';
-import { useGetCharacterQuery } from '../../api/redux.api';
+import { useGetCharacterQuery } from '../../store/api/characterApi';
 
 export default function CartPage() {
   // const dispatch = useAppDispatch();

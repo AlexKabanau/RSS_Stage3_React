@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_PAGE, RESOURCES_PER_PAGE } from '../../constants/constants';
 
 type queryParamsStateType = {
@@ -24,18 +24,14 @@ export const queryParamsSlice = createSlice({
   name: 'queryParams',
   initialState,
   reducers: {
-    setLimit: (state, action: { payload: string }) => {
+    setLimit(state, action: { payload: string }) {
       state.limit = action.payload;
     },
-    setPage: (state, action: { payload: string }) => {
+    setPage(state, action: { payload: string }) {
       state.page = action.payload;
     },
-    setQueryParamsToState: (
-      state,
-      action: { payload: { page: string; search: string } }
-    ) => {
-      state.page = action.payload.page;
-      state.search = action.payload.search;
+    setQueryParamsToState(state, action: PayloadAction<string>) {
+      state.search = action.payload;
     },
   },
 });

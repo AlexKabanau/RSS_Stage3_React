@@ -5,7 +5,7 @@ import isLoading from './reducers/isLoading';
 import favorits from './slice/favoritsSlice';
 
 import { useDispatch } from 'react-redux';
-import { api } from '../api/redux.api';
+import { api } from './api/characterApi';
 
 export const store = configureStore({
   reducer: {

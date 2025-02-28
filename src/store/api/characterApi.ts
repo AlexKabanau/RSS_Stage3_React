@@ -1,8 +1,10 @@
+import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
+import { RESOURCES_PER_PAGE, URL } from '@/constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GetCharacterType, ResponseInfoType } from './getItems';
-import { RESOURCES_PER_PAGE, URL } from '../constants/constants';
+// import { GetCharacterType, ResponseInfoType } from '../../api/getItems';
+// import { RESOURCES_PER_PAGE, URL } from '../../constants/constants';
 
-export const api = createApi({
+export const reduxApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: URL.baseUrl }),
   endpoints: (builder) => ({
@@ -19,4 +21,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetCharacterQuery, useGetCharactersQuery } = api;
+export const { useGetCharacterQuery, useGetCharactersQuery } = reduxApi;

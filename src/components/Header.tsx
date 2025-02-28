@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
+import { useAppDispatch } from '@/store/store';
+import { setQueryParamsToState } from '@/store/reducers/queryParams';
 
 type HeaderPropsType = {
   // handleOnSubmit: () => void;
@@ -15,6 +17,15 @@ const Header: React.FC<HeaderPropsType> = (
     // setInputValue,
   }
 ) => {
+  const [inputValue, setInputValue] = useState('');
+  const dispatch = useAppDispatch();
+
+  const handleOnSubmit = () => {
+    localStorage.setItem('inputValue', inputValue);
+    dispatch(setQueryParamsToState(inputValue));
+    // dispatch(setPage('1'));
+    // setSearch({ limit, page: `1` });
+  };
   // const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setInputValue(event.target.value);
   // };
@@ -27,15 +38,16 @@ const Header: React.FC<HeaderPropsType> = (
           className={styles.searchInput}
           type="text"
           placeholder="Search"
-          // value={inputValue}
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
           // onChange={handleOnChange}
           onKeyDown={(e) => {
-            // if (e.key === 'Enter') handleOnSubmit();
+            if (e.key === 'Enter') handleOnSubmit();
           }}
         />
       </div>
-      {/* <button onClick={() => handleOnSubmit()}>Search</button> */}
-      <ThemeSelect />
+      <button onClick={() => handleOnSubmit()}>Search</button>
+      {/* <ThemeSelect /> */}
     </header>
   );
 };
