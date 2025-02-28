@@ -1,4 +1,7 @@
+// import { getCharacters } from '@/api/getItems';
 import Header from '@/components/Header';
+import { getCharacters, reduxApi } from '@/store/api/characterApi';
+import { wrapper } from '@/store/store';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
@@ -6,7 +9,7 @@ const ErrorButton = dynamic(() => import('@/components/ErrorButton'), {
   ssr: false,
 });
 
-export default function HomePage() {
+export default function HomePage(data) {
   return (
     <>
       <Head>
@@ -16,20 +19,29 @@ export default function HomePage() {
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
       </Head>
       <Header />
+      {JSON.stringify(data)}
       Hello
       <ErrorButton />
     </>
   );
 }
 
-export async function getServerSideProps() {
-  const response = await fetch(
-    'https://api.potterdb.com//v1/characters?page[size]=10&page[number]=1'
-  );
-  const data = await response.json();
-  return {
-    props: {
-      characters: data,
-    },
-  };
-}
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    const { page, search } = context.query;
+
+    const data = await store.dispatch(
+      getCharacters.initiate({
+        page: Array.isArray(page) ? page[0] : page ? page : '1',
+        searchParams: Array.isArray(search) ? search[0] : search ? search : '',
+      })
+    );
+    await Promise.all(store.dispatch(reduxApi.util.getRunningQueriesThunk()));
+
+    return {
+      props: {
+        cards: data,
+      },
+    };
+  }
+);

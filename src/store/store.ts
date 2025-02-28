@@ -4,8 +4,10 @@ import queryParams from './reducers/queryParams';
 import isLoading from './reducers/isLoading';
 import favorits from './slice/favoritsSlice';
 
-import { useDispatch } from 'react-redux';
-import { api } from './api/characterApi';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { reduxApi } from './api/characterApi';
+import { createWrapper, MakeStore } from 'next-redux-wrapper';
+// import { api } from './api/characterApi';
 
 export const store = configureStore({
   reducer: {
@@ -13,13 +15,17 @@ export const store = configureStore({
     queryParams: queryParams,
     isLoading: isLoading,
     // favorits: favorits,
-    // [api.reducerPath]: api.reducer,
+    [reduxApi.reducerPath]: reduxApi.reducer,
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(reduxApi.middleware),
 });
 
 export type RootStateType = ReturnType<typeof store.getState>;
 export type AppStoreType = typeof store;
 export type AppDispatchType = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatchType>();
+export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
+
+const makeStore: MakeStore<AppStoreType> = () => store;
+export const wrapper = createWrapper<AppStoreType>(makeStore, { debug: true });

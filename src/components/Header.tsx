@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
 import { useAppDispatch } from '@/store/store';
-import { setQueryParamsToState } from '@/store/reducers/queryParams';
+import { setPage, setQueryParamsToState } from '@/store/reducers/queryParams';
 
 type HeaderPropsType = {
   // handleOnSubmit: () => void;

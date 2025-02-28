@@ -13,12 +13,14 @@ export const reduxApi = createApi({
     }),
     getCharacters: builder.query<
       ResponseInfoType,
-      { searchParams: string; page: number }
+      { searchParams: string; page: string }
     >({
       query: ({ searchParams, page }) =>
         `${URL.props}${URL.ammount}${RESOURCES_PER_PAGE}${URL.currentPage}${page}${URL.search}${searchParams}`,
     }),
   }),
 });
+
+export const { getCharacter, getCharacters } = reduxApi.endpoints;
 
 export const { useGetCharacterQuery, useGetCharactersQuery } = reduxApi;
