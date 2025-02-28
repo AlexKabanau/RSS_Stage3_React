@@ -1,6 +1,6 @@
 import { store } from './store';
 import { setSearchParamsToState } from './slice/serchParamsSlice';
-import { setLimit, setPage } from './slice/queryParamsSlice';
+import { setLimit, setPage } from './reducers/queryParams';
 import { setFavorites } from './slice/favoritsSlice';
 
 describe('Redux Store', () => {

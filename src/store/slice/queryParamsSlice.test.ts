@@ -3,7 +3,7 @@ import queryParamsReducer, {
   setLimit,
   setPage,
   setQueryParamsToState,
-} from './queryParamsSlice';
+} from '../reducers/queryParams';
 import { DEFAULT_PAGE, RESOURCES_PER_PAGE } from '../../constants/constants';
 
 describe('queryParamsSlice', () => {

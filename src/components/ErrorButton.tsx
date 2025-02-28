@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const ErrorButton: React.FC = () => {
   const [error, setError] = useState<boolean>(false);
@@ -8,13 +8,22 @@ const ErrorButton: React.FC = () => {
     setError(true);
   };
 
-  useEffect(() => {
-    if (error) {
-      throw new Error('Error');
-    }
-  }, [error]);
+  const resetError = () => {
+    setError(false);
+  };
 
-  return <button onClick={() => handleError()}>ErrorButton</button>;
+  return (
+    <div>
+      {error ? (
+        <div className="error-content">
+          <h3>Произошла ошибка. Пожалуйста, попробуйте еще раз.</h3>
+          <button onClick={resetError}>Перезагрузить</button>
+        </div>
+      ) : (
+        <button onClick={handleError}>ErrorButton</button>
+      )}
+    </div>
+  );
 };
 
 export default ErrorButton;

@@ -14,7 +14,10 @@ const initialState: queryParamsStateType = {
   page: DEFAULT_PAGE.toString(),
   isLoading: false,
   error: '',
-  search: '',
+  search:
+    typeof window !== 'undefined'
+      ? localStorage.getItem('inputValue') || ''
+      : '',
 };
 
 export const queryParamsSlice = createSlice({

@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import searchParams from './slice/serchParamsSlice';
-import queryParams from './slice/queryParamsSlice';
+import queryParams from './reducers/queryParams';
+import isLoading from './reducers/isLoading';
 import favorits from './slice/favoritsSlice';
 
 import { useDispatch } from 'react-redux';
@@ -8,13 +9,14 @@ import { api } from '../api/redux.api';
 
 export const store = configureStore({
   reducer: {
-    searchParams: searchParams,
+    // searchParams: searchParams,
     queryParams: queryParams,
-    favorits: favorits,
-    [api.reducerPath]: api.reducer,
+    isLoading: isLoading,
+    // favorits: favorits,
+    // [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootStateType = ReturnType<typeof store.getState>;
