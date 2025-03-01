@@ -1,10 +1,12 @@
 // import { getCharacters } from '@/api/getItems';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
 import { getCharacters, reduxApi } from '@/store/api/characterApi';
 import { wrapper } from '@/store/store';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+// import { Outlet } from 'react-router';
 
 const ErrorButton = dynamic(() => import('@/components/ErrorButton'), {
   ssr: false,
@@ -31,7 +33,9 @@ export default function HomePage(data) {
         count={data.cards.data.meta.pagination.records}
         // onPageChange={() => {}}
       />
+      {/* <Outlet /> */}
       <ErrorButton />
+      <Footer />
     </>
   );
 }

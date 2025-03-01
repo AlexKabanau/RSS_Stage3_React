@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import favoritsReducer, { setFavorites, clearFavorits } from './favoritsSlice';
+import favoritsReducer, {
+  setFavorites,
+  clearFavorits,
+} from '../reducers/favorites';
 import { firstCharacter, secondCharacter } from '../../mock/mock';
 
 describe('favoritsSlice', () => {

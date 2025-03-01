@@ -1,7 +1,7 @@
 import { store } from './store';
 import { setSearchParamsToState } from './slice/serchParamsSlice';
 import { setLimit, setPage } from './reducers/queryParams';
-import { setFavorites } from './slice/favoritsSlice';
+import { setFavorites } from './reducers/favorites';
 
 describe('Redux Store', () => {
   it('должен иметь начальное состояние', () => {

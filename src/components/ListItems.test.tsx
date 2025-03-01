@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import ListItems from './ListItems';
-import { clearFavorits } from '../store/slice/favoritsSlice';
+import { clearFavorits } from '../store/reducers/favorites';
 import { ResponseType } from '../api/getItems';
 import { mockFakeItemList } from '../mock/mock';
 import { MemoryRouter } from 'react-router-dom';
