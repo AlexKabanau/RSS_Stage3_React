@@ -28,7 +28,7 @@ export default function HomePage(data) {
       <Main
         className={charactersData.length ? 'fullwidth' : 'width2/3'}
         items={charactersData}
-        // count={data.cards.data.meta.pagination.records}
+        count={data.cards.data.meta.pagination.records}
         // onPageChange={() => {}}
       />
       <ErrorButton />

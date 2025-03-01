@@ -8,27 +8,27 @@ import { useSelector } from 'react-redux';
 
 type MainPropsType = {
   items: ResponseType[];
-  // count: number;
+  count: number;
   // onPageChanged: (page: number) => void;
   className?: string;
 };
 
 const Main: React.FC<MainPropsType> = ({
   items,
-  // count,
+  count,
   // onPageChanged,
   className,
 }) => {
-  // const { page } = useSelector(queryParamsSelectors);
+  const { page } = useSelector(queryParamsSelectors);
 
   return (
     <main className={className}>
-      {/* <Paginator
+      <Paginator
         currentPage={Number(page)}
-        // totalItemsCount={count}
+        totalItemsCount={count}
         pageSize={RESOURCES_PER_PAGE}
         // onPageChanged={onPageChanged}
-      /> */}
+      />
       <ListItems items={items} />
     </main>
   );
