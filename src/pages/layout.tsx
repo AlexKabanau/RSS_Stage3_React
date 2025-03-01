@@ -49,18 +49,23 @@ export default function Layout({ data, children }: LayoutPropsType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
       </Head>
-      <Header />
+      <div className="app dark">
+        <Header />
+        <div role="homePage" className="main-container">
+          <Main
+            className={data.data.length ? 'fullWidth' : 'width2_3'}
+            items={data.data}
+            count={data.meta.pagination.records}
+            onPageChanged={onPageChanged}
+          />
+          {children}
+        </div>
+        <ErrorButton />
+
+        <Footer />
+      </div>
       {/* {JSON.stringify(data)} */}
       {/* Hello */}
-      <Main
-        className={data.data.length ? 'fullwidth' : 'width2/3'}
-        items={data.data}
-        count={data.meta.pagination.records}
-        onPageChanged={onPageChanged}
-      />
-      {children}
-      <ErrorButton />
-      <Footer />
     </>
   );
 }

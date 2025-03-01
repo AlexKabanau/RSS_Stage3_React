@@ -8,8 +8,8 @@ export const reduxApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: URL.baseUrl }),
   endpoints: (builder) => ({
-    getCharacter: builder.query<GetCharacterType, string>({
-      query: (id) => `${URL.props}/${id}`,
+    getCharacter: builder.query<GetCharacterType, { id: string }>({
+      query: ({ id }) => `${URL.props}/${id}`,
     }),
     getCharacters: builder.query<
       ResponseInfoType,
