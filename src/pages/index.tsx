@@ -1,5 +1,6 @@
 // import { getCharacters } from '@/api/getItems';
 import Header from '@/components/Header';
+import Main from '@/components/Main';
 import { getCharacters, reduxApi } from '@/store/api/characterApi';
 import { wrapper } from '@/store/store';
 import dynamic from 'next/dynamic';
@@ -10,6 +11,9 @@ const ErrorButton = dynamic(() => import('@/components/ErrorButton'), {
 });
 
 export default function HomePage(data) {
+  // console.log(data);
+  const charactersData = data.cards.data.data;
+  // console.log(charactersData);
   return (
     <>
       <Head>
@@ -19,8 +23,14 @@ export default function HomePage(data) {
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
       </Head>
       <Header />
-      {JSON.stringify(data)}
-      Hello
+      {/* {JSON.stringify(data)} */}
+      {/* Hello */}
+      <Main
+        className={charactersData.length ? 'fullwidth' : 'width2/3'}
+        items={charactersData}
+        // count={data.cards.data.meta.pagination.records}
+        // onPageChange={() => {}}
+      />
       <ErrorButton />
     </>
   );
