@@ -9,18 +9,21 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 import reactLogo from '../../public/react.svg';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '@/store/reducers/favorites';
+import { setPage } from '@/store/reducers/queryParams';
+import { setSearchParamsToState } from '@/store/slice/serchParamsSlice';
+import { useSearchParams } from 'react-router';
 
 type MainPropsType = {
   items: ResponseType[];
   count: number;
-  // onPageChanged: (page: number) => void;
+  onPageChanged: (page: number) => void;
   className?: string;
 };
 
 const Main: React.FC<MainPropsType> = ({
   items,
   count,
-  // onPageChanged,
+  onPageChanged,
   className,
 }) => {
   const favorites = useAppSelector((state) => state.favorites.favorites);
@@ -75,7 +78,7 @@ const Main: React.FC<MainPropsType> = ({
             currentPage={Number(page)}
             totalItemsCount={count}
             pageSize={RESOURCES_PER_PAGE}
-            // onPageChanged={onPageChanged}
+            onPageChanged={onPageChanged}
           />
           <ListItems items={items} />
         </>

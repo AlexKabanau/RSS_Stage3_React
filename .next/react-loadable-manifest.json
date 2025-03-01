@@ -11,8 +11,8 @@
       "static/chunks/_pages-dir-browser_node_modules_next_dist_pages__error_js.js"
     ]
   },
-  "pages\\index.tsx -> @/components/ErrorButton": {
-    "id": "pages\\index.tsx -> @/components/ErrorButton",
+  "pages\\layout.tsx -> @/components/ErrorButton": {
+    "id": "pages\\layout.tsx -> @/components/ErrorButton",
     "files": [
       "static/chunks/_pages-dir-browser_src_components_ErrorButton_tsx.js"
     ]
