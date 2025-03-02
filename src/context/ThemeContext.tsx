@@ -1,38 +1,44 @@
-import { ReactNode, useState } from 'react';
+'use client';
+
+import { ReactNode, useEffect, useState } from 'react';
 import {
   DEFAULT_THEME,
   LOCALSTORAGE_THEME,
   THEMES,
 } from '../constants/constants';
 import { ThemeContext } from './themeContextCreation';
+import cn from 'classnames'; // Удобная утилита для работы с className (по желанию)
 
 export type ThemesType = (typeof THEMES)[number];
 
 const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<ThemesType>(() => {
+  const [theme, setTheme] = useState<ThemesType>(DEFAULT_THEME);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true); // Флаг для предотвращения SSR-ошибок
+
     try {
       const savedTheme = localStorage.getItem(LOCALSTORAGE_THEME) as ThemesType;
-      if (savedTheme) return savedTheme;
+      if (savedTheme) setTheme(savedTheme);
     } catch (error) {
       console.warn(`Can't read localStorage`, error);
     }
+  }, []);
 
-    return DEFAULT_THEME;
-  });
-
-  const value = {
-    theme,
-    changeTheme: (selectedTheme: ThemesType) => {
-      try {
-        localStorage.setItem(LOCALSTORAGE_THEME, selectedTheme);
-      } catch (error) {
-        console.warn("Can't access to local storage", error);
-      }
-      setTheme(selectedTheme);
-    },
+  const changeTheme = (selectedTheme: ThemesType) => {
+    try {
+      localStorage.setItem(LOCALSTORAGE_THEME, selectedTheme);
+    } catch (error) {
+      console.warn("Can't access localStorage", error);
+    }
+    setTheme(selectedTheme);
   };
+
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
+      <div className={cn(theme)}>{isMounted ? children : null}</div>
+    </ThemeContext.Provider>
   );
 };
 

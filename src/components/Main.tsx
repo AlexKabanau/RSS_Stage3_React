@@ -12,6 +12,9 @@ import { clearFavorits } from '@/store/reducers/favorites';
 import { setPage } from '@/store/reducers/queryParams';
 import { setSearchParamsToState } from '@/store/slice/serchParamsSlice';
 import { useSearchParams } from 'react-router';
+import { useRouter } from 'next/router';
+import { useDownloadCSV } from '@/hooks/downloadItemsCSV';
+import { useToast } from './useToast';
 
 type MainPropsType = {
   items: ResponseType[];
@@ -26,20 +29,28 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
+  const { addToast } = useToast();
+
   const favorites = useAppSelector((state) => state.favorites.favorites);
 
   const dispatch = useAppDispatch();
-  const { page } = useSelector(queryParamsSelectors);
+  // const { page } = useSelector(queryParamsSelectors);
+  const router = useRouter();
+
+  const { page } = router.query;
   const isLoading = useAppSelector(
     (state) => state.isLoading.isMainPageCharactersLoading
   );
+  const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
     dispatch(clearFavorits());
+    addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    console.log('Download');
+    // console.log('Download');
     // dispatch(clearFavorits());
+    downloadCSV();
   };
 
   return (
@@ -57,21 +68,23 @@ const Main: React.FC<MainPropsType> = ({
         <>
           {favorites.length > 0 && (
             <>
-              <p className="favorits">Favorites: {favorites.length}</p>
-              <button
-                className="favoritButton"
-                aria-label="Trash"
-                onClick={onDeleteIconClick}
-              >
-                <Trash2 size={12} />
-              </button>
-              <button
-                className="favoritButton"
-                onClick={onDownloadIconClick}
-                aria-label="Download"
-              >
-                <ArrowDownToLine size={12} />
-              </button>
+              <p className="favorits">
+                Favorites: {favorites.length}
+                <button
+                  className="favoritButton"
+                  aria-label="Trash"
+                  onClick={onDeleteIconClick}
+                >
+                  <Trash2 size={12} />
+                </button>
+                <button
+                  className={'favoritButton'}
+                  onClick={onDownloadIconClick}
+                  aria-label="Download"
+                >
+                  <ArrowDownToLine size={12} />
+                </button>
+              </p>
             </>
           )}
           <Paginator

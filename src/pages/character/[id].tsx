@@ -33,12 +33,40 @@ export default function CartPage(props: {
   const { charactersData, characterData } = props;
   return (
     <Layout data={charactersData}>
-      <div className="cart">
-        <button role="button">
-          <Link href={'/'}>Close</Link>
-        </button>
-        <p>Character</p>
-        {JSON.stringify(characterData)}
+      <div className="cart" data-testid="cart-page">
+        <div className="container">
+          <button role="button">
+            <Link href={'/'}>Close</Link>
+          </button>
+          <h3 data-testid="character-name">
+            {characterData.data.attributes.name}
+          </h3>
+          <div>
+            {characterData.data.attributes.image && (
+              <img
+                src={characterData.data.attributes.image}
+                alt="Character image"
+              />
+            )}
+            <p data-testid="character-species">
+              Species: {characterData.data.attributes.species}
+            </p>
+            {characterData.data.attributes.gender && (
+              <p data-testid="character-gender">
+                Пол: {characterData.data.attributes.gender}
+              </p>
+            )}
+            {characterData.data.attributes.nationality && (
+              <p>Nationality: {characterData.data.attributes.nationality}</p>
+            )}
+            <p>Hair color: {characterData.data.attributes.hair_color}</p>
+            <p>Eyes color: {characterData.data.attributes.eye_color}</p>
+            <p>Skin color: {characterData.data.attributes.skin_color}</p>
+            {characterData.data.attributes.wiki && (
+              <a href={characterData.data.attributes.wiki}>Wiki</a>
+            )}
+          </div>
+        </div>
       </div>
     </Layout>
   );

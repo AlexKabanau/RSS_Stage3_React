@@ -28,6 +28,7 @@ const Header: React.FC<HeaderPropsType> = (
   const handleOnSubmit = () => {
     localStorage.setItem('inputValue', inputValue);
     dispatch(setQueryParamsToState(inputValue));
+    dispatch(setPage('1'));
     router.push({
       query: {
         search: inputValue,
@@ -58,7 +59,7 @@ const Header: React.FC<HeaderPropsType> = (
         />
       </div>
       <button onClick={() => handleOnSubmit()}>Search</button>
-      {/* <ThemeSelect /> */}
+      <ThemeSelect />
     </header>
   );
 };

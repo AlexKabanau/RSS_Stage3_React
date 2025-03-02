@@ -13,6 +13,7 @@ import { setSearchParamsToState } from '@/store/slice/serchParamsSlice';
 import { useAppDispatch, wrapper } from '@/store/store';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useSearchParams } from 'react-router';
 // import { Outlet } from 'react-router';
 
@@ -28,9 +29,17 @@ export default function Layout({ data, children }: LayoutPropsType) {
   console.log(data);
   // const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { search } = router.query;
 
   const onPageChanged = (page: number) => {
     dispatch(setPage(page.toString()));
+    router.push({
+      query: {
+        page,
+        search,
+      },
+    });
     // dispatch(setSearchParamsToState(inputValue));
 
     // const currentSearch = searchParams.get('search') || inputValue;
@@ -49,11 +58,11 @@ export default function Layout({ data, children }: LayoutPropsType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
       </Head>
-      <div className="app dark">
+      <div className="app">
         <Header />
         <div role="homePage" className="main-container">
           <Main
-            className={data.data.length ? 'fullWidth' : 'width2_3'}
+            className={!children ? 'fullWidth' : 'width2_3'}
             items={data.data}
             count={data.meta.pagination.records}
             onPageChanged={onPageChanged}

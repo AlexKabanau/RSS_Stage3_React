@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux';
 import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { useCallback, useEffect, useRef } from 'react';
 import { useToast } from '../components/useToast';
+import { useAppSelector } from '@/store/store';
 
 export const useDownloadCSV = () => {
-  const favorits = useSelector(favoritsSelectors);
+  const favorits = useAppSelector((state) => state.favorites.favorites);
   const prevFavorits = useRef(favorits);
   useEffect(() => {
     if (prevFavorits.current !== favorits) {

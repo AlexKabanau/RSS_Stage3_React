@@ -6,7 +6,7 @@ import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/reducers/favorites';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
-// import { useToast } from './useToast';
+import { useToast } from './useToast';
 
 type ItemsType = {
   items: ResponseType[];
@@ -14,46 +14,46 @@ type ItemsType = {
 
 const ListItems: React.FC<ItemsType> = ({ items }) => {
   const dispatch = useAppDispatch();
-  // const { addToast } = useToast();
+  const { addToast } = useToast();
   const favorites = useAppSelector((state) => state.favorites.favorites);
-  // const downloadCSV = useDownloadCSV();
+  const downloadCSV = useDownloadCSV();
 
   const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
 
   const showAddedToast = () => {
     console.log('showAddedToast');
-    // addToast(
-    //   <p>
-    //     One character successfully added to favorites!
-    //     <br /> Favorites: {favorites.length + 1}
-    //     <button
-    //       className={'favoritButton'}
-    //       aria-label="Trash"
-    //       onClick={() => {
-    //         dispatch(clearFavorits());
-    //         addToast('Successfully deleted all characters!');
-    //       }}
-    //     >
-    //       Unselect all
-    //     </button>
-    //     <button
-    //       className={'favoritButton'}
-    //       onClick={downloadCSV}
-    //       aria-label="Download"
-    //     >
-    //       Download
-    //     </button>
-    //   </p>
-    // );
+    addToast(
+      <p>
+        One character successfully added to favorites!
+        <br /> Favorites: {favorites.length + 1}
+        <button
+          className={'favoritButton'}
+          aria-label="Trash"
+          onClick={() => {
+            dispatch(clearFavorits());
+            addToast('Successfully deleted all characters!');
+          }}
+        >
+          Unselect all
+        </button>
+        <button
+          className={'favoritButton'}
+          onClick={downloadCSV}
+          aria-label="Download"
+        >
+          Download
+        </button>
+      </p>
+    );
   };
 
   const showRemovedToast = () => {
     console.log('showRemovedToast');
-    // addToast(
-    //   <p data-testid="toast">
-    //     One character successfully removed from favorites!
-    //   </p>
-    // );
+    addToast(
+      <p data-testid="toast">
+        One character successfully removed from favorites!
+      </p>
+    );
   };
 
   const toggleFavorite = (item: ResponseType) => {
