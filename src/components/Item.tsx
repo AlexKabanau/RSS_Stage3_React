@@ -18,7 +18,7 @@ const Item: React.FC<ItemPropsType> = ({
     <li className="item">
       <Link
         role="link"
-        href={`/character/${item.id}`}
+        href={{ pathname: `/character/${item.id}`, query: { id: item.id } }}
         // href={`character/${item.id}${location.search}`}
         data-testid={`link-${item.id}`}
       >

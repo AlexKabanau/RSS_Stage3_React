@@ -10,6 +10,7 @@ import Layout from '../layout';
 import { wrapper } from '@/store/store';
 import { checkRouterElement } from '@/utils/checkRouterElement';
 import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
+import Link from 'next/link';
 
 export default function CartPage(props: {
   charactersData: ResponseInfoType;
@@ -33,6 +34,9 @@ export default function CartPage(props: {
   return (
     <Layout data={charactersData}>
       <div className="cart">
+        <button role="button">
+          <Link href={'/'}>Close</Link>
+        </button>
         <p>Character</p>
         {JSON.stringify(characterData)}
       </div>

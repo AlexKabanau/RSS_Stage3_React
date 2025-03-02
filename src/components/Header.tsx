@@ -3,6 +3,8 @@ import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
 import { useAppDispatch } from '@/store/store';
 import { setPage, setQueryParamsToState } from '@/store/reducers/queryParams';
+import { useRouter } from 'next/router';
+import { checkRouterElement } from '@/utils/checkRouterElement';
 
 type HeaderPropsType = {
   // handleOnSubmit: () => void;
@@ -17,12 +19,21 @@ const Header: React.FC<HeaderPropsType> = (
     // setInputValue,
   }
 ) => {
-  const [inputValue, setInputValue] = useState('');
+  const router = useRouter();
+  let { search } = router.query;
+  search = checkRouterElement(search, '');
+  const [inputValue, setInputValue] = useState(search);
   const dispatch = useAppDispatch();
 
   const handleOnSubmit = () => {
     localStorage.setItem('inputValue', inputValue);
     dispatch(setQueryParamsToState(inputValue));
+    router.push({
+      query: {
+        search: inputValue,
+        page: '1',
+      },
+    });
     // dispatch(setPage('1'));
     // setSearch({ limit, page: `1` });
   };
