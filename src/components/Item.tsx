@@ -2,6 +2,7 @@ import React from 'react';
 import { ResponseType } from '../api/getItems';
 import { useLocation } from 'react-router-dom';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type ItemPropsType = {
   item: ResponseType;
@@ -13,12 +14,31 @@ const Item: React.FC<ItemPropsType> = ({
   isFavorite,
   onToggleFavorite,
 }) => {
-  // const location = useLocation();
+  const router = useRouter();
+  const { page, search } = router.query;
+  const href = search
+    ? {
+        pathname: '/character/[id]',
+        query: {
+          id: item.id,
+          page: page || '1',
+          // limit: limit || '10',
+          search: search || '',
+        },
+      }
+    : {
+        pathname: '/character/[id]',
+        query: {
+          id: item.id,
+          page: page || '1',
+          // limit: limit || '10',
+        },
+      }; // const location = useLocation();
   return (
     <li className="item">
       <Link
         role="link"
-        href={{ pathname: `/character/${item.id}`, query: { id: item.id } }}
+        href={href}
         // href={`character/${item.id}${location.search}`}
         data-testid={`link-${item.id}`}
       >

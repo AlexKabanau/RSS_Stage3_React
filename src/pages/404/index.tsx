@@ -1,10 +1,12 @@
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
+
+import Link from 'next/link';
 
 export default function NotFoundPager() {
   return (
     <div>
       <p>😢 OOPS! Page not found.</p>
-      <Link to={'/'}>Home Page</Link>
+      <Link href={'/'}>Home Page</Link>
     </div>
   );
 }

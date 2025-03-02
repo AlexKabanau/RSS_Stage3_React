@@ -23,6 +23,13 @@ import { checkRouterElement } from '@/utils/checkRouterElement';
 //   };
 // };
 
+// return {
+//   props: {
+//     cards: data,
+//   },
+// };
+// }
+
 export default function HomePage(data: {
   cards: {
     data: ResponseInfoType;
@@ -55,6 +62,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
         searchParams: checkRouterElement(search, ''),
       })
     );
+    console.log('page', page, 'search', search);
     await Promise.all(store.dispatch(reduxApi.util.getRunningQueriesThunk()));
 
     return {

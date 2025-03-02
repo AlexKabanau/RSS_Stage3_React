@@ -5,6 +5,10 @@ import { HYDRATE } from 'next-redux-wrapper';
 // import { GetCharacterType, ResponseInfoType } from '../../api/getItems';
 // import { RESOURCES_PER_PAGE, URL } from '../../constants/constants';
 
+export type CharacterResponseType = {
+  response: GetCharacterType;
+};
+
 export const reduxApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: URL.baseUrl }),

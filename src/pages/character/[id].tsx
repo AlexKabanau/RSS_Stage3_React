@@ -1,6 +1,7 @@
 // import { useParams, useNavigate } from 'react-router-dom';
 // import reactLogo from '../../../public/react.svg';
 import {
+  CharacterResponseType,
   getCharacter,
   getCharacters,
   reduxApi,
@@ -11,63 +12,23 @@ import { wrapper } from '@/store/store';
 import { checkRouterElement } from '@/utils/checkRouterElement';
 import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
 import Link from 'next/link';
+import CharacterDetails from '@/components/CharacterDetails';
 
-export default function CartPage(props: {
+// return {
+//   props: {
+//     charactersData: characters?.data,
+//     characterData: character?.data,
+//   },
+// };
+
+export default function CartPage(data: {
   charactersData: ResponseInfoType;
   characterData: GetCharacterType;
 }) {
-  // const dispatch = useAppDispatch();
-  // const { id } = useParams();
-  // // const [searchParams, setSearchParams] = useSearchParams();
-  // // const navigate = useNavigate();
-
-  // const { data, error, isFetching, status } = useGetCharacterQuery(id || '', {
-  //   skip: !id,
-  // });
-
-  // const onCloseClick = () => {
-  // setSearchParams({});
-  // navigate('/');
-  // };
-
-  const { charactersData, characterData } = props;
+  const { charactersData, characterData } = data;
   return (
     <Layout data={charactersData}>
-      <div className="cart" data-testid="cart-page">
-        <div className="container">
-          <button role="button">
-            <Link href={'/'}>Close</Link>
-          </button>
-          <h3 data-testid="character-name">
-            {characterData.data.attributes.name}
-          </h3>
-          <div>
-            {characterData.data.attributes.image && (
-              <img
-                src={characterData.data.attributes.image}
-                alt="Character image"
-              />
-            )}
-            <p data-testid="character-species">
-              Species: {characterData.data.attributes.species}
-            </p>
-            {characterData.data.attributes.gender && (
-              <p data-testid="character-gender">
-                Пол: {characterData.data.attributes.gender}
-              </p>
-            )}
-            {characterData.data.attributes.nationality && (
-              <p>Nationality: {characterData.data.attributes.nationality}</p>
-            )}
-            <p>Hair color: {characterData.data.attributes.hair_color}</p>
-            <p>Eyes color: {characterData.data.attributes.eye_color}</p>
-            <p>Skin color: {characterData.data.attributes.skin_color}</p>
-            {characterData.data.attributes.wiki && (
-              <a href={characterData.data.attributes.wiki}>Wiki</a>
-            )}
-          </div>
-        </div>
-      </div>
+      <CharacterDetails characterData={characterData} />
     </Layout>
   );
 
@@ -123,6 +84,7 @@ export default function CartPage(props: {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const { page, search, id } = context.query;
+    // console.log(page, search, id);
 
     const characters = await store.dispatch(
       getCharacters.initiate({
@@ -133,6 +95,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const character = await store.dispatch(
       getCharacter.initiate({ id: checkRouterElement(id, '') })
     );
+    console.log('page', page, 'search', search);
     await Promise.all(store.dispatch(reduxApi.util.getRunningQueriesThunk()));
 
     return {

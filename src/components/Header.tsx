@@ -23,18 +23,29 @@ const Header: React.FC<HeaderPropsType> = (
   let { search } = router.query;
   search = checkRouterElement(search, '');
   const [inputValue, setInputValue] = useState(search);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const handleOnSubmit = () => {
     localStorage.setItem('inputValue', inputValue);
-    dispatch(setQueryParamsToState(inputValue));
-    dispatch(setPage('1'));
-    router.push({
-      query: {
-        search: inputValue,
-        page: '1',
-      },
-    });
+    if (router.pathname === '/') {
+      if (inputValue) {
+        router.push({
+          query: { page: '1', search: inputValue },
+        });
+      } else {
+        router.push({
+          query: { page: '1' },
+        });
+      }
+    }
+    // dispatch(setQueryParamsToState(inputValue));
+    // dispatch(setPage('1'));
+    // router.push({
+    //   query: {
+    //     search: inputValue,
+    //     page: '1',
+    //   },
+    // });
     // dispatch(setPage('1'));
     // setSearch({ limit, page: `1` });
   };
