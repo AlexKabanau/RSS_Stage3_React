@@ -1,8 +1,6 @@
 import React from 'react';
 import { ResponseType } from '../api/getItems';
 import Item from './Item';
-import { useSelector } from 'react-redux';
-import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { clearFavorits, setFavorites } from '../store/reducers/favorites';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { useDownloadCSV } from '../hooks/downloadItemsCSV';
@@ -70,10 +68,8 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
 
     if (!isFavorite(item.id)) {
       showAddedToast();
-      // alert('add in favorites');
     } else {
       showRemovedToast();
-      // alert('remove from favorites');
     }
   };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponseType } from '../api/getItems';
-import { useLocation } from 'react-router-dom';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -22,7 +21,6 @@ const Item: React.FC<ItemPropsType> = ({
         query: {
           id: item.id,
           page: page || '1',
-          // limit: limit || '10',
           search: search || '',
         },
       }
@@ -31,17 +29,11 @@ const Item: React.FC<ItemPropsType> = ({
         query: {
           id: item.id,
           page: page || '1',
-          // limit: limit || '10',
         },
-      }; // const location = useLocation();
+      };
   return (
     <li className="item">
-      <Link
-        role="link"
-        href={href}
-        // href={`character/${item.id}${location.search}`}
-        data-testid={`link-${item.id}`}
-      >
+      <Link role="link" href={href} data-testid={`link-${item.id}`}>
         <h3>{item.attributes.name}</h3>
       </Link>
       <label>

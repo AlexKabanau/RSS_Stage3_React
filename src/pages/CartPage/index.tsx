@@ -28,7 +28,7 @@ export default function CartPage() {
         )}
         {error && (
           <div role="error">
-            <p>Произошла ошибка. Пожалуйста, попробуйте снова.</p>
+            <p>Some error occurred. Please open console and try again.</p>
           </div>
         )}
         {status === 'fulfilled' && data?.data && (

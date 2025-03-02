@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import searchParams from './slice/serchParamsSlice';
 import queryParams from './reducers/queryParams';
 import isLoading from './reducers/isLoading';
 import favorites from './reducers/favorites';
@@ -7,11 +6,9 @@ import favorites from './reducers/favorites';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { reduxApi } from './api/characterApi';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
-// import { api } from './api/characterApi';
 
 export const store = configureStore({
   reducer: {
-    // searchParams: searchParams,
     queryParams: queryParams,
     isLoading: isLoading,
     favorites: favorites,

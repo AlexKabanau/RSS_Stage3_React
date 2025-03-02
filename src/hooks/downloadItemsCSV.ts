@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-import { favoritsSelectors } from '../store/slice/favoritsSelectors';
 import { useCallback, useEffect, useRef } from 'react';
 import { useToast } from '../components/useToast';
 import { useAppSelector } from '@/store/store';
@@ -16,7 +14,7 @@ export const useDownloadCSV = () => {
   const { addToast } = useToast();
   const downloadCSV = useCallback(() => {
     if (favorits.length === 0) {
-      addToast('Нет файла для загрузки!');
+      addToast('No files to download!');
       return;
     }
 

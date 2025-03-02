@@ -32,7 +32,7 @@ export default class ErrorBoundary extends Component<
       return (
         <div className="error-content">
           <h3>Some error occurred. Please open console and try again.</h3>
-          <button onClick={this.reset}>Перезагрузить</button>
+          <button onClick={this.reset}>Reset</button>
         </div>
       );
     }

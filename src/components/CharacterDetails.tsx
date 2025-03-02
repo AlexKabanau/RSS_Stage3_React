@@ -47,7 +47,7 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [closeDetails]);
 
   if (!isOpen) return null; // Не рендерим компонент, если он закрыт
   return (

@@ -16,8 +16,8 @@ const ErrorButton: React.FC = () => {
     <div>
       {error ? (
         <div className="error-content">
-          <h3>Произошла ошибка. Пожалуйста, попробуйте еще раз.</h3>
-          <button onClick={resetError}>Перезагрузить</button>
+          <h3>Some error occurred. Please open console and try again.</h3>
+          <button onClick={resetError}>Reset</button>
         </div>
       ) : (
         <button onClick={handleError}>ErrorButton</button>

@@ -3,15 +3,10 @@ import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
 import { RESOURCES_PER_PAGE } from '../constants/constants';
-import { queryParamsSelectors } from '../store/slice/queryParamsSelectors';
-import { useSelector } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import reactLogo from '../../public/react.svg';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '@/store/reducers/favorites';
-import { setPage } from '@/store/reducers/queryParams';
-import { setSearchParamsToState } from '@/store/slice/serchParamsSlice';
-import { useSearchParams } from 'react-router';
 import { useRouter } from 'next/router';
 import { useDownloadCSV } from '@/hooks/downloadItemsCSV';
 import { useToast } from './useToast';
@@ -34,7 +29,6 @@ const Main: React.FC<MainPropsType> = ({
   const favorites = useAppSelector((state) => state.favorites.favorites);
 
   const dispatch = useAppDispatch();
-  // const { page } = useSelector(queryParamsSelectors);
   const router = useRouter();
 
   const { page } = router.query;
@@ -48,8 +42,6 @@ const Main: React.FC<MainPropsType> = ({
     addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    // console.log('Download');
-    // dispatch(clearFavorits());
     downloadCSV();
   };
 
