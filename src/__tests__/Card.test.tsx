@@ -1,16 +1,26 @@
 import mockRouter from 'next-router-mock';
-import Item from '@/components/Item';
 import React from 'react';
-// import HomePage from '@/pages';
 import { render, screen } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
-// import { TransformSpellsRequest, propsToCard } from './_fakeData';
-import { mockFakeCharacterResponse } from '@/mock/mock';
+import { mockFakeCharacterResponse } from '../mock/mock';
+import Item from '../components/Item';
+import { NextRouter } from 'next/router';
 
-describe('Tests for the Card component', () => {
+describe('Tests for the Item component', () => {
   beforeAll(() => {
-    vi.mock('next/router', () => mockRouter);
+    vi.mock('next/router', async (importOriginal) => {
+      const actual: NextRouter = (await importOriginal()) as NextRouter;
+      return {
+        ...actual,
+        useRouter: () => ({
+          query: { page: '1' }, // Mock query parameters if necessary
+          push: vi.fn(),
+          replace: vi.fn(),
+          // добавьте другие методы, если необходимо
+        }),
+      };
+    });
   });
 
   afterAll(() => {
@@ -18,17 +28,15 @@ describe('Tests for the Card component', () => {
     vi.resetAllMocks();
   });
 
-  test('Card component renders the relevant card data', () => {
-    mockRouter.setCurrentUrl('/?page=1&limit=10');
+  test('Item component renders the relevant item data', () => {
+    mockRouter.setCurrentUrl('/?page=1');
 
     render(
-      <RouterContext.Provider value={mockRouter}>
-        <Item
-          item={mockFakeCharacterResponse.data}
-          isFavorite={false}
-          onToggleFavorite={vi.fn()}
-        />
-      </RouterContext.Provider>
+      <Item
+        item={mockFakeCharacterResponse.data}
+        isFavorite={false}
+        onToggleFavorite={vi.fn()}
+      />
     );
 
     const cardName = screen.getByText(
