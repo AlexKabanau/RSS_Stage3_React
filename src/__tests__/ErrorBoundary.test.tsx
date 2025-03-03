@@ -23,52 +23,54 @@ test('Make sure the errorButton is working', () => {
 
   spyError.mockRestore(); // Восстанавливаем консоль
 });
-// test('getDerivedStateFromError sets correct state', () => {
-//   const errorState = ErrorBoundary.getDerivedStateFromError(new Error('Test error'));
-//   expect(errorState).toEqual({ hasError: true, message: 'Some error!' });
-// });
+test('getDerivedStateFromError sets correct state', () => {
+  const errorState = ErrorBoundary.getDerivedStateFromError();
+  expect(errorState).toEqual({ hasError: true, message: 'Some error!' });
+});
 
-// test('componentDidCatch logs error', () => {
-//   const spyConsoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+test('componentDidCatch logs error', () => {
+  const spyConsoleError = vi
+    .spyOn(console, 'error')
+    .mockImplementation(() => {});
 
-//   const TestComponent = () => {
-//     throw new Error('Test error');
-//   };
+  const TestComponent = () => {
+    throw new Error('Test error');
+  };
 
-//   render(
-//     <ErrorBoundary>
-//       <TestComponent />
-//     </ErrorBoundary>
-//   );
+  render(
+    <ErrorBoundary>
+      <TestComponent />
+    </ErrorBoundary>
+  );
 
-//   expect(spyConsoleError).toHaveBeenCalled();
-//   spyConsoleError.mockRestore();
-// });
+  expect(spyConsoleError).toHaveBeenCalled();
+  spyConsoleError.mockRestore();
+});
 
-// test('Reset button clears error state', () => {
-//   render(
-//     <ErrorBoundary>
-//       <ErrorButton />
-//     </ErrorBoundary>
-//   );
+test('Reset button clears error state', () => {
+  render(
+    <ErrorBoundary>
+      <ErrorButton />
+    </ErrorBoundary>
+  );
 
-//   fireEvent.click(screen.getByTestId('errorButton'));
+  fireEvent.click(screen.getByTestId('errorButton'));
 
-//   expect(
-//     screen.getByText('Some error occurred. Please open console and try again.')
-//   ).toBeInTheDocument();
+  expect(
+    screen.getByText('Some error occurred. Please open console and try again.')
+  ).toBeInTheDocument();
 
-//   fireEvent.click(screen.getByText('Reset'));
+  fireEvent.click(screen.getByText('Reset'));
 
-//   expect(screen.queryByText('Some error occurred.')).not.toBeInTheDocument();
-// });
+  expect(screen.queryByText('Some error occurred.')).not.toBeInTheDocument();
+});
 
-// test('ErrorBoundary correctly renders children when no error', () => {
-//   render(
-//     <ErrorBoundary>
-//       <div data-testid="child-component">Hello, world!</div>
-//     </ErrorBoundary>
-//   );
+test('ErrorBoundary correctly renders children when no error', () => {
+  render(
+    <ErrorBoundary>
+      <div data-testid="child-component">Hello, world!</div>
+    </ErrorBoundary>
+  );
 
-//   expect(screen.getByTestId('child-component')).toBeInTheDocument();
-// });
+  expect(screen.getByTestId('child-component')).toBeInTheDocument();
+});
