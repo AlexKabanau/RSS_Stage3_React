@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   getCharacter,
   getCharacters,
@@ -9,11 +10,13 @@ import { checkRouterElement } from '@/utils/checkRouterElement';
 import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
 import CharacterDetails from '@/components/CharacterDetails';
 
-export default function CartPage(data: {
+export default function CartPage({
+  charactersData,
+  characterData,
+}: {
   charactersData: ResponseInfoType;
   characterData: GetCharacterType;
 }) {
-  const { charactersData, characterData } = data;
   return (
     <Layout data={charactersData}>
       <CharacterDetails characterData={characterData} />

@@ -58,7 +58,9 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     >
       <div className="container">
         <button role="button">
-          <Link href={href}>Close</Link>
+          <Link href={href} role="closeButton">
+            Close
+          </Link>
         </button>
         {/* {JSON.stringify(data)} */}
         <h3 data-testid="character-name">{data.attributes.name}</h3>
@@ -70,7 +72,9 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
             Species: {data.attributes.species}
           </p>
           {data.attributes.gender && (
-            <p data-testid="character-gender">Пол: {data.attributes.gender}</p>
+            <p data-testid="character-gender">
+              Gender: {data.attributes.gender}
+            </p>
           )}
           {data.attributes.nationality && (
             <p>Nationality: {data.attributes.nationality}</p>
