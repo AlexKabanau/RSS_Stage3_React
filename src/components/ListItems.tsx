@@ -19,7 +19,6 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
   const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
 
   const showAddedToast = () => {
-    console.log('showAddedToast');
     addToast(
       <p>
         One character successfully added to favorites!
@@ -46,7 +45,6 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
   };
 
   const showRemovedToast = () => {
-    console.log('showRemovedToast');
     addToast(
       <p data-testid="toast">
         One character successfully removed from favorites!
@@ -74,16 +72,19 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
   };
 
   return (
-    <ul className="list-items">
-      {items.map((item) => (
-        <Item
-          key={item.id}
-          item={item}
-          isFavorite={isFavorite(item.id)}
-          onToggleFavorite={() => toggleFavorite(item)}
-        />
-      ))}
-    </ul>
+    <>
+      {!items || (items.length < 1 && <p>{`Could't find any characters`}</p>)}
+      <ul className="list-items">
+        {items.map((item) => (
+          <Item
+            key={item.id}
+            item={item}
+            isFavorite={isFavorite(item.id)}
+            onToggleFavorite={() => toggleFavorite(item)}
+          />
+        ))}
+      </ul>
+    </>
   );
 };
 

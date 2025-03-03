@@ -64,6 +64,7 @@ const Main: React.FC<MainPropsType> = ({
                 Favorites: {favorites.length}
                 <button
                   className="favoritButton"
+                  data-testid="TrashIcon"
                   aria-label="Trash"
                   onClick={onDeleteIconClick}
                 >

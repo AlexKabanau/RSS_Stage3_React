@@ -43,7 +43,7 @@ const Paginator: FC<PropsType> = ({
   const rightPortionPageNumber = portionNumber * portionsSize;
 
   return (
-    <div className={style.paginator}>
+    <div data-testid={'paginator'} className={style.paginator}>
       {portionNumber > 1 && (
         <button
           onClick={() => {

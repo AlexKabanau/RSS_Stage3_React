@@ -81,7 +81,7 @@ describe('Tests for the Item component', () => {
     const mockData = {
       data: mockFakeResponse,
     };
-    mockRouter.setCurrentUrl('/?page=1&limit=10');
+    mockRouter.setCurrentUrl('/?page=1');
 
     render(
       <ThemeContextProvider>
@@ -104,11 +104,40 @@ describe('Tests for the Item component', () => {
       })
     );
   });
-  it('Clicking on favorites.', async () => {
+  it('Add to favorites.', async () => {
     const mockData = {
       data: mockFakeResponse,
     };
-    mockRouter.setCurrentUrl('/?page=1&limit=10');
+    mockRouter.setCurrentUrl('/?page=1');
+
+    render(
+      <ThemeContextProvider>
+        <ToastProvider>
+          <Provider store={store}>
+            <RouterContext.Provider value={mockRouter}>
+              <HomePage cards={mockData} />
+            </RouterContext.Provider>
+          </Provider>
+        </ToastProvider>
+      </ThemeContextProvider>
+    );
+
+    const favorites = screen.getByTestId(
+      'favorite-checkbox-49ce06a5-f08b-4475-8e79-72a2b0733c5d'
+    ) as HTMLInputElement;
+    expect(favorites).toBeTruthy();
+    userEvent.click(favorites);
+
+    waitFor(() => {
+      expect(favorites.checked).toBe(true);
+      expect(store.getState().favorites.favorites.length).toBe(1);
+    });
+  });
+  it('Toggle favorites.', async () => {
+    const mockData = {
+      data: mockFakeResponse,
+    };
+    mockRouter.setCurrentUrl('/?page=1');
 
     render(
       <ThemeContextProvider>
@@ -127,14 +156,15 @@ describe('Tests for the Item component', () => {
     );
     expect(favorites).toBeTruthy();
     userEvent.click(favorites);
+    userEvent.click(favorites);
 
     waitFor(() => {
-      expect(store.getState().favorites.favorites.length).toBe(1);
+      expect(store.getState().favorites.favorites.length).toBe(0);
     });
   });
 
   it('Link component handles href correctly based on search query', () => {
-    mockRouter.setCurrentUrl('/?page=1&limit=10&search=ce');
+    mockRouter.setCurrentUrl('/?page=1&search=ce');
     mockRouter.query = { ...mockRouter.query };
     render(
       <RouterContext.Provider value={mockRouter}>
@@ -145,6 +175,6 @@ describe('Tests for the Item component', () => {
         />
       </RouterContext.Provider>
     );
-    expect(mockRouter.query).toEqual({ page: '1', limit: '10', search: 'ce' });
+    expect(mockRouter.query).toEqual({ page: '1', search: 'ce' });
   });
 });

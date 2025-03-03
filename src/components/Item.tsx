@@ -32,7 +32,7 @@ const Item: React.FC<ItemPropsType> = ({
         },
       };
   return (
-    <li className="item">
+    <li className="item" role="item">
       <Link role="link" href={href} data-testid={`link-${item.id}`}>
         <h3>{item.attributes.name}</h3>
       </Link>

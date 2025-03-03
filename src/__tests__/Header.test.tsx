@@ -20,7 +20,7 @@ vi.mock('next/router', async (importOriginal) => {
   };
 });
 
-test('Search Block with different value', async () => {
+test('Search input with different value', async () => {
   mockRouter.setCurrentUrl('/?page=1');
   render(
     <RouterContext.Provider value={mockRouter}>
@@ -49,4 +49,35 @@ test('Search Block with different value', async () => {
   fireEvent.change(searchInput, { target: { value: '' } });
   fireEvent.click(searchBtn);
   expect(mockRouter.query).toEqual({ page: '1' });
+});
+
+test('Press Enter on Search input with different value', async () => {
+  mockRouter.setCurrentUrl('/?page=1');
+  render(
+    <RouterContext.Provider value={mockRouter}>
+      <Header />
+    </RouterContext.Provider>
+  );
+
+  const searchInput = screen.getByTestId('searchInput');
+  // const searchBtn = screen.getByTestId('searchButton');
+  // const value = searchInput.getAttribute('value');
+  // const img = screen.getByAltText('magnifier-glass');
+
+  expect(searchInput).toBeInstanceOf(HTMLInputElement);
+  expect(searchInput).toBeInTheDocument();
+  // expect(img).toBeInTheDocument();
+  // expect(value).toBe('');
+  // expect(mockRouter.query).toEqual({ page: '1' });
+  fireEvent.change(searchInput, { target: { value: 'ce' } });
+  fireEvent.keyDown(searchInput, { key: 'Enter' });
+  // fireEvent.click(searchBtn);
+  // console.log(mockRouter.query);
+
+  waitFor(() => {
+    expect(mockRouter.query).toEqual({ page: '1', search: 'ce' });
+  });
+  // fireEvent.change(searchInput, { target: { value: '' } });
+  // fireEvent.click(searchBtn);
+  // expect(mockRouter.query).toEqual({ page: '1' });
 });
