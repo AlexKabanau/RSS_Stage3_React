@@ -36,7 +36,6 @@ describe('Tests for the CardList component', () => {
       data: mockFakeResponse,
     };
     mockRouter.setCurrentUrl('/?page=1');
-    // console.log('mockData', mockData.data);
 
     render(
       <ThemeContextProvider>

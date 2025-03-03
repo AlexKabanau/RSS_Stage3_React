@@ -25,7 +25,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
         searchParams: checkRouterElement(search, ''),
       })
     );
-    console.log('page', page, 'search', search);
     await Promise.all(store.dispatch(reduxApi.util.getRunningQueriesThunk()));
 
     return {

@@ -20,8 +20,6 @@ const ErrorButton = dynamic(() => import('@/components/ErrorButton'), {
 });
 
 export default function Layout({ data, children }: LayoutPropsType) {
-  console.log(data);
-  // const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { search } = router.query;

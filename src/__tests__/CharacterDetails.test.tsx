@@ -129,9 +129,7 @@ describe('Detailed card tests', () => {
       </ThemeContextProvider>
     );
 
-    // expect(screen.getAllByTestId('card').length).toBe(2);
     expect(screen.getAllByRole('item').length).toBe(20);
-    // console.log('query', mockRouter);
     expect(mockRouter.query).toEqual({
       id: '643ae975-0c29-49a7-a87e-d052b798962d',
       page: '1',

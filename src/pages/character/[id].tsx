@@ -37,7 +37,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const character = await store.dispatch(
       getCharacter.initiate({ id: checkRouterElement(id, '') })
     );
-    console.log('page', page, 'search', search);
     await Promise.all(store.dispatch(reduxApi.util.getRunningQueriesThunk()));
 
     return {

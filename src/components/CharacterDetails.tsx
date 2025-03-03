@@ -1,7 +1,13 @@
 import { GetCharacterType } from '@/api/getItems';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
   characterData,
@@ -9,27 +15,31 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
   const router = useRouter();
   const { page, search } = router.query;
   const data = characterData.data;
-  const href = search
-    ? {
-        pathname: '/',
-        query: {
-          page: page || '1',
-          search: search || '',
-        },
-      }
-    : {
-        pathname: '/',
-        query: {
-          page: page || '1',
-        },
-      };
+  const href = useMemo(
+    () =>
+      search
+        ? {
+            pathname: '/',
+            query: {
+              page: page || '1',
+              search: search || '',
+            },
+          }
+        : {
+            pathname: '/',
+            query: {
+              page: page || '1',
+            },
+          },
+    [page, search]
+  );
 
   const [isOpen, setIsOpen] = useState(true); // Состояние для управления видимостью
 
-  const closeDetails = () => {
+  const closeDetails = useCallback(() => {
     setIsOpen(false);
     router.push(href);
-  };
+  }, [router, href]);
 
   const detailsRef = useRef<HTMLDivElement>(null);
 

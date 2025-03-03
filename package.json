@@ -20,6 +20,8 @@
     "axios": "^1.7.9",
     "axios-mock-adapter": "^2.1.0",
     "classnames": "^2.5.1",
+    "eslint-plugin-tailwindcss": "^3.18.0",
+    "eslint-plugin-unicorn": "^57.0.0",
     "lucide": "^0.475.0",
     "lucide-react": "^0.475.0",
     "next": "^15.2.0",
@@ -34,6 +36,7 @@
     "vitest": "^3.0.5"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.13.0",
     "@next/eslint-plugin-next": "^15.2.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -45,6 +48,7 @@
     "@vitejs/plugin-react": "^4.3.3",
     "@vitest/coverage-v8": "^3.0.5",
     "eslint": "^9.21.0",
+    "eslint-config-next": "^15.2.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
@@ -59,6 +63,6 @@
     "redux-mock-store": "^1.5.5",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.25.0",
-"vite": "^5.4.10"
+    "vite": "^5.4.10"
   }
 }
