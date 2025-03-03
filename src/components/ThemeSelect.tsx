@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { THEMES } from '../constants/constants';
 import { ThemesType } from '../context/ThemeContext';
 import { useTheme } from '../hooks/useTheme';

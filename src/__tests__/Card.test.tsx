@@ -1,11 +1,18 @@
+import '@testing-library/jest-dom';
 import mockRouter from 'next-router-mock';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
-import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
-import { mockFakeCharacterResponse } from '../mock/mock';
+import { afterAll, beforeAll, describe, expect, vi } from 'vitest';
+import { mockFakeCharacterResponse, mockFakeResponse } from '../mock/mock';
 import Item from '../components/Item';
 import { NextRouter } from 'next/router';
+import HomePage from '@/pages';
+import { Provider } from 'react-redux';
+import { store } from '@/store/store';
+import ThemeContextProvider from '@/context/ThemeContext';
+import { ToastProvider } from '@/components/ToastContext';
+import userEvent from '@testing-library/user-event';
 
 describe('Tests for the Item component', () => {
   beforeAll(() => {
@@ -28,7 +35,7 @@ describe('Tests for the Item component', () => {
     vi.resetAllMocks();
   });
 
-  test('Item component renders the relevant item data', () => {
+  it('Item component renders the relevant item data', () => {
     mockRouter.setCurrentUrl('/?page=1');
 
     render(
@@ -48,53 +55,96 @@ describe('Tests for the Item component', () => {
       );
     });
 
-    expect(cardName).toBeTruthy();
-    expect(cardSpecies).toBeTruthy();
+    expect(cardName).toBeInTheDocument();
+    expect(cardSpecies).toBeInTheDocument();
   });
 
-  // test('Renders default image when image prop is not provided', () => {
-  //   mockRouter.setCurrentUrl('/?page=1&limit=10');
-  //   const propsWithoutImage = { ...propsToCard, image: undefined };
-  //   render(
-  //     <RouterContext.Provider value={mockRouter}>
-  //       <Card {...propsWithoutImage} />
-  //     </RouterContext.Provider>
-  //   );
-  //   const defaultImage: HTMLImageElement = screen.getByAltText('spells-image');
-  //   expect(defaultImage).toHaveAttribute('src');
-  //   expect(defaultImage.src).toMatch(/static-spell\.webp/);
-  // });
+  it('renders a link with the correct URL', () => {
+    mockRouter.setCurrentUrl('/?page=1');
 
-  // test('Clicking on a card opens a detailed card component && Clicking triggers an additional API call to fetch detailed information.', async () => {
-  //   const mockData = {
-  //     data: TransformSpellsRequest,
-  //   };
-  //   mockRouter.setCurrentUrl('/?page=1&limit=10');
+    render(
+      <Item
+        item={mockFakeCharacterResponse.data}
+        isFavorite={false}
+        onToggleFavorite={vi.fn()}
+      />
+    );
 
-  //   render(
-  //     <RouterContext.Provider value={mockRouter}>
-  //       <Home cards={mockData} />
-  //     </RouterContext.Provider>
-  //   );
+    const linkElement = screen.getByRole('link');
+    expect(linkElement).toHaveAttribute(
+      'href',
+      '/character/[id]?id=b832f9ed-fe71-46f5-a9e1-b947a49161e2&page=1'
+    );
+  });
 
-  //   const cards = screen.getAllByTestId('card');
-  //   expect(cards).toBeTruthy();
+  it('Clicking on a card opens a detailed card component && Clicking triggers an additional API call to fetch detailed information.', async () => {
+    const mockData = {
+      data: mockFakeResponse,
+    };
+    mockRouter.setCurrentUrl('/?page=1&limit=10');
 
-  //   expect(mockRouter.query).toEqual(
-  //     expect.not.objectContaining({
-  //       id: expect.anything(),
-  //     })
-  //   );
-  // });
+    render(
+      <ThemeContextProvider>
+        <ToastProvider>
+          <Provider store={store}>
+            <RouterContext.Provider value={mockRouter}>
+              <HomePage cards={mockData} />
+            </RouterContext.Provider>
+          </Provider>
+        </ToastProvider>
+      </ThemeContextProvider>
+    );
 
-  // test('Link component handles href correctly based on search query', () => {
-  //   mockRouter.setCurrentUrl('/?page=1&limit=10&search=ce');
-  //   mockRouter.query = { ...mockRouter.query };
-  //   render(
-  //     <RouterContext.Provider value={mockRouter}>
-  //       <Card {...propsToCard} />
-  //     </RouterContext.Provider>
-  //   );
-  //   expect(mockRouter.query).toEqual({ page: '1', limit: '10', search: 'ce' });
-  // });
+    const cards = screen.getAllByRole('link');
+    expect(cards).toBeTruthy();
+
+    expect(mockRouter.query).toEqual(
+      expect.not.objectContaining({
+        id: expect.anything(),
+      })
+    );
+  });
+  it('Clicking on favorites.', async () => {
+    const mockData = {
+      data: mockFakeResponse,
+    };
+    mockRouter.setCurrentUrl('/?page=1&limit=10');
+
+    render(
+      <ThemeContextProvider>
+        <ToastProvider>
+          <Provider store={store}>
+            <RouterContext.Provider value={mockRouter}>
+              <HomePage cards={mockData} />
+            </RouterContext.Provider>
+          </Provider>
+        </ToastProvider>
+      </ThemeContextProvider>
+    );
+
+    const favorites = screen.getByTestId(
+      'favorite-checkbox-49ce06a5-f08b-4475-8e79-72a2b0733c5d'
+    );
+    expect(favorites).toBeTruthy();
+    userEvent.click(favorites);
+
+    waitFor(() => {
+      expect(store.getState().favorites.favorites.length).toBe(1);
+    });
+  });
+
+  it('Link component handles href correctly based on search query', () => {
+    mockRouter.setCurrentUrl('/?page=1&limit=10&search=ce');
+    mockRouter.query = { ...mockRouter.query };
+    render(
+      <RouterContext.Provider value={mockRouter}>
+        <Item
+          item={mockFakeCharacterResponse.data}
+          isFavorite={false}
+          onToggleFavorite={vi.fn()}
+        />
+      </RouterContext.Provider>
+    );
+    expect(mockRouter.query).toEqual({ page: '1', limit: '10', search: 'ce' });
+  });
 });

@@ -21,7 +21,7 @@ export default class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-    console.error('Ошибка в ErrorBoundary:', error, errorInfo);
+    console.error('Error in ErrorBoundary:', error, errorInfo);
   }
 
   reset = () => {

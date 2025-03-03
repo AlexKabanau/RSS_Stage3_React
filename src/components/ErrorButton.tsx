@@ -6,6 +6,7 @@ const ErrorButton: React.FC = () => {
   const handleError = () => {
     console.log('error');
     setError(true);
+    // throw new Error('Error');
   };
 
   const resetError = () => {
@@ -20,7 +21,9 @@ const ErrorButton: React.FC = () => {
           <button onClick={resetError}>Reset</button>
         </div>
       ) : (
-        <button onClick={handleError}>ErrorButton</button>
+        <button data-testid="errorButton" onClick={handleError}>
+          ErrorButton
+        </button>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import style from './Paginator.module.css';
 import cn from 'classnames';
 import { useAppDispatch } from '@/store/store';

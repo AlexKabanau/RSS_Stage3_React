@@ -31,6 +31,7 @@ const Header: React.FC = () => {
       <h2>Harry Potter Characters</h2>
       <div className={styles.search_container}>
         <input
+          data-testid="searchInput"
           className={styles.searchInput}
           type="text"
           placeholder="Search"
@@ -41,7 +42,9 @@ const Header: React.FC = () => {
           }}
         />
       </div>
-      <button onClick={() => handleOnSubmit()}>Search</button>
+      <button data-testid="searchButton" onClick={() => handleOnSubmit()}>
+        Search
+      </button>
       <ThemeSelect />
     </header>
   );

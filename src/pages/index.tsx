@@ -1,4 +1,5 @@
 // import { getCharacters } from '@/api/getItems';
+import React from 'react';
 import { getCharacters, reduxApi } from '@/store/api/characterApi';
 import { wrapper } from '@/store/store';
 import Layout from './layout';

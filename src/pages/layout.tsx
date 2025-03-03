@@ -1,4 +1,6 @@
 // import { getCharacters } from '@/api/getItems';
+import React from 'react';
+
 import { ResponseInfoType } from '@/api/getItems';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';

@@ -1,4 +1,6 @@
 // import { Link } from 'react-router';
+import React from 'react';
+
 import Link from 'next/link';
 import gitHubLogo from '../../public/github_logo_black.svg';
 import RSSLogo from '../../public/rs_logo_black.svg';
