@@ -22,7 +22,6 @@ const Paginator: FC<PropsType> = ({
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  // const { search } = router.query;
   let { page } = router.query;
   page = checkRouterElement(page, '10');
   if (+page < 1) {

@@ -1,26 +1,15 @@
 import React from 'react';
 import mockRouter from 'next-router-mock';
-// import Details from '@/pages/details/[id]';
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  // within,
-} from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-// import { TransformSpellsRequest, transformCard } from './_fakeData';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
-// import CharacterDetails from '@/components/card-detail/CardDetail';
 import { NextRouter } from 'next/router';
-// import CartPage from '@/pages/CartPage';
 import { mockFakeCharacterResponse, mockFakeMoreResponse } from '@/mock/mock';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import CartPage from '@/pages/character/[id]';
-//CharacterDetails
 describe('Detailed card tests', () => {
   beforeEach(() => {
     vi.mock('next/router', async (importOriginal) => {
@@ -93,19 +82,9 @@ describe('Detailed card tests', () => {
       const closeBtn = screen.getByRole('closeButton');
 
       expect(cartPage).toBeInTheDocument();
-      // expect(mockRouter.query).toEqual(
-      //   expect.objectContaining({
-      //     id: expect.anything(),
-      //   })
-      // );
 
       fireEvent.click(closeBtn);
       expect(mockRouter.pathname).toBe('/');
-      // expect(mockRouter.query).toEqual(
-      //   expect.not.objectContaining({
-      //     id: expect.anything(),
-      //   })
-      // );
     });
   });
 
@@ -182,7 +161,7 @@ describe('Detailed card tests', () => {
     const cartPage = screen.getByTestId('cart-page');
     expect(cartPage).toBeInTheDocument();
 
-    fireEvent.mouseDown(document.body); // Кликаем вне компонента
+    fireEvent.mouseDown(document.body);
 
     await waitFor(() => {
       expect(cartPage).not.toBeInTheDocument();
@@ -232,11 +211,6 @@ describe('Detailed card tests', () => {
         `Eyes color: ${mockFakeCharacterResponse.data.attributes.eye_color}`
       )
     ).toBeInTheDocument();
-    // expect(
-    //   screen.getByText(
-    //     `Skin color: ${mockFakeCharacterResponse.data.attributes.skin_color}`
-    //   )
-    // ).toBeInTheDocument();
 
     if (mockFakeCharacterResponse.data.attributes.wiki) {
       expect(screen.getByRole('link', { name: /wiki/i })).toHaveAttribute(

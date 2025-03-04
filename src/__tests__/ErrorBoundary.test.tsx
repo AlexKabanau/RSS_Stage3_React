@@ -5,7 +5,7 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import ErrorButton from '@/components/ErrorButton';
 
 test('Make sure the errorButton is working', () => {
-  const spyError = vi.spyOn(console, 'error').mockImplementation(() => {}); // Отключаем лишние логи
+  const spyError = vi.spyOn(console, 'error').mockImplementation(() => {});
 
   render(
     <ErrorBoundary>
@@ -21,7 +21,7 @@ test('Make sure the errorButton is working', () => {
   ).toBeInTheDocument();
   expect(screen.getByText('Reset')).toBeInTheDocument();
 
-  spyError.mockRestore(); // Восстанавливаем консоль
+  spyError.mockRestore();
 });
 test('getDerivedStateFromError sets correct state', () => {
   const errorState = ErrorBoundary.getDerivedStateFromError();

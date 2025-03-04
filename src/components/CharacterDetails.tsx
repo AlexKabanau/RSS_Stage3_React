@@ -34,7 +34,7 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     [page, search]
   );
 
-  const [isOpen, setIsOpen] = useState(true); // Состояние для управления видимостью
+  const [isOpen, setIsOpen] = useState(true);
 
   const closeDetails = useCallback(() => {
     setIsOpen(false);
@@ -59,20 +59,15 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     };
   }, [closeDetails]);
 
-  if (!isOpen) return null; // Не рендерим компонент, если он закрыт
+  if (!isOpen) return null;
   return (
-    <div
-      className="cart"
-      data-testid="cart-page"
-      ref={detailsRef} // Привязываем ref к контейнеру
-    >
+    <div className="cart" data-testid="cart-page" ref={detailsRef}>
       <div className="container">
         <button role="button">
           <Link href={href} role="closeButton">
             Close
           </Link>
         </button>
-        {/* {JSON.stringify(data)} */}
         <h3 data-testid="character-name">{data.attributes.name}</h3>
         <div>
           {data.attributes.image && (

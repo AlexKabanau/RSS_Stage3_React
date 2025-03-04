@@ -9,7 +9,6 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-// import HomePage from '@/pages';
 import ListItems from '@/components/ListItems';
 import { setFavorites } from '@/store/reducers/favorites';
 import HomePage from '@/components/HomePage';
@@ -95,7 +94,6 @@ describe('Tests for the CardList component', () => {
     );
     expect(favorites).toBeTruthy();
     fireEvent.click(favorites);
-    // userEvent.click(favorites);
 
     waitFor(() => {
       expect(store.getState().favorites.favorites).toContainEqual(item);

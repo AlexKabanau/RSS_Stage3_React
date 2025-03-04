@@ -9,7 +9,6 @@ const Header: React.FC = () => {
   let { search } = router.query;
   search = checkRouterElement(search, '');
   const [inputValue, setInputValue] = useState(search);
-  // const dispatch = useAppDispatch();
 
   const handleOnSubmit = () => {
     localStorage.setItem('inputValue', inputValue);

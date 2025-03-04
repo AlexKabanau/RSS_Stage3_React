@@ -21,10 +21,9 @@ describe('Tests for the Item component', () => {
       return {
         ...actual,
         useRouter: () => ({
-          query: { page: '1' }, // Mock query parameters if necessary
+          query: { page: '1' },
           push: vi.fn(),
           replace: vi.fn(),
-          // добавьте другие методы, если необходимо
         }),
       };
     });

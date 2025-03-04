@@ -1,4 +1,3 @@
-// import { getCharacters } from '@/api/getItems';
 import React from 'react';
 
 import { ResponseInfoType } from '@/api/getItems';
