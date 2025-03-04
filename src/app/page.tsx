@@ -2,7 +2,7 @@
 import React from 'react';
 import { getCharacters, reduxApi } from '@/store/api/characterApi';
 import { wrapper } from '@/store/store';
-import Layout from './layout';
+import Layout from '../pages/layout';
 import { ResponseInfoType } from '@/api/getItems';
 import { checkRouterElement } from '@/utils/checkRouterElement';
 

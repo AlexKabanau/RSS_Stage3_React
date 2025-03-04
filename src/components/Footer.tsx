@@ -14,11 +14,7 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          <img
-            className="creator__link"
-            src={gitHubLogo.src}
-            alt="github logo"
-          />
+          <img className="creator__link" src={gitHubLogo} alt="github logo" />
           <span>AlexKabanau</span>
         </Link>
       </div>
@@ -29,11 +25,7 @@ export default function Footer() {
           rel="noreferrer"
           data-testid="rsschool-link"
         >
-          <img
-            className="rsschool__link"
-            src={RSSLogo.src}
-            alt="RSSchool logo"
-          />
+          <img className="rsschool__link" src={RSSLogo} alt="RSSchool logo" />
         </Link>
       </div>
     </footer>

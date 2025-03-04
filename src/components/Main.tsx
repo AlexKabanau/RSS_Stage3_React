@@ -50,7 +50,7 @@ const Main: React.FC<MainPropsType> = ({
       {isLoading && (
         <div>
           <p>Loading...</p>
-          <img src={reactLogo.src} className="logo" alt="loading" />
+          <img src={reactLogo} className="logo" alt="loading" />
         </div>
       )}
       {!isLoading && (!items || items.length < 1) && (
