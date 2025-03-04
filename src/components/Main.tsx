@@ -24,71 +24,72 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
-  const { addToast } = useToast();
+  // const { addToast } = useToast();
 
   const favorites = useAppSelector((state) => state.favorites.favorites);
 
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+  // const dispatch = useAppDispatch();
+  // const router = useRouter();
 
-  const { page } = router.query;
-  const isLoading = useAppSelector(
-    (state) => state.isLoading.isMainPageCharactersLoading
-  );
-  const downloadCSV = useDownloadCSV();
+  // const { page } = router.query;
+  // const isLoading = useAppSelector(
+  //   (state) => state.isLoading.isMainPageCharactersLoading
+  // );
+  // const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
-    dispatch(clearFavorits());
-    addToast('Successfully deleted all characters!');
+    // dispatch(clearFavorits());
+    // addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    downloadCSV();
+    // downloadCSV();
   };
 
   return (
     <main className={className}>
-      {isLoading && (
+      {/* {isLoading && (
         <div>
           <p>Loading...</p>
           <img src={reactLogo} className="logo" alt="loading" />
         </div>
-      )}
-      {!isLoading && (!items || items.length < 1) && (
+      )} */}
+      {/* {!isLoading && (!items || items.length < 1) && (
         <h2>Characters not found</h2>
-      )}
-      {!isLoading && items && (
-        <>
-          {favorites.length > 0 && (
-            <>
-              <p className="favorits">
-                Favorites: {favorites.length}
-                <button
-                  className="favoritButton"
-                  data-testid="TrashIcon"
-                  aria-label="Trash"
-                  onClick={onDeleteIconClick}
-                >
-                  <Trash2 size={12} />
-                </button>
-                <button
-                  className={'favoritButton'}
-                  onClick={onDownloadIconClick}
-                  aria-label="Download"
-                >
-                  <ArrowDownToLine size={12} />
-                </button>
-              </p>
-            </>
-          )}
-          <Paginator
+      )} */}
+      {/* {!isLoading && items && ( */}
+      <>
+        {favorites.length > 0 && (
+          <>
+            <p className="favorits">
+              Favorites: {favorites.length}
+              <button
+                className="favoritButton"
+                data-testid="TrashIcon"
+                aria-label="Trash"
+                onClick={onDeleteIconClick}
+              >
+                <Trash2 size={12} />
+              </button>
+              <button
+                className={'favoritButton'}
+                onClick={onDownloadIconClick}
+                aria-label="Download"
+              >
+                <ArrowDownToLine size={12} />
+              </button>
+            </p>
+          </>
+        )}
+        {/* <Paginator
             currentPage={Number(page)}
             totalItemsCount={count}
             pageSize={RESOURCES_PER_PAGE}
             onPageChanged={onPageChanged}
-          />
-          <ListItems items={items} />
-        </>
-      )}
+          /> */}
+        <ListItems items={items} />
+      </>
+      {/* ) */}
+      {/* } */}
     </main>
   );
 };

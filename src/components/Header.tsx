@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
-import { useRouter } from 'next/router';
-import { checkRouterElement } from '@/utils/checkRouterElement';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+// import { checkRouterElement } from '@/utils/checkRouterElement';
 
 const Header: React.FC = () => {
   const router = useRouter();
-  let { search } = router.query;
-  search = checkRouterElement(search, '');
-  const [inputValue, setInputValue] = useState(search);
-  // const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams ? searchParams.get('search') || '' : ''; // Проверка на null
+  const [inputValue, setInputValue] = useState(initialSearch);
 
   const handleOnSubmit = () => {
     localStorage.setItem('inputValue', inputValue);
-    if (router.pathname === '/') {
-      if (inputValue) {
-        router.push({
-          query: { page: '1', search: inputValue },
-        });
-      } else {
-        router.push({
-          query: { page: '1' },
-        });
-      }
+    const params = new URLSearchParams();
+
+    params.set('page', '1');
+    if (inputValue) {
+      params.set('search', inputValue);
     }
+
+    router.push(`?${params.toString()}`); // Переход с новыми параметрами
   };
+
+  useEffect(() => {
+    if (searchParams) {
+      setInputValue(searchParams.get('search') || ''); // Обновляем inputValue, если параметр search изменился
+    }
+  }, [searchParams]);
 
   return (
     <header className={styles.header_bordered}>
@@ -42,7 +47,7 @@ const Header: React.FC = () => {
           }}
         />
       </div>
-      <button data-testid="searchButton" onClick={() => handleOnSubmit()}>
+      <button data-testid="searchButton" onClick={handleOnSubmit}>
         Search
       </button>
       <ThemeSelect />

@@ -28,16 +28,30 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@components/": ["components/"],
-      "@pages/": ["pages/"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "@components/": [
+        "components/"
+      ],
+      "@pages/": [
+        "pages/"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "next.config.js"  ],
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

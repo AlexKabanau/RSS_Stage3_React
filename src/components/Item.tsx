@@ -13,27 +13,27 @@ const Item: React.FC<ItemPropsType> = ({
   isFavorite,
   onToggleFavorite,
 }) => {
-  const router = useRouter();
-  const { page, search } = router.query;
-  const href = search
-    ? {
-        pathname: '/character/[id]',
-        query: {
-          id: item.id,
-          page: page || '1',
-          search: search || '',
-        },
-      }
-    : {
-        pathname: '/character/[id]',
-        query: {
-          id: item.id,
-          page: page || '1',
-        },
-      };
+  // const router = useRouter();
+  // const { page, search } = router.query;
+  // const href = search
+  //   ? {
+  //       pathname: '/character/[id]',
+  //       query: {
+  //         id: item.id,
+  //         page: page || '1',
+  //         search: search || '',
+  //       },
+  //     }
+  //   : {
+  //       pathname: '/character/[id]',
+  //       query: {
+  //         id: item.id,
+  //         page: page || '1',
+  //       },
+  //     };
   return (
     <li className="item" role="item">
-      <Link role="link" href={href} data-testid={`link-${item.id}`}>
+      <Link role="link" href={'href'} data-testid={`link-${item.id}`}>
         <h3>{item.attributes.name}</h3>
       </Link>
       <label>

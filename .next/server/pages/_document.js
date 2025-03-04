@@ -1,4 +1,3 @@
-"use strict";
 /*
  * ATTENTION: An "eval-source-map" devtool has been used.
  * This devtool is neither made for production nor for readable output files.
@@ -17,59 +16,9 @@ exports.modules = {
 /*!*********************************!*\
   !*** ./src/pages/_document.tsx ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Document)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/document */ \"(pages-dir-node)/./node_modules/next/document.js\");\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_document__WEBPACK_IMPORTED_MODULE_1__);\n\n\nfunction Document() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Html, {\n        lang: \"en\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {}, void 0, false, {\n                fileName: \"D:\\\\GitHub\\\\RSS_Stage3_React\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 6,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Main, {}, void 0, false, {\n                        fileName: \"D:\\\\GitHub\\\\RSS_Stage3_React\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 8,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.NextScript, {}, void 0, false, {\n                        fileName: \"D:\\\\GitHub\\\\RSS_Stage3_React\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 9,\n                        columnNumber: 9\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"D:\\\\GitHub\\\\RSS_Stage3_React\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 7,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"D:\\\\GitHub\\\\RSS_Stage3_React\\\\src\\\\pages\\\\_document.tsx\",\n        lineNumber: 5,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHBhZ2VzLWRpci1ub2RlKS8uL3NyYy9wYWdlcy9fZG9jdW1lbnQudHN4IiwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUE2RDtBQUU5QyxTQUFTSTtJQUN0QixxQkFDRSw4REFBQ0osK0NBQUlBO1FBQUNLLE1BQUs7OzBCQUNULDhEQUFDSiwrQ0FBSUE7Ozs7OzBCQUNMLDhEQUFDSzs7a0NBQ0MsOERBQUNKLCtDQUFJQTs7Ozs7a0NBQ0wsOERBQUNDLHFEQUFVQTs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFJbkIiLCJzb3VyY2VzIjpbIkQ6XFxHaXRIdWJcXFJTU19TdGFnZTNfUmVhY3RcXHNyY1xccGFnZXNcXF9kb2N1bWVudC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSHRtbCwgSGVhZCwgTWFpbiwgTmV4dFNjcmlwdCB9IGZyb20gJ25leHQvZG9jdW1lbnQnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEb2N1bWVudCgpIHtcbiAgcmV0dXJuIChcbiAgICA8SHRtbCBsYW5nPVwiZW5cIj5cbiAgICAgIDxIZWFkIC8+XG4gICAgICA8Ym9keT5cbiAgICAgICAgPE1haW4gLz5cbiAgICAgICAgPE5leHRTY3JpcHQgLz5cbiAgICAgIDwvYm9keT5cbiAgICA8L0h0bWw+XG4gICk7XG59XG4iXSwibmFtZXMiOlsiSHRtbCIsIkhlYWQiLCJNYWluIiwiTmV4dFNjcmlwdCIsIkRvY3VtZW50IiwibGFuZyIsImJvZHkiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(pages-dir-node)/./src/pages/_document.tsx\n");
-
-/***/ }),
-
-/***/ "next/dist/compiled/next-server/pages.runtime.dev.js":
-/*!**********************************************************************!*\
-  !*** external "next/dist/compiled/next-server/pages.runtime.dev.js" ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/next-server/pages.runtime.dev.js");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");
-
-/***/ }),
-
-/***/ "react":
-/*!************************!*\
-  !*** external "react" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = require("react");
-
-/***/ }),
-
-/***/ "react/jsx-dev-runtime":
-/*!****************************************!*\
-  !*** external "react/jsx-dev-runtime" ***!
-  \****************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-dev-runtime");
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!************************************!*\
-  !*** external "react/jsx-runtime" ***!
-  \************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-runtime");
+eval("// import { Html, Head, Main, NextScript } from 'next/document';\n// export default function Document() {\n//   return (\n//     <Html lang=\"en\">\n//       <Head />\n//       <body>\n//         <Main />\n//         <NextScript />\n//       </body>\n//     </Html>\n//   );\n// }\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkQ6XFxHaXRIdWJcXFJTU19TdGFnZTNfUmVhY3RcXHNyY1xccGFnZXNcXF9kb2N1bWVudC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiLy8gaW1wb3J0IHsgSHRtbCwgSGVhZCwgTWFpbiwgTmV4dFNjcmlwdCB9IGZyb20gJ25leHQvZG9jdW1lbnQnO1xuXG4vLyBleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEb2N1bWVudCgpIHtcbi8vICAgcmV0dXJuIChcbi8vICAgICA8SHRtbCBsYW5nPVwiZW5cIj5cbi8vICAgICAgIDxIZWFkIC8+XG4vLyAgICAgICA8Ym9keT5cbi8vICAgICAgICAgPE1haW4gLz5cbi8vICAgICAgICAgPE5leHRTY3JpcHQgLz5cbi8vICAgICAgIDwvYm9keT5cbi8vICAgICA8L0h0bWw+XG4vLyAgICk7XG4vLyB9XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0VBQWdFO0FBRWhFLHVDQUF1QztBQUN2QyxhQUFhO0FBQ2IsdUJBQXVCO0FBQ3ZCLGlCQUFpQjtBQUNqQixlQUFlO0FBQ2YsbUJBQW1CO0FBQ25CLHlCQUF5QjtBQUN6QixnQkFBZ0I7QUFDaEIsY0FBYztBQUNkLE9BQU87QUFDUCxJQUFJIiwiZmlsZSI6IihwYWdlcy1kaXItbm9kZSkvLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeCIsInNvdXJjZVJvb3QiOiIiLCJpZ25vcmVMaXN0IjpbXX0=\n//# sourceURL=webpack-internal:///(pages-dir-node)/./src/pages/_document.tsx\n");
 
 /***/ })
 
@@ -80,7 +29,7 @@ module.exports = require("react/jsx-runtime");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc"], () => (__webpack_exec__("(pages-dir-node)/./src/pages/_document.tsx")));
+var __webpack_exports__ = (__webpack_exec__("(pages-dir-node)/./src/pages/_document.tsx"));
 module.exports = __webpack_exports__;
 
 })();
