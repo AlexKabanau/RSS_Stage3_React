@@ -9,9 +9,10 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import HomePage from '@/pages';
+// import HomePage from '@/pages';
 import ListItems from '@/components/ListItems';
 import { setFavorites } from '@/store/reducers/favorites';
+import HomePage from '@/components/HomePage';
 
 describe('Tests for the CardList component', () => {
   beforeAll(() => {
@@ -42,7 +43,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>
@@ -82,7 +83,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>
@@ -115,7 +116,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>

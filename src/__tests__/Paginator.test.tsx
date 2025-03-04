@@ -9,9 +9,10 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import HomePage from '../pages/index';
+// import HomePage from '../pages/index';
 import { mockFakeMoreResponse } from '@/mock/mock';
 import { NextRouter } from 'next/router';
+import HomePage from '@/components/HomePage';
 
 const mockData = {
   data: mockFakeMoreResponse,
@@ -35,7 +36,7 @@ test('Make sure the component updates URL query parameter when page changes', as
       <ToastProvider>
         <Provider store={store}>
           <RouterContext.Provider value={mockRouter}>
-            <HomePage cards={mockData} />
+            <HomePage cards={mockData.data} />
           </RouterContext.Provider>
         </Provider>
       </ToastProvider>

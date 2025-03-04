@@ -1,9 +1,7 @@
 import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
 import { RESOURCES_PER_PAGE, URL } from '@/constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { HYDRATE } from 'next-redux-wrapper';
-// import { GetCharacterType, ResponseInfoType } from '../../api/getItems';
-// import { RESOURCES_PER_PAGE, URL } from '../../constants/constants';
+// import { HYDRATE } from 'next-redux-wrapper';
 
 export type CharacterResponseType = {
   response: GetCharacterType;
@@ -12,11 +10,11 @@ export type CharacterResponseType = {
 export const reduxApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: URL.baseUrl }),
-  extractRehydrationInfo(action, { reducerPath }) {
-    if (action.type === HYDRATE) {
-      return action.payload[reducerPath];
-    }
-  },
+  // extractRehydrationInfo(action, { reducerPath }) {
+  //   if (action.type === HYDRATE) {
+  //     return action.payload[reducerPath];
+  //   }
+  // },
   endpoints: (builder) => ({
     getCharacter: builder.query<GetCharacterType, { id: string }>({
       query: ({ id }) => `${URL.props}/${id}`,

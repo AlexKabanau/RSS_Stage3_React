@@ -17,6 +17,10 @@ export default function CartPage({
   charactersData: ResponseInfoType;
   characterData: GetCharacterType;
 }) {
+  if (!charactersData || !characterData) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Layout data={charactersData}>
       <CharacterDetails characterData={characterData} />
@@ -47,3 +51,5 @@ export const getServerSideProps = wrapper.getServerSideProps(
     };
   }
 );
+
+/*   */

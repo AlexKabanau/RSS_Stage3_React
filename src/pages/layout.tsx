@@ -34,6 +34,10 @@ export default function Layout({ data, children }: LayoutPropsType) {
     });
   };
 
+  if (!data || !data.data || !data.meta) {
+    return <p>Ошибка загрузки данных Layout</p>;
+  }
+
   return (
     <>
       <Head>
