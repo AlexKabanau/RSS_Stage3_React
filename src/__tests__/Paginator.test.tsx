@@ -9,25 +9,26 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import HomePage from '../pages/index';
+// import HomePage from '../pages/index';
 import { mockFakeMoreResponse } from '@/mock/mock';
 import { NextRouter } from 'next/router';
+import HomePageContainer from '@/app/page';
+import HomePage from '@/app/components/HomePage';
 
 const mockData = {
   data: mockFakeMoreResponse,
 };
-vi.mock('next/router', async (importOriginal) => {
-  const actual: NextRouter = (await importOriginal()) as NextRouter;
-  return {
-    ...actual,
-    useRouter: () => ({
-      query: { page: '1' }, // Mock query parameters if necessary
-      push: vi.fn(),
-      replace: vi.fn(),
-      // добавьте другие методы, если необходимо
-    }),
-  };
-});
+const pushMock = vi.fn();
+const searchParamValue = '1';
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: pushMock,
+  }),
+  useSearchParams: () => ({
+    get: (key: string) => (key === 'search' ? searchParamValue : '1'),
+  }),
+}));
 test('Make sure the component updates URL query parameter when page changes', async () => {
   mockRouter.setCurrentUrl('/?page=1');
   render(
@@ -35,7 +36,7 @@ test('Make sure the component updates URL query parameter when page changes', as
       <ToastProvider>
         <Provider store={store}>
           <RouterContext.Provider value={mockRouter}>
-            <HomePage cards={mockData} />
+            <HomePage cards={mockData.data} />
           </RouterContext.Provider>
         </Provider>
       </ToastProvider>

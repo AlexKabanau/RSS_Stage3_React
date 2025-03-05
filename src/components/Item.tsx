@@ -1,7 +1,7 @@
 import React from 'react';
 import { ResponseType } from '../api/getItems';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 type ItemPropsType = {
   item: ResponseType;
@@ -13,27 +13,38 @@ const Item: React.FC<ItemPropsType> = ({
   isFavorite,
   onToggleFavorite,
 }) => {
-  // const router = useRouter();
-  // const { page, search } = router.query;
-  // const href = search
-  //   ? {
-  //       pathname: '/character/[id]',
-  //       query: {
-  //         id: item.id,
-  //         page: page || '1',
-  //         search: search || '',
-  //       },
-  //     }
-  //   : {
-  //       pathname: '/character/[id]',
-  //       query: {
-  //         id: item.id,
-  //         page: page || '1',
-  //       },
-  //     };
+  const searchParams = useSearchParams();
+  const page = searchParams?.get('page');
+  const search = searchParams?.get('search');
+  // // const { page, search } = router.query;
+  const href = search
+    ? `/character/${item.id}?page=${page || 1}&search=${search || ''}`
+    : `/character/${item.id}?page=${page || 1}`;
+
+  // http://localhost:3000/character/dde712de-4fce-487f-a365-e15bf01d31ce?page=5&search=
+  // {
+  //     pathname: '/character/[id]',
+  //     query: {
+  //       id: item.id,
+  //       page: page || '1',
+  //       search: search || '',
+  //     },
+  //   }
+  // : {
+  //     pathname: '/character/[id]',
+  //     query: {
+  //       id: item.id,
+  //       page: page || '1',
+  //     },
+  //   };
   return (
     <li className="item" role="item">
-      <Link role="link" href={'href'} data-testid={`link-${item.id}`}>
+      <Link
+        role="link"
+        // href={`/character/${item.id}`}
+        href={href}
+        data-testid={`link-${item.id}`}
+      >
         <h3>{item.attributes.name}</h3>
       </Link>
       <label>

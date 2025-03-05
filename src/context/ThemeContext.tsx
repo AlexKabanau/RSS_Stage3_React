@@ -14,31 +14,41 @@ export type ThemesType = (typeof THEMES)[number];
 
 const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemesType>(DEFAULT_THEME);
-  const [isMounted, setIsMounted] = useState(false);
+  // const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Флаг для предотвращения SSR-ошибок
-
     try {
       const savedTheme = localStorage.getItem(LOCALSTORAGE_THEME) as ThemesType;
-      if (savedTheme) setTheme(savedTheme);
+      console.log('Загруженная тема из localStorage:', savedTheme); // 🔍 Проверяем, что хранится в localStorage
+      if (savedTheme && THEMES.includes(savedTheme)) {
+        setTheme(savedTheme);
+      }
     } catch (error) {
-      console.warn(`Can't read localStorage`, error);
+      console.warn('Ошибка чтения localStorage', error);
     }
   }, []);
 
   const changeTheme = (selectedTheme: ThemesType) => {
+    console.log('changeTheme вызван с темой:', selectedTheme); // 🔍 Проверяем вызов функции
     try {
       localStorage.setItem(LOCALSTORAGE_THEME, selectedTheme);
+      console.log(
+        'localStorage обновлён:',
+        localStorage.getItem(LOCALSTORAGE_THEME)
+      ); // 🔍 Проверяем запись в localStorage
+      setTheme(selectedTheme);
     } catch (error) {
-      console.warn("Can't access localStorage", error);
+      console.warn('Ошибка доступа к localStorage', error);
     }
-    setTheme(selectedTheme);
   };
+
+  useEffect(() => {
+    console.log('🔥 Текущая тема в useEffect:', theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, changeTheme }}>
-      <div className={cn(theme)}>{isMounted ? children : null}</div>
+      <div className={cn(theme)}>{children}</div>
     </ThemeContext.Provider>
   );
 };

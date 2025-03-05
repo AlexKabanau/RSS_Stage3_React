@@ -1,47 +1,58 @@
 import { GetCharacterType } from '@/api/getItems';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+// import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, {
   useCallback,
   useEffect,
-  useMemo,
+  // useMemo,
   useRef,
-  useState,
+  // useState,
 } from 'react';
 
 const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
   characterData,
 }) => {
-  const router = useRouter();
-  const { page, search } = router.query;
+  // const router = useRouter();
+  // const { page, search } = router.query;
   const data = characterData.data;
-  const href = useMemo(
-    () =>
-      search
-        ? {
-            pathname: '/',
-            query: {
-              page: page || '1',
-              search: search || '',
-            },
-          }
-        : {
-            pathname: '/',
-            query: {
-              page: page || '1',
-            },
-          },
-    [page, search]
-  );
+  // const href = useMemo(
+  //   () =>
+  //     search
+  //       ? {
+  //           pathname: '/',
+  //           query: {
+  //             page: page || '1',
+  //             search: search || '',
+  //           },
+  //         }
+  //       : {
+  //           pathname: '/',
+  //           query: {
+  //             page: page || '1',
+  //           },
+  //         },
+  //   [page, search]
+  // );
 
-  const [isOpen, setIsOpen] = useState(true); // Состояние для управления видимостью
+  // const [isOpen, setIsOpen] = useState(true); // Состояние для управления видимостью
 
-  const closeDetails = useCallback(() => {
-    setIsOpen(false);
-    router.push(href);
-  }, [router, href]);
+  // const closeDetails = useCallback(() => {
+  //   setIsOpen(false);
+  //   // router.push(href);
+  // }, [router, href]);
+  const searchParams = useSearchParams();
+  const page = searchParams?.get('page');
+  const search = searchParams?.get('search');
+  const href = search
+    ? `/?page=${page || 1}&search=${search || ''}`
+    : `/?page=${page || 1}`;
+  const router = useRouter();
 
   const detailsRef = useRef<HTMLDivElement>(null);
+  const handleClose = useCallback(() => {
+    // Удаление ID из строки запроса
+    router.push(href); // Измените путь на нужный, если необходимо
+  }, [router, href]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,7 +60,8 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
         detailsRef.current &&
         !detailsRef.current.contains(event.target as Node)
       ) {
-        closeDetails();
+        console.log('Should close details');
+        handleClose();
       }
     };
 
@@ -57,9 +69,10 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [closeDetails]);
+  }, [handleClose]);
 
-  if (!isOpen) return null; // Не рендерим компонент, если он закрыт
+  // if (!isOpen) return null; // Не рендерим компонент, если он закрыт
+
   return (
     <div
       className="cart"
@@ -67,10 +80,10 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
       ref={detailsRef} // Привязываем ref к контейнеру
     >
       <div className="container">
-        <button role="button">
-          <Link href={href} role="closeButton">
-            Close
-          </Link>
+        <button role="closeButton" onClick={handleClose}>
+          {/* <Link href={href} role="closeButton"> */}
+          Close
+          {/* </Link> */}
         </button>
         {/* {JSON.stringify(data)} */}
         <h3 data-testid="character-name">{data.attributes.name}</h3>

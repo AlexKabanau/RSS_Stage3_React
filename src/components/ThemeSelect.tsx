@@ -9,10 +9,10 @@ const ThemeSelect = () => {
 
   return (
     <select
-      defaultValue={theme}
+      value={theme}
       onChange={(e) => {
-        const selectedTheme = e.target.value as ThemesType;
-        changeTheme(selectedTheme);
+        console.log('Выбрана тема:', e.target.value); // 🔍 Проверяем, передается ли значение
+        changeTheme(e.target.value as ThemesType);
       }}
     >
       {THEMES.map((option, key) => (

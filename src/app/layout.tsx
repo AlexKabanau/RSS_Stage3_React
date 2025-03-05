@@ -36,7 +36,8 @@ import '@/styles/index.css';
 // import { Providers } from '@/store/Providers';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { Providers } from '@/store/Providers';
+import Providers from './providers';
+// import { Providers } from '@/store/Providers';
 
 export const metadata: Metadata = {
   title: 'Harry Potter Characters',

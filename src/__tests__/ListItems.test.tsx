@@ -9,21 +9,24 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import HomePage from '@/pages';
+// import HomePage from '@/pages';
 import ListItems from '@/components/ListItems';
 import { setFavorites } from '@/store/reducers/favorites';
+import HomePage from '@/app/components/HomePage';
+
+const pushMock = vi.fn();
+const searchParamValue = '1';
 
 describe('Tests for the CardList component', () => {
   beforeAll(() => {
-    vi.mock('next/router', async (importOriginal) => {
-      const actual: NextRouter = (await importOriginal()) as NextRouter;
-      return {
-        ...actual,
-        useRouter: () => ({
-          query: { page: '1' },
-        }),
-      };
-    });
+    vi.mock('next/navigation', () => ({
+      useRouter: () => ({
+        push: pushMock,
+      }),
+      useSearchParams: () => ({
+        get: (key: string) => (key === 'search' ? searchParamValue : '1'),
+      }),
+    }));
   });
 
   afterAll(() => {
@@ -42,7 +45,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>
@@ -82,7 +85,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>
@@ -115,7 +118,7 @@ describe('Tests for the CardList component', () => {
         <ToastProvider>
           <Provider store={store}>
             <RouterContext.Provider value={mockRouter}>
-              <HomePage cards={mockData} />
+              <HomePage cards={mockData.data} />
             </RouterContext.Provider>
           </Provider>
         </ToastProvider>

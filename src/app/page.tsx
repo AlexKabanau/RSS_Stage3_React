@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-  getCharacters, // getCharacters,
-  // reduxApi,
-  // useGetCharactersQuery,
-} from '@/store/api/characterApi';
-// import { wrapper } from '@/store/store';
+import { getCharacters } from '@/store/api/characterApi';
 import { checkRouterElement } from '@/utils/checkRouterElement';
-// import HomePage from '@/components/HomePage';
-// import reactLogo from '../../public/react.svg';
-import { ResponseInfoType } from '@/api/getItems';
 import HomePage from '@/app/components/HomePage';
 import { store } from '@/store/store';
 
@@ -16,51 +8,41 @@ type Props = {
   searchParams: { page?: string; search?: string };
 };
 
-// async function getData(
-//   page: string,
-//   search: string
-// ): Promise<ResponseInfoType | null> {
-//   try {
-//     const response = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/characters?page=${checkRouterElement(page, '1')}&search=${checkRouterElement(search, '')}`
-//     );
-
-//     if (!response.ok) throw new Error('Ошибка загрузки данных');
-
-//     return response.json();
-//   } catch (error) {
-//     console.error('Ошибка при загрузке:', error);
-//     return null;
-//   }
-// }
-
 export default async function HomePageContainer({ searchParams }: Props) {
-  const { page = '1', search = '' } = searchParams;
-  const initialCards = await store.dispatch(
+  const { page = '1', search = '' } = await searchParams;
+  // if (!searchParams.page) {
+  //   searchParams.page.
+  // }
+  // const page = searchParams.page || '1';
+  // const search = searchParams.search || '';
+
+  // Запрашиваем данные
+  const initialCardsPromise = store.dispatch(
     getCharacters.initiate({
       page: checkRouterElement(page, '1'),
       searchParams: checkRouterElement(search, ''),
     })
   );
+  // const character = await store.dispatch(
+  //   getCharacter.initiate({ id: checkRouterElement(id, '') })
+  // );
 
-  if (!initialCards) {
+  // Пока данные загружаются, показываем "Loading..."
+  const initialCards = await initialCardsPromise;
+
+  // console.log(initialCards);
+
+  if (initialCards.isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (initialCards.isError) {
     return <p>Ошибка загрузки данных.</p>;
   }
 
-  // if (isLoading || !cards) {
-  //   return (
-  //     <div>
-  //       <p>Loading...</p>
-  //       <img src={reactLogo.src} className="logo" alt="loading" />
-  //     </div>
-  //   );
-  // }
+  if (initialCards.data) {
+    return <HomePage cards={initialCards.data} />;
+  }
 
-  // if (error) {
-  //   console.error('Error loading data:', error);
-  //   return <p>Ошибка загрузки данных.</p>;
-  // }
-
-  return <HomePage cards={initialCards.data} />;
-  // return <>{JSON.stringify(initialCards.data)}</>;
+  return null;
 }

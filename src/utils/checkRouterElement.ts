@@ -1,5 +1,5 @@
 export function checkRouterElement(
-  element: string | string[] | null,
+  element: string | string[] | null | undefined,
   defaulElement: string
 ) {
   return Array.isArray(element)

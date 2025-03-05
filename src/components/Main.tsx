@@ -2,18 +2,21 @@ import React from 'react';
 import { ResponseType } from '../api/getItems';
 import ListItems from './ListItems';
 import Paginator from './Paginator';
-import { RESOURCES_PER_PAGE } from '../constants/constants';
+import {
+  DEFAULT_CURRENT_PAGE,
+  RESOURCES_PER_PAGE,
+} from '../constants/constants';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-import reactLogo from '../../public/react.svg';
+// import reactLogo from '../../public/react.svg';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '@/store/reducers/favorites';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useDownloadCSV } from '@/hooks/downloadItemsCSV';
 import { useToast } from './useToast';
 
 type MainPropsType = {
   items: ResponseType[];
-  count: number;
+  count: number | undefined;
   onPageChanged: (page: number) => void;
   className?: string;
 };
@@ -24,25 +27,29 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
-  // const { addToast } = useToast();
+  const { addToast } = useToast();
 
   const favorites = useAppSelector((state) => state.favorites.favorites);
+  const searchParams = useSearchParams();
+  const page = searchParams?.get('page') || DEFAULT_CURRENT_PAGE.toString();
+  // console.log(page);
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   // const router = useRouter();
+  // console.log(router);
 
   // const { page } = router.query;
   // const isLoading = useAppSelector(
   //   (state) => state.isLoading.isMainPageCharactersLoading
   // );
-  // const downloadCSV = useDownloadCSV();
+  const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
-    // dispatch(clearFavorits());
-    // addToast('Successfully deleted all characters!');
+    dispatch(clearFavorits());
+    addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    // downloadCSV();
+    downloadCSV();
   };
 
   return (
@@ -80,12 +87,12 @@ const Main: React.FC<MainPropsType> = ({
             </p>
           </>
         )}
-        {/* <Paginator
-            currentPage={Number(page)}
-            totalItemsCount={count}
-            pageSize={RESOURCES_PER_PAGE}
-            onPageChanged={onPageChanged}
-          /> */}
+        <Paginator
+          currentPage={Number(page)}
+          totalItemsCount={count}
+          pageSize={RESOURCES_PER_PAGE}
+          onPageChanged={onPageChanged}
+        />
         <ListItems items={items} />
       </>
       {/* ) */}
