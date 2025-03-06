@@ -19,7 +19,7 @@ import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import CartDetailsPage from '@/app/components/CartDetailsPage';
+import CartDetailsPage from '@/__tests__/app/components/CartDetailsPage';
 // import CartPage from '@/pages/character/[id]';
 //CharacterDetails
 

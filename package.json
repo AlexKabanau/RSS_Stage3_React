@@ -4,12 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "lint-staged": "lint-staged",
+    "dev": "vite", 
+    "build": "vite build", 
+    "start": "node server.js",
+    "lint": "eslint . --ext ts,tsx",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
     "format:fix": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
     "test": "vitest",
     "coverage": "vitest run --coverage"
@@ -31,7 +30,7 @@
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.1.5",
-    "react-router-dom": "^7.1.5",
+    "react-router-dom": "^7.2.0",
     "sonner": "^1.7.4",
     "vitest": "^3.0.5"
   },

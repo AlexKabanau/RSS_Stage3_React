@@ -13,7 +13,7 @@ import { store } from '@/store/store';
 import { mockFakeMoreResponse } from '@/mock/mock';
 // import { NextRouter } from 'next/router';
 // import HomePageContainer from '@/app/page';
-import HomePage from '@/app/components/HomePage';
+import HomePage from '@/__tests__/app/components/HomePage';
 
 const mockData = {
   data: mockFakeMoreResponse,

@@ -13,7 +13,7 @@ import { store } from '@/store/store';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import userEvent from '@testing-library/user-event';
-import HomePage from '@/app/components/HomePage';
+import HomePage from '@/__tests__/app/components/HomePage';
 // import HomePage from '@/app/components/HomePage';
 
 const pushMock = vi.fn();

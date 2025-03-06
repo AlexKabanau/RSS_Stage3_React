@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ResponseInfoType } from '@/api/getItems';
-import Main from '../../components/Main';
+import Main from '../../../components/Main';
 import { useAppDispatch } from '@/store/store';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { setPage } from '@/store/reducers/queryParams';

@@ -8,7 +8,7 @@ import { checkRouterElement } from '@/utils/checkRouterElement';
 // import Footer from '@/components/Footer';
 import { getCharacter, getCharacters } from '@/store/api/characterApi';
 import { store } from '@/store/store';
-import CartDetailsPage from '@/app/components/CartDetailsPage';
+import CartDetailsPage from '@/__tests__/app/components/CartDetailsPage';
 
 type Props = {
   params: { id: string };

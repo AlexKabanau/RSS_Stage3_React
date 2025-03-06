@@ -12,7 +12,7 @@ import { store } from '@/store/store';
 // import HomePage from '@/pages';
 import ListItems from '@/components/ListItems';
 import { setFavorites } from '@/store/reducers/favorites';
-import HomePage from '@/app/components/HomePage';
+import HomePage from '@/__tests__/app/components/HomePage';
 // import HomePage from '@/app/components/HomePage';
 
 const pushMock = vi.fn();
