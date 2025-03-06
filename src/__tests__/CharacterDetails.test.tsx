@@ -12,7 +12,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 // import { TransformSpellsRequest, transformCard } from './_fakeData';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 // import CharacterDetails from '@/components/card-detail/CardDetail';
-import { NextRouter } from 'next/router';
+// import { NextRouter } from 'next/router';
 // import CartPage from '@/pages/CartPage';
 import { mockFakeCharacterResponse, mockFakeMoreResponse } from '@/mock/mock';
 import ThemeContextProvider from '@/context/ThemeContext';

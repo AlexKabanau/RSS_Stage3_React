@@ -1,3 +1,5 @@
+'use client';
+
 import { GetCharacterType } from '@/api/getItems';
 // import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
