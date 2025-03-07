@@ -1,33 +1,49 @@
-import { render, screen } from '@testing-library/react';
-import Footer from '@/components/Footer';
 import React from 'react';
-import { expect, test } from 'vitest';
+import Footer from '@/components/Footer';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+// import Footer from './Footer';
 
-test('Footer renders correctly with links', () => {
-  render(<Footer />);
+describe('Footer', () => {
+  test('renders GitHub link with correct text and image', () => {
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>
+    );
 
-  // Проверяем наличие ссылки на GitHub
-  const githubLink = screen.getByRole('link', { name: /alexkabanau/i });
-  expect(githubLink).toBeInTheDocument();
-  expect(githubLink).toHaveAttribute('href', 'https://github.com/AlexKabanau');
-  expect(githubLink).toHaveAttribute('target', '_blank');
-  expect(githubLink).toHaveAttribute('rel', 'noreferrer');
+    const githubLink = screen.getByRole('link', { name: /AlexKabanau/i });
+    expect(githubLink).toHaveAttribute(
+      'href',
+      'https://github.com/AlexKabanau'
+    );
+    expect(githubLink).toBeInTheDocument();
 
-  // Проверяем наличие изображения GitHub
-  const githubLogo = screen.getByAltText('github logo');
-  expect(githubLogo).toBeInTheDocument();
+    const githubImage = screen.getByAltText('github logo');
+    expect(githubImage).toHaveAttribute(
+      'src',
+      expect.stringContaining('github_logo_black.svg')
+    );
+  });
 
-  // Проверяем наличие ссылки на RS School
-  const rsschoolLink = screen.getByTestId('rsschool-link');
-  expect(rsschoolLink).toBeInTheDocument();
-  expect(rsschoolLink).toHaveAttribute(
-    'href',
-    'https://rs.school/courses/reactjs'
-  );
-  expect(rsschoolLink).toHaveAttribute('target', '_blank');
-  expect(rsschoolLink).toHaveAttribute('rel', 'noreferrer');
+  test('renders RSSchool link with correct image', () => {
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>
+    );
 
-  // Проверяем наличие изображения RSSchool
-  const rsschoolLogo = screen.getByAltText('RSSchool logo');
-  expect(rsschoolLogo).toBeInTheDocument();
+    const rsschoolLink = screen.getByTestId('rsschool-link');
+    expect(rsschoolLink).toHaveAttribute(
+      'href',
+      'https://rs.school/courses/reactjs'
+    );
+    expect(rsschoolLink).toBeInTheDocument();
+
+    const rsschoolImage = screen.getByAltText('RSSchool logo');
+    expect(rsschoolImage).toHaveAttribute(
+      'src',
+      expect.stringContaining('rs_logo_black.svg')
+    );
+  });
 });

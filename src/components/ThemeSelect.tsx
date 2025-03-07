@@ -11,7 +11,7 @@ const ThemeSelect = () => {
     <select
       value={theme}
       onChange={(e) => {
-        console.log('Выбрана тема:', e.target.value); // 🔍 Проверяем, передается ли значение
+        // console.log('Выбрана тема:', e.target.value); // 🔍 Проверяем, передается ли значение
         changeTheme(e.target.value as ThemesType);
       }}
     >

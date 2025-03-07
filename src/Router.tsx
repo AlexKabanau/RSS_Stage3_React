@@ -12,6 +12,7 @@ import { characterLoader } from './loaders/characterLoader';
 import HomePage from './components/HomePage';
 import CharacterDetails from './components/CharacterDetails';
 import { charactersLoader } from './loaders/charactersLoader';
+import NotFoundPage from './components/not-found';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         loader: ({ params }) => characterLoader(params.id!),
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);
 

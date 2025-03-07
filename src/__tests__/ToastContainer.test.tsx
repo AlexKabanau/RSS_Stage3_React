@@ -1,29 +1,33 @@
 import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import ToastContainer from '@/components/ToastContainer';
-import { render, screen, fireEvent } from '@testing-library/react';
-// import ToastContainer from './ToastContainer';
 
-describe('ToastContainer', () => {
-  test('renders button to show toast', () => {
+describe('ToastContainer Component', () => {
+  it('должен добавлять тост при нажатии кнопки', () => {
     render(<ToastContainer />);
-    const button = screen.getByText('Показать тост');
-    expect(button).toBeInTheDocument();
-  });
 
-  test('adds a toast when button is clicked', () => {
-    render(<ToastContainer />);
-    const button = screen.getByText('Показать тост');
+    const button = screen.getByRole('button', { name: /Показать тост/i });
     fireEvent.click(button);
 
-    const toastMessage = screen.getByText(/Это ваше уведомление с/i);
-    expect(toastMessage).toBeInTheDocument();
+    const toast = screen.getByText(/Это ваше уведомление с/i);
+    expect(toast).toBeInTheDocument();
   });
 
-  test('displays toast when button is clicked', () => {
+  it('должен удалять тост через 3 секунды', async () => {
     render(<ToastContainer />);
 
-    fireEvent.click(screen.getByText('Показать тост'));
+    const button = screen.getByRole('button', { name: /Показать тост/i });
+    fireEvent.click(button);
 
-    expect(screen.getByText(/это ваше уведомление с/i)).toBeInTheDocument();
+    const toast = screen.getByText(/Это ваше уведомление с/i);
+    expect(toast).toBeInTheDocument();
+
+    // Ждем 3 секунды, чтобы тост исчез
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    // Проверяем, что тост исчез
+    await waitFor(() => {
+      expect(toast).not.toBeInTheDocument();
+    });
   });
 });
