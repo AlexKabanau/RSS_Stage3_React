@@ -2,9 +2,10 @@ import React, { FC, useState } from 'react';
 import style from './Paginator.module.css';
 import cn from 'classnames';
 import { useAppDispatch } from '@/store/store';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { checkRouterElement } from '@/utils/checkRouterElement';
-import { setPage } from '@/store/reducers/queryParams';
+// import { setPage } from '@/store/reducers/queryParams';
+import { useSearchParams } from 'react-router';
 
 type PropsType = {
   totalItemsCount: number | undefined;
@@ -20,16 +21,16 @@ const Paginator: FC<PropsType> = ({
   onPageChanged,
   portionsSize = 10,
 }) => {
-  const dispatch = useAppDispatch();
-  const searchParams = useSearchParams();
-  let page = searchParams?.get('page');
+  // const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
+  let page = searchParams.get('page');
   // const search = searchParams?.get('search')
 
   // const { search } = router.query;
   // let { page } = router.query;
   page = checkRouterElement(page, '99');
   if (+page < 1) {
-    dispatch(setPage('1'));
+    // dispatch(setPage('1'));
     page = '1';
   }
 

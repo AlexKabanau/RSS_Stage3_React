@@ -36,13 +36,16 @@ import App from './Router';
 import { store } from './store/store';
 import ErrorBoundary from './components/ErrorBoundary';
 import ThemeContextProvider from './context/ThemeContext';
+import { ToastProvider } from './components/ToastContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <React.StrictMode>
       <ErrorBoundary>
         <ThemeContextProvider>
-          <App />
+          <ToastProvider>
+            <App />
+          </ToastProvider>
         </ThemeContextProvider>
       </ErrorBoundary>
     </React.StrictMode>

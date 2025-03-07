@@ -27,6 +27,7 @@ const CharacterDetails: React.FC = () => {
   }, [navigate, href]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      console.log('click outside');
       if (
         detailsRef.current &&
         !detailsRef.current.contains(event.target as Node)
@@ -46,7 +47,7 @@ const CharacterDetails: React.FC = () => {
     <div
       className="cart"
       data-testid="cart-page"
-      // ref={detailsRef} // Привязываем ref к контейнеру
+      ref={detailsRef} // Привязываем ref к контейнеру
     >
       <div className="container">
         <button role="closeButton" onClick={handleClose}>

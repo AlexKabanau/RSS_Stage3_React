@@ -10,9 +10,10 @@ import { useAppDispatch, useAppSelector } from '@/store/store';
 // import reactLogo from '../../public/react.svg';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '@/store/reducers/favorites';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { useDownloadCSV } from '@/hooks/downloadItemsCSV';
 import { useToast } from './useToast';
+import { useSearchParams } from 'react-router';
 
 type MainPropsType = {
   items: ResponseType[];
@@ -27,11 +28,13 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
-  // const { addToast } = useToast();
+  const { addToast } = useToast();
 
   const favorites = useAppSelector((state) => state.favorites.favorites);
+  const [searchParams] = useSearchParams();
+
   // const searchParams = useSearchParams();
-  // const page = searchParams?.get('page') || DEFAULT_CURRENT_PAGE.toString();
+  const page = searchParams.get('page') || DEFAULT_CURRENT_PAGE.toString();
   // console.log(page);
 
   const dispatch = useAppDispatch();
@@ -42,14 +45,14 @@ const Main: React.FC<MainPropsType> = ({
   // const isLoading = useAppSelector(
   //   (state) => state.isLoading.isMainPageCharactersLoading
   // );
-  // const downloadCSV = useDownloadCSV();
+  const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
     dispatch(clearFavorits());
-    // addToast('Successfully deleted all characters!');
+    addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    // downloadCSV();
+    downloadCSV();
   };
 
   return (
@@ -87,12 +90,12 @@ const Main: React.FC<MainPropsType> = ({
             </p>
           </>
         )}
-        {/* <Paginator
+        <Paginator
           currentPage={Number(page)}
           totalItemsCount={count}
           pageSize={RESOURCES_PER_PAGE}
           onPageChanged={onPageChanged}
-        /> */}
+        />
         {/* {JSON.stringify(items)} */}
         <ListItems items={items} />
       </>

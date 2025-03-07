@@ -4,10 +4,7 @@ import { getItems } from '@/api/getItems';
 
 // import { getCharacters } from "@/store/api/characterApi";
 
-export const charactersLoader = async (
-  paramas: string = '',
-  page: number = 1
-) => {
+export const charactersLoader = async (paramas: string = '', page: number) => {
   const response = await getItems(paramas, page);
   return response;
 };

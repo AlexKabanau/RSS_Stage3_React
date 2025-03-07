@@ -20,7 +20,8 @@ const router = createBrowserRouter([
     loader: ({ request }) => {
       const url = new URL(request.url);
       const search = url.searchParams.get('search') || '';
-      return charactersLoader(search);
+      const page = url.searchParams.get('page') || '1';
+      return charactersLoader(search, Number(page));
     },
     children: [
       {
