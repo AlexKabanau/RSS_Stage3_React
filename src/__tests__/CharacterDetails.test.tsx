@@ -12,14 +12,14 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 // import { TransformSpellsRequest, transformCard } from './_fakeData';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 // import CharacterDetails from '@/components/card-detail/CardDetail';
-// import { NextRouter } from 'next/router';
+import { NextRouter } from 'next/router';
 // import CartPage from '@/pages/CartPage';
 import { mockFakeCharacterResponse, mockFakeMoreResponse } from '@/mock/mock';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
-import CartDetailsPage from '@/__tests__/app/components/CartDetailsPage';
+import CartDetailsPage from '@/app/components/CartDetailsPage';
 // import CartPage from '@/pages/character/[id]';
 //CharacterDetails
 

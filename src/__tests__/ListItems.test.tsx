@@ -4,7 +4,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest';
 import { mockFakeResponse } from '@/mock/mock';
-// import { NextRouter } from 'next/router';
+import { NextRouter } from 'next/router';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import { Provider } from 'react-redux';
@@ -12,8 +12,7 @@ import { store } from '@/store/store';
 // import HomePage from '@/pages';
 import ListItems from '@/components/ListItems';
 import { setFavorites } from '@/store/reducers/favorites';
-import HomePage from '@/__tests__/app/components/HomePage';
-// import HomePage from '@/app/components/HomePage';
+import HomePage from '@/app/components/HomePage';
 
 const pushMock = vi.fn();
 const searchParamValue = '1';

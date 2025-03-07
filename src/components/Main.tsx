@@ -27,14 +27,14 @@ const Main: React.FC<MainPropsType> = ({
   onPageChanged,
   className,
 }) => {
-  const { addToast } = useToast();
+  // const { addToast } = useToast();
 
-  const favorites = useAppSelector((state) => state.favorites.favorites);
-  const searchParams = useSearchParams();
-  const page = searchParams?.get('page') || DEFAULT_CURRENT_PAGE.toString();
+  // const favorites = useAppSelector((state) => state.favorites.favorites);
+  // const searchParams = useSearchParams();
+  // const page = searchParams?.get('page') || DEFAULT_CURRENT_PAGE.toString();
   // console.log(page);
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   // const router = useRouter();
   // console.log(router);
 
@@ -42,14 +42,14 @@ const Main: React.FC<MainPropsType> = ({
   // const isLoading = useAppSelector(
   //   (state) => state.isLoading.isMainPageCharactersLoading
   // );
-  const downloadCSV = useDownloadCSV();
+  // const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
-    dispatch(clearFavorits());
-    addToast('Successfully deleted all characters!');
+    // dispatch(clearFavorits());
+    // addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
-    downloadCSV();
+    // downloadCSV();
   };
 
   return (
@@ -65,7 +65,7 @@ const Main: React.FC<MainPropsType> = ({
       )} */}
       {/* {!isLoading && items && ( */}
       <>
-        {favorites.length > 0 && (
+        {/* {favorites.length > 0 && (
           <>
             <p className="favorits">
               Favorites: {favorites.length}
@@ -86,13 +86,14 @@ const Main: React.FC<MainPropsType> = ({
               </button>
             </p>
           </>
-        )}
-        <Paginator
+        )} */}
+        {/* <Paginator
           currentPage={Number(page)}
           totalItemsCount={count}
           pageSize={RESOURCES_PER_PAGE}
           onPageChanged={onPageChanged}
-        />
+        /> */}
+        {/* {JSON.stringify(items)} */}
         <ListItems items={items} />
       </>
       {/* ) */}

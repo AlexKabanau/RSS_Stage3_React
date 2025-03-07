@@ -11,9 +11,18 @@ import {
 import { characterLoader } from './loaders/characterLoader';
 import HomePage from './components/HomePage';
 import CharacterDetails from './components/CharacterDetails';
+import { charactersLoader } from './loaders/charactersLoader';
 
 const router = createBrowserRouter([
-  { path: '/', element: <HomePage />, loader: () => characterLoader('') },
+  {
+    path: '/',
+    element: <HomePage />,
+    loader: ({ request }) => {
+      const url = new URL(request.url);
+      const search = url.searchParams.get('search') || '';
+      return charactersLoader(search);
+    },
+  },
   {
     path: '/character/:id',
     element: <CharacterDetails />,

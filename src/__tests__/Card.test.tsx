@@ -6,15 +6,14 @@ import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtim
 import { afterAll, beforeAll, describe, expect, vi } from 'vitest';
 import { mockFakeCharacterResponse, mockFakeResponse } from '../mock/mock';
 import Item from '../components/Item';
-// import { NextRouter } from 'next/router';
+import { NextRouter } from 'next/router';
 // import HomePage from '@/pages';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import userEvent from '@testing-library/user-event';
-import HomePage from '@/__tests__/app/components/HomePage';
-// import HomePage from '@/app/components/HomePage';
+import HomePage from '@/app/components/HomePage';
 
 const pushMock = vi.fn();
 // const pushMock = vi.fn();
