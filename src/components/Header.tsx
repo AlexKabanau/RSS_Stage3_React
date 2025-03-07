@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './Header.module.css';
-// import ThemeSelect from './ThemeSelect';
+import ThemeSelect from './ThemeSelect';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ const Header: React.FC = () => {
       newParams.set('search', inputValue);
     }
 
-    setSearchParams(newParams); // Обновляем параметры в URL
-    navigate(`?${newParams.toString()}`); // Программная навигация
+    setSearchParams(newParams);
+    navigate(`?${newParams.toString()}`);
   };
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
       <button data-testid="searchButton" onClick={handleOnSubmit}>
         Search
       </button>
-      {/* <ThemeSelect /> */}
+      <ThemeSelect />
     </header>
   );
 };

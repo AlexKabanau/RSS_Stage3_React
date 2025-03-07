@@ -100,5 +100,6 @@ export const getCharacter = async (
   id: string
 ): Promise<GetCharacterType | undefined> => {
   const response = await axios(`${URL.baseUrl}${URL.props}/${id}`);
+  console.log(response.data);
   return response.data;
 };

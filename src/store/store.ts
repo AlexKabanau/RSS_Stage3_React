@@ -9,13 +9,13 @@ import { createWrapper, MakeStore } from 'next-redux-wrapper';
 
 export const store = configureStore({
   reducer: {
-    queryParams: queryParams,
-    isLoading: isLoading,
+    // queryParams: queryParams,
+    // isLoading: isLoading,
     favorites: favorites,
-    [reduxApi.reducerPath]: reduxApi.reducer,
+    // [reduxApi.reducerPath]: reduxApi.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(reduxApi.middleware),
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware().concat(reduxApi.middleware),
 });
 
 export type RootStateType = ReturnType<typeof store.getState>;
@@ -24,5 +24,5 @@ export type AppDispatchType = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatchType>();
 export const useAppSelector: TypedUseSelectorHook<RootStateType> = useSelector;
 
-const makeStore: MakeStore<AppStoreType> = () => store;
-export const wrapper = createWrapper<AppStoreType>(makeStore, { debug: true });
+// const makeStore: MakeStore<AppStoreType> = () => store;
+// export const wrapper = createWrapper<AppStoreType>(makeStore, { debug: true });

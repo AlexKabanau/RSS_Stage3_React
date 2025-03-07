@@ -11,12 +11,12 @@ type ItemsType = {
 };
 
 const ListItems: React.FC<ItemsType> = ({ items }) => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   // const { addToast } = useToast();
-  // const favorites = useAppSelector((state) => state.favorites.favorites);
+  const favorites = useAppSelector((state) => state.favorites.favorites);
   // const downloadCSV = useDownloadCSV();
 
-  // const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
+  const isFavorite = (id: string) => favorites.some((fav) => fav.id === id);
 
   const showAddedToast = () => {
     // addToast(
@@ -52,24 +52,24 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
     // );
   };
 
-  // const toggleFavorite = (item: ResponseType) => {
-  //   if (!Array.isArray(favorites)) {
-  //     console.error('favorits is not an array!');
-  //     return;
-  //   }
+  const toggleFavorite = (item: ResponseType) => {
+    if (!Array.isArray(favorites)) {
+      console.error('favorits is not an array!');
+      return;
+    }
 
-  //   const updatedFavorites = isFavorite(item.id)
-  //     ? favorites.filter((fav) => fav.id !== item.id)
-  //     : [...favorites, item];
+    const updatedFavorites = isFavorite(item.id)
+      ? favorites.filter((fav) => fav.id !== item.id)
+      : [...favorites, item];
 
-  //   dispatch(setFavorites(updatedFavorites));
+    dispatch(setFavorites(updatedFavorites));
 
-  //   if (!isFavorite(item.id)) {
-  //     showAddedToast();
-  //   } else {
-  //     showRemovedToast();
-  //   }
-  // };
+    if (!isFavorite(item.id)) {
+      showAddedToast();
+    } else {
+      showRemovedToast();
+    }
+  };
 
   return (
     <>
@@ -82,10 +82,10 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
           <Item
             key={item.id}
             item={item}
-            // isFavorite={isFavorite(item.id)}
-            isFavorite={false}
-            // onToggleFavorite={() => toggleFavorite(item)}
-            onToggleFavorite={() => {}}
+            isFavorite={isFavorite(item.id)}
+            // isFavorite={false}
+            onToggleFavorite={() => toggleFavorite(item)}
+            // onToggleFavorite={() => {}}
           />
         ))}
       </ul>

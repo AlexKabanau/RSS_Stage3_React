@@ -29,12 +29,12 @@ const Main: React.FC<MainPropsType> = ({
 }) => {
   // const { addToast } = useToast();
 
-  // const favorites = useAppSelector((state) => state.favorites.favorites);
+  const favorites = useAppSelector((state) => state.favorites.favorites);
   // const searchParams = useSearchParams();
   // const page = searchParams?.get('page') || DEFAULT_CURRENT_PAGE.toString();
   // console.log(page);
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   // const router = useRouter();
   // console.log(router);
 
@@ -45,7 +45,7 @@ const Main: React.FC<MainPropsType> = ({
   // const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
-    // dispatch(clearFavorits());
+    dispatch(clearFavorits());
     // addToast('Successfully deleted all characters!');
   };
   const onDownloadIconClick = () => {
@@ -65,7 +65,7 @@ const Main: React.FC<MainPropsType> = ({
       )} */}
       {/* {!isLoading && items && ( */}
       <>
-        {/* {favorites.length > 0 && (
+        {favorites.length > 0 && (
           <>
             <p className="favorits">
               Favorites: {favorites.length}
@@ -86,7 +86,7 @@ const Main: React.FC<MainPropsType> = ({
               </button>
             </p>
           </>
-        )} */}
+        )}
         {/* <Paginator
           currentPage={Number(page)}
           totalItemsCount={count}

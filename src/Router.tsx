@@ -22,11 +22,13 @@ const router = createBrowserRouter([
       const search = url.searchParams.get('search') || '';
       return charactersLoader(search);
     },
-  },
-  {
-    path: '/character/:id',
-    element: <CharacterDetails />,
-    loader: ({ params }) => characterLoader(params.id!),
+    children: [
+      {
+        path: '/character/:id',
+        element: <CharacterDetails />,
+        loader: ({ params }) => characterLoader(params.id!),
+      },
+    ],
   },
 ]);
 

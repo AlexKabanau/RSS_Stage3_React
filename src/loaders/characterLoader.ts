@@ -5,8 +5,10 @@ import { getCharacter } from '@/api/getItems';
 // import { getCharacters } from "@/store/api/characterApi";
 
 export const characterLoader = async (id: string) => {
+  console.log(id);
   const response = await getCharacter(id);
-  return response?.data;
+  console.log(response);
+  return response;
 };
 
 // export const characterLoader = async (id: string) => {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { ResponseType } from '../api/getItems';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+// import Link from 'next/link';
+// import { useSearchParams } from 'next/navigation';
+import { Link, useSearchParams } from 'react-router-dom';
 
 type ItemPropsType = {
   item: ResponseType;
@@ -13,13 +14,14 @@ const Item: React.FC<ItemPropsType> = ({
   isFavorite,
   onToggleFavorite,
 }) => {
-  // const searchParams = useSearchParams();
-  // const page = searchParams?.get('page');
-  // const search = searchParams?.get('search');
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get('page');
+  const search = searchParams.get('search');
   // // // const { page, search } = router.query;
-  // const href = search
-  //   ? `/character/${item.id}?page=${page || 1}&search=${search || ''}`
-  //   : `/character/${item.id}?page=${page || 1}`;
+  // const href = '123';
+  const href = search
+    ? `/character/${item.id}?page=${page || 1}&search=${search || ''}`
+    : `/character/${item.id}?page=${page || 1}`;
 
   // http://localhost:3000/character/dde712de-4fce-487f-a365-e15bf01d31ce?page=5&search=
   // {
@@ -39,14 +41,14 @@ const Item: React.FC<ItemPropsType> = ({
   //   };
   return (
     <li className="item" role="item">
-      {/* <Link
+      <Link
         role="link"
         // href={`/character/${item.id}`}
-        href={href}
+        to={href}
         data-testid={`link-${item.id}`}
       >
         <h3>{item.attributes.name}</h3>
-      </Link> */}
+      </Link>
       <label>
         <input
           type="checkbox"

@@ -4,10 +4,10 @@ import './styles/index.css';
 // import ThemeContextProvider from './context/ThemeContext.tsx';
 
 // import { StrictMode } from 'react';
-// // import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 // import { createRoot } from 'react-dom/client';
 // import App from './Router';
-// // import { store } from './store/store.ts';
+// import { store } from './store/store.ts';
 // // import { ToastProvider } from './components/ToastContext.tsx';
 
 // const rootElement = document.getElementById('root');
@@ -33,9 +33,18 @@ import './styles/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './Router';
+import { store } from './store/store';
+import ErrorBoundary from './components/ErrorBoundary';
+import ThemeContextProvider from './context/ThemeContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <ErrorBoundary>
+        <ThemeContextProvider>
+          <App />
+        </ThemeContextProvider>
+      </ErrorBoundary>
+    </React.StrictMode>
+  </Provider>
 );
