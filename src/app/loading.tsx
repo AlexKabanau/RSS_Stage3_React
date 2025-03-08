@@ -1,5 +1,6 @@
+import reactLogo from '../../public/react.svg';
+
 export default function Loading() {
-  console.log('Loading component rendered');
   return (
     <div
       style={{
@@ -9,8 +10,8 @@ export default function Loading() {
         padding: '20px',
       }}
     >
-      <p>⏳ Загрузка...</p>
-      <em>искусственное замедление для демонстрации работоспособности</em>
+      <p>⏳ Loading...</p>
+      <img src={reactLogo.src} className="logo" alt="loading" />
     </div>
   );
 }

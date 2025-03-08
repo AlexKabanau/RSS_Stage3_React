@@ -23,10 +23,6 @@ const Paginator: FC<PropsType> = ({
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   let page = searchParams?.get('page');
-  // const search = searchParams?.get('search')
-
-  // const { search } = router.query;
-  // let { page } = router.query;
   page = checkRouterElement(page, '99');
   if (+page < 1) {
     dispatch(setPage('1'));

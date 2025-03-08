@@ -5,12 +5,11 @@ import styles from './Header.module.css';
 import ThemeSelect from './ThemeSelect';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-// import { checkRouterElement } from '@/utils/checkRouterElement';
 
 const Header: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const initialSearch = searchParams ? searchParams.get('search') || '' : ''; // Проверка на null
+  const initialSearch = searchParams ? searchParams.get('search') || '' : '';
   const [inputValue, setInputValue] = useState(initialSearch);
 
   const handleOnSubmit = () => {
@@ -22,12 +21,12 @@ const Header: React.FC = () => {
       params.set('search', inputValue);
     }
 
-    router.push(`?${params.toString()}`); // Переход с новыми параметрами
+    router.push(`?${params.toString()}`);
   };
 
   useEffect(() => {
     if (searchParams) {
-      setInputValue(searchParams.get('search') || ''); // Обновляем inputValue, если параметр search изменился
+      setInputValue(searchParams.get('search') || '');
     }
   }, [searchParams]);
 

@@ -6,7 +6,6 @@ const ErrorButton: React.FC = () => {
   const handleError = () => {
     console.log('error');
     setError(true);
-    // throw new Error('Error');
   };
 
   const resetError = () => {

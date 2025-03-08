@@ -2,8 +2,6 @@ import { GetCharacterType, ResponseInfoType } from '@/api/getItems';
 import { RESOURCES_PER_PAGE, URL } from '@/constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
-// import { GetCharacterType, ResponseInfoType } from '../../api/getItems';
-// import { RESOURCES_PER_PAGE, URL } from '../../constants/constants';
 
 export type CharacterResponseType = {
   response: GetCharacterType;

@@ -6,18 +6,13 @@ import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtim
 import { afterAll, beforeAll, describe, expect, vi } from 'vitest';
 import { mockFakeCharacterResponse, mockFakeResponse } from '../mock/mock';
 import Item from '../components/Item';
-// import { NextRouter } from 'next/router';
-// import HomePage from '@/pages';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import ThemeContextProvider from '@/context/ThemeContext';
 import { ToastProvider } from '@/components/ToastContext';
 import userEvent from '@testing-library/user-event';
 import HomePage from '@/app/components/HomePage';
-// import HomePage from '@/app/components/HomePage';
-
 const pushMock = vi.fn();
-// const pushMock = vi.fn();
 const searchParamValue = '1';
 
 describe('Tests for the Item component', () => {
@@ -26,7 +21,6 @@ describe('Tests for the Item component', () => {
       useRouter: () => ({
         push: pushMock,
         replace: pushMock,
-        // query: { page: searchParamValue },
       }),
       useSearchParams: () => ({
         get: (key: string) => (key === 'search' ? searchParamValue : '1'),
@@ -53,14 +47,8 @@ describe('Tests for the Item component', () => {
     const cardName = screen.getByText(
       mockFakeCharacterResponse.data.attributes.name
     );
-    // const cardSpecies = screen.getByText((content) => {
-    //   return content.includes(
-    //     mockFakeCharacterResponse.data.attributes.species
-    //   );
-    // });
 
     expect(cardName).toBeInTheDocument();
-    // expect(cardSpecies).toBeInTheDocument();
   });
 
   it('renders a link with the correct URL', () => {

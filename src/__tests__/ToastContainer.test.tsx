@@ -1,7 +1,6 @@
 import React from 'react';
 import ToastContainer from '@/components/ToastContainer';
 import { render, screen, fireEvent } from '@testing-library/react';
-// import ToastContainer from './ToastContainer';
 
 describe('ToastContainer', () => {
   test('renders button to show toast', () => {
