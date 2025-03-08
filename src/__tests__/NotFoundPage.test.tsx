@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 // import NotFoundPage from '@/components/NotFoundPage';
 import userEvent from '@testing-library/user-event';
 import NotFoundPage from '@/components/not-found';
+import { MemoryRouter } from 'react-router';
+// import { MemoryRouter } from 'react-router-dom';
 
 describe('NotFoundPage component', () => {
   it('renders the not found message', () => {
