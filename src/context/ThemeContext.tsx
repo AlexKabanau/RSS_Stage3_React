@@ -8,7 +8,7 @@ import {
   THEMES,
 } from '../constants/constants';
 import { ThemeContext } from './themeContextCreation';
-import cn from 'classnames'; // Удобная утилита для работы с className (по желанию)
+import cn from 'classnames';
 
 export type ThemesType = (typeof THEMES)[number];
 
@@ -17,7 +17,7 @@ const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true); // Флаг для предотвращения SSR-ошибок
+    setIsMounted(true);
 
     try {
       const savedTheme = localStorage.getItem(LOCALSTORAGE_THEME) as ThemesType;

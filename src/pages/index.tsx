@@ -31,8 +31,15 @@ export default function HomePageContainer({
   );
   if (isLoading || !cards) {
     return (
-      <div>
-        <p>Loading...</p>
+      <div
+        style={{
+          fontSize: '24px',
+          color: 'red',
+          textAlign: 'center',
+          padding: '20px',
+        }}
+      >
+        <p>⏳ Loading...</p>
         <img src={reactLogo.src} className="logo" alt="loading" />
       </div>
     );
@@ -42,7 +49,6 @@ export default function HomePageContainer({
     return <p>Ошибка загрузки данных.</p>;
   }
   const finalCards = cards ?? initialCards;
-  console.log('Final cards:', finalCards);
 
   return <HomePage cards={finalCards} />;
 }
