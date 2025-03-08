@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import style from './Paginator.module.css';
 import cn from 'classnames';
-import { useAppDispatch } from '@/store/store';
 // import { useSearchParams } from 'next/navigation';
 import { checkRouterElement } from '@/utils/checkRouterElement';
 // import { setPage } from '@/store/reducers/queryParams';

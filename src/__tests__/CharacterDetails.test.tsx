@@ -1,11 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { vi } from 'vitest';
 // import CharacterDetails from '../CharacterDetails';
 import { GetCharacterType } from '@/api/getItems';
 import CharacterDetails from '@/components/CharacterDetails';
-import { firstCharacter, mockFakeCharacterResponse } from '@/mock/mock';
+import { mockFakeCharacterResponse } from '@/mock/mock';
 
 // Мокаем useNavigate
 const mockNavigate = vi.fn();
