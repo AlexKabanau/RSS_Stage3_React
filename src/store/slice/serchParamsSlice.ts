@@ -12,7 +12,6 @@ const initialState: SearchParamsType = {
       ? localStorage.getItem('inputValue') || ''
       : '',
 
-  // searchParams: localStorage.getItem('inputValue') || '',
   isLoading: false,
   error: '',
 };

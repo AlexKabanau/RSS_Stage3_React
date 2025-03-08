@@ -1,9 +1,6 @@
 import React, { Suspense } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-// import HomePage from './app/HomePage';
-// import CharacterDetails from './app/character/[id]/page';
 import { characterLoader } from './loaders/characterLoader';
-// import HomePage from './components/HomePage';
 import CharacterDetails from './components/CharacterDetails';
 import { charactersLoader } from './loaders/charactersLoader';
 import NotFoundPage from './components/not-found';

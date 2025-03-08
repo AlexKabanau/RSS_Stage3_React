@@ -76,16 +76,11 @@ const ListItems: React.FC<ItemsType> = ({ items }) => {
       {!items || (items.length < 1 && <p>{`Could't find any characters`}</p>)}
       <ul className="list-items">
         {items.map((item) => (
-          // <>
-          //   <p>{item.id}</p>
-          // </>
           <Item
             key={item.id}
             item={item}
             isFavorite={isFavorite(item.id)}
-            // isFavorite={false}
             onToggleFavorite={() => toggleFavorite(item)}
-            // onToggleFavorite={() => {}}
           />
         ))}
       </ul>

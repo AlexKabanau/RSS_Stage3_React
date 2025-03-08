@@ -16,26 +16,18 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const onPageChanged = (page: number) => {
-    // Логика для изменения страницы
     navigate(`?page=${page}&search=${searchParams.get('search') || ''}`);
   };
   const hasOutlet = useOutlet();
-  // const onPageChanged = (page: number) => {
-  //   console.log(page);
-  //   // dispatch(setPage(page.toString()));
-  //   // router.push(`?page=${page}&search=${searchParams?.get('search') ?? ''}`);
-  // };
   return (
     <div className="app">
       <Header />
       <div role="homePage" className="main-container">
         <Main
-          // className={className}
-          // className={''}
           className={!hasOutlet ? 'fullWidth' : 'width2_3'}
           items={itemsData.data}
           count={itemsData.meta.pagination?.records}
-          onPageChanged={onPageChanged} // ✅ добавили onPageChanged
+          onPageChanged={onPageChanged}
         />
         <Outlet />
       </div>

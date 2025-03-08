@@ -1,7 +1,5 @@
-// import { Link } from 'react-router';
 import React from 'react';
 
-// import Link from 'next/link';
 import gitHubLogo from '/github_logo_black.svg?url';
 import RSSLogo from '/rs_logo_black.svg?url';
 import { Link } from 'react-router';

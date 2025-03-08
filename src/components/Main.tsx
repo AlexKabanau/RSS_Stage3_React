@@ -7,10 +7,8 @@ import {
   RESOURCES_PER_PAGE,
 } from '../constants/constants';
 import { useAppDispatch, useAppSelector } from '@/store/store';
-// import reactLogo from '../../public/react.svg';
 import { ArrowDownToLine, Trash2 } from 'lucide-react';
 import { clearFavorits } from '@/store/reducers/favorites';
-// import { useSearchParams } from 'next/navigation';
 import { useDownloadCSV } from '@/hooks/downloadItemsCSV';
 import { useToast } from './useToast';
 import { useSearchParams } from 'react-router';
@@ -33,18 +31,9 @@ const Main: React.FC<MainPropsType> = ({
   const favorites = useAppSelector((state) => state.favorites.favorites);
   const [searchParams] = useSearchParams();
 
-  // const searchParams = useSearchParams();
   const page = searchParams.get('page') || DEFAULT_CURRENT_PAGE.toString();
-  // console.log(page);
 
   const dispatch = useAppDispatch();
-  // const router = useRouter();
-  // console.log(router);
-
-  // const { page } = router.query;
-  // const isLoading = useAppSelector(
-  //   (state) => state.isLoading.isMainPageCharactersLoading
-  // );
   const downloadCSV = useDownloadCSV();
 
   const onDeleteIconClick = () => {
@@ -57,16 +46,6 @@ const Main: React.FC<MainPropsType> = ({
 
   return (
     <main className={className}>
-      {/* {isLoading && (
-        <div>
-          <p>Loading...</p>
-          <img src={reactLogo} className="logo" alt="loading" />
-        </div>
-      )} */}
-      {/* {!isLoading && (!items || items.length < 1) && (
-        <h2>Characters not found</h2>
-      )} */}
-      {/* {!isLoading && items && ( */}
       <>
         {favorites.length > 0 && (
           <>
@@ -96,11 +75,8 @@ const Main: React.FC<MainPropsType> = ({
           pageSize={RESOURCES_PER_PAGE}
           onPageChanged={onPageChanged}
         />
-        {/* {JSON.stringify(items)} */}
         <ListItems items={items} />
       </>
-      {/* ) */}
-      {/* } */}
     </main>
   );
 };

@@ -22,10 +22,8 @@ describe('ToastContainer Component', () => {
     const toast = screen.getByText(/Это ваше уведомление с/i);
     expect(toast).toBeInTheDocument();
 
-    // Ждем 3 секунды, чтобы тост исчез
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    // Проверяем, что тост исчез
     await waitFor(() => {
       expect(toast).not.toBeInTheDocument();
     });

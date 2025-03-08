@@ -1,45 +1,11 @@
 import { GetCharacterType } from '@/api/getItems';
-// import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, {
-  useCallback,
-  useEffect,
-  // useMemo,
-  useRef,
-  // useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
   characterData,
 }) => {
-  // const router = useRouter();
-  // const { page, search } = router.query;
   const data = characterData.data;
-  // const href = useMemo(
-  //   () =>
-  //     search
-  //       ? {
-  //           pathname: '/',
-  //           query: {
-  //             page: page || '1',
-  //             search: search || '',
-  //           },
-  //         }
-  //       : {
-  //           pathname: '/',
-  //           query: {
-  //             page: page || '1',
-  //           },
-  //         },
-  //   [page, search]
-  // );
-
-  // const [isOpen, setIsOpen] = useState(true); // Состояние для управления видимостью
-
-  // const closeDetails = useCallback(() => {
-  //   setIsOpen(false);
-  //   // router.push(href);
-  // }, [router, href]);
   const searchParams = useSearchParams();
   const page = searchParams?.get('page');
   const search = searchParams?.get('search');
@@ -50,8 +16,7 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
 
   const detailsRef = useRef<HTMLDivElement>(null);
   const handleClose = useCallback(() => {
-    // Удаление ID из строки запроса
-    router.push(href); // Измените путь на нужный, если необходимо
+    router.push(href);
   }, [router, href]);
 
   useEffect(() => {
@@ -60,7 +25,6 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
         detailsRef.current &&
         !detailsRef.current.contains(event.target as Node)
       ) {
-        console.log('Should close details');
         handleClose();
       }
     };
@@ -71,21 +35,12 @@ const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
     };
   }, [handleClose]);
 
-  // if (!isOpen) return null; // Не рендерим компонент, если он закрыт
-
   return (
-    <div
-      className="cart"
-      data-testid="cart-page"
-      ref={detailsRef} // Привязываем ref к контейнеру
-    >
+    <div className="cart" data-testid="cart-page" ref={detailsRef}>
       <div className="container">
         <button role="closeButton" onClick={handleClose}>
-          {/* <Link href={href} role="closeButton"> */}
           Close
-          {/* </Link> */}
         </button>
-        {/* {JSON.stringify(data)} */}
         <h3 data-testid="character-name">{data.attributes.name}</h3>
         <div>
           {data.attributes.image && (

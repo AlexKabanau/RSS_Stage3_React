@@ -6,7 +6,6 @@ import {
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
-// import { characterLoader } from '@/loaders/characterLoader';
 
 const CharacterDetails: React.FC = () => {
   const characterData: GetCharacterType = useLoaderData();
@@ -19,20 +18,16 @@ const CharacterDetails: React.FC = () => {
     : `/?page=${page || 1}`;
   const navigate = useNavigate();
   const data = characterData.data;
-  console.log(data);
 
   const handleClose = useCallback(() => {
-    // Удаление ID из строки запроса
-    navigate(href); // Измените путь на нужный, если необходимо
+    navigate(href);
   }, [navigate, href]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      console.log('click outside');
       if (
         detailsRef.current &&
         !detailsRef.current.contains(event.target as Node)
       ) {
-        console.log('Should close details');
         handleClose();
       }
     };
@@ -44,11 +39,7 @@ const CharacterDetails: React.FC = () => {
   }, [handleClose]);
 
   return (
-    <div
-      className="cart"
-      data-testid="cart-page"
-      ref={detailsRef} // Привязываем ref к контейнеру
-    >
+    <div className="cart" data-testid="cart-page" ref={detailsRef}>
       <div className="container">
         <button role="closeButton" onClick={handleClose}>
           <Link to={href} role="closeButton">

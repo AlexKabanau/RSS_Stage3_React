@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Header from '@/components/Header';
-// import Header from './Header';
 
 describe('Header', () => {
   beforeEach(() => {
@@ -41,10 +40,6 @@ describe('Header', () => {
 
     fireEvent.change(searchInput, { target: { value: 'Harry' } });
     fireEvent.click(searchButton);
-
-    // Здесь вы можете проверить, что параметры поиска были обновлены,
-    // например, используя mock для setSearchParams и navigate,
-    // или проверив localStorage, если это применимо.
   });
 
   test('calls handleOnSubmit when Enter key is pressed', () => {
@@ -52,8 +47,5 @@ describe('Header', () => {
 
     fireEvent.change(searchInput, { target: { value: 'Harry' } });
     fireEvent.keyDown(searchInput, { key: 'Enter', code: 'Enter' });
-
-    // Здесь вы можете проверить, что параметры поиска были обновлены,
-    // например, используя mock для setSearchParams и navigate.
   });
 });

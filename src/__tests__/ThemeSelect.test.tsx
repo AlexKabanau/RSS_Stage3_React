@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-// import ThemeSelect from './ThemeSelect';
 import { useTheme } from '../hooks/useTheme';
 import { THEMES } from '../constants/constants';
 import ThemeSelect from '@/components/ThemeSelect';

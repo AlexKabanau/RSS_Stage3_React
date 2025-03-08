@@ -1,10 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-// import NotFoundPage from '@/components/NotFoundPage';
 import userEvent from '@testing-library/user-event';
 import NotFoundPage from '@/components/not-found';
 import { MemoryRouter } from 'react-router';
-// import { MemoryRouter } from 'react-router-dom';
 
 describe('NotFoundPage component', () => {
   it('renders the not found message', () => {
@@ -28,6 +26,5 @@ describe('NotFoundPage component', () => {
     expect(homeLink).toHaveAttribute('href', '/');
 
     await userEvent.click(homeLink);
-    // Здесь можно добавить дополнительные проверки, если в тесте требуется навигация
   });
 });

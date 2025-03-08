@@ -3,14 +3,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import favoritsSlice from '../store/reducers/favorites';
-// import ListItems from './ListItems';
 import { vi } from 'vitest';
 import ListItems from '@/components/ListItems';
 import { mockFakeItemList } from '@/mock/mock';
 import { MemoryRouter } from 'react-router-dom';
 import { ToastProvider } from '@/components/ToastContext';
 
-// Мокаем хук useToast
 vi.mock('./useToast', () => ({
   useToast: () => ({
     addToast: vi.fn(),
@@ -59,9 +57,6 @@ describe('ListItems', () => {
   });
 
   test('adds item to favorites and shows toast', async () => {
-    // const { useToast } = await import('../components/useToast');
-    // const addToast = useToast().addToast;
-
     render(
       <MemoryRouter>
         <Provider store={createTestStore()}>
@@ -70,9 +65,6 @@ describe('ListItems', () => {
           </ToastProvider>
         </Provider>
       </MemoryRouter>
-      // <Provider store={createTestStore()}>
-      //   <ListItems items={mockFakeItemList} />
-      // </Provider>
     );
 
     const favoriteButton = screen.getByTestId(
@@ -82,8 +74,6 @@ describe('ListItems', () => {
     expect(
       screen.getByText(/One character successfully added to favorites!/i)
     ).toBeInTheDocument();
-
-    // expect(addToast).toHaveBeenCalled();
   });
 
   test('removes item from favorites and shows toast', () => {
@@ -95,9 +85,6 @@ describe('ListItems', () => {
           </ToastProvider>
         </Provider>
       </MemoryRouter>
-      // <Provider store={createTestStore()}>
-      //   <ListItems items={mockFakeItemList} />
-      // </Provider>
     );
 
     const favoriteButton = screen.getByTestId(

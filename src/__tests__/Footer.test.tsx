@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router'; // Импортируем MemoryRouter
+import { MemoryRouter } from 'react-router';
 import Footer from '@/components/Footer';
-// import Footer from './Footer';
 
 describe('Footer', () => {
   test('renders GitHub link with correct text and image', () => {

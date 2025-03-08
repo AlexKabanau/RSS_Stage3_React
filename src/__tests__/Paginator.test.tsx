@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Paginator from '@/components/Paginator';
 import { MemoryRouter } from 'react-router';
-// import Paginator from './Paginator';
 
 describe('Paginator', () => {
   const totalItemsCount = 999;
@@ -24,7 +23,7 @@ describe('Paginator', () => {
 
   test('renders the correct number of page numbers', () => {
     const pageNumbers = screen.getAllByText(/^\d+$/);
-    expect(pageNumbers.length).toBe(10); // В данном случае 100/10 = 10 страниц
+    expect(pageNumbers.length).toBe(10);
   });
 
   test('calls onPageChanged when a page number is clicked', () => {
@@ -35,7 +34,7 @@ describe('Paginator', () => {
 
   test('disables the "PREV" button on the first portion', () => {
     const prevButton = screen.queryByText('PREV');
-    expect(prevButton).not.toBeInTheDocument(); // Кнопка не должна отображаться
+    expect(prevButton).not.toBeInTheDocument();
   });
 
   test('shows the "NEXT" button when there are more pages', () => {
@@ -47,7 +46,6 @@ describe('Paginator', () => {
     const nextButton = screen.getByText('NEXT');
     fireEvent.click(nextButton);
 
-    // Проверяем, что теперь отображаются страницы 11-20
     const pageEleven = screen.getByText('11');
     expect(pageEleven).toBeInTheDocument();
   });
