@@ -1,0 +1,97 @@
+import { GetCharacterType } from '@/api/getItems';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+
+const CharacterDetails: React.FC<{ characterData: GetCharacterType }> = ({
+  characterData,
+}) => {
+  const router = useRouter();
+  const { page, search } = router.query;
+  const data = characterData.data;
+  const href = useMemo(
+    () =>
+      search
+        ? {
+            pathname: '/',
+            query: {
+              page: page || '1',
+              search: search || '',
+            },
+          }
+        : {
+            pathname: '/',
+            query: {
+              page: page || '1',
+            },
+          },
+    [page, search]
+  );
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const closeDetails = useCallback(() => {
+    setIsOpen(false);
+    router.push(href);
+  }, [router, href]);
+
+  const detailsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        detailsRef.current &&
+        !detailsRef.current.contains(event.target as Node)
+      ) {
+        closeDetails();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [closeDetails]);
+
+  if (!isOpen) return null;
+  return (
+    <div className="cart" data-testid="cart-page" ref={detailsRef}>
+      <div className="container">
+        <button role="button">
+          <Link href={href} role="closeButton">
+            Close
+          </Link>
+        </button>
+        <h3 data-testid="character-name">{data.attributes.name}</h3>
+        <div>
+          {data.attributes.image && (
+            <img src={data.attributes.image} alt="Character image" />
+          )}
+          <p data-testid="character-species">
+            Species: {data.attributes.species}
+          </p>
+          {data.attributes.gender && (
+            <p data-testid="character-gender">
+              Gender: {data.attributes.gender}
+            </p>
+          )}
+          {data.attributes.nationality && (
+            <p>Nationality: {data.attributes.nationality}</p>
+          )}
+          <p>Hair color: {data.attributes.hair_color}</p>
+          <p>Eyes color: {data.attributes.eye_color}</p>
+          <p>Skin color: {data.attributes.skin_color}</p>
+          {data.attributes.wiki && <a href={data.attributes.wiki}>Wiki</a>}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CharacterDetails;
