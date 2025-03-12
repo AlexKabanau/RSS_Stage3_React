@@ -1,4 +1,5 @@
-import * as yup from 'yup';
+import * as yup from "yup";
+import { GENDER } from '../constants/constants';
 
 export const schema = yup.object().shape({
   name: yup
@@ -11,6 +12,17 @@ export const schema = yup.object().shape({
     .positive('Age should be a positive number')
     .lessThan(130, 'Age should be less than 130')
     .integer('Age should be integer'),
+  gender: yup.string().oneOf([GENDER.female, GENDER.male]).required('Gender is required'),
+  country: yup.string().required('Coutry is required field'),
+  email: yup.string().email('Invalid email format').required('Email is required'),
+  accept: yup.boolean().test({
+    name: 'accepted',
+    message: 'You should accept the term and conditions',
+    test: (value) => value === true
+  }),
+  password: yup.string(),
+  confirmPassword: yup.string()
+
 });
 
 /* name (validate for first uppercased letter)
