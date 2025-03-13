@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FormDataType } from '../../pages/HookForm';
 
-type SubmitFormDataType = {
+export type SubmitFormDataType = FormDataType & {
   picture: string;
 };
 

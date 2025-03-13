@@ -1,14 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { schema } from '../utils/schema';
 import './HookForm.css';
 import { converter } from '../utils/converter';
 import { useAppDispatch } from '../store/store';
-import { setData } from '../store/reducers/dataSlice';
+import { setData, SubmitFormDataType } from '../store/reducers/dataSlice';
+import { useNavigate } from 'react-router-dom';
 // import { GENDER } from '../constants/constants'
 
-type FormDataType = {
+export type FormDataType = {
   name?: string;
   age?: number;
   email?: string;
@@ -16,10 +17,12 @@ type FormDataType = {
   confirmPassword?: string;
   gender?: string;
   country?: string;
-  picture?: File | unknown;
+  picture?:  unknown | File;
   accept?: boolean;
 };
 function HookForm() {
+  const navigate = useNavigate();
+  const [preview, setPreview] = useState('')
   const {
     register,
     handleSubmit,
@@ -30,16 +33,32 @@ function HookForm() {
   const dispatch = useAppDispatch()
 
   const onSubmitHandler = async (data: FormDataType) => {
-    console.log(data);
+    // console.log(data);
+    // console.log(data.picture[0])
     if (data.picture instanceof File) {
       const string64 = await converter(data.picture)
-      dispatch(setData([...data, picture: string64]))
+      const newData: SubmitFormDataType = {...data, picture: string64}
+      const newDataArr: SubmitFormDataType[] = [newData]
+      dispatch(setData(newDataArr))
+      navigate('/')
     } else {
-
+      console.log('Invalid picture')
     }
   };
+  
+
+  const pictureHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0] instanceof File) {
+      // console.log('has file')
+      // console.log(event.target.files[0])
+      const picture = event.target.files[0]
+      setPreview(URL.createObjectURL(picture));
+      setValue('picture', picture);
+      trigger('picture')
+    } else {console.log('no files')}
+  }
   return (
-    <form className="form-container" onSubmit={handleSubmit(onSubmitHandler)}>
+    <form className="form-container" onChange={e=>console.log(e)} onSubmit={handleSubmit(onSubmitHandler)}>
       <h2 className="formTitle">React Hook Form</h2>
       <p className="formDescription">Let's create a form</p>
 
@@ -117,7 +136,11 @@ function HookForm() {
         <label className="label" htmlFor="picture">
           Picture
         </label>
-        <input className="input" {...register('picture')} id="picture" type="file" />
+        <input className="input"  id="picture" type="file" onChange={(e) => {
+          // console.log(e)
+          pictureHandler(e)
+          }}/>
+        {preview && (<img src={preview} alt='Preview'/>)}
         {errors.picture && <p className="errorField">{errors.picture.message}</p>}
       </div>
 
