@@ -4,6 +4,9 @@ import { FormDataType } from '../../pages/HookForm';
 export type SubmitFormDataType = FormDataType & {
   picture: string;
 };
+export type SubmitUnFormDataType = FormDataType & {
+  picture?: File;
+};
 
 const initialState: {
   data: SubmitFormDataType[];

@@ -1,0 +1,10 @@
+.data-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: left
+}
+
+.propImage {
+  width: 5rem;
+}
+

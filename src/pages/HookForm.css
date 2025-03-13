@@ -46,15 +46,6 @@
     justify-content: flex-start;
 }
 
-.form-container input,
-.form-container button {
-
-}
-
-.form-container button {
-
-}
-
-.form-container button:hover {
-
+.preview {
+    width: 4rem;
 }

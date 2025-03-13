@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../store/store';
 import './MainPage.css';
+import Item from '../components/Item';
 
 function MainPage() {
   const data = useAppSelector((state) => state.data);
@@ -18,11 +19,7 @@ function MainPage() {
       </nav>
       <div className="data-container">
         {data.length ? (
-          data.map((item, key) => (
-            <div key={key} className="data-item">
-              {JSON.stringify(item)}
-            </div>
-          ))
+          data.map((item, key) => <Item item={item} key={key} />)
         ) : (
           <div className="empty-state">
             <p>Items not fond</p>
