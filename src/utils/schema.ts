@@ -2,6 +2,9 @@ import * as yup from 'yup';
 import { GENDER } from '../constants/constants';
 import { countriesData } from '../store/reducers/dataSlice';
 
+const MAX_FILE_SIZE = 1024 * 1024; // 1MB (adjust as needed)
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+
 export const schema = yup.object().shape({
   name: yup
     .string()
@@ -38,7 +41,19 @@ export const schema = yup.object().shape({
     test: (value) => value === true,
   }),
 
-  picture: yup.mixed().required('Picture is required'),
+  picture: yup
+    .mixed()
+    .required('Picture is required')
+    .test('fileSize', 'File too large', (value) => {
+      const file = value as File;
+      if (!file) return true; // Allow empty value (no file selected)
+      return file.size <= MAX_FILE_SIZE;
+    })
+    .test('fileFormat', 'Unsupported Format', (value) => {
+      const file = value as File;
+      if (!file) return true; // Allow empty value (no file selected)
+      return SUPPORTED_FORMATS.includes(file.type);
+    }),
 
   country: yup.string().oneOf(countriesData).required('Coutry is required field'),
 });
