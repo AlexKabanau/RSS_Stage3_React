@@ -7,6 +7,8 @@ import { converter } from '../utils/converter';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { setData, SubmitFormDataType } from '../store/reducers/dataSlice';
 import { useNavigate } from 'react-router-dom';
+import PasswordStrengthBar from '../components/PasswordStrengthBar';
+import { getStrength } from '../utils/getStrength';
 // import { GENDER } from '../constants/constants'
 
 export type FormDataType = {
@@ -24,6 +26,7 @@ function HookForm() {
   const navigate = useNavigate();
   const countries = useAppSelector((store) => store.countries);
   const [preview, setPreview] = useState('');
+  const [passStrength, setPassStrength] = useState<number>(0);
   const {
     register,
     handleSubmit,
@@ -45,6 +48,15 @@ function HookForm() {
     } else {
       console.log('Invalid picture');
     }
+  };
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // handeOnInputChange('password');
+    const pass = e.target.value;
+    const strength = getStrength(e.target.value);
+    setPassStrength(strength);
+    setValue('password', pass);
+    trigger('password');
+    trigger('confirmPassword');
   };
 
   const pictureHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +104,17 @@ function HookForm() {
         <label className="label" htmlFor="password">
           Password
         </label>
-        <input className="input" {...register('password')} id="password" type="password" />
+        <div className="passwordBlock">
+          <input
+            className="input"
+            {...register('password')}
+            id="password"
+            type="password"
+            onChange={handlePasswordChange}
+          />
+          <PasswordStrengthBar strength={passStrength} />
+        </div>
+
         {errors.password && <p className="errorField">{errors.password.message}</p>}
       </div>
 

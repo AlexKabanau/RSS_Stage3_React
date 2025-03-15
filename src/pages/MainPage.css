@@ -54,6 +54,15 @@
   transform: scale(1.01);
   background-color: rgba(255, 255, 255, 0.15);
 }
+/* .data-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: left
+} */
+
+.propImage {
+  width: 10rem;
+}
 
 .empty-state {
   display: flex;

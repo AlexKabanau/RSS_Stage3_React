@@ -49,3 +49,14 @@
 .preview {
     width: 4rem;
 }
+.passwordBlock {
+    /* width: 100%; */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.passwordBlock .input {
+    width: 100%;
+    box-sizing: border-box;
+}

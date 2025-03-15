@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { GENDER } from '../constants/constants';
+import { countriesData } from '../store/reducers/dataSlice';
 
 export const schema = yup.object().shape({
   name: yup
@@ -39,7 +40,7 @@ export const schema = yup.object().shape({
 
   picture: yup.mixed().required('Picture is required'),
 
-  country: yup.string().required('Coutry is required field'),
+  country: yup.string().oneOf(countriesData).required('Coutry is required field'),
 });
 
 /* name (validate for first uppercased letter)
