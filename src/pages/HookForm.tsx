@@ -5,7 +5,7 @@ import { schema } from '../utils/schema';
 import './HookForm.css';
 import { converter } from '../utils/converter';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { setData, SubmitFormDataType } from '../store/reducers/dataSlice';
+import { setData, setShadow, SubmitFormDataType } from '../store/reducers/dataSlice';
 import { useNavigate } from 'react-router-dom';
 import PasswordStrengthBar from '../components/PasswordStrengthBar';
 import { getStrength } from '../utils/getStrength';
@@ -44,6 +44,7 @@ function HookForm() {
       const newData: SubmitFormDataType = { ...data, picture: string64 };
       const newDataArr: SubmitFormDataType[] = [newData];
       dispatch(setData(newDataArr));
+      dispatch(setShadow('0px 0px 20px 10px rgba(0, 255, 0, 0.5)'));
       navigate('/');
     } else {
       console.log('Invalid picture');

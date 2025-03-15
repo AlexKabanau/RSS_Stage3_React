@@ -1,11 +1,24 @@
 import React from 'react';
 import { SubmitFormDataType } from '../store/reducers/dataSlice';
 import './Item';
+import { useAppSelector } from '../store/store';
 
-function Item({ key, item }: { key: number; item: SubmitFormDataType }) {
-  console.log(item);
+function Item({
+  key,
+  item,
+  i,
+  highlight,
+}: {
+  key: number;
+  item: SubmitFormDataType;
+  i: number;
+  highlight: number;
+}) {
+  const border = useAppSelector((state) => state.borderStyle);
+
+  // console.log(item);
   return (
-    <div key={key} className="data-item">
+    <div key={key} className="data-item" style={highlight === i ? border : {}}>
       <p className="itemProp">
         <b>Name:</b> {item.name}
       </p>

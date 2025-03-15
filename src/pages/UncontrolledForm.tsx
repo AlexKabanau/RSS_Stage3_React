@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { setData, SubmitUnFormDataType } from '../store/reducers/dataSlice';
+import { setData, setShadow, SubmitUnFormDataType } from '../store/reducers/dataSlice';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { schema } from '../utils/schema';
 import { ValidationError } from 'yup';
@@ -79,6 +79,7 @@ function UncontrolledForm() {
       const newData = { ...data, picture: string64 };
       const newDataArr = [newData];
       dispatch(setData(newDataArr));
+      dispatch(setShadow('0px 0px 20px 10px rgba(0, 255, 0, 0.5)'));
       navigate('/');
     }
 

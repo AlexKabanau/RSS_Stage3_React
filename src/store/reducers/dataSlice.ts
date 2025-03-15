@@ -268,8 +268,11 @@ export const dataSlice = createSlice({
       // state.data = action.payload;
       state.data.push(...action.payload); // Now we add new data to the existing array
     },
+    setShadow(state, action: PayloadAction<string>) {
+      state.borderStyle.boxShadow = action.payload;
+    },
   },
 });
 
 export default dataSlice.reducer;
-export const { setData } = dataSlice.actions;
+export const { setData, setShadow } = dataSlice.actions;
