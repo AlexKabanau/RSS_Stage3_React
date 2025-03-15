@@ -5,11 +5,14 @@ import { schema } from '../utils/schema';
 import './HookForm.css';
 import { converter } from '../utils/converter';
 import { useAppDispatch, useAppSelector } from '../store/store';
-import { setData, setShadow, SubmitFormDataType } from '../store/reducers/dataSlice';
+import {
+  setData,
+  setShadow,
+  SubmitFormDataType,
+} from '../store/reducers/dataSlice';
 import { useNavigate } from 'react-router-dom';
 import PasswordStrengthBar from '../components/PasswordStrengthBar';
 import { getStrength } from '../utils/getStrength';
-// import { GENDER } from '../constants/constants'
 
 export type FormDataType = {
   name?: string;
@@ -37,8 +40,6 @@ function HookForm() {
   const dispatch = useAppDispatch();
 
   const onSubmitHandler = async (data: FormDataType) => {
-    // console.log(data);
-    // console.log(data.picture[0])
     if (data.picture instanceof File) {
       const string64 = await converter(data.picture);
       const newData: SubmitFormDataType = { ...data, picture: string64 };
@@ -51,7 +52,6 @@ function HookForm() {
     }
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // handeOnInputChange('password');
     const pass = e.target.value;
     const strength = getStrength(e.target.value);
     setPassStrength(strength);
@@ -62,8 +62,6 @@ function HookForm() {
 
   const pictureHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0] instanceof File) {
-      // console.log('has file')
-      // console.log(event.target.files[0])
       const picture = event.target.files[0];
       setPreview(URL.createObjectURL(picture));
       setValue('picture', picture);
@@ -75,7 +73,7 @@ function HookForm() {
   return (
     <form className="form-container" onSubmit={handleSubmit(onSubmitHandler)}>
       <h2 className="formTitle">React Hook Form</h2>
-      <p className="formDescription">Let's create a form</p>
+      <p className="formDescription">{"Let's create a form"}</p>
 
       <div className="formBlock">
         <label className="label" htmlFor="name">
@@ -116,7 +114,9 @@ function HookForm() {
           <PasswordStrengthBar strength={passStrength} />
         </div>
 
-        {errors.password && <p className="errorField">{errors.password.message}</p>}
+        {errors.password && (
+          <p className="errorField">{errors.password.message}</p>
+        )}
       </div>
 
       <div className="formBlock">
@@ -129,19 +129,33 @@ function HookForm() {
           id="confirmPassword"
           type="password"
         />
-        {errors.confirmPassword && <p className="errorField">{errors.confirmPassword.message}</p>}
+        {errors.confirmPassword && (
+          <p className="errorField">{errors.confirmPassword.message}</p>
+        )}
       </div>
 
       <div className="formBlock">
         <p className="label">Gender:</p>
         <div className="radioBlock">
-          <input {...register('gender')} type="radio" id="male" name="gender" value="male" />
+          <input
+            {...register('gender')}
+            type="radio"
+            id="male"
+            name="gender"
+            value="male"
+          />
           <label className="labelRadio" htmlFor="male">
             Male
           </label>
         </div>
         <div className="radioBlock">
-          <input {...register('gender')} type="radio" id="female" name="gender" value="female" />
+          <input
+            {...register('gender')}
+            type="radio"
+            id="female"
+            name="gender"
+            value="female"
+          />
           <label className="labelRadio" htmlFor="female">
             Female
           </label>
@@ -153,7 +167,12 @@ function HookForm() {
         <label className="label" htmlFor="accept">
           Accept Terms and Conditions agreement
         </label>
-        <input className="input" {...register('accept')} id="accept" type="checkbox" />
+        <input
+          className="input"
+          {...register('accept')}
+          id="accept"
+          type="checkbox"
+        />
         {errors.accept && <p className="errorField">{errors.accept.message}</p>}
       </div>
 
@@ -166,25 +185,33 @@ function HookForm() {
           id="picture"
           type="file"
           onChange={(e) => {
-            // console.log(e)
             pictureHandler(e);
           }}
         />
         {preview && <img src={preview} alt="Preview" className="preview" />}
-        {errors.picture && <p className="errorField">{errors.picture.message}</p>}
+        {errors.picture && (
+          <p className="errorField">{errors.picture.message}</p>
+        )}
       </div>
 
       <div className="formBlock">
         <label className="label" htmlFor="country">
           Country
         </label>
-        <input className="input" {...register('country')} id="country" list="countries" />
+        <input
+          className="input"
+          {...register('country')}
+          id="country"
+          list="countries"
+        />
         <datalist id="countries">
           {countries.map((el, key) => (
             <option value={el} key={key} />
           ))}
         </datalist>
-        {errors.country && <p className="errorField">{errors.country.message}</p>}
+        {errors.country && (
+          <p className="errorField">{errors.country.message}</p>
+        )}
       </div>
       <button type="submit" disabled={!isValid}>
         Submit

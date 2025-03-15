@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import './MainPage.css';
@@ -15,7 +15,6 @@ function MainPage() {
       }, 3000);
       return () => clearTimeout(timeoutId);
     }
-    // console.log(data);
   }, [data, dispatch]);
   return (
     <div className="main-page">
@@ -30,7 +29,9 @@ function MainPage() {
       </nav>
       <div className="data-container">
         {data.length ? (
-          data.map((item, i) => <Item item={item} key={i} i={i} highlight={0} />)
+          data.map((item, i) => (
+            <Item item={item} key={i} i={i} highlight={0} />
+          ))
         ) : (
           <div className="empty-state">
             <p>Items not fond</p>

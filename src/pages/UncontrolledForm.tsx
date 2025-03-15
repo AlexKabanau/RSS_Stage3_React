@@ -1,5 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { setData, setShadow, SubmitUnFormDataType } from '../store/reducers/dataSlice';
+import {
+  setData,
+  setShadow,
+  SubmitUnFormDataType,
+} from '../store/reducers/dataSlice';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { schema } from '../utils/schema';
 import { ValidationError } from 'yup';
@@ -68,7 +72,9 @@ function UncontrolledForm() {
       confirmPassword: confirmPasswordRef.current?.value,
       gender: maleRef.current?.checked ? 'male' : 'female',
       country: countryRef.current?.value,
-      picture: pictureRef.current?.files ? pictureRef.current.files[0] : undefined,
+      picture: pictureRef.current?.files
+        ? pictureRef.current.files[0]
+        : undefined,
       accept: acceptRef.current?.checked,
     };
     const isValid = await validateSubmit(data);
@@ -82,22 +88,11 @@ function UncontrolledForm() {
       dispatch(setShadow('0px 0px 20px 10px rgba(0, 255, 0, 0.5)'));
       navigate('/');
     }
-
-    /*if (data.picture instanceof File) {
-          const string64 = await converter(data.picture);
-          const newData: SubmitFormDataType = { ...data, picture: string64 };
-          const newDataArr: SubmitFormDataType[] = [newData];
-          dispatch(setData(newDataArr));
-          navigate('/');
-        } else {
-          console.log('Invalid picture');
-        } */
-    // age: ageRef.current?.value,
   }
   const handeOnInputChange = (fieldName: FieldsName) => {
     setErrors((prevErrors) => {
       const newErrors = { ...prevErrors };
-      delete newErrors[fieldName];
+      newErrors[fieldName] = undefined;
       return newErrors;
     });
   };
@@ -109,14 +104,13 @@ function UncontrolledForm() {
   };
   const pictureHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && pictureRef.current) {
-      // const picture = e.target.files[0];
       pictureRef.current.files = e.target.files;
     }
   };
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <h2 className="formTitle">Uncontrolled Form</h2>
-      <p className="formDescription">Let's create a form</p>
+      <p className="formDescription">{`Let's create a form`}</p>
 
       <div className="formBlock">
         <label className="label" htmlFor="name">
@@ -186,7 +180,9 @@ function UncontrolledForm() {
           type="password"
           onChange={() => handeOnInputChange('confirmPassword')}
         />
-        {errors.confirmPassword && <p className="errorField">{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p className="errorField">{errors.confirmPassword}</p>
+        )}
       </div>
 
       <div className="formBlock">
@@ -249,13 +245,7 @@ function UncontrolledForm() {
             pictureHandler(e);
           }}
         />
-        {/* {preview && <img src={preview} alt="Preview" className="preview" />} */}
-        {errors.picture && (
-          <p className="errorField">
-            {/* {errors.picture} */}
-            Error
-          </p>
-        )}
+        {errors.picture && <p className="errorField">Error</p>}
       </div>
 
       <div className="formBlock">
@@ -278,9 +268,6 @@ function UncontrolledForm() {
         {errors.country && <p className="errorField">{errors.country}</p>}
       </div>
       <button type="submit">Submit</button>
-      {/* <button type="reset" onClick={() => trigger()}>
-        Reset
-      </button> */}
     </form>
   );
 }

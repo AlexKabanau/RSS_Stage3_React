@@ -1,4 +1,3 @@
-import React from 'react';
 import './PasswordStrengthBar.css';
 
 interface PasswordStrengthBarProps {
@@ -9,17 +8,17 @@ function PasswordStrengthBar({ strength }: PasswordStrengthBarProps) {
   const getStrengthLabel = (strength: number) => {
     switch (strength) {
       case 0:
-        return 'Very Weak';
-      case 1:
         return 'Weak';
-      case 2:
+      case 1:
         return 'Medium';
+      case 2:
+        return 'Strong';
       case 3:
         return 'Strong';
       case 4:
-        return 'Very Strong';
+        return 'Strong';
       default:
-        return '';
+        return 'Weak';
     }
   };
 
@@ -28,15 +27,15 @@ function PasswordStrengthBar({ strength }: PasswordStrengthBarProps) {
       case 0:
         return 'red';
       case 1:
-        return 'orange';
-      case 2:
         return 'yellow';
+      case 2:
+        return 'green';
       case 3:
-        return 'lightgreen';
+        return 'green';
       case 4:
         return 'green';
       default:
-        return 'gray';
+        return 'red';
     }
   };
 
@@ -51,7 +50,8 @@ function PasswordStrengthBar({ strength }: PasswordStrengthBarProps) {
           style={{
             width: `${(strength / 4) * 100}%`,
             backgroundColor: strengthColor,
-          }}></div>
+          }}
+        ></div>
       </div>
       <div className="password-strength-bar-label">{strengthLabel}</div>
     </div>

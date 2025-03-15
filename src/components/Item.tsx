@@ -1,4 +1,3 @@
-import React from 'react';
 import { SubmitFormDataType } from '../store/reducers/dataSlice';
 import './Item';
 import { useAppSelector } from '../store/store';
@@ -16,7 +15,6 @@ function Item({
 }) {
   const border = useAppSelector((state) => state.borderStyle);
 
-  // console.log(item);
   return (
     <div key={key} className="data-item" style={highlight === i ? border : {}}>
       <p className="itemProp">
