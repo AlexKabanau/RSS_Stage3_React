@@ -108,167 +108,170 @@ function UncontrolledForm() {
     }
   };
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <h2 className="formTitle">Uncontrolled Form</h2>
-      <p className="formDescription">{`Let's create a form`}</p>
+    <>
+      <form className="form-container" onSubmit={handleSubmit}>
+        <h2 className="formTitle">Uncontrolled Form</h2>
+        <p className="formDescription">{`Let's create a form`}</p>
 
-      <div className="formBlock">
-        <label className="label" htmlFor="name">
-          Name
-        </label>
-        <input
-          className="input"
-          id="name"
-          ref={nameRef}
-          onChange={() => handeOnInputChange('name')}
-        />
-        {errors.name && <p className="errorField">{errors.name}</p>}
-      </div>
-
-      <div className="formBlock">
-        <label className="label" htmlFor="age">
-          Age
-        </label>
-        <input
-          className="input"
-          id="age"
-          ref={ageRef}
-          onChange={() => handeOnInputChange('age')}
-          type="number"
-        />
-        {errors.age && <p className="errorField">{errors.age}</p>}
-      </div>
-
-      <div className="formBlock">
-        <label className="label" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="input"
-          id="email"
-          ref={emailRef}
-          onChange={() => handeOnInputChange('email')}
-        />
-        {errors.email && <p className="errorField">{errors.email}</p>}
-      </div>
-
-      <div className="formBlock">
-        <label className="label" htmlFor="password">
-          Password
-        </label>
-        <div className="passwordBlock">
+        <div className="formBlock">
+          <label className="label" htmlFor="name">
+            Name
+          </label>
           <input
             className="input"
-            id="password"
-            ref={passwordRef}
+            id="name"
+            ref={nameRef}
+            onChange={() => handeOnInputChange('name')}
+          />
+          {errors.name && <p className="errorField">{errors.name}</p>}
+        </div>
+
+        <div className="formBlock">
+          <label className="label" htmlFor="age">
+            Age
+          </label>
+          <input
+            className="input"
+            id="age"
+            ref={ageRef}
+            onChange={() => handeOnInputChange('age')}
+            type="number"
+          />
+          {errors.age && <p className="errorField">{errors.age}</p>}
+        </div>
+
+        <div className="formBlock">
+          <label className="label" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="input"
+            id="email"
+            ref={emailRef}
+            onChange={() => handeOnInputChange('email')}
+          />
+          {errors.email && <p className="errorField">{errors.email}</p>}
+        </div>
+
+        <div className="formBlock">
+          <label className="label" htmlFor="password">
+            Password
+          </label>
+          <div className="passwordBlock">
+            <input
+              className="input"
+              id="password"
+              ref={passwordRef}
+              type="password"
+              onChange={(e) => handlePasswordChange(e)}
+            />
+            <PasswordStrengthBar strength={passStrength} />
+          </div>
+          {errors.password && <p className="errorField">{errors.password}</p>}
+        </div>
+
+        <div className="formBlock">
+          <label className="label" htmlFor="confirmPassword">
+            Confirm password
+          </label>
+          <input
+            className="input"
+            id="confirmPassword"
+            ref={confirmPasswordRef}
             type="password"
-            onChange={(e) => handlePasswordChange(e)}
+            onChange={() => handeOnInputChange('confirmPassword')}
           />
-          <PasswordStrengthBar strength={passStrength} />
+          {errors.confirmPassword && (
+            <p className="errorField">{errors.confirmPassword}</p>
+          )}
         </div>
-        {errors.password && <p className="errorField">{errors.password}</p>}
-      </div>
 
-      <div className="formBlock">
-        <label className="label" htmlFor="confirmPassword">
-          Confirm password
-        </label>
-        <input
-          className="input"
-          id="confirmPassword"
-          ref={confirmPasswordRef}
-          type="password"
-          onChange={() => handeOnInputChange('confirmPassword')}
-        />
-        {errors.confirmPassword && (
-          <p className="errorField">{errors.confirmPassword}</p>
-        )}
-      </div>
+        <div className="formBlock">
+          <p className="label">Gender:</p>
+          <div className="radioBlock">
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+              ref={maleRef}
+              onChange={() => handeOnInputChange('gender')}
+            />
+            <label className="labelRadio" htmlFor="male">
+              Male
+            </label>
+          </div>
+          <div className="radioBlock">
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+              ref={femaleRef}
+              onChange={() => handeOnInputChange('gender')}
+            />
+            <label className="labelRadio" htmlFor="female">
+              Female
+            </label>
+          </div>
 
-      <div className="formBlock">
-        <p className="label">Gender:</p>
-        <div className="radioBlock">
-          <input
-            type="radio"
-            id="male"
-            name="gender"
-            value="male"
-            ref={maleRef}
-            onChange={() => handeOnInputChange('gender')}
-          />
-          <label className="labelRadio" htmlFor="male">
-            Male
+          {errors.gender && <p className="errorField">{errors.gender}</p>}
+        </div>
+
+        <div className="acceptBlock">
+          <label className="label" htmlFor="accept">
+            Accept Terms and Conditions agreement
           </label>
-        </div>
-        <div className="radioBlock">
           <input
-            type="radio"
-            id="female"
-            name="gender"
-            value="female"
-            ref={femaleRef}
-            onChange={() => handeOnInputChange('gender')}
+            className="input"
+            id="accept"
+            ref={acceptRef}
+            type="checkbox"
+            onChange={() => handeOnInputChange('accept')}
           />
-          <label className="labelRadio" htmlFor="female">
-            Female
-          </label>
+          {errors.accept && <p className="errorField">{errors.accept}</p>}
         </div>
 
-        {errors.gender && <p className="errorField">{errors.gender}</p>}
-      </div>
+        <div className="formBlock">
+          <label className="label" htmlFor="picture">
+            Picture
+          </label>
+          <input
+            className="input"
+            id="picture"
+            type="file"
+            ref={pictureRef}
+            onChange={(e) => {
+              handeOnInputChange('picture');
+              pictureHandler(e);
+            }}
+          />
+          {errors.picture && <p className="errorField">Error</p>}
+        </div>
 
-      <div className="acceptBlock">
-        <label className="label" htmlFor="accept">
-          Accept Terms and Conditions agreement
-        </label>
-        <input
-          className="input"
-          id="accept"
-          ref={acceptRef}
-          type="checkbox"
-          onChange={() => handeOnInputChange('accept')}
-        />
-        {errors.accept && <p className="errorField">{errors.accept}</p>}
-      </div>
-
-      <div className="formBlock">
-        <label className="label" htmlFor="picture">
-          Picture
-        </label>
-        <input
-          className="input"
-          id="picture"
-          type="file"
-          ref={pictureRef}
-          onChange={(e) => {
-            handeOnInputChange('picture');
-            pictureHandler(e);
-          }}
-        />
-        {errors.picture && <p className="errorField">Error</p>}
-      </div>
-
-      <div className="formBlock">
-        <label className="label" htmlFor="country">
-          Country
-        </label>
-        <input
-          className="input"
-          id="country"
-          list="countries"
-          name="country"
-          ref={countryRef}
-          onChange={() => handeOnInputChange('country')}
-        />
-        <datalist id="countries">
-          {countries.map((el, key) => (
-            <option value={el} key={key} />
-          ))}
-        </datalist>
-        {errors.country && <p className="errorField">{errors.country}</p>}
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+        <div className="formBlock">
+          <label className="label" htmlFor="country">
+            Country
+          </label>
+          <input
+            className="input"
+            id="country"
+            list="countries"
+            name="country"
+            ref={countryRef}
+            onChange={() => handeOnInputChange('country')}
+          />
+          <datalist id="countries">
+            {countries.map((el, key) => (
+              <option value={el} key={key} />
+            ))}
+          </datalist>
+          {errors.country && <p className="errorField">{errors.country}</p>}
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <button onClick={() => navigate('/')}>Home</button>
+    </>
   );
 }
 
