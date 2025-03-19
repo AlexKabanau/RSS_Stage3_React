@@ -59,10 +59,10 @@ function Categories() {
       }
     };
     //FIXME document
-    document.body.addEventListener('click', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.body.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -87,7 +87,7 @@ function Categories() {
         </span>
       </div>
       {openFilter && (
-        <div className="filter__popup">
+        <div className="categories__popup">
           <ul>
             {filterList.map((obj, index) => (
               <li

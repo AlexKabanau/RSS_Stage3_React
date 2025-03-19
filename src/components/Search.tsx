@@ -66,7 +66,7 @@ const Search: React.FC = () => {
         onChange={onChangeInput}
         className={style.input}
         type="text"
-        placeholder="Поиск пиццы...."
+        placeholder="Search countries...."
       />
       {value && (
         <svg

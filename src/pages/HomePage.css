@@ -65,32 +65,33 @@
   text-decoration: underline;
 }
 
-.filter__popup,
+.categories__popup,
 .sort__popup {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
+  background-color: darkslategrey;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 10;
 }
 
-.filter__popup ul,
+.categories__popup ul,
 .sort__popup ul {
   list-style: none;
   padding: 10px;
   margin: 0;
 }
 
-.filter__popup li,
+.categories__popup li,
 .sort__popup li {
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.filter__popup li:hover,
+.categories__popup li:hover,
 .sort__popup li:hover {
-  background-color: #f0f0f0;
+  background-color: forestgreen;
+  color: black;
 }

@@ -30,6 +30,22 @@
   font-weight: bold;
 }
 
+.country-block__visited-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.country-block__visited-checkbox {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.country-block__visited-text {
+  font-size: 0.9rem;
+}
+
 .country-block__population,
 .country-block__region {
   margin: 5px 0;

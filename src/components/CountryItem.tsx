@@ -22,13 +22,14 @@ function CountryItem({
       />
       <div className="country-block__info">
         <h4 className="country-block__name">{country.name.common}</h4>
-        <label>
+        <label className="country-block__visited-label">
           <input
             type="checkbox"
             checked={isVisited}
             onChange={() => onToggleVisited(country.name.common)}
+            className="country-block__visited-checkbox"
           />
-          Visited
+          <span className="country-block__visited-text">Visited</span>
         </label>
         <p className="country-block__population">
           Population: {country.population.toLocaleString()}

@@ -33,7 +33,7 @@ function HomePage() {
   const isVisited = (name: string) =>
     visited.visited.some((item) => item.common === name);
 
-  const { data, error, isFetching, refetch } = useGetAllCountriesQuery('');
+  const { data, error, isFetching } = useGetAllCountriesQuery('');
   const sortBy = sort.sortProperty.replace('-', '');
   const order = sort.sortProperty.includes('-') ? `asc` : `desc`;
   const filter = categoryId.filterProperty;
