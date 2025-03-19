@@ -4,6 +4,10 @@
   padding: 2rem;
   text-align: center;
 }
+.main {
+  display: grid;
+  grid-template-rows: 150px 1fr;
+}
 
 .logo {
   height: 6em;
@@ -24,17 +28,18 @@
     margin: 100px auto;
     width: 580px;
     text-align: center;
+}
 
-    h2 {
+.content__error-info h2 {
       font-size: 32px;
       font-weight: 700;
       margin-bottom: 10px;
     }
 
-    p {
+    .content__error-info p {
       font-size: 20px;
     }
-  }
+  
 
   .content__title {
     font-weight: 800;
@@ -71,26 +76,30 @@
 
     /* @media (max-width: 1260px) {
       /* flex-direction: column-reverse; */
+  }
 
-      .categories {
+      /* .content__top .categories {
         /* // margin-top: 30px; */
-        width: 100%;
+        /* width: 100%;
         overflow-x: scroll;
+      } */
 
 
-        ul {
+        /* .content__top .categories ul {
           width: 785px;
-        }
-      }
+        } */
+      
 
-      .sort {
+        /* .content__top .categories .sort {
         padding-left: 20px;
-        b {
+        } */
+
+        /* .content__top .categories .sort b {
           display: none;
-        }
-      }
-    } 
-    */
+        } */ 
+      
+    
+    
 
     /* @media (max-width: 820px) {
       .categories {
@@ -111,30 +120,36 @@
   /* } */
   /* @import '../variables'; */
 
-.sort {
+.sort,
+.categories {
   position: relative;
 }
-.sort__label {
+.sort__label,
+.categories__label {
     display: flex;
     align-items: center;
 }
 
-.sort__label svg {
+.sort__label svg,
+.categories__label svg {
       margin-right: 8px;
     }
 
-    .sort__label b {
+    .sort__label b,
+    .categories__label b {
       margin-right: 8px;
     }
 
-    .sort__label span {
+    .sort__label span,
+    .categories__label span {
       color: orange;
       border-bottom: 1px dashed orange;
       cursor: pointer;
     }
   /* } */
 
-  .sort__popup {
+  .sort__popup,
+  .categories__popup {
     position: absolute;
     right: 0;
     margin-top: 15px;
@@ -146,20 +161,25 @@
     /* // width: 160px; */
   }
 
-  .sort__popup ul {
+  .sort__popup ul,
+  .categories__popup ul {
       overflow: hidden;
   }
-  .sort__popup ul li {
+  .sort__popup ul li,
+  .categories__popup ul li {
         padding: 12px 20px;
         cursor: pointer;
   }
 
   .sort__popup ul li.active,
-  .sort__popup ul li:hover {
+  .sort__popup ul li:hover,
+  .categories__popup ul li.active,
+  .categories__popup ul li:hover {
           background: rgba(254, 95, 30, 0.05);
         }
 
-        .sort__popup ul li.active {
+        .sort__popup ul li.active,
+        .categories__popup ul li.active {
           font-weight: bold;
           color: orange;
         }

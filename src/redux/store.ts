@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 // import favorits from './slice/favoritsSlice';
 import filter from './slices/filterSlice';
 import countries from './slices/countriesSlice';
+import visited from './slices/visitedSlice';
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { countriesApi } from './redux.api';
@@ -11,7 +12,7 @@ export const store = configureStore({
   reducer: {
     filter: filter,
     countries: countries,
-    // favorits: favorits,
+    visited: visited,
     [countriesApi.reducerPath]: countriesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

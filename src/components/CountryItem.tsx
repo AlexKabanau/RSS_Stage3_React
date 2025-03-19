@@ -2,7 +2,17 @@ import React from 'react';
 import { Country } from '../redux/slices/countriesSlice';
 import './CountryItem.css';
 
-function CountryItem({ key, country }: { key: string; country: Country }) {
+function CountryItem({
+  key,
+  country,
+  isVisited,
+  onToggleVisited,
+}: {
+  key: string;
+  country: Country;
+  isVisited: boolean;
+  onToggleVisited: (name: string) => void;
+}) {
   return (
     <div className="country-block">
       <img
@@ -12,6 +22,14 @@ function CountryItem({ key, country }: { key: string; country: Country }) {
       />
       <div className="country-block__info">
         <h4 className="country-block__name">{country.name.common}</h4>
+        <label>
+          <input
+            type="checkbox"
+            checked={isVisited}
+            onChange={() => onToggleVisited(country.name.common)}
+          />
+          Visited
+        </label>
         <p className="country-block__population">
           Population: {country.population.toLocaleString()}
         </p>

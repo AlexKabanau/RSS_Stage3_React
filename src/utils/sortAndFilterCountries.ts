@@ -31,25 +31,27 @@ export const sortAndFilterCountries = (
   // 2. Sort
   const sortedCountries = [...filteredCountries];
 
-  if (sortBy === SortPropertyEnum.NAME_ASC || SortPropertyEnum.NAME_DESC) {
+  if (sortBy === 'name') {
+    console.log('sortBy function ', sortBy);
     if (order === 'asc') {
-      console.log('sort name asc');
+      console.log('sort name ', order);
       sortedCountries.sort((a, b) =>
         a.name.common.localeCompare(b.name.common)
       );
     } else {
-      console.log('sort name desc');
+      console.log('sort name ', order);
       sortedCountries.sort((a, b) =>
         b.name.common.localeCompare(a.name.common)
       );
     }
-  } else if (
-    sortBy === SortPropertyEnum.POPULATION_ASC ||
-    SortPropertyEnum.POPULATION_DESC
-  ) {
+  } else if (sortBy === 'population') {
     if (order === 'asc') {
+      console.log('sort population ', order);
+
       sortedCountries.sort((a, b) => a.population - b.population);
     } else {
+      console.log('sort population ', order);
+
       sortedCountries.sort((a, b) => b.population - a.population);
     }
   }

@@ -81,7 +81,7 @@ function Categories() {
             fill="#2C2C2C"
           />
         </svg>
-        <b>Filter:</b>
+        <b>Region:</b>
         <span onClick={() => setOpenFilter(!openFilter)}>
           {categoryId.name}
         </span>
