@@ -53,10 +53,10 @@ function HomePage() {
     }
   }, [dispatch]);
   useEffect(() => {
-    console.log('sortBy =>', sortBy);
-    console.log('order =>', order);
-    console.log('filter =>', filter);
-    console.log('searchValue =>', searchValue);
+    // console.log('sortBy =>', sortBy);
+    // console.log('order =>', order);
+    // console.log('filter =>', filter);
+    // console.log('searchValue =>', searchValue);
 
     setSortedAndFilteredCountries(
       sortAndFilterCountries(data || [], sortBy, order, filter, searchValue)
