@@ -69,12 +69,14 @@ function HomePage() {
       <h2 className="content__title">Countries</h2>
       {isFetching ? (
         <div>Loading...</div>
-      ) : (
+      ) : sortedAndFilteredCountries && sortedAndFilteredCountries.length ? (
         <div className="content__items">
           {sortedAndFilteredCountries?.map((country: Country) => (
             <CountryItem key={country.cca3} country={country} />
           ))}
         </div>
+      ) : (
+        <div>Items not found</div>
       )}
     </div>
   );

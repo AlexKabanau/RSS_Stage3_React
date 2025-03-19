@@ -3,7 +3,7 @@ import React, { ChangeEvent, useRef, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { useContext } from "react";
 
-// import style from './Search.module.scss';
+import style from './Search.module.css';
 // import { SearchContext } from "../../App";
 import { useCallback } from 'react';
 import { useState } from 'react';
@@ -45,9 +45,9 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className={'style.root'}>
+    <div className={style.root}>
       <svg
-        className={'style.icon'}
+        className={style.icon}
         enableBackground="new 0 0 32 32"
         id="Glyph"
         version="1.1"
@@ -64,14 +64,14 @@ const Search: React.FC = () => {
         value={value}
         // onChange={(event) => setSearchValue(event.target.value)}
         onChange={onChangeInput}
-        className={'style.input'}
+        className={style.input}
         type="text"
         placeholder="Поиск пиццы...."
       />
       {value && (
         <svg
           onClick={onClickClear}
-          className={'style.clearIcon'}
+          className={style.clearIcon}
           height="512px"
           id="Layer_1"
           version="1.1"
