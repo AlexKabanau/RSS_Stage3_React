@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import CountryBlock from '../components/CountryItem';
 import Search from '../components/Search';
 import { selectFilter, selectSort, setSort } from '../redux/slices/filterSlice';
-import { useAppDispatch } from '../redux/store';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { useSelector } from 'react-redux';
 import {
   Country,
@@ -14,6 +14,7 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import CountryItem from '../components/CountryItem';
 import './HomePage.css';
+import { sortAndFilterCountries } from '../utils/sortAndFilterCountries';
 
 // export enum SortPropertyEnum {
 //   POPULATION_DESC = 'population',
@@ -24,7 +25,31 @@ import './HomePage.css';
 
 function HomePage() {
   // const dispatch = useAppDispatch();
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilter);
+
   const { data, error, isFetching, refetch } = useGetAllCountriesQuery('');
+  const countries = useAppSelector((state) => state.countries.items);
+  const sortBy = sort.sortProperty.replace('-', '');
+  const order = sort.sortProperty.includes('-') ? `asc` : `desc`;
+  const filter = categoryId.filterProperty;
+  const [sortedAndFilteredCountries, setSortedAndFilteredCountries] = useState<
+    Country[] | undefined
+  >(data);
+  // const sortBy = useAppSelector((state) => state.filter.sort.sortProperty);
+  // const order = useAppSelector((state) => state.filter.sort.name);
+  // const filter = useAppSelector((state) => state.filter.categoryId);
+  // let sortedAndFilteredCountries = data;
+  useEffect(() => {
+    setSortedAndFilteredCountries(
+      sortAndFilterCountries(data || [], sortBy, order, filter)
+    );
+    console.log('sortBy =>', sortBy);
+    console.log('order =>', order);
+    console.log('filter =>', filter);
+    console.log(sortedAndFilteredCountries?.length);
+  }, [sortBy, order, filter, data]);
+
   if (isFetching) {
     return <div className="loading">Loading...</div>;
   }
@@ -47,7 +72,7 @@ function HomePage() {
         <div>Loading...</div>
       ) : (
         <div className="content__items">
-          {data?.map((country: Country) => (
+          {sortedAndFilteredCountries?.map((country: Country) => (
             <CountryItem key={country.cca3} country={country} />
           ))}
         </div>

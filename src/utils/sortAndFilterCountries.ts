@@ -3,9 +3,9 @@ import { SortPropertyEnum } from '../redux/slices/filterSlice';
 
 export const sortAndFilterCountries = (
   countries: Country[],
-  sortBy: SortPropertyEnum,
-  order: 'asc' | 'desc',
-  filter: Region | 'All'
+  sortBy: string,
+  order: string, //'asc' | 'desc',
+  filter: string //Region | 'All'
 ): Country[] => {
   // 1. Filter
   let filteredCountries = [...countries];
@@ -19,21 +19,34 @@ export const sortAndFilterCountries = (
   // 2. Sort
   const sortedCountries = [...filteredCountries];
 
-  if (sortBy === SortPropertyEnum.NAME_ASC) {
-    sortedCountries.sort((a, b) => a.name.common.localeCompare(b.name.common));
-  } else if (sortBy === SortPropertyEnum.NAME_DESC) {
-    sortedCountries.sort((a, b) => b.name.common.localeCompare(a.name.common));
-  } else if (sortBy === SortPropertyEnum.POPULATION_ASC) {
-    sortedCountries.sort((a, b) => a.population - b.population);
-  } else if (sortBy === SortPropertyEnum.POPULATION_DESC) {
-    sortedCountries.sort((a, b) => b.population - a.population);
+  if (sortBy === SortPropertyEnum.NAME_ASC || SortPropertyEnum.NAME_DESC) {
+    if (order === 'asc') {
+      console.log('sort name asc');
+      sortedCountries.sort((a, b) =>
+        a.name.common.localeCompare(b.name.common)
+      );
+    } else {
+      console.log('sort name desc');
+      sortedCountries.sort((a, b) =>
+        b.name.common.localeCompare(a.name.common)
+      );
+    }
+  } else if (
+    sortBy === SortPropertyEnum.POPULATION_ASC ||
+    SortPropertyEnum.POPULATION_DESC
+  ) {
+    if (order === 'asc') {
+      sortedCountries.sort((a, b) => a.population - b.population);
+    } else {
+      sortedCountries.sort((a, b) => b.population - a.population);
+    }
   }
 
   // 3. Order (if needed, but it's already handled in the sort logic above)
   // if (order === 'desc') {
   //   sortedCountries.reverse();
   // }
-
+  console.log(sortedCountries);
   return sortedCountries;
 };
 /* import React from 'react';
