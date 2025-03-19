@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import CountryBlock from '../components/CountryItem';
+import { useEffect, useState } from 'react';
+// import CountryBlock from '../components/CountryItem';
 import Search from '../components/Search';
-import { selectFilter, selectSort, setSort } from '../redux/slices/filterSlice';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { selectFilter } from '../redux/slices/filterSlice';
+import { useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import {
   Country,
-  fetchCountries,
+  // fetchCountries,
   Name,
-  selectCountriesData,
+  // selectCountriesData,
 } from '../redux/slices/countriesSlice';
+import reactLogo from '../assets/react.svg';
 import { useGetAllCountriesQuery } from '../redux/redux.api';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -29,7 +30,7 @@ function HomePage() {
   const dispatch = useAppDispatch();
   const { categoryId, sort, searchValue } = useSelector(selectFilter);
   const visited = useSelector(selectVisited);
-  console.log('visited =>', visited);
+  // console.log('visited =>', visited);
   const isVisited = (name: string) =>
     visited.visited.some((item) => item.common === name);
 
@@ -69,7 +70,7 @@ function HomePage() {
   }, [visited]);
 
   const toggleVisited = (item: Name) => {
-    console.log(item);
+    // console.log(item);
     // if (!Array.isArray(visited)) {
     //   console.error('visited is not an array!');
     //   return;
@@ -97,7 +98,10 @@ function HomePage() {
       </div>
       <h2 className="content__title">Countries</h2>
       {isFetching ? (
-        <div>Loading...</div>
+        <>
+          <p>⏳ Loading...</p>
+          <img src={reactLogo} className="logo" alt="loading" />
+        </>
       ) : sortedAndFilteredCountries && sortedAndFilteredCountries.length ? (
         <div className="content__items">
           {sortedAndFilteredCountries?.map((country: Country) => (

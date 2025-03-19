@@ -1,14 +1,14 @@
-import React from 'react';
+// import React from 'react';
 import { Country } from '../redux/slices/countriesSlice';
 import './CountryItem.css';
 
 function CountryItem({
-  key,
+  // key,
   country,
   isVisited,
   onToggleVisited,
 }: {
-  key: string;
+  // key: string;
   country: Country;
   isVisited: boolean;
   onToggleVisited: (name: string) => void;

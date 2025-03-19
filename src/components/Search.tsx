@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useRef, MouseEvent } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 // import debounce from 'lodash.debounce';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 // import { useContext } from "react";
 
 import style from './Search.module.css';
@@ -17,7 +17,7 @@ const Search: React.FC = () => {
   // const { setSearchValue } = useContext(SearchContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onClickClear = (event: MouseEvent<SVGSVGElement>) => {
+  const onClickClear = () => {
     dispatch(setSearchValue(''));
     setValue('');
     // setSearchValue("");

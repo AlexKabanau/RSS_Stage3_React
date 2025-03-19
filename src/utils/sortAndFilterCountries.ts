@@ -1,5 +1,5 @@
-import { Country, Region } from '../redux/slices/countriesSlice';
-import { SortPropertyEnum } from '../redux/slices/filterSlice';
+import { Country } from '../redux/slices/countriesSlice';
+// import { SortPropertyEnum } from '../redux/slices/filterSlice';
 
 export const sortAndFilterCountries = (
   countries: Country[],
@@ -32,25 +32,25 @@ export const sortAndFilterCountries = (
   const sortedCountries = [...filteredCountries];
 
   if (sortBy === 'name') {
-    console.log('sortBy function ', sortBy);
+    // console.log('sortBy function ', sortBy);
     if (order === 'asc') {
-      console.log('sort name ', order);
+      // console.log('sort name ', order);
       sortedCountries.sort((a, b) =>
         a.name.common.localeCompare(b.name.common)
       );
     } else {
-      console.log('sort name ', order);
+      // console.log('sort name ', order);
       sortedCountries.sort((a, b) =>
         b.name.common.localeCompare(a.name.common)
       );
     }
   } else if (sortBy === 'population') {
     if (order === 'asc') {
-      console.log('sort population ', order);
+      // console.log('sort population ', order);
 
       sortedCountries.sort((a, b) => a.population - b.population);
     } else {
-      console.log('sort population ', order);
+      // console.log('sort population ', order);
 
       sortedCountries.sort((a, b) => b.population - a.population);
     }
@@ -60,7 +60,7 @@ export const sortAndFilterCountries = (
   // if (order === 'desc') {
   //   sortedCountries.reverse();
   // }
-  console.log(sortedCountries);
+  // console.log(sortedCountries);
   return sortedCountries;
 };
 /* import React from 'react';
