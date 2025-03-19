@@ -5,7 +5,8 @@ export const sortAndFilterCountries = (
   countries: Country[],
   sortBy: string,
   order: string, //'asc' | 'desc',
-  filter: string //Region | 'All'
+  filter: string, //Region | 'All'
+  searchValue: string
 ): Country[] => {
   // 1. Filter
   let filteredCountries = [...countries];
@@ -13,6 +14,17 @@ export const sortAndFilterCountries = (
   if (filter !== 'All') {
     filteredCountries = filteredCountries.filter(
       (country) => country.region === filter
+    );
+  }
+
+  //search Filter
+  if (searchValue.trim() !== '') {
+    const searchRegex = new RegExp(
+      searchValue.trim().replace(/\s+/g, '\\s*'),
+      'i'
+    );
+    filteredCountries = filteredCountries.filter((country) =>
+      searchRegex.test(country.name.common)
     );
   }
 

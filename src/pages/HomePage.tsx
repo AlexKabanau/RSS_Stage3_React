@@ -25,11 +25,9 @@ import { sortAndFilterCountries } from '../utils/sortAndFilterCountries';
 
 function HomePage() {
   // const dispatch = useAppDispatch();
-  const { categoryId, sort, currentPage, searchValue } =
-    useSelector(selectFilter);
+  const { categoryId, sort, searchValue } = useSelector(selectFilter);
 
   const { data, error, isFetching, refetch } = useGetAllCountriesQuery('');
-  const countries = useAppSelector((state) => state.countries.items);
   const sortBy = sort.sortProperty.replace('-', '');
   const order = sort.sortProperty.includes('-') ? `asc` : `desc`;
   const filter = categoryId.filterProperty;
@@ -42,13 +40,14 @@ function HomePage() {
   // let sortedAndFilteredCountries = data;
   useEffect(() => {
     setSortedAndFilteredCountries(
-      sortAndFilterCountries(data || [], sortBy, order, filter)
+      sortAndFilterCountries(data || [], sortBy, order, filter, searchValue)
     );
     console.log('sortBy =>', sortBy);
     console.log('order =>', order);
     console.log('filter =>', filter);
+    console.log('searchValue =>', searchValue);
     console.log(sortedAndFilteredCountries?.length);
-  }, [sortBy, order, filter, data]);
+  }, [sortBy, order, filter, data, searchValue]);
 
   if (isFetching) {
     return <div className="loading">Loading...</div>;
