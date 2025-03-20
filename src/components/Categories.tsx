@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 // import { useSelector } from 'react-redux';
 import {
   FilterItem,
@@ -44,16 +44,19 @@ const Categories = memo(function Categories({ value }: { value: FilterItem }) {
   const filterRef = useRef<HTMLDivElement>(null);
   const [openFilter, setOpenFilter] = useState(false);
   // const { categoryId } = useSelector(selectFilter);
-  const onClickFilterListItem = (obj: FilterItem) => {
-    dispatch(setFilter(obj));
-    setOpenFilter(false);
-  };
+  const onClickFilterListItem = useCallback(
+    (obj: FilterItem) => {
+      dispatch(setFilter(obj));
+      setOpenFilter(false);
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: globalThis.MouseEvent) => {
       if (
         filterRef.current &&
-        !event.composedPath().includes(filterRef.current)
+        !filterRef.current.contains(event.target as Node)
       ) {
         setOpenFilter(false);
       }
@@ -91,16 +94,14 @@ const Categories = memo(function Categories({ value }: { value: FilterItem }) {
               <li
                 key={index}
                 onClick={() => onClickFilterListItem(obj)}
-                // className={
-                //   sort.sortProperty === obj.sortProperty ? 'active' : ''
-                // }
+                className={value.name === obj.name ? 'active' : ''} // Add active class
               >
                 {obj.name}
               </li>
             ))}
             {/* <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li> */}
+            <li>цене</li>
+            <li>алфавиту</li> */}
           </ul>
         </div>
       )}

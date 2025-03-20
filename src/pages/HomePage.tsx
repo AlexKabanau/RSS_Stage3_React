@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 // import CountryBlock from '../components/CountryItem';
 import Search from '../components/Search';
-import { selectFilter } from '../redux/slices/filterSlice';
+import { FilterPropertyEnum, selectFilter } from '../redux/slices/filterSlice';
 import { useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
 import {
+  Country,
   // Country,
   // fetchCountries,
   Name,
@@ -36,17 +37,37 @@ function HomePage() {
   const { data, error, isFetching } = useGetAllCountriesQuery('');
 
   const sortBy = sort.sortProperty.replace('-', '');
-  const order = sort.sortProperty.includes('-') ? `asc` : `desc`;
+  const order: 'asc' | 'desc' = sort.sortProperty.includes('-')
+    ? `asc`
+    : `desc`;
   const filter = categoryId.filterProperty;
 
   // const [sortedAndFilteredCountries, setSortedAndFilteredCountries] = useState<
   //   Country[] | undefined
   // >(data);
 
+  const sortAndFilterCountriesCallback = useCallback(
+    (
+      data: Country[] | [],
+      sortBy: string,
+      order: 'asc' | 'desc',
+      filter: FilterPropertyEnum,
+      searchValue: string
+    ) => {
+      return sortAndFilterCountries(data, sortBy, order, filter, searchValue);
+    },
+    []
+  );
   const sortedAndFilteredCountries = useMemo(
     () =>
-      sortAndFilterCountries(data || [], sortBy, order, filter, searchValue),
-    [data, sortBy, order, filter, searchValue]
+      sortAndFilterCountriesCallback(
+        data || [],
+        sortBy,
+        order,
+        filter,
+        searchValue
+      ),
+    [data, sortBy, order, filter, searchValue, sortAndFilterCountriesCallback]
   );
 
   // const isVisited = (name: string) =>
@@ -106,7 +127,12 @@ function HomePage() {
   // }, [sortBy, order, filter, data, searchValue]);
 
   if (error) {
-    return <div className="error">Error: {JSON.stringify(error)}</div>;
+    return (
+      <div className="error">
+        <h2>Произошла ошибка</h2>
+        <p>{error instanceof Error ? error.message : 'Неизвестная ошибка'}</p>
+      </div>
+    );
   }
   return (
     <div className="main">

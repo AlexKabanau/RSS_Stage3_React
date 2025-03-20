@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../redux/store';
 import {
   setSort,
@@ -25,10 +25,13 @@ const Sort: React.FC<SortProps> = React.memo(function Sort({ value }) {
   const sortRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  const onClickListItem = (obj: SortType) => {
-    dispatch(setSort(obj));
-    setOpen(false);
-  };
+  const onClickListItem = useCallback(
+    (obj: SortType) => {
+      dispatch(setSort(obj));
+      setOpen(false);
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

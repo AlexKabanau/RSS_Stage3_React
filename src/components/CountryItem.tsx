@@ -15,7 +15,7 @@ const CountryItem: React.FC<CountryItemPropsType> = ({
   isVisited,
   onToggleVisited,
 }) => {
-  console.log(`Rendering ${country.name.common}`); // для отладки
+  // console.log(`Rendering ${country.name.common}`); // для отладки
   // useWhyDidYouUpdate('Categories', { value, onChangeCategory })
   return (
     <div className="country-block">
