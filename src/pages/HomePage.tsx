@@ -52,20 +52,24 @@ function HomePage() {
   // const isVisited = (name: string) =>
   //   visited.visited.some((item) => item.common === name);
 
-  const isVisited = useCallback(
-    (name: string) => visited.visited.some((item) => item.common === name),
-    [visited]
-  );
+  const isVisited = (name: string) =>
+    visited.visited.some((item) => item.common === name);
 
   const toggleVisited = useCallback(
     (item: Name) => {
-      const updatedVisit = isVisited(item.common)
-        ? visited.visited.filter((country) => country.common !== item.common)
-        : [...visited.visited, item];
+      // (item: { common: string }) => {
 
-      dispatch(setVisited(updatedVisit));
+      dispatch(
+        setVisited(
+          isVisited(item.common)
+            ? visited.visited.filter(
+                (country) => country.common !== item.common
+              )
+            : [...visited.visited, item]
+        )
+      );
     },
-    [dispatch, isVisited, visited]
+    [dispatch, visited]
   );
 
   // const toggleVisited = useCallback(
@@ -121,7 +125,7 @@ function HomePage() {
           <img src={reactLogo} className="logo" alt="loading" />
         </>
       ) : sortedAndFilteredCountries && sortedAndFilteredCountries.length ? (
-        <MemoizedListItems
+        <ListItems
           sortedAndFilteredCountries={sortedAndFilteredCountries}
           isVisited={isVisited}
           toggleVisited={toggleVisited}
@@ -142,6 +146,6 @@ function HomePage() {
     </div>
   );
 }
-const MemoizedListItems = React.memo(ListItems);
+// const MemoizedListItems = React.memo(ListItems);
 
 export default HomePage;

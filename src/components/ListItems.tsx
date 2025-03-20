@@ -2,15 +2,11 @@ import React from 'react';
 import { Country, Name } from '../redux/slices/countriesSlice';
 import CountryItem from './CountryItem';
 
-function ListItems({
-  sortedAndFilteredCountries,
-  isVisited,
-  toggleVisited,
-}: {
+const ListItems: React.FC<{
   sortedAndFilteredCountries: Country[];
   isVisited: (name: string) => boolean;
   toggleVisited: (name: Name) => void;
-}) {
+}> = ({ sortedAndFilteredCountries, isVisited, toggleVisited }) => {
   console.log(sortedAndFilteredCountries.length);
   return (
     <div className="content__items">
@@ -24,6 +20,7 @@ function ListItems({
       ))}
     </div>
   );
-}
+};
+// const MemoizedCountryItem = React.memo(CountryItem);
 
-export default ListItems;
+export default React.memo(ListItems);
