@@ -288,7 +288,7 @@ The following optimizations were implemented to achieve these goals:
 *   **`key` Props:** Correctly used `key` props for lists (`ListItems.tsx`, `Categories.tsx`, `Sort.tsx`) to help React identify which items have changed, been added, or been removed.
 *   **`active` class**: Added `active` class to highlight the active filter and sort options.
 * **Using `event.target`**: Used `event.target` instead of `event.composedPath().includes(filterRef.current)` in `Categories.tsx` to close the dropdown when the user clicks outside of it.
-* **Remove `console.log`**: Removed `console.log` in `CountryItem.tsx`.
+* **Remove `console`**: Removed `console` in `CountryItem.tsx`.
 * **Using `JSON.stringify` and `JSON.parse`**: Used `JSON.stringify` and `JSON.parse` to store and retrieve the data from local storage.
 
 
@@ -298,17 +298,17 @@ The following optimizations were implemented to achieve these goals:
 * ***Filter countries by region (All -> Antarctic)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~24.1ms~~ 2.2ms
-- **Максимальное время рендеринга компонента:** ~~24.1ms~~ 2.2ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~23.4ms~~ 0.9ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 5 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~1.8s~~ 2.5s (ухудшение на 39%)
+- **Максимальное время рендеринга компонента:** ~~24.1ms~~ 2.2ms (улучшение на 91%) (Компонент `<HomePage>`) 
+- **Наиболее затратный компонент:** ~~23.4ms~~ 0.9ms (улучшение на 96%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** 2 (улучшение на 33%)(Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image.png)
+![Flame Graph](image.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-1.png)
+![Ranked Chart](image-1.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Antarctic -> Americas)***
@@ -321,10 +321,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-2.png)
+![Flame Graph](image-2.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-3.png)
+![Ranked Chart](image-3.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Americas -> Europe)***
@@ -337,10 +337,11 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-4.png)
+![Flame Graph]![alt text](image-4.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-5.png)
+![Ranked Chart]![alt text](image-5.png)
+
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Europe -> Africa)***
 
@@ -352,10 +353,11 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-6.png)
+![Flame Graph]![alt text](image-7.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-7.png)
+![Ranked Chart]![alt text](image-8.png)
+
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Africa -> Asia)***
 
@@ -367,10 +369,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-8.png)
+![Flame Graph]![alt text](image-9.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-9.png)
+![Ranked Chart]![alt text](image-10.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Asia -> Oceania)***
@@ -383,10 +385,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-10.png)
+![Flame Graph]![alt text](image-11.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-11.png)
+![Ranked Chart]![alt text](image-12.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Oceania -> All)***
@@ -399,10 +401,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-12.png)
+![Flame Graph]![alt text](image-13.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-13.png)
+![Ranked Chart]![alt text](image-14.png)
 ---
 
 ### 🔍 Тестируемая операция:
@@ -416,10 +418,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-14.png)
+![Flame Graph]![alt text](image-15.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-15.png)
+![Ranked Chart]![alt text](image-16.png)
 
 ### 🔍 Тестируемая операция:
 * ***Sort countries by name(population ASC -> name ASC)***
@@ -432,10 +434,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-16.png)
+![Flame Graph]![alt text](image-17.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-17.png)
+![Ranked Chart]![alt text](image-18.png)
 
 ### 🔍 Тестируемая операция:
 * ***Search Belarus***
@@ -448,10 +450,10 @@ The following optimizations were implemented to achieve these goals:
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](/src/assets/images/after/image-18.png)
+![Flame Graph]![alt text](image-19.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](/src/assets/images/after/image-19.png)
+![Ranked Chart]![alt text](image-20.png)
 ---
 
 By implementing these optimizations, this React application has become significantly more performant. The use of `React.memo`, `useMemo`, `useCallback`, and debouncing has reduced unnecessary re-renders and memoized expensive calculations, resulting in a more responsive and efficient user experience. The React DevTools Profiler is an invaluable tool for measuring the impact of these optimizations and identifying further areas for improvement.
