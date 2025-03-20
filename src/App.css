@@ -182,6 +182,7 @@
 .categories__popup ul li {
   padding: 12px 20px;
   cursor: pointer;
+  color: white;
 }
 
 .sort__popup ul li.active,

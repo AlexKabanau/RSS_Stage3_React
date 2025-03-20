@@ -18,6 +18,7 @@ import CountryItem from '../components/CountryItem';
 import './HomePage.css';
 import { sortAndFilterCountries } from '../utils/sortAndFilterCountries';
 import { selectVisited, setVisited } from '../redux/slices/visitedSlice';
+import ListItems from '../components/ListItems';
 
 // export enum SortPropertyEnum {
 //   POPULATION_DESC = 'population',
@@ -103,17 +104,22 @@ function HomePage() {
           <img src={reactLogo} className="logo" alt="loading" />
         </>
       ) : sortedAndFilteredCountries && sortedAndFilteredCountries.length ? (
-        <div className="content__items">
-          {sortedAndFilteredCountries?.map((country: Country) => (
-            <CountryItem
-              key={country.cca3}
-              country={country}
-              isVisited={isVisited(country.name.common)}
-              onToggleVisited={() => toggleVisited(country.name)}
-            />
-          ))}
-        </div>
+        <ListItems
+          sortedAndFilteredCountries={sortedAndFilteredCountries}
+          isVisited={isVisited}
+          toggleVisited={toggleVisited}
+        />
       ) : (
+        // <div className="content__items">
+        //   {sortedAndFilteredCountries?.map((country: Country) => (
+        //     <CountryItem
+        //       key={country.cca3}
+        //       country={country}
+        //       isVisited={isVisited(country.name.common)}
+        //       onToggleVisited={() => toggleVisited(country.name)}
+        //     />
+        //   ))}
+        // </div>
         <div>Items not found</div>
       )}
     </div>

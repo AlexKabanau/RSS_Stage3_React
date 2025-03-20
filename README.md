@@ -7,160 +7,160 @@
 * ***Filter countries by region (All -> Antarctic)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~15.9ms
-- **Максимальное время рендеринга компонента:** 2.2ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<Category>`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** 24.1ms
+- **Максимальное время рендеринга компонента:** 24.1ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 5 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image.png)
+![Flame Graph](/public/image-3.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-1.png)
+![Ranked Chart](/public/image-4.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Antarctic -> Americas)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~12.2ms
-- **Максимальное время рендеринга компонента:** 1.3ms (Компонент `<CountryItem key='VGB'>`)
-- **Наиболее затратный компонент:** `<CountryItem key='VGB'>`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~25.3ms
+- **Максимальное время рендеринга компонента:** 25.3ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 56 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-4.png)
+![Flame Graph](/public/image-5.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-5.png)
+![Ranked Chart](/public/image-6.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Americas -> Europe)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~2s
-- **Максимальное время рендеринга компонента:** 10.7ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<HomePage>`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~17.8ms
+- **Максимальное время рендеринга компонента:** 17.8ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 53 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-6.png)
+![Flame Graph](/public/image-7.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-7.png)
+![Ranked Chart](/public/image-8.png)
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Europe -> Africa)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~3.1s
+- **Commit Duration:** ~22.6ms
 - **Максимальное время рендеринга компонента:** 14.7ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<HomePage>`
-- **Количество повторных рендеров:** 1
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 59 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-8.png)
+![Flame Graph](/public/image-9.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-9.png)
+![Ranked Chart](/public/image-10.png)
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Africa -> Asia)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~1.9s
-- **Максимальное время рендеринга компонента:** 17ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<CountryItem key="TUR">`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~16.4ms
+- **Максимальное время рендеринга компонента:** 16.4ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 50 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-10.png)
+![Flame Graph](/public/image-11.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-11.png)
+![Ranked Chart](/public/image-12.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Asia -> Oceania)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~2.6s
-- **Максимальное время рендеринга компонента:** 6.9ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<HomePage>`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~8.8ms
+- **Максимальное время рендеринга компонента:** 8.8ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 27 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-12.png)
+![Flame Graph](/public/image-13.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-13.png)
+![Ranked Chart](/public/image-14.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Oceania -> All)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~3s
-- **Максимальное время рендеринга компонента:** 42.5ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<CountryItem key="LKA">`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~86.8ms
+- **Максимальное время рендеринга компонента:** 86.8ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 250 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-14.png)
+![Flame Graph](/public/image-15.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-15.png)
+![Ranked Chart](/public/image-16.png)
 ---
 
 ### 🔍 Тестируемая операция:
 * ***Sort countries by population(population DESC -> population ASC)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~2.5s
-- **Максимальное время рендеринга компонента:** 14.6ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<CountryItem key="MDG">`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~28ms
+- **Максимальное время рендеринга компонента:** 28ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 250 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-16.png)
+![Flame Graph](/public/image-17.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-17.png)
+![Ranked Chart](/public/image-18.png)
 
 ### 🔍 Тестируемая операция:
 * ***Sort countries by name(population ASC -> name ASC)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~2.9s
-- **Максимальное время рендеринга компонента:** 17.7ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<CountryItem key="GHA">`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~34.9ms
+- **Максимальное время рендеринга компонента:** 34.9ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 250 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-18.png)
+![Flame Graph](/public/image-19.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-19.png)
+![Ranked Chart](/public/image-20.png)
 
 ### 🔍 Тестируемая операция:
 * ***Search Belarus***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~1.4s
-- **Максимальное время рендеринга компонента:** 17.1ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** `<CountryItem key="GHA">`
-- **Количество повторных рендеров:** 1
+- **Commit Duration:** ~30.6ms
+- **Максимальное время рендеринга компонента:** 30.6ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** `<ListItems>`
+- **Количество повторных рендеров:** 1 (Компонент `<CountryItem>`)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-20.png)
+![Flame Graph](/public/image-21.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-21.png)
+![Ranked Chart](/public/image-22.png)
 
 
 ### 🛠 Оптимизация:
