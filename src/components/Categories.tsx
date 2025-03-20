@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { memo, useEffect, useRef, useState } from 'react';
+// import { useSelector } from 'react-redux';
 import {
   FilterItem,
   FilterPropertyEnum,
-  selectFilter,
+  // selectFilter,
   setFilter,
 } from '../redux/slices/filterSlice';
 import { useAppDispatch } from '../redux/store';
@@ -38,12 +38,12 @@ const filterList: FilterItem[] = [
     filterProperty: FilterPropertyEnum.OCEANIA,
   },
 ];
-function Categories() {
+const Categories = memo(function Categories({ value }: { value: FilterItem }) {
   const dispatch = useAppDispatch();
 
   const filterRef = useRef<HTMLDivElement>(null);
   const [openFilter, setOpenFilter] = useState(false);
-  const { categoryId } = useSelector(selectFilter);
+  // const { categoryId } = useSelector(selectFilter);
   const onClickFilterListItem = (obj: FilterItem) => {
     dispatch(setFilter(obj));
     setOpenFilter(false);
@@ -82,9 +82,7 @@ function Categories() {
           />
         </svg>
         <b>Region:</b>
-        <span onClick={() => setOpenFilter(!openFilter)}>
-          {categoryId.name}
-        </span>
+        <span onClick={() => setOpenFilter(!openFilter)}>{value.name}</span>
       </div>
       {openFilter && (
         <div className="categories__popup">
@@ -108,6 +106,6 @@ function Categories() {
       )}
     </div>
   );
-}
+});
 
 export default Categories;
