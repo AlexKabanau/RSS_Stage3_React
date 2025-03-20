@@ -29,9 +29,12 @@ function MainPage() {
       </nav>
       <div className="data-container">
         {data.length ? (
-          data.map((item, i) => (
-            <Item item={item} key={i} i={i} highlight={0} />
-          ))
+          data.map((item, i) => {
+            const hightLightIndex = data.length - 1;
+            return (
+              <Item item={item} key={i} i={i} highlight={hightLightIndex} />
+            );
+          })
         ) : (
           <div className="empty-state">
             <p>Items not fond</p>
