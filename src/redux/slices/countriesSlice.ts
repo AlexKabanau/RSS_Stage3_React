@@ -1,17 +1,3 @@
-import { RootStateType } from '../store';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-export const fetchCountries = createAsyncThunk<
-  Country[],
-  SearchCountriesParams
->('countries/fetchCounriesStatus', async () => {
-  const { data } = await axios.get<Country[]>(
-    `https://restcountries.com/v3.1/all`
-  );
-  return data;
-});
-
 export type Country = {
   name: Name;
   tld?: string[];
@@ -152,50 +138,8 @@ export enum Status {
   ERROR = 'error',
 }
 
-interface CountrySlicState {
-  items: Country[];
-  status: Status;
-}
-
-const initialState: CountrySlicState = {
-  items: [],
-  status: Status.LOADING, // loading | success | error
-};
-
 export type SearchCountriesParams = {
   sortBy: string;
   order: string;
   filter: string;
 };
-
-export const countriesSlice = createSlice({
-  name: 'countries',
-  initialState,
-  reducers: {
-    setItems: (state, action) => {
-      state.items = action.payload;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchCountries.pending, (state) => {
-      state.status = Status.LOADING;
-      state.items = [];
-    });
-    builder.addCase(fetchCountries.fulfilled, (state, action) => {
-      state.status = Status.SUCCESS;
-      state.items = action.payload;
-    });
-
-    builder.addCase(fetchCountries.rejected, (state) => {
-      state.status = Status.ERROR;
-      state.items = [];
-    });
-  },
-});
-
-export const selectCountriesData = (state: RootStateType) => state.countries;
-
-// Action creators are generated for each case reducer function
-export const { setItems } = countriesSlice.actions;
-
-export default countriesSlice.reducer;

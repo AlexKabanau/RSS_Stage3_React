@@ -21,7 +21,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  
+
   gap: 20px;
 }
 
@@ -37,7 +37,6 @@
   color: red;
 }
 
-/* Add styles for Categories and Sort components */
 .categories,
 .sort {
   position: relative;

@@ -48,9 +48,6 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    // setCategoryId: (state, action: PayloadAction<number>) => {
-    //   state.categoryId = action.payload;
-    // },
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
@@ -62,12 +59,9 @@ export const filterSlice = createSlice({
     },
     setFilters: (state, action: PayloadAction<FilterSliceState>) => {
       if (Object.keys(action.payload).length) {
-        // state.currentPage = Number(action.payload.currentPage);
-        // state.sort = action.payload.sort;
         state.categoryId = action.payload.categoryId;
         state.sort = action.payload.sort;
       } else {
-        // state.currentPage = 1;
         state.categoryId = {
           name: 'All',
           filterProperty: FilterPropertyEnum.ALL,
@@ -84,7 +78,6 @@ export const filterSlice = createSlice({
 export const selectFilter = (state: RootStateType) => state.filter;
 export const selectSort = (state: RootStateType) => state.filter.sort;
 
-// Action creators are generated for each case reducer function
 export const { setSort, setFilter, setFilters, setSearchValue } =
   filterSlice.actions;
 

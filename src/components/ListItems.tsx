@@ -7,7 +7,6 @@ const ListItems: React.FC<{
   isVisited: (name: string) => boolean;
   toggleVisited: (name: Name) => void;
 }> = ({ sortedAndFilteredCountries, isVisited, toggleVisited }) => {
-  // console.log(sortedAndFilteredCountries.length);
   return (
     <div className="content__items">
       {sortedAndFilteredCountries?.map((country: Country) => (
@@ -21,6 +20,5 @@ const ListItems: React.FC<{
     </div>
   );
 };
-// const MemoizedCountryItem = React.memo(CountryItem);
 
 export default React.memo(ListItems);

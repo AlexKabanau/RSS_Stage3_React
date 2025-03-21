@@ -1,9 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
-// import { useSelector } from 'react-redux';
 import {
   FilterItem,
   FilterPropertyEnum,
-  // selectFilter,
   setFilter,
 } from '../redux/slices/filterSlice';
 import { useAppDispatch } from '../redux/store';
@@ -43,7 +41,6 @@ const Categories = memo(function Categories({ value }: { value: FilterItem }) {
 
   const filterRef = useRef<HTMLDivElement>(null);
   const [openFilter, setOpenFilter] = useState(false);
-  // const { categoryId } = useSelector(selectFilter);
   const onClickFilterListItem = useCallback(
     (obj: FilterItem) => {
       dispatch(setFilter(obj));
@@ -61,7 +58,6 @@ const Categories = memo(function Categories({ value }: { value: FilterItem }) {
         setOpenFilter(false);
       }
     };
-    //FIXME document
     document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
@@ -94,14 +90,11 @@ const Categories = memo(function Categories({ value }: { value: FilterItem }) {
               <li
                 key={index}
                 onClick={() => onClickFilterListItem(obj)}
-                className={value.name === obj.name ? 'active' : ''} // Add active class
+                className={value.name === obj.name ? 'active' : ''}
               >
                 {obj.name}
               </li>
             ))}
-            {/* <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li> */}
           </ul>
         </div>
       )}
