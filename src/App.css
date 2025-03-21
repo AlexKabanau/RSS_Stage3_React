@@ -1,0 +1,135 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.main {
+  display: grid;
+  grid-template-rows: 150px 1fr;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  margin: 0 auto;
+  will-change: filter;
+  transition: filter 300ms;
+  animation: filter 1000ms;
+  animation-name: logo-rotate;
+  animation-iteration-count: infinite;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+@keyframes logo-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.content {
+  padding: 40px 0;
+}
+.content__error-info {
+  margin: 100px auto;
+  width: 580px;
+  text-align: center;
+}
+
+.content__error-info h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.content__error-info p {
+  font-size: 20px;
+}
+
+.content__title {
+  font-weight: 800;
+  font-size: 38px;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+.content__items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-column-gap: 11px;
+}
+
+.content__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sort,
+.categories {
+  position: relative;
+}
+.sort__label,
+.categories__label {
+  display: flex;
+  align-items: center;
+}
+
+.sort__label svg,
+.categories__label svg {
+  margin-right: 8px;
+}
+
+.sort__label b,
+.categories__label b {
+  margin-right: 8px;
+}
+
+.sort__label span,
+.categories__label span {
+  border-bottom: 1px dashed rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.sort__popup,
+.categories__popup {
+  position: absolute;
+  right: 0;
+  margin-top: 15px;
+  background: #ffffff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.sort__popup ul,
+.categories__popup ul {
+  overflow: hidden;
+  background-color: darkslategrey;
+}
+.sort__popup ul li,
+.categories__popup ul li {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: white;
+}
+
+.sort__popup ul li.active,
+.sort__popup ul li:hover,
+.categories__popup ul li.active,
+.categories__popup ul li:hover {
+  background: rgba(254, 95, 30, 0.05);
+}
+
+.sort__popup ul li.active,
+.categories__popup ul li.active {
+  font-weight: bold;
+}
