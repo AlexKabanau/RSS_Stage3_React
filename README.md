@@ -161,6 +161,22 @@
 
 #### 2️⃣ **Ranked Chart**
 ![Ranked Chart](/src/assets/images/before/image-22.png)
+
+### 🔍 Тестируемая операция:
+* ***Toggle visited for US and India***
+
+### 📌 Результаты профилирования:
+- **Commit Duration:** ~1.2s
+- **Максимальное время рендеринга компонента:** 30.1ms (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** 28.8 ms `<ListItems>`
+- **Количество повторных рендеров:** 4
+
+### 📊 Графики профилирования:
+#### 1️⃣ **Flame Graph**
+![Flame Graph](/src/assets/images/before/image-211.png)
+
+#### 2️⃣ **Ranked Chart**
+![Ranked Chart](/src/assets/images/before/image-221.png)
 ---
 
 
@@ -298,113 +314,113 @@ The following optimizations were implemented to achieve these goals:
 * ***Filter countries by region (All -> Antarctic)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~1.8s~~ 2.5s (ухудшение на 39%)
-- **Максимальное время рендеринга компонента:** ~~24.1ms~~ 2.2ms (улучшение на 91%) (Компонент `<HomePage>`) 
-- **Наиболее затратный компонент:** ~~23.4ms~~ 0.9ms (улучшение на 96%) `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 2 (улучшение на 33%)(Компонент `<CountryItem>`)
+- **Commit Duration:** ~~1.8s~~ 2.2s (ухудшение на 22%)
+- **Максимальное время рендеринга компонента:** ~~24.1ms~~ 1.1ms (улучшение на 95%) (Компонент `<HomePage>`) 
+- **Наиболее затратный компонент:** ~~23.4ms~~ 0.2ms (улучшение на 99%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** 2 (улучшение на 33%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image.png)
+![Flame Graph]![alt text](image-23.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-1.png)
+![Ranked Chart]![alt text](image-24.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Antarctic -> Americas)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~25.3ms~~ 21.6ms
-- **Максимальное время рендеринга компонента:** ~~25.3ms~~ 21.6ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~24.6ms~~ 20.1ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 56 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~2.7s~~ 2.1s (ухудшение на 22%)
+- **Максимальное время рендеринга компонента:** ~~25.3ms~~ 15.4ms (улучшение на 39%) (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~24.6ms~~ 14.4ms (улучшение на 41%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph](image-2.png)
+![Flame Graph]![alt text](image-25.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart](image-3.png)
+![Ranked Chart]![alt text](image-26.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Americas -> Europe)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~17.8ms~~ 19.1ms
-- **Максимальное время рендеринга компонента:** ~~17.8ms~~ 19.1ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~16.7ms~~ 18.1ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 53 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~2.2s~~ 2.1ms (улучшение на 5%)
+- **Максимальное время рендеринга компонента:** ~~17.8ms~~ 13.6ms (улучшение на 24%)(Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~16.7ms~~ 13ms (улучшение на 22%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph]![alt text](image-4.png)
+![Flame Graph]![alt text](image-27.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart]![alt text](image-5.png)
+![Ranked Chart]![alt text](image-28.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Europe -> Africa)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~22.6ms~~ 19.4ms
-- **Максимальное время рендеринга компонента:** ~~22.6ms~~ 19.4ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~22ms~~ 18.5ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 59 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~2.8s~~ 2.6s (улучшение на 7%)
+- **Максимальное время рендеринга компонента:** ~~22.6ms~~ 15.1ms (улучшение на 33%) (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~22ms~~ 14.3ms (улучшение на 35%)`<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph]![alt text](image-7.png)
+![Flame Graph]![alt text](image-29.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart]![alt text](image-8.png)
+![Ranked Chart]![alt text](image-30.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Africa -> Asia)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~16.4ms~~ 14.4ms
-- **Максимальное время рендеринга компонента:** ~~16.4ms~~ 14.4ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~15.7ms~~ 13.7ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 50 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~2.2s~~ 2.5s (ухудшение на 13%)
+- **Максимальное время рендеринга компонента:** ~~16.4ms~~ 20.8ms (ухудшение на 26%) (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~15.7ms~~ 20.1ms (ухудшение на 28%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph]![alt text](image-9.png)
+![Flame Graph]![alt text](image-31.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart]![alt text](image-10.png)
+![Ranked Chart]![alt text](image-32.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Asia -> Oceania)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~8.8ms~~ 8.8ms
-- **Максимальное время рендеринга компонента:** ~~8.8ms~~ 8.8ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~8.2ms~~ 6.6ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 27 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~2.2s~~ 2.6s (ухудшение на 18%) 
+- **Максимальное время рендеринга компонента:** ~~8.8ms~~ 9.3ms (ухудшение на 6%)  (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~8.2ms~~ 8.5ms (ухудшение на 4%)  `<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph]![alt text](image-11.png)
+![Flame Graph]![alt text](image-33.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart]![alt text](image-12.png)
+![Ranked Chart]![alt text](image-34.png)
 
 ### 🔍 Тестируемая операция:
 * ***Filter countries by region(Oceania -> All)***
 
 ### 📌 Результаты профилирования:
-- **Commit Duration:** ~~86.8ms~~ 58.1ms
-- **Максимальное время рендеринга компонента:** ~~86.8ms~~ 58.1ms (Компонент `<HomePage>`)
-- **Наиболее затратный компонент:** ~~85.9ms~~ 57.1ms `<ListItems> (Memo)`
-- **Количество повторных рендеров:** 250 (Компонент `<CountryItem>`)
+- **Commit Duration:** ~~3.2s~~ 2.4s (улучшение на 25%)
+- **Максимальное время рендеринга компонента:** ~~86.8ms~~ 51.4ms (улучшение на 40%) (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~85.9ms~~ 50.7ms (улучшение на 41%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** ~~3~~ 2 (улучшение на 30%)
 
 ### 📊 Графики профилирования:
 #### 1️⃣ **Flame Graph**
-![Flame Graph]![alt text](image-13.png)
+![Flame Graph]![alt text](image-35.png)
 
 #### 2️⃣ **Ranked Chart**
-![Ranked Chart]![alt text](image-14.png)
+![Ranked Chart]![alt text](image-36.png)
 ---
 
 ### 🔍 Тестируемая операция:
@@ -454,6 +470,22 @@ The following optimizations were implemented to achieve these goals:
 
 #### 2️⃣ **Ranked Chart**
 ![Ranked Chart]![alt text](image-20.png)
+
+### 🔍 Тестируемая операция:
+* ***Toggle visited for US and India***
+
+### 📌 Результаты профилирования:
+- **Commit Duration:** ~~~1.2s~~ 0.9s (улучшение на 25%)
+- **Максимальное время рендеринга компонента:** ~~30.1ms ~~ 2.9ms (улучшение на 90%) (Компонент `<HomePage>`)
+- **Наиболее затратный компонент:** ~~28.8ms~~ 2.5ms (улучшение на 91%) `<ListItems> (Memo)`
+- **Количество повторных рендеров:** 4
+
+### 📊 Графики профилирования:
+#### 1️⃣ **Flame Graph**
+![Flame Graph]![alt text](image-21.png)
+
+#### 2️⃣ **Ranked Chart**
+![Ranked Chart]![alt text](image-22.png)
 ---
 
 By implementing these optimizations, this React application has become significantly more performant. The use of `React.memo`, `useMemo`, `useCallback`, and debouncing has reduced unnecessary re-renders and memoized expensive calculations, resulting in a more responsive and efficient user experience. The React DevTools Profiler is an invaluable tool for measuring the impact of these optimizations and identifying further areas for improvement.

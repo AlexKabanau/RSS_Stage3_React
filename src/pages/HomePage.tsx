@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 // import CountryBlock from '../components/CountryItem';
 import Search from '../components/Search';
 import { FilterPropertyEnum, selectFilter } from '../redux/slices/filterSlice';
